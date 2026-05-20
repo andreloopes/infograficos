@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Capitalização da OpenAI — 2015 a 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red:     #D9001E;
+    --red-dk:  #A8001A;
+    --red-pale:#FFF0F2;
+    --black:   #111111;
+    --g1:      #333333;
+    --g2:      #666666;
+    --g3:      #999999;
+    --g4:      #CCCCCC;
+    --gbg:     #F5F5F5;
+    --white:   #FFFFFF;
+    --line:    #E8E8E8;
+    --mono:    'IBM Plex Mono', monospace;
+    --sans:    'Archivo', sans-serif;
+    --blk:     'Archivo Black', sans-serif;
+  }
+  body { background:var(--white); color:var(--black); font-family:var(--sans); width:800px; margin:0 auto; -webkit-font-smoothing:antialiased; }
+
+  /* HEADER */
+  .hdr { border-bottom:3px solid var(--red); }
+  .hdr-l { padding:32px 40px 28px; }
+  .eyebrow { font-family:var(--mono); font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--red); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .eyebrow span { display:inline-block; width:16px; height:2px; background:var(--red); }
+  .hdr-l h1 { font-family:var(--blk); font-size:38px; line-height:1.05; color:var(--black); margin-bottom:12px; letter-spacing:-0.5px; }
+  .hdr-l h1 em { font-style:normal; color:var(--red); }
+  .hdr-l p { font-size:12.5px; color:var(--g2); line-height:1.6; max-width:420px; }
+  .hdr-r { background:var(--red); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:20px 16px; }
+  .hdr-r .big { font-family:var(--blk); font-size:52px; color:#fff; line-height:1; letter-spacing:-1px; }
+  .hdr-r .lbl { font-family:var(--mono); font-size:8px; color:rgba(255,255,255,.7); letter-spacing:2px; text-transform:uppercase; text-align:center; line-height:1.6; }
+
+  /* METRICS */
+  .metrics { display:grid; grid-template-columns:1fr 1fr 1fr; background:var(--gbg); border-bottom:1px solid var(--line); }
+  .met { padding:20px 24px; border-right:1px solid var(--line); }
+  .met:last-child { border-right:none; }
+  .met-lbl { font-family:var(--mono); font-size:8.5px; color:var(--g3); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px; }
+  .met-val { font-family:var(--blk); font-size:24px; line-height:1; color:var(--black); margin-bottom:3px; }
+  .met-val.r { color:var(--red); }
+  .met-note { font-size:10.5px; color:var(--g3); }
+
+  /* SEC HEADER */
+  .sh { display:flex; align-items:center; gap:10px; padding:20px 40px 0; }
+  .sh-lbl { font-family:var(--mono); font-size:8.5px; letter-spacing:2.5px; text-transform:uppercase; color:var(--red); white-space:nowrap; font-weight:600; }
+  .sh-line { flex:1; height:1px; background:var(--line); }
+
+  /* VALUATION MILESTONES */
+  .vmilestones { padding:16px 40px 24px; }
+  .vorigin { display:flex; align-items:center; gap:12px; margin-bottom:14px; padding:10px 14px; background:var(--gbg); border-radius:2px; border-left:3px solid var(--g4); }
+  .vorigin-lbl { font-family:var(--mono); font-size:8px; color:var(--g3); letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
+  .vorigin-items { display:flex; gap:24px; }
+  .vorigin-item { font-size:11px; color:var(--g2); }
+  .vorigin-item strong { color:var(--g1); font-weight:700; }
+  .vcards { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; position:relative; }
+  .vcard { background:var(--white); border:1px solid var(--line); border-top:3px solid var(--line); padding:14px 12px 12px; cursor:crosshair; transition:border-color .15s, box-shadow .15s; }
+  .vcard:hover { border-color:var(--red); box-shadow:0 2px 12px rgba(217,0,30,.08); }
+  .vcard.now { border-top-color:var(--red); background:var(--red-pale); }
+  .vcard-date { font-family:var(--mono); font-size:8px; color:var(--g3); letter-spacing:.5px; display:block; margin-bottom:4px; }
+  .vcard-round { font-size:10px; font-weight:700; color:var(--g1); display:block; margin-bottom:10px; line-height:1.3; }
+  .vcard-val { font-family:var(--blk); font-size:17px; line-height:1; color:var(--black); margin-bottom:8px; }
+  .vcard-val.now { color:var(--red); font-size:19px; }
+  .vcard-growth { display:inline-flex; align-items:center; gap:3px; font-family:var(--mono); font-size:9px; font-weight:600; color:#1a8a4a; background:rgba(0,180,80,.1); padding:2px 6px; border-radius:2px; }
+  .vcards-arrows { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; }
+  .varrow { display:flex; align-items:center; justify-content:center; color:var(--g4); font-size:18px; height:20px; }
+
+  /* APORTES */
+  .aportes { padding:12px 40px 28px; }
+  .ap-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; cursor:crosshair; border-radius:2px; padding:3px 0; transition:background .1s; }
+  .ap-row:hover { background:rgba(0,0,0,.025); }
+  .ap-meta { width:120px; flex-shrink:0; }
+  .ap-date { font-family:var(--mono); font-size:8.5px; color:var(--g3); letter-spacing:.5px; display:block; }
+  .ap-name { font-size:11px; font-weight:700; color:var(--black); display:block; margin-top:1px; line-height:1.2; }
+  .ap-track { flex:1; height:14px; background:var(--gbg); border-radius:1px; overflow:hidden; }
+  .ap-fill { height:100%; border-radius:1px; transform-origin:left; transform:scaleX(0); animation:growH .7s cubic-bezier(.4,0,.2,1) forwards; }
+  .ap-row:nth-child(1)  .ap-fill { animation-delay:.05s; }
+  .ap-row:nth-child(2)  .ap-fill { animation-delay:.10s; }
+  .ap-row:nth-child(3)  .ap-fill { animation-delay:.15s; }
+  .ap-row:nth-child(4)  .ap-fill { animation-delay:.20s; }
+  .ap-row:nth-child(5)  .ap-fill { animation-delay:.25s; }
+  .ap-row:nth-child(6)  .ap-fill { animation-delay:.30s; }
+  .ap-row:nth-child(7)  .ap-fill { animation-delay:.35s; }
+  .ap-row:nth-child(8)  .ap-fill { animation-delay:.40s; }
+  .ap-row:nth-child(9)  .ap-fill { animation-delay:.45s; }
+  .ap-row:nth-child(10) .ap-fill { animation-delay:.50s; }
+  .ap-val { font-family:var(--mono); font-size:10px; font-weight:600; width:72px; flex-shrink:0; color:var(--g2); text-align:right; }
+  .ap-val.r { color:var(--red); }
+  .ap-val.dk { color:var(--g1); }
+
+  /* BAR COLORS */
+  .c-grant  { background:rgba(217,0,30,.18); }
+  .c-seed   { background:rgba(217,0,30,.15); }
+  .c-ms     { background:rgba(217,0,30,.30); }
+  .c-ms2    { background:rgba(217,0,30,.45); }
+  .c-sec    { background:rgba(100,100,100,.30); }
+  .c-se     { background:rgba(168,0,26,.55); }
+  .c-div    { background:rgba(100,100,100,.40); }
+  .c-sf     { background:rgba(217,0,30,.70); }
+  .c-sec2   { background:rgba(168,0,26,.60); }
+  .c-mega   { background:var(--red); }
+
+  /* VCOL COLORS */
+  .vc1 { background:rgba(217,0,30,.18); }
+  .vc2 { background:rgba(217,0,30,.38); }
+  .vc3 { background:rgba(217,0,30,.55); }
+  .vc4 { background:rgba(217,0,30,.68); }
+  .vc5 { background:rgba(217,0,30,.82); }
+  .vc6 { background:var(--red); }
+
+  /* ANCHOR CARDS */
+  .anchors { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--line); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .anchor { background:var(--white); padding:20px 22px; border-top:3px solid var(--line); }
+  .anchor.a1 { border-color:var(--red); }
+  .anchor.a2 { border-color:var(--g1); }
+  .anchor.a3 { border-color:var(--g2); }
+  .anchor-who { font-family:var(--mono); font-size:9px; color:var(--g3); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px; }
+  .anchor-val { font-family:var(--blk); font-size:28px; line-height:1; margin-bottom:5px; }
+  .anchor.a1 .anchor-val { color:var(--red); }
+  .anchor.a2 .anchor-val { color:var(--g1); }
+  .anchor.a3 .anchor-val { color:var(--g2); }
+  .anchor-desc { font-size:11.5px; color:var(--g2); line-height:1.5; }
+  .anchor-desc strong { color:var(--black); font-weight:700; }
+
+  /* TOOLTIP */
+  #tip { position:fixed; pointer-events:none; background:var(--black); color:var(--white); border-radius:4px; padding:10px 14px; font-family:var(--sans); font-size:12px; line-height:1.5; width:230px; opacity:0; transition:opacity .15s ease; z-index:9999; border-left:3px solid var(--red); }
+  #tip.on { opacity:1; }
+  #tip .tv { font-family:var(--blk); font-size:20px; color:var(--white); line-height:1.1; margin-bottom:4px; }
+  #tip .tt { display:inline-block; font-family:var(--mono); font-size:8.5px; letter-spacing:1px; text-transform:uppercase; padding:2px 6px; border-radius:2px; margin-bottom:7px; }
+  #tip .tt.up { background:rgba(0,200,100,.2); color:#00c864; }
+  #tip .tt.nt { background:rgba(200,200,200,.15); color:#aaa; }
+  #tip .tt.db { background:rgba(255,200,0,.15); color:#e6b800; }
+  #tip .tdiv { height:1px; background:rgba(255,255,255,.1); margin:6px 0; }
+  #tip .tr { display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.55); margin-bottom:3px; }
+  #tip .tr span:last-child { color:var(--white); font-weight:600; }
+  #tip .td { font-size:11px; color:rgba(255,255,255,.5); line-height:1.45; margin-top:5px; border-top:1px solid rgba(255,255,255,.08); padding-top:5px; }
+
+  /* FOOTER */
+  .foot { padding:12px 40px; display:flex; justify-content:space-between; align-items:center; background:var(--gbg); border-top:1px solid var(--line); }
+  .foot-src { font-family:var(--mono); font-size:8px; color:var(--g3); letter-spacing:.5px; }
+  .foot-logo { font-family:var(--blk); font-size:12px; letter-spacing:1px; color:var(--g2); }
+  .foot-logo em { font-style:normal; color:var(--red); }
+
+  @keyframes growV { from{transform:scaleY(0)} to{transform:scaleY(1)} }
+  @keyframes growH { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-l">
+    <div class="eyebrow"><span></span>OpenAI · Histórico de Captações · 2015–2026</div>
+    <h1>DE US$ 130 MI<br>A <em>US$ 852 BI</em><br>EM 10 ANOS</h1>
+    <p>A OpenAI se tornou a empresa privada mais capitalizada da história da tecnologia. Conheça cada rodada de investimento, quem pagou e quanto a companhia valia em cada etapa.</p>
+  </div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="met">
+    <div class="met-lbl">Total captado (2015–2026)</div>
+    <div class="met-val r">US$ 190,6 bi</div>
+    <div class="met-note">em 10 rodadas de investimento</div>
+  </div>
+  <div class="met">
+    <div class="met-lbl">Maior rodada privada da história</div>
+    <div class="met-val">US$ 122 bi</div>
+    <div class="met-note">Mega-Rodada · Mar. 2026</div>
+  </div>
+  <div class="met">
+    <div class="met-lbl">Crescimento de valuation</div>
+    <div class="met-val r">+1.704×</div>
+    <div class="met-note">de US$ 500 mi (2019) a US$ 852 bi</div>
+  </div>
+</div>
+
+<!-- VALUATION MILESTONES -->
+<div class="sh">
+  <span class="sh-lbl">Evolução do valuation — marcos por rodada</span>
+  <div class="sh-line"></div>
+</div>
+<div class="vmilestones">
+  <div class="vorigin">
+    <span class="vorigin-lbl">Antes de 2023</span>
+    <div class="vorigin-items">
+      <span class="vorigin-item">Dez. 2015 — <strong>sem valuation</strong> (sem fins lucrativos)</span>
+      <span class="vorigin-item">Mar. 2019 — <strong>US$ 500 mi</strong> (Seed · Khosla)</span>
+      <span class="vorigin-item">Jul. 2019 — <strong>US$ 1 bi captados</strong> (Microsoft)</span>
+    </div>
+  </div>
+
+  <div class="vcards">
+    <div class="vcard"
+         data-val="US$ 29 bi" data-tag="nt" data-tag-txt="CORPORATE · JAN. 2023"
+         data-lead="Lead: Microsoft"
+         data-val2="US$ 10 bi captados"
+         data-desc="Segundo grande aporte da Microsoft, incluindo expansão do acordo de cloud via Azure. Estruturação da parceria de longo prazo.">
+      <span class="vcard-date">Jan. 2023</span>
+      <span class="vcard-round">Microsoft</span>
+      <div class="vcard-val">US$ 29 bi</div>
+    </div>
+
+    <div class="vcard"
+         data-val="US$ 157 bi" data-tag="up" data-tag-txt="SERIES E · OUT. 2024"
+         data-lead="Lead: Thrive Capital (US$ 1,25 bi)"
+         data-val2="US$ 6,6 bi captados"
+         data-desc="Participação de Microsoft, SoftBank, Nvidia, Altimeter, Fidelity e MGX (Abu Dhabi).">
+      <span class="vcard-date">Out. 2024</span>
+      <span class="vcard-round">Series E</span>
+      <div class="vcard-val">US$ 157 bi</div>
+      <div class="vcard-growth">+441% vs jan/23</div>
+    </div>
+
+    <div class="vcard"
+         data-val="US$ 300 bi" data-tag="up" data-tag-txt="SERIES F · MAR. 2025"
+         data-lead="Lead: SoftBank (US$ 30 bi)"
+         data-val2="US$ 40 bi captados"
+         data-desc="SoftBank comprometeu US$ 30 bi dos US$ 40 bi totais. Participação de Microsoft, Coatue, Altimeter, Thrive e Dragoneer.">
+      <span class="vcard-date">Mar. 2025</span>
+      <span class="vcard-round">Series F</span>
+      <div class="vcard-val">US$ 300 bi</div>
+      <div class="vcard-growth">+91% vs out/24</div>
+    </div>
+
+    <div class="vcard"
+         data-val="US$ 500 bi" data-tag="up" data-tag-txt="SECONDARY · OUT. 2025"
+         data-lead="Lead: SoftBank + institucionais"
+         data-val2="US$ 6,6 bi captados"
+         data-desc="Venda secundária para prover liquidez a funcionários. Valuation supera Apple e Microsoft na época.">
+      <span class="vcard-date">Out. 2025</span>
+      <span class="vcard-round">Secondary</span>
+      <div class="vcard-val">US$ 500 bi</div>
+      <div class="vcard-growth">+67% vs mar/25</div>
+    </div>
+
+    <div class="vcard now"
+         data-val="US$ 852 bi" data-tag="up" data-tag-txt="MEGA-RODADA · MAR. 2026"
+         data-lead="Amazon (50 bi) · SoftBank (30 bi) · Nvidia (30 bi)"
+         data-val2="US$ 122 bi captados"
+         data-desc="Maior captação privada da história do Vale do Silício. Co-leads: a16z e D.E. Shaw. +20 instituições participantes incluindo Blackstone, BlackRock e Temasek.">
+      <span class="vcard-date">Mar. 2026</span>
+      <span class="vcard-round">Mega-Rodada</span>
+      <div class="vcard-val now">US$ 852 bi</div>
+      <div class="vcard-growth">+70% vs out/25</div>
+    </div>
+  </div>
+</div>
+
+<!-- APORTES -->
+<div class="sh" style="margin-top:8px">
+  <span class="sh-lbl">Aportes por rodada — valor captado (escala logarítmica)</span>
+  <div class="sh-line"></div>
+</div>
+<div class="aportes">
+
+  <div class="ap-row"
+       data-val="US$ 130 mi" data-tag="nt" data-tag-txt="GRANT · 2015"
+       data-lead="Coletivo: Musk, Altman, Thiel, Hoffman…"
+       data-val2="Valuation: sem fins lucrativos"
+       data-desc="Promessa de US$ 1 bi; apenas ~US$ 130 mi efetivamente desembolsados. Organização sem fins lucrativos.">
+    <div class="ap-meta"><span class="ap-date">Dez. 2015</span><span class="ap-name">Grant fundador</span></div>
+    <div class="ap-track"><div class="ap-fill c-grant" style="width:18.8%"></div></div>
+    <span class="ap-val">US$ 130 mi</span>
+  </div>
+
+  <div class="ap-row"
+       data-val="US$ 50 mi" data-tag="nt" data-tag-txt="SEED · 2019"
+       data-lead="Lead: Khosla Ventures"
+       data-val2="Valuation: US$ 500 mi"
+       data-desc="Primeiro VC formal após a criação do modelo capped-profit. Marco da transição da filantropia para o mercado.">
+    <div class="ap-meta"><span class="ap-date">Mar. 2019</span><span class="ap-name">Seed</span></div>
+    <div class="ap-track"><div class="ap-fill c-seed" style="width:8%"></div></div>
+    <span class="ap-val">US$ 50 mi</span>
+  </div>
+
+  <div class="ap-row"
+       data-val="US$ 1 bi" data-tag="nt" data-tag-txt="CORPORATE · 2019"
+       data-lead="Lead: Microsoft"
+       data-val2="Valuation: não divulgado"
+       data-desc="Microsoft entra como principal parceira estratégica e provedora de cloud da OpenAI.">
+    <div class="ap-meta"><span class="ap-date">Jul. 2019</span><span class="ap-name">Microsoft</span></div>
+    <div class="ap-track"><div class="ap-fill c-ms" style="width:41.8%"></div></div>
+    <span class="ap-val">US$ 1 bi</span>
+  </div>
+
+  <div class="ap-row"
+       data-val="US$ 10 bi" data-tag="up" data-tag-txt="CORPORATE · 2023"
+       data-lead="Lead: Microsoft"
+       data-val2="Valuation: US$ 29 bi"
+       data-desc="Investimento estrutural incluindo expansão do acordo Azure. Microsoft passa a integrar OpenAI em toda a sua stack.">
+    <div class="ap-meta"><span class="ap-date">Jan. 2023</span><span class="ap-name">Microsoft</span></div>
+    <div class="ap-track"><div class="ap-fill c-ms2" style="width:67.8%"></div></div>
+    <span class="ap-val dk">US$ 10 bi</span>
+  </div>
+
+  <div class="ap-row"
+       data-val="US$ 300 mi" data-tag="nt" data-tag-txt="SECONDARY · 2023"
+       data-lead="Sequoia, a16z, Thrive, Tiger Global, K2"
+       data-val2="Valuation: ~US$ 27–29 bi"
+       data-desc="Venda de ações secundárias. Entrada de grandes fundos de VC que não participaram das rodadas primárias.">
+    <div class="ap-meta"><span class="ap-date">Abr. 2023</span><span class="ap-name">Secondary</span></div>
+    <div class="ap-track"><div class="ap-fill c-sec" style="width:28.2%"></div></div>
+    <span class="ap-val">US$ 300 mi</span>
+  </div>
+
+  <div class="ap-row"
+       data-val="US$ 6,6 bi" data-tag="up" data-tag-txt="SERIES E · 2024"
+       data-lead="Lead: Thrive Capital (US$ 1,25 bi)"
+       data-val2="Valuation: US$ 157 bi"
+       data-desc="Participação de Microsoft, SoftBank, Nvidia, Altimeter, Fidelity e MGX (Abu Dhabi). Maior rodada até então.">
+    <div class="ap-meta"><span class="ap-date">Out. 2024</span><span class="ap-name">Series E</span></div>
+    <div class="ap-track"><div class="ap-fill c-se" style="width:63.1%"></div></div>
+    <span class="ap-val r">US$ 6,6 bi</span>
+  </div>
+
+  <div class="ap-row"
+       data-val="US$ 4 bi" data-tag="db" data-tag-txt="DÍVIDA · 2024"
+       data-lead="JPMorgan, Citi, Goldman, Morgan Stanley…"
+       data-val2="Crédito rotativo (sindicato)"
+       data-desc="Linha de crédito com 9 bancos: JPMorgan, Citi, Goldman Sachs, Morgan Stanley, Santander, Wells Fargo, SMBC, UBS e HSBC.">
+    <div class="ap-meta"><span class="ap-date">Out. 2024</span><span class="ap-name">Crédito (dívida)</span></div>
+    <div class="ap-track"><div class="ap-fill c-div" style="width:57.4%"></div></div>
+    <span class="ap-val">US$ 4 bi</span>
+  </div>
+
+  <div class="ap-row"
+       data-val="US$ 40 bi" data-tag="up" data-tag-txt="SERIES F · MAR. 2025"
+       data-lead="Lead: SoftBank (US$ 30 bi)"
+       data-val2="Valuation: US$ 300 bi"
+       data-desc="SoftBank comprometeu US$ 30 bi dos US$ 40 bi totais. Participação de Microsoft, Coatue, Altimeter, Thrive e Dragoneer.">
+    <div class="ap-meta"><span class="ap-date">Mar. 2025</span><span class="ap-name">Series F</span></div>
+    <div class="ap-track"><div class="ap-fill c-sf" style="width:83.4%"></div></div>
+    <span class="ap-val dk">US$ 40 bi</span>
+  </div>
+
+  <div class="ap-row"
+       data-val="US$ 6,6 bi" data-tag="nt" data-tag-txt="SECONDARY · 2025"
+       data-lead="Lead: SoftBank + institucionais"
+       data-val2="Valuation: US$ 500 bi"
+       data-desc="Venda secundária para prover liquidez a funcionários. Valuation ultrapassa as maiores empresas listadas de tecnologia.">
+    <div class="ap-meta"><span class="ap-date">Out. 2025</span><span class="ap-name">Secondary</span></div>
+    <div class="ap-track"><div class="ap-fill c-sec2" style="width:63.1%"></div></div>
+    <span class="ap-val">US$ 6,6 bi</span>
+  </div>
+
+  <div class="ap-row"
+       data-val="US$ 122 bi" data-tag="up" data-tag-txt="RECORDE HISTÓRICO · 2026"
+       data-lead="Amazon (50 bi) · SoftBank (30 bi) · Nvidia (30 bi)"
+       data-val2="Valuation pós-money: US$ 852 bi"
+       data-desc="Maior captação privada da história do Vale do Silício. Co-leads: a16z e D.E. Shaw. +20 instituições participantes.">
+    <div class="ap-meta"><span class="ap-date">Mar. 2026</span><span class="ap-name">Mega-Rodada</span></div>
+    <div class="ap-track"><div class="ap-fill c-mega" style="width:96%"></div></div>
+    <span class="ap-val r">US$ 122 bi</span>
+  </div>
+
+</div>
+
+<!-- ANCHOR INVESTORS -->
+<div class="sh" style="margin-top:4px">
+  <span class="sh-lbl">Maiores investidores — Mega-Rodada 2026</span>
+  <div class="sh-line"></div>
+</div>
+<div class="anchors">
+  <div class="anchor a1">
+    <div class="anchor-who">Amazon</div>
+    <div class="anchor-val">US$ 50 bi</div>
+    <div class="anchor-desc"><strong>Maior cheque da história</strong> em uma rodada privada. A Amazon entra como âncora estratégica, ampliando presença no mercado de IA via AWS.</div>
+  </div>
+  <div class="anchor a2">
+    <div class="anchor-who">SoftBank</div>
+    <div class="anchor-val">US$ 60+ bi</div>
+    <div class="anchor-desc"><strong>Maior investidor acumulado</strong> na OpenAI: US$ 30 bi na Series F + US$ 30 bi na Mega-Rodada + liderança na venda secundária de 2025.</div>
+  </div>
+  <div class="anchor a3">
+    <div class="anchor-who">Nvidia</div>
+    <div class="anchor-val">US$ 30 bi</div>
+    <div class="anchor-desc"><strong>Do fornecedor ao sócio</strong>: a Nvidia, que vende chips para a OpenAI, também passa a ser investidora direta — US$ 100 mi em 2024 e US$ 30 bi em 2026.</div>
+  </div>
+</div>
+
+<!-- TOOLTIP -->
+<div id="tip">
+  <div class="tv" id="tv"></div>
+  <div class="tt" id="tt"></div>
+  <div class="tdiv"></div>
+  <div class="tr"><span>Investidor(es)</span><span id="tl"></span></div>
+  <div class="tr"><span id="tv2l">Valuation</span><span id="tv2"></span></div>
+  <div class="td" id="td"></div>
+</div>
+
+<!-- FOOTER -->
+<div class="foot">
+  <div class="foot-src">Fonte: OpenAI, Crunchbase, Bloomberg, Reuters · Compilado até maio de 2026</div>
+  <div class="foot-logo"><em>EXAME</em>LAB</div>
+</div>
+
+<script>
+  var tip=document.getElementById('tip'),
+      tv=document.getElementById('tv'),
+      tt=document.getElementById('tt'),
+      tl=document.getElementById('tl'),
+      tv2=document.getElementById('tv2'),
+      tv2l=document.getElementById('tv2l'),
+      td=document.getElementById('td');
+
+  var hoverEls = document.querySelectorAll('.vcard, .ap-row');
+
+  hoverEls.forEach(function(el) {
+    el.addEventListener('mouseenter', function(e) {
+      tv.textContent  = el.dataset.val;
+      tt.textContent  = el.dataset.tagTxt;
+      tt.className    = 'tt ' + el.dataset.tag;
+      tl.textContent  = el.dataset.lead;
+      tv2.textContent = el.dataset.val2 || el.dataset.aporte || '—';
+      tv2l.textContent = el.dataset.aporte ? 'Captado' : 'Valuation';
+      td.textContent  = el.dataset.desc;
+      tip.classList.add('on');
+      pos(e);
+    });
+    el.addEventListener('mousemove', pos);
+    el.addEventListener('mouseleave', function() { tip.classList.remove('on'); });
+  });
+
+  function pos(e) {
+    var x = e.clientX + 16, y = e.clientY - 10;
+    if (x + 246 > window.innerWidth) x = e.clientX - 246;
+    if (y + tip.offsetHeight > window.innerHeight) y = e.clientY - tip.offsetHeight - 10;
+    tip.style.left = x + 'px';
+    tip.style.top  = y + 'px';
+  }
+
+  function h() { window.parent.postMessage({height: document.body.scrollHeight}, '*'); }
+  window.addEventListener('load', h);
+  window.addEventListener('resize', h);
+</script>
+</body>
+</html>
