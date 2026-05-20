@@ -10,20 +10,20 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --red:   #D9001E;
-    --red-pale: #FFF0F2;
-    --black: #111111;
-    --g1:    #333333;
-    --g2:    #666666;
-    --g3:    #999999;
-    --gbg:   #F5F5F5;
-    --white: #FFFFFF;
-    --line:  #E8E8E8;
-    --green: #1a8a4a;
-    --green-bg: rgba(0,160,70,.09);
-    --mono:  'IBM Plex Mono', monospace;
-    --sans:  'Archivo', sans-serif;
-    --blk:   'Archivo Black', sans-serif;
+    --red:      #D9001E;
+    --red-pale: #FFF5F6;
+    --black:    #111111;
+    --g1:       #333333;
+    --g2:       #666666;
+    --g3:       #aaaaaa;
+    --gbg:      #F7F7F7;
+    --line:     #EBEBEB;
+    --white:    #FFFFFF;
+    --green:    #1a7a40;
+    --green-bg: rgba(0,140,60,.08);
+    --mono:     'IBM Plex Mono', monospace;
+    --sans:     'Archivo', sans-serif;
+    --blk:      'Archivo Black', sans-serif;
   }
 
   body {
@@ -33,256 +33,222 @@
     width: 800px;
     margin: 0 auto;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
   }
 
   /* ── HEADER ── */
   .hdr {
-    padding: 28px 40px 24px;
+    padding: 36px 48px 32px;
     border-top: 3px solid var(--red);
-    border-bottom: 1px solid var(--line);
   }
   .hdr h1 {
     font-family: var(--blk);
-    font-size: 30px;
+    font-size: 32px;
     line-height: 1.1;
     color: var(--black);
-    margin-bottom: 10px;
+    margin-bottom: 14px;
     letter-spacing: -0.3px;
+    max-width: 600px;
   }
   .hdr h1 em { font-style: normal; color: var(--red); }
   .hdr p {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--g2);
-    line-height: 1.55;
-    border-left: 2px solid var(--line);
-    padding-left: 12px;
+    line-height: 1.6;
+    max-width: 560px;
   }
 
-  /* ── SECTION LABEL ── */
-  .sh {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 20px 40px 0;
-  }
-  .sh-lbl {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--red);
-    white-space: nowrap;
-    font-weight: 600;
-  }
-  .sh-line { flex: 1; height: 1px; background: var(--line); }
-
-  /* ── VALUATION CARDS ── */
-  .vcards-wrap { padding: 14px 40px 24px; }
-
-  .vorigin {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    background: var(--gbg);
-    border-radius: 2px;
-    margin-bottom: 12px;
-  }
-  .vorigin-lbl {
-    font-family: var(--mono);
-    font-size: 8px;
-    color: var(--g3);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .vorigin-items {
-    display: flex;
-    gap: 0;
-    flex-wrap: wrap;
-  }
-  .vorigin-item {
+  /* ── SECTION TITLE ── */
+  .sec-title {
+    font-family: var(--sans);
     font-size: 11px;
-    color: var(--g2);
-    padding: 0 14px;
-    border-right: 1px solid var(--line);
-    line-height: 1.4;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--g3);
+    padding: 32px 48px 0;
   }
-  .vorigin-item:last-child { border-right: none; }
-  .vorigin-item strong { color: var(--g1); font-weight: 700; }
 
-  .vcards {
+  /* ── VALUATION ── */
+  .valuation { padding: 20px 48px 36px; }
+
+  .v-context {
+    font-size: 12px;
+    color: var(--g3);
+    margin-bottom: 24px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .v-steps {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 6px;
+    gap: 2px;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
   }
-  .vcard {
-    border: 1px solid var(--line);
-    border-top: 3px solid var(--line);
-    padding: 14px 12px 12px;
+
+  .v-step {
+    padding: 0 16px 0 0;
+    border-right: 1px solid var(--line);
     cursor: crosshair;
-    transition: border-color .15s, background .15s;
   }
-  .vcard:hover { border-color: var(--red); background: #fafafa; }
-  .vcard.now  { border-top-color: var(--red); background: var(--red-pale); }
-  .vcard-date {
+  .v-step:last-child { border-right: none; padding-right: 0; }
+  .v-step:first-child { padding-left: 0; }
+
+  .v-step-date {
     font-family: var(--mono);
-    font-size: 8px;
+    font-size: 9px;
     color: var(--g3);
     letter-spacing: .5px;
     display: block;
-    margin-bottom: 3px;
+    margin-bottom: 6px;
   }
-  .vcard-round {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--g1);
+  .v-step-round {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--g2);
     display: block;
-    margin-bottom: 10px;
-    line-height: 1.3;
+    margin-bottom: 14px;
   }
-  .vcard-val {
+  .v-step-val {
     font-family: var(--blk);
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1;
     color: var(--black);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
-  .vcard-val.now { color: var(--red); font-size: 18px; }
-  .vcard-growth {
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
+  .v-step-val.now { color: var(--red); font-size: 24px; }
+  .v-step-growth {
     font-family: var(--mono);
-    font-size: 8.5px;
-    font-weight: 600;
+    font-size: 9px;
     color: var(--green);
     background: var(--green-bg);
-    padding: 2px 5px;
+    display: inline-block;
+    padding: 3px 6px;
     border-radius: 2px;
+    font-weight: 600;
   }
 
   /* ── APORTES ── */
-  .aportes { padding: 12px 40px 28px; }
-  .ap-row {
-    display: flex;
+  .aportes { padding: 0 48px 40px; }
+
+  .ap-item {
+    display: grid;
+    grid-template-columns: 160px 1fr 120px;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 9px;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
     cursor: crosshair;
-    padding: 3px 0;
-    border-radius: 2px;
     transition: background .1s;
   }
-  .ap-row:hover { background: rgba(0,0,0,.025); }
-  .ap-meta { width: 130px; flex-shrink: 0; }
+  .ap-item:first-child { border-top: 1px solid var(--line); }
+  .ap-item:hover { background: var(--gbg); margin: 0 -12px; padding-left: 12px; padding-right: 12px; }
+
+  .ap-meta {}
   .ap-date {
     font-family: var(--mono);
-    font-size: 8px;
+    font-size: 9px;
     color: var(--g3);
-    letter-spacing: .5px;
     display: block;
+    margin-bottom: 3px;
+    letter-spacing: .3px;
   }
   .ap-name {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     color: var(--black);
     display: block;
-    margin-top: 1px;
-    line-height: 1.2;
+    line-height: 1.3;
   }
-  .ap-track {
-    flex: 1;
-    height: 13px;
-    background: var(--gbg);
-    border-radius: 1px;
+  .ap-type {
+    font-size: 11px;
+    color: var(--g3);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .ap-bar-wrap {}
+  .ap-bar-track {
+    height: 6px;
+    background: var(--line);
+    border-radius: 3px;
     overflow: hidden;
+    margin-bottom: 5px;
   }
-  .ap-fill {
+  .ap-bar-fill {
     height: 100%;
-    border-radius: 1px;
+    border-radius: 3px;
     transform-origin: left;
     transform: scaleX(0);
-    animation: growH .65s cubic-bezier(.4,0,.2,1) forwards;
+    animation: growH .7s cubic-bezier(.4,0,.2,1) forwards;
   }
-  .ap-row:nth-child(1)  .ap-fill { animation-delay: .04s; }
-  .ap-row:nth-child(2)  .ap-fill { animation-delay: .08s; }
-  .ap-row:nth-child(3)  .ap-fill { animation-delay: .12s; }
-  .ap-row:nth-child(4)  .ap-fill { animation-delay: .16s; }
-  .ap-row:nth-child(5)  .ap-fill { animation-delay: .20s; }
-  .ap-row:nth-child(6)  .ap-fill { animation-delay: .24s; }
-  .ap-row:nth-child(7)  .ap-fill { animation-delay: .28s; }
-  .ap-row:nth-child(8)  .ap-fill { animation-delay: .32s; }
-  .ap-row:nth-child(9)  .ap-fill { animation-delay: .36s; }
-  .ap-row:nth-child(10) .ap-fill { animation-delay: .40s; }
+  .ap-item:nth-child(1)  .ap-bar-fill { animation-delay: .04s; }
+  .ap-item:nth-child(2)  .ap-bar-fill { animation-delay: .09s; }
+  .ap-item:nth-child(3)  .ap-bar-fill { animation-delay: .14s; }
+  .ap-item:nth-child(4)  .ap-bar-fill { animation-delay: .19s; }
+  .ap-item:nth-child(5)  .ap-bar-fill { animation-delay: .24s; }
+  .ap-item:nth-child(6)  .ap-bar-fill { animation-delay: .29s; }
+  .ap-item:nth-child(7)  .ap-bar-fill { animation-delay: .34s; }
+  .ap-item:nth-child(8)  .ap-bar-fill { animation-delay: .39s; }
+  .ap-item:nth-child(9)  .ap-bar-fill { animation-delay: .44s; }
+  .ap-item:nth-child(10) .ap-bar-fill { animation-delay: .49s; }
 
-  .ap-val {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 600;
-    width: 76px;
-    flex-shrink: 0;
+  .ap-lead {
+    font-size: 10.5px;
+    color: var(--g3);
+    line-height: 1.4;
+  }
+
+  .ap-amount {
+    font-family: var(--blk);
+    font-size: 16px;
+    color: var(--black);
     text-align: right;
-    color: var(--g2);
+    white-space: nowrap;
   }
-  .ap-val.r  { color: var(--red); }
-  .ap-val.dk { color: var(--g1); }
-  .ap-val.db { color: var(--g2); }
+  .ap-amount.r  { color: var(--red); }
+  .ap-amount.dk { color: var(--g1); }
 
-  /* bar fills */
+  /* bar colors */
   .f-grant { background: rgba(217,0,30,.15); }
   .f-seed  { background: rgba(217,0,30,.12); }
   .f-ms1   { background: rgba(217,0,30,.28); }
   .f-ms2   { background: rgba(217,0,30,.45); }
-  .f-sec1  { background: rgba(100,100,100,.28); }
-  .f-se    { background: rgba(168,0,26,.55); }
-  .f-div   { background: rgba(100,100,100,.38); }
-  .f-sf    { background: rgba(217,0,30,.70); }
+  .f-sec   { background: rgba(150,150,150,.35); }
+  .f-se    { background: rgba(168,0,26,.60); }
+  .f-div   { background: rgba(150,150,150,.45); }
+  .f-sf    { background: rgba(217,0,30,.72); }
   .f-sec2  { background: rgba(168,0,26,.58); }
   .f-mega  { background: var(--red); }
 
   /* ── TOOLTIP ── */
   #tip {
-    position: fixed;
-    pointer-events: none;
-    background: var(--black);
-    color: var(--white);
-    border-radius: 4px;
-    padding: 10px 14px;
-    font-family: var(--sans);
-    font-size: 12px;
-    line-height: 1.5;
-    width: 230px;
-    opacity: 0;
-    transition: opacity .15s ease;
-    z-index: 9999;
-    border-left: 3px solid var(--red);
+    position: fixed; pointer-events: none;
+    background: var(--black); color: var(--white);
+    border-radius: 4px; padding: 12px 16px;
+    font-family: var(--sans); font-size: 12px;
+    line-height: 1.5; width: 240px;
+    opacity: 0; transition: opacity .15s ease;
+    z-index: 9999; border-left: 3px solid var(--red);
   }
   #tip.on { opacity: 1; }
-  #tip .tv { font-family: var(--blk); font-size: 19px; color: var(--white); line-height: 1.1; margin-bottom: 4px; }
-  #tip .tt { display: inline-block; font-family: var(--mono); font-size: 8.5px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; margin-bottom: 7px; }
+  #tip .tv { font-family: var(--blk); font-size: 20px; line-height: 1.1; margin-bottom: 4px; }
+  #tip .tt { display: inline-block; font-family: var(--mono); font-size: 8.5px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 6px; border-radius: 2px; margin-bottom: 8px; }
   #tip .tt.up { background: rgba(0,180,70,.2); color: #00c864; }
   #tip .tt.nt { background: rgba(200,200,200,.15); color: #aaa; }
   #tip .tt.db { background: rgba(255,200,0,.15); color: #e6b800; }
-  #tip .tdiv { height: 1px; background: rgba(255,255,255,.1); margin: 6px 0; }
-  #tip .tr { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,.55); margin-bottom: 3px; }
-  #tip .tr span:last-child { color: var(--white); font-weight: 600; font-size: 11px; }
-  #tip .td { font-size: 11px; color: rgba(255,255,255,.5); line-height: 1.45; margin-top: 5px; border-top: 1px solid rgba(255,255,255,.08); padding-top: 5px; }
+  #tip .tdiv { height: 1px; background: rgba(255,255,255,.1); margin: 7px 0; }
+  #tip .tr { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,.5); margin-bottom: 4px; }
+  #tip .tr span:last-child { color: var(--white); font-weight: 600; }
+  #tip .td { font-size: 11px; color: rgba(255,255,255,.45); line-height: 1.5; margin-top: 6px; border-top: 1px solid rgba(255,255,255,.08); padding-top: 6px; }
 
   /* ── FOOTER ── */
   .foot {
-    padding: 12px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--gbg);
+    padding: 16px 48px;
     border-top: 1px solid var(--line);
   }
-  .foot-src { font-family: var(--mono); font-size: 8px; color: var(--g3); letter-spacing: .5px; }
-  .foot-logo { font-family: var(--blk); font-size: 12px; letter-spacing: 1px; color: var(--g2); }
-  .foot-logo em { font-style: normal; color: var(--red); }
+  .foot-src { font-size: 11px; color: var(--g3); }
 
   @keyframes growH { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 </style>
@@ -296,144 +262,200 @@
 </div>
 
 <!-- VALUATION -->
-<div class="sh">
-  <span class="sh-lbl">Evolução do valuation (em bilhões de dólares)</span>
-  <div class="sh-line"></div>
-</div>
-<div class="vcards-wrap">
+<div class="sec-title">Evolução do valuation — em bilhões de dólares (bi)</div>
+<div class="valuation">
+  <p class="v-context">Antes de 2023, a OpenAI captou US$ 1,18 bilhão em três etapas — um grant filantrópico em 2015, uma rodada seed com a Khosla Ventures em 2019 e um aporte de US$ 1 bilhão da Microsoft no mesmo ano.</p>
+  <div class="v-steps">
 
-  <div class="vorigin">
-    <span class="vorigin-lbl">Antes de 2023</span>
-    <div class="vorigin-items">
-      <span class="vorigin-item">Dez. 2015 — <strong>sem valuation</strong> (sem fins lucrativos)</span>
-      <span class="vorigin-item">Mar. 2019 — <strong>US$ 500 mi</strong> (Seed)</span>
-      <span class="vorigin-item">Jul. 2019 — <strong>US$ 1 bi captados</strong> (Microsoft)</span>
-    </div>
-  </div>
-
-  <div class="vcards">
-    <div class="vcard"
-         data-val="US$ 29 bi" data-tag="nt" data-tag-txt="JAN. 2023"
+    <div class="v-step"
+         data-val="US$ 29 bilhões" data-tag="nt" data-tag-txt="Janeiro de 2023"
          data-lead="Lead: Microsoft"
-         data-val2="US$ 10 bi captados"
-         data-desc="Segundo grande aporte da Microsoft, incluindo expansão do acordo de cloud via Azure.">
-      <span class="vcard-date">Jan. 2023</span>
-      <span class="vcard-round">Microsoft</span>
-      <div class="vcard-val">US$ 29 bi</div>
+         data-val2="US$ 10 bilhões captados"
+         data-desc="Segundo grande aporte da Microsoft, incluindo expansão do acordo de cloud via Azure. Estruturação da parceria de longo prazo.">
+      <span class="v-step-date">Jan. 2023</span>
+      <span class="v-step-round">Microsoft</span>
+      <div class="v-step-val">29 bi</div>
     </div>
 
-    <div class="vcard"
-         data-val="US$ 157 bi" data-tag="up" data-tag-txt="+441% vs jan/23"
+    <div class="v-step"
+         data-val="US$ 157 bilhões" data-tag="up" data-tag-txt="+441% em relação a jan/23"
          data-lead="Lead: Thrive Capital"
-         data-val2="US$ 6,6 bi captados"
+         data-val2="US$ 6,6 bilhões captados"
          data-desc="Participação de Microsoft, SoftBank, Nvidia, Altimeter, Fidelity e MGX (Abu Dhabi).">
-      <span class="vcard-date">Out. 2024</span>
-      <span class="vcard-round">Series E</span>
-      <div class="vcard-val">US$ 157 bi</div>
-      <div class="vcard-growth">+441% vs jan/23</div>
+      <span class="v-step-date">Out. 2024</span>
+      <span class="v-step-round">Series E</span>
+      <div class="v-step-val">157 bi</div>
+      <div class="v-step-growth">+441%</div>
     </div>
 
-    <div class="vcard"
-         data-val="US$ 300 bi" data-tag="up" data-tag-txt="+91% vs out/24"
-         data-lead="Lead: SoftBank (US$ 30 bi)"
-         data-val2="US$ 40 bi captados"
-         data-desc="SoftBank comprometeu US$ 30 bi dos US$ 40 bi totais. Participação de Microsoft, Coatue, Altimeter, Thrive e Dragoneer.">
-      <span class="vcard-date">Mar. 2025</span>
-      <span class="vcard-round">Series F</span>
-      <div class="vcard-val">US$ 300 bi</div>
-      <div class="vcard-growth">+91% vs out/24</div>
+    <div class="v-step"
+         data-val="US$ 300 bilhões" data-tag="up" data-tag-txt="+91% em relação a out/24"
+         data-lead="Lead: SoftBank (US$ 30 bilhões)"
+         data-val2="US$ 40 bilhões captados"
+         data-desc="SoftBank comprometeu US$ 30 bilhões dos US$ 40 bilhões totais. Participação de Microsoft, Coatue, Altimeter, Thrive e Dragoneer.">
+      <span class="v-step-date">Mar. 2025</span>
+      <span class="v-step-round">Series F</span>
+      <div class="v-step-val">300 bi</div>
+      <div class="v-step-growth">+91%</div>
     </div>
 
-    <div class="vcard"
-         data-val="US$ 500 bi" data-tag="up" data-tag-txt="+67% vs mar/25"
-         data-lead="Lead: SoftBank + institucionais"
-         data-val2="US$ 6,6 bi captados"
+    <div class="v-step"
+         data-val="US$ 500 bilhões" data-tag="up" data-tag-txt="+67% em relação a mar/25"
+         data-lead="Lead: SoftBank e institucionais"
+         data-val2="US$ 6,6 bilhões captados"
          data-desc="Venda secundária para prover liquidez a funcionários. Valuation supera as maiores empresas de tecnologia listadas em bolsa.">
-      <span class="vcard-date">Out. 2025</span>
-      <span class="vcard-round">Secondary</span>
-      <div class="vcard-val">US$ 500 bi</div>
-      <div class="vcard-growth">+67% vs mar/25</div>
+      <span class="v-step-date">Out. 2025</span>
+      <span class="v-step-round">Secondary</span>
+      <div class="v-step-val">500 bi</div>
+      <div class="v-step-growth">+67%</div>
     </div>
 
-    <div class="vcard now"
-         data-val="US$ 852 bi" data-tag="up" data-tag-txt="+70% vs out/25"
-         data-lead="Amazon (50 bi) · SoftBank (30 bi) · Nvidia (30 bi)"
-         data-val2="US$ 122 bi captados"
-         data-desc="Maior captação privada da história do Vale do Silício. Co-leads: a16z e D.E. Shaw. +20 instituições participantes.">
-      <span class="vcard-date">Mar. 2026</span>
-      <span class="vcard-round">Mega-Rodada</span>
-      <div class="vcard-val now">US$ 852 bi</div>
-      <div class="vcard-growth">+70% vs out/25</div>
+    <div class="v-step"
+         data-val="US$ 852 bilhões" data-tag="up" data-tag-txt="+70% em relação a out/25"
+         data-lead="Amazon · SoftBank · Nvidia"
+         data-val2="US$ 122 bilhões captados"
+         data-desc="Maior captação privada da história do Vale do Silício. Co-leads: Andreessen Horowitz e D.E. Shaw. Mais de 20 instituições participantes.">
+      <span class="v-step-date">Mar. 2026</span>
+      <span class="v-step-round">Mega-Rodada</span>
+      <div class="v-step-val now">852 bi</div>
+      <div class="v-step-growth">+70%</div>
     </div>
+
   </div>
-
 </div>
 
 <!-- APORTES -->
-<div class="sh">
-  <span class="sh-lbl">Aportes por rodada (valor em dólares captado)</span>
-  <div class="sh-line"></div>
-</div>
+<div class="sec-title">Aportes por rodada — em dólares americanos (bi = bilhões · mi = milhões)</div>
 <div class="aportes">
 
-  <div class="ap-row" data-val="US$ 130 mi" data-tag="nt" data-tag-txt="GRANT · 2015" data-lead="Musk, Altman, Thiel, Hoffman e outros" data-val2="Sem valuation formal" data-desc="Promessa de US$ 1 bi; ~US$ 130 mi efetivamente desembolsados. Organização sem fins lucrativos.">
-    <div class="ap-meta"><span class="ap-date">Dez. 2015</span><span class="ap-name">Grant fundador</span></div>
-    <div class="ap-track"><div class="ap-fill f-grant" style="width:18.8%"></div></div>
-    <span class="ap-val">US$ 130 mi</span>
+  <div class="ap-item" data-val="US$ 130 milhões" data-tag="nt" data-tag-txt="Dezembro de 2015" data-lead="Musk, Altman, Thiel, Hoffman e outros" data-val2="Sem valuation formal" data-desc="Promessa de US$ 1 bilhão; cerca de US$ 130 milhões efetivamente desembolsados. Organização sem fins lucrativos.">
+    <div class="ap-meta">
+      <span class="ap-date">Dezembro de 2015</span>
+      <span class="ap-name">Grant fundador</span>
+      <span class="ap-type">Filantrópico</span>
+    </div>
+    <div class="ap-bar-wrap">
+      <div class="ap-bar-track"><div class="ap-bar-fill f-grant" style="width:18.8%"></div></div>
+      <div class="ap-lead">Musk, Altman, Thiel, Hoffman e outros</div>
+    </div>
+    <div class="ap-amount">130 mi</div>
   </div>
 
-  <div class="ap-row" data-val="US$ 50 mi" data-tag="nt" data-tag-txt="SEED · 2019" data-lead="Lead: Khosla Ventures" data-val2="Valuation: US$ 500 mi" data-desc="Primeiro VC formal após a criação do modelo capped-profit. Marco da transição da filantropia para o mercado.">
-    <div class="ap-meta"><span class="ap-date">Mar. 2019</span><span class="ap-name">Seed</span></div>
-    <div class="ap-track"><div class="ap-fill f-seed" style="width:8%"></div></div>
-    <span class="ap-val">US$ 50 mi</span>
+  <div class="ap-item" data-val="US$ 50 milhões" data-tag="nt" data-tag-txt="Março de 2019" data-lead="Lead: Khosla Ventures" data-val2="Valuation: US$ 500 milhões" data-desc="Primeiro aporte em formato de venture capital após a reestruturação para modelo capped-profit.">
+    <div class="ap-meta">
+      <span class="ap-date">Março de 2019</span>
+      <span class="ap-name">Seed</span>
+      <span class="ap-type">Venture Capital</span>
+    </div>
+    <div class="ap-bar-wrap">
+      <div class="ap-bar-track"><div class="ap-bar-fill f-seed" style="width:8%"></div></div>
+      <div class="ap-lead">Khosla Ventures</div>
+    </div>
+    <div class="ap-amount">50 mi</div>
   </div>
 
-  <div class="ap-row" data-val="US$ 1 bi" data-tag="nt" data-tag-txt="CORPORATE · 2019" data-lead="Lead: Microsoft" data-val2="Valuation: não divulgado" data-desc="Microsoft entra como principal parceira estratégica e provedora de cloud da OpenAI.">
-    <div class="ap-meta"><span class="ap-date">Jul. 2019</span><span class="ap-name">Microsoft</span></div>
-    <div class="ap-track"><div class="ap-fill f-ms1" style="width:41.8%"></div></div>
-    <span class="ap-val">US$ 1 bi</span>
+  <div class="ap-item" data-val="US$ 1 bilhão" data-tag="nt" data-tag-txt="Julho de 2019" data-lead="Lead: Microsoft" data-val2="Valuation: não divulgado" data-desc="Microsoft entra como principal parceira estratégica e provedora de cloud da OpenAI.">
+    <div class="ap-meta">
+      <span class="ap-date">Julho de 2019</span>
+      <span class="ap-name">Microsoft</span>
+      <span class="ap-type">Rodada corporativa</span>
+    </div>
+    <div class="ap-bar-wrap">
+      <div class="ap-bar-track"><div class="ap-bar-fill f-ms1" style="width:41.8%"></div></div>
+      <div class="ap-lead">Microsoft</div>
+    </div>
+    <div class="ap-amount">1 bi</div>
   </div>
 
-  <div class="ap-row" data-val="US$ 10 bi" data-tag="up" data-tag-txt="CORPORATE · 2023" data-lead="Lead: Microsoft" data-val2="Valuation: US$ 29 bi" data-desc="Investimento estrutural incluindo expansão do acordo Azure. Microsoft passa a integrar OpenAI em toda a sua stack.">
-    <div class="ap-meta"><span class="ap-date">Jan. 2023</span><span class="ap-name">Microsoft</span></div>
-    <div class="ap-track"><div class="ap-fill f-ms2" style="width:67.8%"></div></div>
-    <span class="ap-val dk">US$ 10 bi</span>
+  <div class="ap-item" data-val="US$ 10 bilhões" data-tag="up" data-tag-txt="Janeiro de 2023" data-lead="Lead: Microsoft" data-val2="Valuation: US$ 29 bilhões" data-desc="Investimento estrutural incluindo expansão do acordo Azure. Microsoft passa a integrar a OpenAI em toda a sua stack de produtos.">
+    <div class="ap-meta">
+      <span class="ap-date">Janeiro de 2023</span>
+      <span class="ap-name">Microsoft</span>
+      <span class="ap-type">Rodada corporativa</span>
+    </div>
+    <div class="ap-bar-wrap">
+      <div class="ap-bar-track"><div class="ap-bar-fill f-ms2" style="width:67.8%"></div></div>
+      <div class="ap-lead">Microsoft</div>
+    </div>
+    <div class="ap-amount dk">10 bi</div>
   </div>
 
-  <div class="ap-row" data-val="US$ 300 mi" data-tag="nt" data-tag-txt="SECONDARY · 2023" data-lead="Sequoia, a16z, Thrive, Tiger Global, K2" data-val2="Valuation: ~US$ 29 bi" data-desc="Venda de ações secundárias. Entrada de grandes fundos de VC que não participaram das rodadas primárias.">
-    <div class="ap-meta"><span class="ap-date">Abr. 2023</span><span class="ap-name">Secondary</span></div>
-    <div class="ap-track"><div class="ap-fill f-sec1" style="width:28.2%"></div></div>
-    <span class="ap-val">US$ 300 mi</span>
+  <div class="ap-item" data-val="US$ 300 milhões" data-tag="nt" data-tag-txt="Abril de 2023" data-lead="Sequoia, a16z, Thrive, Tiger Global, K2" data-val2="Valuation: ~US$ 29 bilhões" data-desc="Venda de ações secundárias. Entrada de grandes fundos de VC que não participaram das rodadas primárias.">
+    <div class="ap-meta">
+      <span class="ap-date">Abril de 2023</span>
+      <span class="ap-name">Secondary</span>
+      <span class="ap-type">Venda secundária</span>
+    </div>
+    <div class="ap-bar-wrap">
+      <div class="ap-bar-track"><div class="ap-bar-fill f-sec" style="width:28.2%"></div></div>
+      <div class="ap-lead">Sequoia, a16z, Thrive, Tiger Global</div>
+    </div>
+    <div class="ap-amount">300 mi</div>
   </div>
 
-  <div class="ap-row" data-val="US$ 6,6 bi" data-tag="up" data-tag-txt="SERIES E · 2024" data-lead="Lead: Thrive Capital (US$ 1,25 bi)" data-val2="Valuation: US$ 157 bi" data-desc="Participação de Microsoft, SoftBank, Nvidia, Altimeter, Fidelity e MGX (Abu Dhabi).">
-    <div class="ap-meta"><span class="ap-date">Out. 2024</span><span class="ap-name">Series E</span></div>
-    <div class="ap-track"><div class="ap-fill f-se" style="width:63.1%"></div></div>
-    <span class="ap-val r">US$ 6,6 bi</span>
+  <div class="ap-item" data-val="US$ 6,6 bilhões" data-tag="up" data-tag-txt="Outubro de 2024" data-lead="Lead: Thrive Capital (US$ 1,25 bilhão)" data-val2="Valuation: US$ 157 bilhões" data-desc="Participação de Microsoft, SoftBank, Nvidia, Altimeter, Fidelity e MGX (Abu Dhabi).">
+    <div class="ap-meta">
+      <span class="ap-date">Outubro de 2024</span>
+      <span class="ap-name">Series E</span>
+      <span class="ap-type">Venture Capital</span>
+    </div>
+    <div class="ap-bar-wrap">
+      <div class="ap-bar-track"><div class="ap-bar-fill f-se" style="width:63.1%"></div></div>
+      <div class="ap-lead">Thrive Capital, Microsoft, SoftBank, Nvidia</div>
+    </div>
+    <div class="ap-amount r">6,6 bi</div>
   </div>
 
-  <div class="ap-row" data-val="US$ 4 bi" data-tag="db" data-tag-txt="DÍVIDA · 2024" data-lead="JPMorgan, Citi, Goldman, Morgan Stanley…" data-val2="Crédito rotativo" data-desc="Linha de crédito com 9 bancos: JPMorgan, Citi, Goldman Sachs, Morgan Stanley, Santander, Wells Fargo, SMBC, UBS e HSBC.">
-    <div class="ap-meta"><span class="ap-date">Out. 2024</span><span class="ap-name">Crédito (dívida)</span></div>
-    <div class="ap-track"><div class="ap-fill f-div" style="width:57.4%"></div></div>
-    <span class="ap-val db">US$ 4 bi</span>
+  <div class="ap-item" data-val="US$ 4 bilhões" data-tag="db" data-tag-txt="Outubro de 2024" data-lead="JPMorgan, Citi, Goldman Sachs, Morgan Stanley e outros" data-val2="Crédito rotativo" data-desc="Linha de crédito com sindicato de 9 bancos: JPMorgan, Citi, Goldman Sachs, Morgan Stanley, Santander, Wells Fargo, SMBC, UBS e HSBC.">
+    <div class="ap-meta">
+      <span class="ap-date">Outubro de 2024</span>
+      <span class="ap-name">Crédito rotativo</span>
+      <span class="ap-type">Dívida</span>
+    </div>
+    <div class="ap-bar-wrap">
+      <div class="ap-bar-track"><div class="ap-bar-fill f-div" style="width:57.4%"></div></div>
+      <div class="ap-lead">JPMorgan, Goldman, Citi e outros 6 bancos</div>
+    </div>
+    <div class="ap-amount">4 bi</div>
   </div>
 
-  <div class="ap-row" data-val="US$ 40 bi" data-tag="up" data-tag-txt="SERIES F · 2025" data-lead="Lead: SoftBank (US$ 30 bi)" data-val2="Valuation: US$ 300 bi" data-desc="SoftBank comprometeu US$ 30 bi dos US$ 40 bi totais. Participação de Microsoft, Coatue, Altimeter, Thrive e Dragoneer.">
-    <div class="ap-meta"><span class="ap-date">Mar. 2025</span><span class="ap-name">Series F</span></div>
-    <div class="ap-track"><div class="ap-fill f-sf" style="width:83.4%"></div></div>
-    <span class="ap-val dk">US$ 40 bi</span>
+  <div class="ap-item" data-val="US$ 40 bilhões" data-tag="up" data-tag-txt="Março de 2025" data-lead="Lead: SoftBank (US$ 30 bilhões)" data-val2="Valuation: US$ 300 bilhões" data-desc="SoftBank comprometeu US$ 30 bilhões dos US$ 40 bilhões totais. Participação de Microsoft, Coatue, Altimeter, Thrive e Dragoneer.">
+    <div class="ap-meta">
+      <span class="ap-date">Março de 2025</span>
+      <span class="ap-name">Series F</span>
+      <span class="ap-type">Venture Capital</span>
+    </div>
+    <div class="ap-bar-wrap">
+      <div class="ap-bar-track"><div class="ap-bar-fill f-sf" style="width:83.4%"></div></div>
+      <div class="ap-lead">SoftBank, Microsoft, Coatue, Thrive</div>
+    </div>
+    <div class="ap-amount dk">40 bi</div>
   </div>
 
-  <div class="ap-row" data-val="US$ 6,6 bi" data-tag="nt" data-tag-txt="SECONDARY · 2025" data-lead="Lead: SoftBank + institucionais" data-val2="Valuation: US$ 500 bi" data-desc="Venda secundária para prover liquidez a funcionários. Valuation ultrapassa as maiores empresas de tecnologia.">
-    <div class="ap-meta"><span class="ap-date">Out. 2025</span><span class="ap-name">Secondary</span></div>
-    <div class="ap-track"><div class="ap-fill f-sec2" style="width:63.1%"></div></div>
-    <span class="ap-val">US$ 6,6 bi</span>
+  <div class="ap-item" data-val="US$ 6,6 bilhões" data-tag="nt" data-tag-txt="Outubro de 2025" data-lead="Lead: SoftBank e compradores institucionais" data-val2="Valuation: US$ 500 bilhões" data-desc="Venda secundária para prover liquidez a funcionários. Valuation da empresa ultrapassa as maiores companhias de tecnologia listadas em bolsa.">
+    <div class="ap-meta">
+      <span class="ap-date">Outubro de 2025</span>
+      <span class="ap-name">Secondary</span>
+      <span class="ap-type">Venda secundária</span>
+    </div>
+    <div class="ap-bar-wrap">
+      <div class="ap-bar-track"><div class="ap-bar-fill f-sec2" style="width:63.1%"></div></div>
+      <div class="ap-lead">SoftBank e institucionais</div>
+    </div>
+    <div class="ap-amount">6,6 bi</div>
   </div>
 
-  <div class="ap-row" data-val="US$ 122 bi" data-tag="up" data-tag-txt="RECORDE HISTÓRICO · 2026" data-lead="Amazon (50 bi) · SoftBank (30 bi) · Nvidia (30 bi)" data-val2="Valuation pós-money: US$ 852 bi" data-desc="Maior captação privada da história do Vale do Silício. Co-leads: a16z e D.E. Shaw. +20 instituições participantes.">
-    <div class="ap-meta"><span class="ap-date">Mar. 2026</span><span class="ap-name">Mega-Rodada</span></div>
-    <div class="ap-track"><div class="ap-fill f-mega" style="width:96%"></div></div>
-    <span class="ap-val r">US$ 122 bi</span>
+  <div class="ap-item" data-val="US$ 122 bilhões" data-tag="up" data-tag-txt="Maior captação privada da história" data-lead="Amazon (US$ 50 bi) · SoftBank (US$ 30 bi) · Nvidia (US$ 30 bi)" data-val2="Valuation pós-money: US$ 852 bilhões" data-desc="A maior captação privada da história do Vale do Silício. Co-leads: Andreessen Horowitz e D.E. Shaw. Mais de 20 instituições participantes, incluindo Blackstone, BlackRock, Sequoia e Temasek.">
+    <div class="ap-meta">
+      <span class="ap-date">Março de 2026</span>
+      <span class="ap-name">Mega-Rodada</span>
+      <span class="ap-type">Recorde histórico</span>
+    </div>
+    <div class="ap-bar-wrap">
+      <div class="ap-bar-track"><div class="ap-bar-fill f-mega" style="width:96%"></div></div>
+      <div class="ap-lead">Amazon, SoftBank, Nvidia, a16z e outros</div>
+    </div>
+    <div class="ap-amount r">122 bi</div>
   </div>
 
 </div>
@@ -444,14 +466,13 @@
   <div class="tt" id="tt"></div>
   <div class="tdiv"></div>
   <div class="tr"><span>Investidor(es)</span><span id="tl"></span></div>
-  <div class="tr"><span id="tv2l">Valuation</span><span id="tv2"></span></div>
+  <div class="tr"><span id="tv2l">—</span><span id="tv2"></span></div>
   <div class="td" id="td"></div>
 </div>
 
 <!-- FOOTER -->
 <div class="foot">
-  <div class="foot-src">Fonte: OpenAI, Crunchbase, Bloomberg, Reuters · Compilado até maio de 2026</div>
-  <div class="foot-logo"><em>EXAME</em>LAB</div>
+  <span class="foot-src">Fonte: OpenAI, Crunchbase, Bloomberg, Reuters · Compilado até maio de 2026</span>
 </div>
 
 <script>
@@ -463,15 +484,16 @@
       tv2l=document.getElementById('tv2l'),
       td=document.getElementById('td');
 
-  document.querySelectorAll('.vcard, .ap-row').forEach(function(el) {
+  document.querySelectorAll('.v-step, .ap-item').forEach(function(el) {
     el.addEventListener('mouseenter', function(e) {
-      tv.textContent  = el.dataset.val;
-      tt.textContent  = el.dataset.tagTxt;
-      tt.className    = 'tt ' + el.dataset.tag;
-      tl.textContent  = el.dataset.lead;
-      tv2l.textContent = el.dataset.val2 && el.dataset.val2.includes('captados') ? 'Captado' : 'Valuation';
-      tv2.textContent = el.dataset.val2 || '—';
-      td.textContent  = el.dataset.desc;
+      tv.textContent   = el.dataset.val;
+      tt.textContent   = el.dataset.tagTxt;
+      tt.className     = 'tt ' + el.dataset.tag;
+      tl.textContent   = el.dataset.lead;
+      var v2 = el.dataset.val2 || '';
+      tv2l.textContent = v2.toLowerCase().includes('captados') ? 'Captado' : 'Valuation';
+      tv2.textContent  = v2;
+      td.textContent   = el.dataset.desc;
       tip.classList.add('on');
       pos(e);
     });
@@ -481,7 +503,7 @@
 
   function pos(e) {
     var x=e.clientX+16, y=e.clientY-10;
-    if (x+246>window.innerWidth) x=e.clientX-246;
+    if (x+256>window.innerWidth) x=e.clientX-256;
     if (y+tip.offsetHeight>window.innerHeight) y=e.clientY-tip.offsetHeight-10;
     tip.style.left=x+'px'; tip.style.top=y+'px';
   }
