@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gartner: Gastos Globais em IA 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red:      #D9001E;
+    --red-mid:  #A8001A;
+    --red-pale: #FFF0F2;
+    --red-dim:  rgba(217,0,30,0.10);
+    --red-dim2: rgba(217,0,30,0.06);
+    --black:    #111111;
+    --gray-1:   #333333;
+    --gray-2:   #666666;
+    --gray-3:   #999999;
+    --gray-4:   #CCCCCC;
+    --gray-bg:  #F5F5F5;
+    --white:    #FFFFFF;
+    --line:     #E8E8E8;
+
+    /* data colors — all red-family + grays para não sair da paleta */
+    --d1: #D9001E;   /* infra      — vermelho cheio   */
+    --d2: #333333;   /* serviços   — preto editorial  */
+    --d3: #888888;   /* software   — cinza médio      */
+    --d4: #B0001A;   /* cyber      — vinho escuro     */
+    --d5: rgba(217,0,30,0.40); /* modelos — vermelho translúcido */
+
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Archivo', sans-serif;
+    --black-font: 'Archivo Black', sans-serif;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--sans);
+    width: 800px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ─────────────────────────── */
+  .header {
+    padding: 0;
+    border-bottom: 3px solid var(--red);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: stretch;
+  }
+  .header-left {
+    padding: 36px 40px 32px;
+    border-right: 1px solid var(--line);
+  }
+  .header-eyebrow {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-eyebrow span {
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: var(--red);
+  }
+  h1 {
+    font-family: var(--black-font);
+    font-size: 42px;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+  .header-sub {
+    font-size: 13px;
+    color: var(--gray-2);
+    line-height: 1.6;
+    max-width: 420px;
+    font-weight: 400;
+  }
+
+  /* big badge on right */
+  .header-right {
+    background: var(--red);
+    padding: 36px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 168px;
+    gap: 4px;
+  }
+  .badge-pct {
+    font-family: var(--black-font);
+    font-size: 80px;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .badge-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* ── HERO METRICS ────────────────────── */
+  .hero-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--line);
+    background: var(--gray-bg);
+  }
+  .metric {
+    padding: 24px 28px;
+    border-right: 1px solid var(--line);
+  }
+  .metric:last-child { border-right: none; }
+  .metric-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--gray-3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .metric-value {
+    font-family: var(--black-font);
+    font-size: 30px;
+    line-height: 1;
+    color: var(--black);
+    margin-bottom: 5px;
+  }
+  .metric-value.red { color: var(--red); }
+  .metric-note {
+    font-size: 11px;
+    color: var(--gray-3);
+    font-weight: 400;
+  }
+
+  /* ── SECTION DIVIDERS ────────────────── */
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 22px 40px 0;
+  }
+  .sec-head-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  .sec-head-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* ── BAR CHART ───────────────────────── */
+  .chart-area {
+    padding: 16px 40px 28px;
+  }
+  .chart-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.4s ease forwards;
+  }
+  .chart-row:nth-child(1) { animation-delay: 0.05s; }
+  .chart-row:nth-child(2) { animation-delay: 0.12s; }
+  .chart-row:nth-child(3) { animation-delay: 0.19s; }
+  .chart-row:nth-child(4) { animation-delay: 0.26s; }
+  .chart-row:nth-child(5) { animation-delay: 0.33s; }
+
+  .chart-label {
+    width: 124px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .chart-label-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.2;
+  }
+  .chart-label-sub {
+    font-family: var(--mono);
+    font-size: 8.5px;
+    color: var(--gray-3);
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .chart-bars { flex: 1; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    height: 22px;
+  }
+  .bar-yr {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--gray-3);
+    width: 28px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .bar-yr.hl { color: var(--red); font-weight: 600; }
+  .bar-track {
+    flex: 1;
+    height: 13px;
+    background: var(--gray-bg);
+    border-radius: 1px;
+    overflow: hidden;
+    position: relative;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 1px;
+    transform-origin: left;
+    transform: scaleX(0);
+    animation: growBar 0.7s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  .bar-row:nth-child(1) .bar-fill { animation-delay: 0.2s; }
+  .bar-row:nth-child(2) .bar-fill { animation-delay: 0.35s; }
+  .bar-row:nth-child(3) .bar-fill { animation-delay: 0.5s; }
+
+  /* colors per segment */
+  .f-d1-dim { background: rgba(217,0,30,0.20); }
+  .f-d1     { background: var(--red); }
+  .f-d1-mid { background: rgba(217,0,30,0.50); }
+
+  .f-d2-dim { background: rgba(51,51,51,0.18); }
+  .f-d2     { background: var(--gray-1); }
+
+  .f-d3-dim { background: rgba(136,136,136,0.25); }
+  .f-d3     { background: var(--gray-2); }
+  .f-d3-mid { background: rgba(136,136,136,0.55); }
+
+  .f-d4-dim { background: rgba(176,0,26,0.20); }
+  .f-d4     { background: var(--d4); }
+  .f-d4-mid { background: rgba(176,0,26,0.45); }
+
+  .f-d5-dim { background: rgba(217,0,30,0.15); }
+  .f-d5     { background: rgba(217,0,30,0.45); }
+  .f-d5-mid { background: rgba(217,0,30,0.30); }
+
+  .bar-val {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    width: 60px;
+    flex-shrink: 0;
+    color: var(--gray-2);
+  }
+  .bar-val.hl { color: var(--red); }
+  .bar-val.dk { color: var(--gray-1); }
+
+  @keyframes growBar {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── LEGEND ──────────────────────────── */
+  .legend {
+    display: flex;
+    gap: 18px;
+    padding: 0 40px 20px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--gray-3);
+    letter-spacing: 0.5px;
+  }
+  .legend-dot {
+    width: 9px; height: 9px;
+    border-radius: 1px;
+    flex-shrink: 0;
+  }
+
+  /* ── CALLOUT CARDS ───────────────────── */
+  .callouts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .callout {
+    background: var(--white);
+    padding: 24px 28px;
+    border-top: 3px solid transparent;
+  }
+  .callout.c1 { border-color: var(--red); }
+  .callout.c2 { border-color: var(--gray-1); }
+  .callout.c3 { border-color: var(--d4); }
+  .callout.c4 { border-color: var(--gray-3); }
+
+  .callout-num {
+    font-family: var(--black-font);
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .callout.c1 .callout-num { color: var(--red); }
+  .callout.c2 .callout-num { color: var(--gray-1); }
+  .callout.c3 .callout-num { color: var(--d4); }
+  .callout.c4 .callout-num { color: var(--gray-2); }
+
+  .callout-text {
+    font-size: 12.5px;
+    color: var(--gray-2);
+    line-height: 1.55;
+  }
+  .callout-text strong { color: var(--black); font-weight: 700; }
+
+  /* ── WHO IS SPENDING ─────────────────── */
+  .who-section {
+    padding: 28px 40px 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .who-lbl {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--gray-3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .who-bar {
+    height: 44px;
+    display: flex;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .who-vendors {
+    width: 68%;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+    font-family: var(--black-font);
+    font-size: 13px;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    animation: growBar 1s cubic-bezier(.4,0,.2,1) 0.4s both;
+    transform-origin: left;
+  }
+  .who-enterprise {
+    flex: 1;
+    background: var(--gray-bg);
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    font-family: var(--black-font);
+    font-size: 11px;
+    color: var(--gray-3);
+    border: 1px solid var(--line);
+    border-left: none;
+  }
+  .who-desc {
+    font-size: 12.5px;
+    color: var(--gray-2);
+    line-height: 1.65;
+  }
+  .who-desc strong { color: var(--red); font-weight: 700; }
+
+  /* ── TIMELINE ────────────────────────── */
+  .timeline {
+    padding: 28px 40px 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tl-cols {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr 40px 1fr;
+    align-items: end;
+    margin-bottom: 0;
+  }
+  .tl-bar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .tl-value {
+    font-family: var(--black-font);
+    font-size: 20px;
+    color: var(--black);
+    text-align: center;
+  }
+  .tl-value.is-now { color: var(--red); }
+  .tl-col-box {
+    width: 100%;
+    border-radius: 2px 2px 0 0;
+    position: relative;
+  }
+  .tl-col-box.y25 {
+    height: 52px;
+    background: var(--gray-bg);
+    border: 1px solid var(--line);
+    border-bottom: none;
+  }
+  .tl-col-box.y26 {
+    height: 80px;
+    background: var(--red);
+  }
+  .tl-col-box.y27 {
+    height: 104px;
+    background: rgba(217,0,30,0.20);
+    border: 1px dashed var(--red);
+    border-bottom: none;
+  }
+  .tl-base {
+    height: 2px;
+    background: var(--line);
+    grid-column: 1 / -1;
+    margin-top: 0;
+    display: block;
+  }
+  .tl-label-row {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr 40px 1fr;
+    padding-top: 8px;
+  }
+  .tl-yr-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray-3);
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  .tl-yr-label.now { color: var(--red); font-weight: 600; }
+  .tl-arrow-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 4px;
+    gap: 3px;
+  }
+  .tl-growth-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--red);
+    background: var(--red-pale);
+    padding: 2px 5px;
+    border-radius: 2px;
+  }
+  .tl-arr { color: var(--gray-3); font-size: 14px; line-height: 1; }
+  .tl-bottom-line {
+    width: 100%;
+    height: 2px;
+    background: var(--line);
+    margin-bottom: 0;
+    grid-column: 1/-1;
+  }
+  .tl-grid {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr 40px 1fr;
+    align-items: end;
+  }
+
+  /* ── FOOTER ──────────────────────────── */
+  .footer {
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--gray-bg);
+    border-top: 1px solid var(--line);
+  }
+  .footer-src {
+    font-family: var(--mono);
+    font-size: 8.5px;
+    color: var(--gray-3);
+    letter-spacing: 1px;
+  }
+  .footer-logo {
+    font-family: var(--black-font);
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--gray-2);
+  }
+  .footer-logo em {
+    font-style: normal;
+    color: var(--red);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="header-eyebrow"><span></span>Gartner · Maio 2026 · Previsão Global</div>
+    <h1>GASTOS MUNDIAIS<br>EM <em>INTELIGÊNCIA<br>ARTIFICIAL</em> 2026</h1>
+    <p class="header-sub">O investimento global em IA deve atingir US$ 2,59 trilhões em 2026, impulsionado por infraestrutura, modelos generativos e adoção corporativa em expansão.</p>
+  </div>
+  <div class="header-right">
+    <div class="badge-pct">+47%</div>
+    <div class="badge-label">crescimento<br>ano a ano</div>
+  </div>
+</div>
+
+<!-- HERO METRICS -->
+<div class="hero-metrics">
+  <div class="metric">
+    <div class="metric-label">Total estimado 2026</div>
+    <div class="metric-value red">$2,59 tri</div>
+    <div class="metric-note">vs. US$ 1,76 tri em 2025</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">Projeção para 2027</div>
+    <div class="metric-value">$3,49 tri</div>
+    <div class="metric-note">+35% sobre 2026</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">Crescimento modelos de IA</div>
+    <div class="metric-value red">+110%</div>
+    <div class="metric-note">maior alta percentual em 2026</div>
+  </div>
+</div>
+
+<!-- CHART -->
+<div class="sec-head">
+  <span class="sec-head-label">Gastos por segmento — 2025 a 2027 (bi e tri USD)</span>
+  <div class="sec-head-line"></div>
+</div>
+
+<div class="chart-area">
+
+  <div class="chart-row">
+    <div class="chart-label">
+      <div class="chart-label-name">Infraestrutura</div>
+      <div class="chart-label-sub">Servidores · IaaS · Chips</div>
+    </div>
+    <div class="chart-bars">
+      <div class="bar-row">
+        <span class="bar-yr">2025</span>
+        <div class="bar-track"><div class="bar-fill f-d1-dim" style="width:51.5%"></div></div>
+        <span class="bar-val">$975,6 bi</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-yr hl">2026</span>
+        <div class="bar-track"><div class="bar-fill f-d1" style="width:75.7%"></div></div>
+        <span class="bar-val hl">$1,43 tri</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-yr">2027</span>
+        <div class="bar-track"><div class="bar-fill f-d1-mid" style="width:100%"></div></div>
+        <span class="bar-val">$1,89 tri</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-label">
+      <div class="chart-label-name">Serviços de IA</div>
+      <div class="chart-label-sub">Consultoria · Suporte</div>
+    </div>
+    <div class="chart-bars">
+      <div class="bar-row">
+        <span class="bar-yr">2025</span>
+        <div class="bar-track"><div class="bar-fill f-d2-dim" style="width:74.5%"></div></div>
+        <span class="bar-val">$436,4 bi</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-yr hl">2026</span>
+        <div class="bar-track"><div class="bar-fill f-d2" style="width:100%"></div></div>
+        <span class="bar-val dk">$585,5 bi</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-label">
+      <div class="chart-label-name">Software de IA</div>
+      <div class="chart-label-sub">Apps · Automação · SaaS</div>
+    </div>
+    <div class="chart-bars">
+      <div class="bar-row">
+        <span class="bar-yr">2025</span>
+        <div class="bar-track"><div class="bar-fill f-d3-dim" style="width:44.3%"></div></div>
+        <span class="bar-val">$282,9 bi</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-yr hl">2026</span>
+        <div class="bar-track"><div class="bar-fill f-d3" style="width:71%"></div></div>
+        <span class="bar-val dk">$453,2 bi</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-yr">2027</span>
+        <div class="bar-track"><div class="bar-fill f-d3-mid" style="width:100%"></div></div>
+        <span class="bar-val">$638,4 bi</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-label">
+      <div class="chart-label-name">Cibersegurança</div>
+      <div class="chart-label-sub">IA Defensiva · Detecção</div>
+    </div>
+    <div class="chart-bars">
+      <div class="bar-row">
+        <span class="bar-yr">2025</span>
+        <div class="bar-track"><div class="bar-fill f-d4-dim" style="width:30.1%"></div></div>
+        <span class="bar-val">$25,9 bi</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-yr hl">2026</span>
+        <div class="bar-track"><div class="bar-fill f-d4" style="width:59.6%"></div></div>
+        <span class="bar-val hl">$51,3 bi</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-yr">2027</span>
+        <div class="bar-track"><div class="bar-fill f-d4-mid" style="width:100%"></div></div>
+        <span class="bar-val">~$86 bi</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-label">
+      <div class="chart-label-name">Modelos de IA</div>
+      <div class="chart-label-sub">GenAI · Agentes · LLMs</div>
+    </div>
+    <div class="chart-bars">
+      <div class="bar-row">
+        <span class="bar-yr">2025</span>
+        <div class="bar-track"><div class="bar-fill f-d5-dim" style="width:26.2%"></div></div>
+        <span class="bar-val">$15,5 bi</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-yr hl">2026</span>
+        <div class="bar-track"><div class="bar-fill f-d5" style="width:55.1%"></div></div>
+        <span class="bar-val hl">$32,6 bi</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-yr">2027</span>
+        <div class="bar-track"><div class="bar-fill f-d5-mid" style="width:100%"></div></div>
+        <span class="bar-val">$59,2 bi</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Infraestrutura</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--gray-1)"></div>Serviços</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--gray-2)"></div>Software</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--d4)"></div>Cibersegurança</div>
+  <div class="legend-item"><div class="legend-dot" style="background:rgba(217,0,30,0.45)"></div>Modelos de IA</div>
+  <div class="legend-item" style="margin-left:auto"><div class="legend-dot" style="background:var(--gray-bg);border:1px dashed var(--red)"></div>2027 = projeção</div>
+</div>
+
+<!-- CALLOUTS -->
+<div class="sec-head" style="margin-top:4px">
+  <span class="sec-head-label">Destaques do relatório</span>
+  <div class="sec-head-line"></div>
+</div>
+
+<div class="callouts">
+  <div class="callout c1">
+    <div class="callout-num">+45%</div>
+    <div class="callout-text"><strong>do gasto total vai para infraestrutura</strong> — servidores otimizados para IA, semicondutores, redes e IaaS em nuvem. Maior segmento do mercado pelos próximos anos.</div>
+  </div>
+  <div class="callout c2">
+    <div class="callout-num">3×</div>
+    <div class="callout-text"><strong>Servidores para IA devem triplicar</strong> nos próximos 5 anos, tornando-se o maior subsegmento, sustentados por hiperscalers que expandem capacidade para GenAI e workflows agênticos.</div>
+  </div>
+  <div class="callout c3">
+    <div class="callout-num">2×</div>
+    <div class="callout-text"><strong>Cibersegurança com IA praticamente dobra</strong> em 2026: de US$ 25,9 bi para US$ 51,3 bi. Deepfakes, ataques automatizados e proteção de ambientes de IA aceleram o crescimento.</div>
+  </div>
+  <div class="callout c4">
+    <div class="callout-num">+110%</div>
+    <div class="callout-text"><strong>Modelos de IA</strong> registram o maior salto percentual de 2026 — agentes e fluxos multietapas aumentam consumo de modelos GenAI em todo o ecossistema corporativo.</div>
+  </div>
+</div>
+
+<!-- WHO IS SPENDING -->
+<div class="sec-head" style="margin-top:4px">
+  <span class="sec-head-label">Quem está investindo em 2026</span>
+  <div class="sec-head-line"></div>
+</div>
+
+<div class="who-section">
+  <div class="who-lbl">Distribuição atual do gasto</div>
+  <div class="who-bar">
+    <div class="who-vendors">VENDORS &amp; HIPERSCALERS</div>
+    <div class="who-enterprise">EMPRESAS</div>
+  </div>
+  <p class="who-desc">Até agora, o gasto foi dominado por empresas de tecnologia e hiperscalers que constroem capacidade para o futuro. <strong>2026 é o ano de inflexão</strong>: as corporações ainda preferem iniciativas táticas de eficiência e produtividade — e ainda não "flexionaram seu potencial de gasto". O desafio dos CIOs é provar o retorno antes de escalar.&nbsp;</p>
+</div>
+
+<!-- TIMELINE -->
+<div class="sec-head">
+  <span class="sec-head-label">Evolução do gasto total global em IA</span>
+  <div class="sec-head-line"></div>
+</div>
+<div class="timeline">
+  <div class="tl-grid">
+    <div class="tl-bar-wrap">
+      <div class="tl-value">$1,76 tri</div>
+      <div class="tl-col-box y25"></div>
+    </div>
+    <div class="tl-arrow-col">
+      <span class="tl-growth-tag">+47%</span>
+      <span class="tl-arr">→</span>
+    </div>
+    <div class="tl-bar-wrap">
+      <div class="tl-value is-now">$2,59 tri</div>
+      <div class="tl-col-box y26"></div>
+    </div>
+    <div class="tl-arrow-col">
+      <span class="tl-growth-tag">+35%</span>
+      <span class="tl-arr">→</span>
+    </div>
+    <div class="tl-bar-wrap">
+      <div class="tl-value">$3,49 tri</div>
+      <div class="tl-col-box y27"></div>
+    </div>
+  </div>
+  <div style="width:100%;height:2px;background:var(--line);margin-bottom:8px"></div>
+  <div class="tl-label-row">
+    <div class="tl-yr-label">2025</div>
+    <div></div>
+    <div class="tl-yr-label now">◀ 2026 (atual)</div>
+    <div></div>
+    <div class="tl-yr-label">2027 (projeção)</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-src">Fonte: Gartner · Forecast: AI Spending, Worldwide, 2025–2030, 1Q26 · Maio 2026</div>
+  <div class="footer-logo"><em>EXAME</em>LAB</div>
+</div>
+
+</body>
+</html>
