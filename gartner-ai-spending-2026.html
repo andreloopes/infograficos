@@ -240,7 +240,9 @@
     border-radius: 1px;
     overflow: hidden;
     position: relative;
+    cursor: crosshair;
   }
+  .bar-track:hover .bar-fill { filter: brightness(1.12); }
   .bar-fill {
     height: 100%;
     border-radius: 1px;
@@ -282,6 +284,66 @@
   }
   .bar-val.hl { color: var(--red); }
   .bar-val.dk { color: var(--gray-1); }
+
+  /* ── TOOLTIP ─────────────────────────── */
+  #tip {
+    position: fixed;
+    pointer-events: none;
+    background: var(--black);
+    color: var(--white);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.5;
+    width: 220px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 9999;
+    border-left: 3px solid var(--red);
+  }
+  #tip.visible { opacity: 1; }
+  #tip .tip-val {
+    font-family: var(--black-font);
+    font-size: 20px;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  #tip .tip-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-bottom: 7px;
+  }
+  #tip .tip-tag.up   { background: rgba(0,200,100,0.2); color: #00c864; }
+  #tip .tip-tag.flat { background: rgba(200,200,200,0.15); color: #aaa; }
+  #tip .tip-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 7px 0;
+  }
+  #tip .tip-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 3px;
+  }
+  #tip .tip-row span:last-child { color: var(--white); font-weight: 600; }
+  #tip .tip-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.45;
+    margin-top: 6px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 6px;
+  }
 
   @keyframes growBar {
     from { transform: scaleX(0); }
@@ -577,17 +639,17 @@
     <div class="chart-bars">
       <div class="bar-row">
         <span class="bar-yr">2025</span>
-        <div class="bar-track"><div class="bar-fill f-d1-dim" style="width:51.5%"></div></div>
+        <div class="bar-track" data-val="$975,6 bi" data-crescimento="base" data-share="56,2% do total" data-desc="Ponto de partida da expansão massiva de capacidade pelos hiperscalers para suportar GenAI."><div class="bar-fill f-d1-dim" style="width:51.5%"></div></div>
         <span class="bar-val">$975,6 bi</span>
       </div>
       <div class="bar-row">
         <span class="bar-yr hl">2026</span>
-        <div class="bar-track"><div class="bar-fill f-d1" style="width:75.7%"></div></div>
+        <div class="bar-track" data-val="$1,43 tri" data-crescimento="+46,6% vs 2025" data-share="55,2% do total" data-desc="Maior segmento do mercado. Servidores otimizados para IA lideram a expansão, seguidos por semicondutores e IaaS."><div class="bar-fill f-d1" style="width:75.7%"></div></div>
         <span class="bar-val hl">$1,43 tri</span>
       </div>
       <div class="bar-row">
         <span class="bar-yr">2027</span>
-        <div class="bar-track"><div class="bar-fill f-d1-mid" style="width:100%"></div></div>
+        <div class="bar-track" data-val="$1,89 tri" data-crescimento="+32,2% vs 2026" data-share="54,2% do total" data-desc="Servidores para IA devem triplicar em 5 anos. Redes de alta banda e resfriamento líquido impulsionam o crescimento." data-proj="true"><div class="bar-fill f-d1-mid" style="width:100%"></div></div>
         <span class="bar-val">$1,89 tri</span>
       </div>
     </div>
@@ -601,12 +663,12 @@
     <div class="chart-bars">
       <div class="bar-row">
         <span class="bar-yr">2025</span>
-        <div class="bar-track"><div class="bar-fill f-d2-dim" style="width:74.5%"></div></div>
+        <div class="bar-track" data-val="$436,4 bi" data-crescimento="base" data-share="25,1% do total" data-desc="Consultoria, integração e suporte técnico para implementação de IA nas empresas."><div class="bar-fill f-d2-dim" style="width:74.5%"></div></div>
         <span class="bar-val">$436,4 bi</span>
       </div>
       <div class="bar-row">
         <span class="bar-yr hl">2026</span>
-        <div class="bar-track"><div class="bar-fill f-d2" style="width:100%"></div></div>
+        <div class="bar-track" data-val="$585,5 bi" data-crescimento="+34,2% vs 2025" data-share="22,6% do total" data-desc="Crescimento impulsionado pela demanda corporativa por implementação de agentes de IA e automação de workflows."><div class="bar-fill f-d2" style="width:100%"></div></div>
         <span class="bar-val dk">$585,5 bi</span>
       </div>
     </div>
@@ -620,17 +682,17 @@
     <div class="chart-bars">
       <div class="bar-row">
         <span class="bar-yr">2025</span>
-        <div class="bar-track"><div class="bar-fill f-d3-dim" style="width:44.3%"></div></div>
+        <div class="bar-track" data-val="$282,9 bi" data-crescimento="base" data-share="16,3% do total" data-desc="Ferramentas de GenAI embarcadas em suítes de produtividade, CRM, ERP e plataformas de automação."><div class="bar-fill f-d3-dim" style="width:44.3%"></div></div>
         <span class="bar-val">$282,9 bi</span>
       </div>
       <div class="bar-row">
         <span class="bar-yr hl">2026</span>
-        <div class="bar-track"><div class="bar-fill f-d3" style="width:71%"></div></div>
+        <div class="bar-track" data-val="$453,2 bi" data-crescimento="+60,2% vs 2025" data-share="17,5% do total" data-desc="Expansão das empresas no uso de modelos GenAI embutidos em aplicativos existentes e novos agentes de IA."><div class="bar-fill f-d3" style="width:71%"></div></div>
         <span class="bar-val dk">$453,2 bi</span>
       </div>
       <div class="bar-row">
         <span class="bar-yr">2027</span>
-        <div class="bar-track"><div class="bar-fill f-d3-mid" style="width:100%"></div></div>
+        <div class="bar-track" data-val="$638,4 bi" data-crescimento="+40,8% vs 2026" data-share="18,3% do total" data-desc="Software de IA consolida participação crescente no mercado total à medida que a adoção corporativa escala." data-proj="true"><div class="bar-fill f-d3-mid" style="width:100%"></div></div>
         <span class="bar-val">$638,4 bi</span>
       </div>
     </div>
@@ -644,17 +706,17 @@
     <div class="chart-bars">
       <div class="bar-row">
         <span class="bar-yr">2025</span>
-        <div class="bar-track"><div class="bar-fill f-d4-dim" style="width:30.1%"></div></div>
+        <div class="bar-track" data-val="$25,9 bi" data-crescimento="base" data-share="1,5% do total" data-desc="Mercado emergente de cibersegurança com IA, focado em detecção de ameaças e proteção de dados."><div class="bar-fill f-d4-dim" style="width:30.1%"></div></div>
         <span class="bar-val">$25,9 bi</span>
       </div>
       <div class="bar-row">
         <span class="bar-yr hl">2026</span>
-        <div class="bar-track"><div class="bar-fill f-d4" style="width:59.6%"></div></div>
+        <div class="bar-track" data-val="$51,3 bi" data-crescimento="+98% vs 2025" data-share="2,0% do total" data-desc="Praticamente dobra em 1 ano. Deepfakes, ataques automatizados e proteção de ambientes de IA aceleram os investimentos."><div class="bar-fill f-d4" style="width:59.6%"></div></div>
         <span class="bar-val hl">$51,3 bi</span>
       </div>
       <div class="bar-row">
         <span class="bar-yr">2027</span>
-        <div class="bar-track"><div class="bar-fill f-d4-mid" style="width:100%"></div></div>
+        <div class="bar-track" data-val="~$86 bi" data-crescimento="+67,6% vs 2026" data-share="~2,5% do total" data-desc="Integração de IA em SOCs, plataformas de endpoint e sistemas de gestão de identidade continua a crescer." data-proj="true"><div class="bar-fill f-d4-mid" style="width:100%"></div></div>
         <span class="bar-val">~$86 bi</span>
       </div>
     </div>
@@ -668,17 +730,17 @@
     <div class="chart-bars">
       <div class="bar-row">
         <span class="bar-yr">2025</span>
-        <div class="bar-track"><div class="bar-fill f-d5-dim" style="width:26.2%"></div></div>
+        <div class="bar-track" data-val="$15,5 bi" data-crescimento="base" data-share="0,9% do total" data-desc="Gasto ainda concentrado em poucos grandes provedores de modelos de linguagem e imagem."><div class="bar-fill f-d5-dim" style="width:26.2%"></div></div>
         <span class="bar-val">$15,5 bi</span>
       </div>
       <div class="bar-row">
         <span class="bar-yr hl">2026</span>
-        <div class="bar-track"><div class="bar-fill f-d5" style="width:55.1%"></div></div>
+        <div class="bar-track" data-val="$32,6 bi" data-crescimento="+110% vs 2025" data-share="1,3% do total" data-desc="Maior crescimento percentual do mercado. Agentes de IA e processos multietapas aumentam consumo de tokens e APIs."><div class="bar-fill f-d5" style="width:55.1%"></div></div>
         <span class="bar-val hl">$32,6 bi</span>
       </div>
       <div class="bar-row">
         <span class="bar-yr">2027</span>
-        <div class="bar-track"><div class="bar-fill f-d5-mid" style="width:100%"></div></div>
+        <div class="bar-track" data-val="$59,2 bi" data-crescimento="+81,6% vs 2026" data-share="1,7% do total" data-desc="Expansão contínua impulsionada por modelos multimodais, raciocínio avançado e integração em suítes corporativas." data-proj="true"><div class="bar-fill f-d5-mid" style="width:100%"></div></div>
         <span class="bar-val">$59,2 bi</span>
       </div>
     </div>
@@ -739,7 +801,61 @@
   <div class="footer-logo"><em>EXAME</em>LAB</div>
 </div>
 
+<div id="tip">
+  <div class="tip-val" id="tip-val"></div>
+  <div class="tip-tag" id="tip-tag"></div>
+  <div class="tip-divider"></div>
+  <div class="tip-row"><span>Participação no total</span><span id="tip-share"></span></div>
+  <div class="tip-desc" id="tip-desc"></div>
+</div>
+
 <script>
+  const tip = document.getElementById('tip');
+  const tipVal = document.getElementById('tip-val');
+  const tipTag = document.getElementById('tip-tag');
+  const tipShare = document.getElementById('tip-share');
+  const tipDesc = document.getElementById('tip-desc');
+
+  document.querySelectorAll('.bar-track').forEach(function(bar) {
+    bar.addEventListener('mouseenter', function(e) {
+      const crescimento = bar.dataset.crescimento;
+      const isProj = bar.dataset.proj === 'true';
+
+      tipVal.textContent = bar.dataset.val;
+      tipShare.textContent = bar.dataset.share;
+      tipDesc.textContent = bar.dataset.desc;
+
+      if (isProj) {
+        tipTag.textContent = 'PROJEÇÃO 2027';
+        tipTag.className = 'tip-tag flat';
+      } else if (crescimento === 'base') {
+        tipTag.textContent = 'BASE 2025';
+        tipTag.className = 'tip-tag flat';
+      } else {
+        tipTag.textContent = crescimento;
+        tipTag.className = 'tip-tag up';
+      }
+
+      tip.classList.add('visible');
+      posicionar(e);
+    });
+
+    bar.addEventListener('mousemove', posicionar);
+
+    bar.addEventListener('mouseleave', function() {
+      tip.classList.remove('visible');
+    });
+  });
+
+  function posicionar(e) {
+    var x = e.clientX + 16;
+    var y = e.clientY - 10;
+    if (x + 236 > window.innerWidth) x = e.clientX - 236;
+    if (y + tip.offsetHeight > window.innerHeight) y = e.clientY - tip.offsetHeight - 10;
+    tip.style.left = x + 'px';
+    tip.style.top  = y + 'px';
+  }
+
   function enviarAltura() {
     window.parent.postMessage({ height: document.body.scrollHeight }, '*');
   }
