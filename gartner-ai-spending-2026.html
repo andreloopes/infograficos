@@ -695,46 +695,6 @@
   <div class="legend-item" style="margin-left:auto"><div class="legend-dot" style="background:var(--gray-bg);border:1px dashed var(--red)"></div>2027 = projeção</div>
 </div>
 
-<!-- CALLOUTS -->
-<div class="sec-head" style="margin-top:4px">
-  <span class="sec-head-label">Destaques do relatório</span>
-  <div class="sec-head-line"></div>
-</div>
-
-<div class="callouts">
-  <div class="callout c1">
-    <div class="callout-num">+45%</div>
-    <div class="callout-text"><strong>do gasto total vai para infraestrutura</strong> — servidores otimizados para IA, semicondutores, redes e IaaS em nuvem. Maior segmento do mercado pelos próximos anos.</div>
-  </div>
-  <div class="callout c2">
-    <div class="callout-num">3×</div>
-    <div class="callout-text"><strong>Servidores para IA devem triplicar</strong> nos próximos 5 anos, tornando-se o maior subsegmento, sustentados por hiperscalers que expandem capacidade para GenAI e workflows agênticos.</div>
-  </div>
-  <div class="callout c3">
-    <div class="callout-num">2×</div>
-    <div class="callout-text"><strong>Cibersegurança com IA praticamente dobra</strong> em 2026: de US$ 25,9 bi para US$ 51,3 bi. Deepfakes, ataques automatizados e proteção de ambientes de IA aceleram o crescimento.</div>
-  </div>
-  <div class="callout c4">
-    <div class="callout-num">+110%</div>
-    <div class="callout-text"><strong>Modelos de IA</strong> registram o maior salto percentual de 2026 — agentes e fluxos multietapas aumentam consumo de modelos GenAI em todo o ecossistema corporativo.</div>
-  </div>
-</div>
-
-<!-- WHO IS SPENDING -->
-<div class="sec-head" style="margin-top:4px">
-  <span class="sec-head-label">Quem está investindo em 2026</span>
-  <div class="sec-head-line"></div>
-</div>
-
-<div class="who-section">
-  <div class="who-lbl">Distribuição atual do gasto</div>
-  <div class="who-bar">
-    <div class="who-vendors">VENDORS &amp; HIPERSCALERS</div>
-    <div class="who-enterprise">EMPRESAS</div>
-  </div>
-  <p class="who-desc">Até agora, o gasto foi dominado por empresas de tecnologia e hiperscalers que constroem capacidade para o futuro. <strong>2026 é o ano de inflexão</strong>: as corporações ainda preferem iniciativas táticas de eficiência e produtividade — e ainda não "flexionaram seu potencial de gasto". O desafio dos CIOs é provar o retorno antes de escalar.&nbsp;</p>
-</div>
-
 <!-- TIMELINE -->
 <div class="sec-head">
   <span class="sec-head-label">Evolução do gasto total global em IA</span>
@@ -779,5 +739,12 @@
   <div class="footer-logo"><em>EXAME</em>LAB</div>
 </div>
 
+<script>
+  function enviarAltura() {
+    window.parent.postMessage({ height: document.body.scrollHeight }, '*');
+  }
+  window.addEventListener('load', enviarAltura);
+  window.addEventListener('resize', enviarAltura);
+</script>
 </body>
 </html>
