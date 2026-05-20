@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>O valor de mercado da Tesla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#D9001E;--black:#111;--g2:#666;--g3:#aaa;
+  --line:#EBEBEB;--white:#fff;--gbg:#F7F7F7;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Archivo',sans-serif;
+  --blk:'Archivo Black',sans-serif;
+}
+html,body{width:100%;background:var(--white);color:var(--black);font-family:var(--sans);-webkit-font-smoothing:antialiased;margin:0}
+
+.hdr{padding:20px 24px 16px;border-top:3px solid var(--red);border-bottom:1px solid var(--line)}
+.hdr h1{font-family:var(--blk);font-size:clamp(16px,3.5vw,24px);line-height:1.15;margin-bottom:6px;letter-spacing:-0.2px}
+.hdr h1 em{font-style:normal;color:var(--red)}
+.hdr-sub{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.hdr-sub p{font-size:clamp(11px,1.8vw,13px);color:var(--g2)}
+.hdr-sub span{font-family:var(--mono);font-size:clamp(9px,1.4vw,10px);color:var(--g3)}
+
+/* ── DESKTOP: vertical ── */
+.desktop{display:block;padding:20px 24px 24px}
+.bars-v{display:flex;align-items:flex-end;gap:clamp(6px,1.2vw,14px);height:220px;border-bottom:1px solid var(--line)}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.blbl{font-family:var(--mono);font-size:clamp(7.5px,1.1vw,9.5px);font-weight:600;color:var(--g2);margin-bottom:4px;white-space:nowrap;text-align:center}
+.blbl.cur{color:var(--red);font-size:clamp(8px,1.2vw,10.5px)}
+.bfill{width:100%;border-radius:2px 2px 0 0;transform-origin:bottom;transform:scaleY(0);animation:growV .6s cubic-bezier(.4,0,.2,1) forwards}
+.byr{font-family:var(--mono);font-size:clamp(7px,1vw,8.5px);color:var(--g3);margin-top:7px;letter-spacing:.2px}
+.byr.cur{color:var(--red);font-weight:600}
+
+/* ── MOBILE: horizontal ── */
+.mobile{display:none;padding:12px 16px 16px}
+.row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.row.cur .yr{color:var(--red);font-weight:600}
+.yr{font-family:var(--mono);font-size:10px;color:var(--g3);width:44px;flex-shrink:0;text-align:right}
+.track{flex:1;height:7px;background:var(--gbg);border-radius:2px;overflow:hidden}
+.fill{height:100%;border-radius:2px;transform-origin:left;transform:scaleX(0);animation:growH .6s cubic-bezier(.4,0,.2,1) forwards}
+.val{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--g2);width:52px;flex-shrink:0;text-align:right}
+.val.cur{color:var(--red);font-size:11px}
+
+.foot{padding:10px 24px;border-top:1px solid var(--line)}
+.foot-src{font-size:clamp(9px,1.2vw,11px);color:var(--g3)}
+
+@keyframes growV{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes growH{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+@media(max-width:520px){
+  .desktop{display:none}
+  .mobile{display:block}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <h1>O valor de mercado da <em>Tesla</em></h1>
+  <div class="hdr-sub">
+    <p>Valor consolidado da empresa ano a ano</p>
+    <span>(em bilhões de dólares)</span>
+  </div>
+</div>
+
+<div class="desktop">
+  <div class="bars-v">
+        <div class="bcol">
+          <div class="blbl">669 bi</div>
+          <div class="bfill" style="height:69px;background:rgba(217,0,30,0.12);animation-delay:0.00s"></div>
+          <div class="byr">2020</div>
+        </div>
+        <div class="bcol">
+          <div class="blbl">1,1 tri</div>
+          <div class="bfill" style="height:110px;background:rgba(217,0,30,0.20);animation-delay:0.07s"></div>
+          <div class="byr">2021</div>
+        </div>
+        <div class="bcol">
+          <div class="blbl">389 bi</div>
+          <div class="bfill" style="height:40px;background:rgba(217,0,30,0.15);animation-delay:0.14s"></div>
+          <div class="byr">2022</div>
+        </div>
+        <div class="bcol">
+          <div class="blbl">789 bi</div>
+          <div class="bfill" style="height:81px;background:rgba(217,0,30,0.32);animation-delay:0.21s"></div>
+          <div class="byr">2023</div>
+        </div>
+        <div class="bcol">
+          <div class="blbl">1,3 tri</div>
+          <div class="bfill" style="height:134px;background:rgba(217,0,30,0.55);animation-delay:0.28s"></div>
+          <div class="byr">2024</div>
+        </div>
+        <div class="bcol">
+          <div class="blbl">1,6 tri</div>
+          <div class="bfill" style="height:160px;background:rgba(217,0,30,0.75);animation-delay:0.35s"></div>
+          <div class="byr">2025</div>
+        </div>
+        <div class="bcol">
+          <div class="blbl cur">1,4 tri</div>
+          <div class="bfill" style="height:144px;background:#D9001E;animation-delay:0.42s"></div>
+          <div class="byr cur">mai/26</div>
+        </div>
+  </div>
+</div>
+
+<div class="mobile">
+        <div class="row">
+          <div class="yr">2020</div>
+          <div class="track"><div class="fill" style="width:42.9%;background:rgba(217,0,30,0.12);animation-delay:0.00s"></div></div>
+          <div class="val">669 bi</div>
+        </div>
+        <div class="row">
+          <div class="yr">2021</div>
+          <div class="track"><div class="fill" style="width:68.8%;background:rgba(217,0,30,0.20);animation-delay:0.07s"></div></div>
+          <div class="val">1,1 tri</div>
+        </div>
+        <div class="row">
+          <div class="yr">2022</div>
+          <div class="track"><div class="fill" style="width:24.9%;background:rgba(217,0,30,0.15);animation-delay:0.14s"></div></div>
+          <div class="val">389 bi</div>
+        </div>
+        <div class="row">
+          <div class="yr">2023</div>
+          <div class="track"><div class="fill" style="width:50.6%;background:rgba(217,0,30,0.32);animation-delay:0.21s"></div></div>
+          <div class="val">789 bi</div>
+        </div>
+        <div class="row">
+          <div class="yr">2024</div>
+          <div class="track"><div class="fill" style="width:84.0%;background:rgba(217,0,30,0.55);animation-delay:0.28s"></div></div>
+          <div class="val">1,3 tri</div>
+        </div>
+        <div class="row">
+          <div class="yr">2025</div>
+          <div class="track"><div class="fill" style="width:100.0%;background:rgba(217,0,30,0.75);animation-delay:0.35s"></div></div>
+          <div class="val">1,6 tri</div>
+        </div>
+        <div class="row cur">
+          <div class="yr">mai/26</div>
+          <div class="track"><div class="fill" style="width:89.7%;background:#D9001E;animation-delay:0.42s"></div></div>
+          <div class="val cur">1,4 tri</div>
+        </div>
+</div>
+
+<div class="foot">
+  <span class="foot-src">Fonte: CompaniesMarketCap, Bloomberg · Dados anuais de fechamento · mai/26 = maio de 2026</span>
+</div>
+
+<script>
+  function h(){window.parent.postMessage({height:document.body.scrollHeight},'*');}
+  window.addEventListener('load',h);
+  window.addEventListener('resize',h);
+</script>
+</body>
+</html>
