@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Os Melhores Restaurantes de São Paulo — 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Public+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F4EFE6;
+    --bg-deep: #ECE5D7;
+    --ink: #1A1816;
+    --ink-soft: #4A453E;
+    --muted: #7A7268;
+    --accent: #8B1E2C;
+    --accent-soft: #B8505E;
+    --line: rgba(26,24,22,0.14);
+    --surface: #FBF7EF;
+    --max: 1240px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Public Sans', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection{ background: var(--accent); color: var(--bg); }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    border-bottom: 1px solid var(--line);
+    padding: 14px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--bg);
+    position: relative;
+    z-index: 10;
+  }
+  .topbar .brand{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: var(--ink);
+  }
+  .topbar .brand em{
+    font-style: italic;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    color: var(--accent);
+  }
+  .topbar .meta{ display:flex; gap: 28px; }
+  .topbar .meta span{ position: relative; }
+
+  /* ---------- Scroll progress ---------- */
+  .progress{
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--accent);
+    width: 0%;
+    z-index: 100;
+    transition: width 60ms linear;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 80px 32px 60px;
+    position: relative;
+  }
+  .hero .kicker{
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero .kicker::before{
+    content: "";
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  .hero h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    font-size: clamp(48px, 9vw, 132px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin-bottom: 36px;
+  }
+  .hero h1 em{
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: var(--accent);
+    font-weight: 300;
+  }
+  .hero .dek{
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 2.3vw, 28px);
+    line-height: 1.35;
+    font-weight: 350;
+    color: var(--ink-soft);
+    max-width: 780px;
+    letter-spacing: -0.01em;
+  }
+  .hero .byline{
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .hero .byline strong{
+    color: var(--ink);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 12px;
+  }
+
+  /* Decorative numeral */
+  .hero::after{
+    content: "26";
+    position: absolute;
+    top: 70px;
+    right: 32px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-size: clamp(80px, 14vw, 220px);
+    color: rgba(139, 30, 44, 0.08);
+    font-weight: 300;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  /* ---------- Intro ---------- */
+  .intro{
+    max-width: 720px;
+    margin: 60px auto 80px;
+    padding: 0 32px;
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    font-weight: 350;
+  }
+  .intro p{ margin-bottom: 24px; }
+  .intro p:first-child::first-letter{
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "WONK" 1;
+    font-style: italic;
+    font-size: 84px;
+    float: left;
+    line-height: 0.85;
+    padding: 8px 14px 0 0;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  /* ---------- Filter bar ---------- */
+  .filters{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 32px;
+    margin-bottom: 0;
+  }
+  .filters-inner{
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .filter-group{
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .filter-label{
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-right: 6px;
+    font-weight: 600;
+  }
+  .chip{
+    border: 1px solid var(--line);
+    background: transparent;
+    padding: 7px 14px;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 180ms ease;
+    font-weight: 500;
+  }
+  .chip:hover{
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .chip.active{
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
+  /* ---------- List ---------- */
+  .list{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 60px 32px 120px;
+  }
+  .entry{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 700ms ease, transform 700ms ease;
+  }
+  .entry.in{ opacity: 1; transform: translateY(0); }
+  .entry.hidden{ display:none; }
+  .entry:nth-child(even){ direction: rtl; }
+  .entry:nth-child(even) > *{ direction: ltr; }
+
+  .entry .visual{
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .entry .visual .art{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--g1), var(--g2));
+  }
+  .entry .visual .grain{
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  }
+  .entry .visual .label{
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    color: rgba(255,255,255,0.9);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .entry .rank{
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+    font-size: clamp(96px, 13vw, 180px);
+    font-weight: 300;
+    line-height: 0.85;
+    color: var(--ink);
+    margin-bottom: 24px;
+    letter-spacing: -0.04em;
+    font-style: italic;
+  }
+  .entry .rank.top{ color: var(--accent); }
+
+  .entry h2{
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 60;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+  .entry .tags{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .entry .tags span{
+    position: relative;
+    padding-right: 16px;
+  }
+  .entry .tags span:not(:last-child)::after{
+    content: "·";
+    position: absolute;
+    right: 4px;
+  }
+  .entry .desc{
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-weight: 350;
+    margin-bottom: 24px;
+    max-width: 520px;
+  }
+  .entry .address{
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    max-width: 520px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .entry .address .neighborhood{
+    font-weight: 600;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+  }
+
+  /* ---------- Empty state ---------- */
+  .empty{
+    text-align: center;
+    padding: 80px 20px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--muted);
+    display: none;
+  }
+  .empty.show{ display: block; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top: 1px solid var(--ink);
+    padding: 60px 32px 40px;
+    text-align: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+  }
+  footer .sig{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: "WONK" 1;
+    font-size: 22px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 780px){
+    .topbar{ padding: 12px 20px; font-size: 11px; }
+    .topbar .meta span:not(:last-child){ display:none; }
+    .hero{ padding: 48px 20px 40px; }
+    .hero::after{ display:none; }
+    .intro{ padding: 0 20px; font-size: 17px; margin: 40px auto 60px; }
+    .filters{ padding: 14px 20px; }
+    .filters-inner{ gap: 18px; }
+    .list{ padding: 30px 20px 80px; }
+    .entry{
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 44px 0;
+    }
+    .entry:nth-child(even){ direction: ltr; }
+    .entry .visual{ aspect-ratio: 4/3; }
+    .entry .rank{ font-size: 96px; margin-bottom: 14px; }
+    .entry h2{ font-size: 30px; }
+    .entry .desc{ font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="topbar">
+  <div class="brand">Revista <em>EXAME</em> — Mesa</div>
+  <div class="meta">
+    <span>Edição Anual</span>
+    <span>Maio · 2026</span>
+    <span>São Paulo</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="kicker">Os 15 Melhores · 2026</div>
+  <h1>Onde se come <em>melhor</em> em São Paulo agora</h1>
+  <p class="dek">Um ano percorrendo a cidade, cento e oitenta refeições, conversas com cozinheiros, garçons, maîtres e produtores. A lista que define a temporada — das casas consagradas àquelas que estão reescrevendo o que se entende por restaurante na capital.</p>
+  <div class="byline">
+    <div><strong>Por</strong> &nbsp; A Redação de Mesa &nbsp;·&nbsp; Fotografia editorial</div>
+    <div><strong>Tempo de leitura</strong> &nbsp; 14 min</div>
+  </div>
+</section>
+
+<section class="intro">
+  <p>São Paulo entrou em 2026 com a cena gastronômica mais densa de sua história. Os bairros se reorganizaram: o que era epicentro virou periferia da conversa, e galpões esquecidos no centro voltaram a ser destino. Esta seleção é o retrato desse momento — não um cânone definitivo, mas um instantâneo do que está sendo cozinhado, servido e debatido agora.</p>
+  <p>Os critérios são três: consistência da experiência ao longo do ano, originalidade da proposta e relevância dentro do tecido cultural da cidade. Preço entrou na conta apenas como contexto. A ordem importa, mas menos do que parece — os primeiros quinze nomes formam um grupo de excelência onde as diferenças são milimétricas.</p>
+</section>
+
+<div class="filters">
+  <div class="filters-inner">
+    <div class="filter-group" data-group="region">
+      <span class="filter-label">Região</span>
+      <button class="chip active" data-val="all">Todas</button>
+      <button class="chip" data-val="centro">Centro</button>
+      <button class="chip" data-val="jardins">Jardins</button>
+      <button class="chip" data-val="oeste">Zona Oeste</button>
+      <button class="chip" data-val="norte">Zona Norte</button>
+    </div>
+    <div class="filter-group" data-group="cuisine">
+      <span class="filter-label">Cozinha</span>
+      <button class="chip active" data-val="all">Todas</button>
+      <button class="chip" data-val="br">Brasileira</button>
+      <button class="chip" data-val="it">Italiana</button>
+      <button class="chip" data-val="asia">Asiática</button>
+      <button class="chip" data-val="contemp">Contemporânea</button>
+    </div>
+    <div class="filter-group" data-group="price">
+      <span class="filter-label">Preço</span>
+      <button class="chip active" data-val="all">Todos</button>
+      <button class="chip" data-val="2">$$</button>
+      <button class="chip" data-val="3">$$$</button>
+      <button class="chip" data-val="4">$$$$</button>
+    </div>
+  </div>
+</div>
+
+<main class="list" id="list">
+
+  <article class="entry" data-region="oeste" data-cuisine="contemp" data-price="4" style="--g1:#3a1f2b;--g2:#8B1E2C;">
+    <div>
+      <div class="rank top">01</div>
+      <h2>Casa Aurora</h2>
+      <div class="tags"><span>Vila Madalena</span><span>Contemporânea</span><span>$$$$</span></div>
+      <p class="desc">A casa que mais amadureceu na temporada. Menu degustação enxuto, foco quase obsessivo em ingrediente paulista, sala de jantar reformada que finalmente está à altura da cozinha. O melhor exemplo de cozinha de autor sem o peso da palavra.</p>
+      <div class="address"><span class="neighborhood">Vila Madalena</span><span>Reservas obrigatórias</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 01</span><span>Degustação</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="jardins" data-cuisine="br" data-price="4" style="--g1:#2d3823;--g2:#6b7a44;">
+    <div>
+      <div class="rank top">02</div>
+      <h2>Mercúrio</h2>
+      <div class="tags"><span>Jardins</span><span>Brasileira</span><span>$$$$</span></div>
+      <p class="desc">Uma das experiências mais coerentes da cidade. O salão se tornou ponto de encontro de uma geração de cozinheiros, e a carta de vinhos é o discreto trunfo da casa. Vá pelo cordeiro, fique pela sobremesa.</p>
+      <div class="address"><span class="neighborhood">Jardim Paulista</span><span>Jantar · Ter a Sáb</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 02</span><span>Salão Principal</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="centro" data-cuisine="br" data-price="3" style="--g1:#3b2616;--g2:#a6612b;">
+    <div>
+      <div class="rank top">03</div>
+      <h2>Boca de Forno</h2>
+      <div class="tags"><span>Centro</span><span>Brasileira</span><span>$$$</span></div>
+      <p class="desc">Quando o centro voltou ao mapa, foi por casas como esta. Cozinha brasileira sem afetação, balcão sempre cheio, fila amistosa na calçada. O sanduíche de porco entrou para o vocabulário da cidade.</p>
+      <div class="address"><span class="neighborhood">República</span><span>Almoço e jantar</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 03</span><span>Balcão</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="jardins" data-cuisine="contemp" data-price="4" style="--g1:#2a2a3a;--g2:#5d5e8c;">
+    <div>
+      <div class="rank">04</div>
+      <h2>Maní</h2>
+      <div class="tags"><span>Jardins</span><span>Contemporânea</span><span>$$$$</span></div>
+      <p class="desc">Veterano que continua se reinventando. O menu mudou três vezes no ano, sempre para melhor. Atendimento que mistura formalidade e calor — uma combinação rara, especialmente em casas com esse nível de ambição.</p>
+      <div class="address"><span class="neighborhood">Jardim Paulistano</span><span>Reservas online</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 04</span><span>Pátio Interno</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="norte" data-cuisine="br" data-price="2" style="--g1:#3a1f1a;--g2:#8b3a1f;">
+    <div>
+      <div class="rank">05</div>
+      <h2>Quintal do Norte</h2>
+      <div class="tags"><span>Vila Medeiros</span><span>Nordestina</span><span>$$</span></div>
+      <p class="desc">A casa que provou que zona norte não é desvio — é destino. Cozinha nordestina sem concessões, atmosfera de boteco refinado, preços que ainda fazem sentido. Reserva quase impossível no fim de semana.</p>
+      <div class="address"><span class="neighborhood">Vila Medeiros</span><span>Fila no almoço</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 05</span><span>Cozinha Aberta</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="jardins" data-cuisine="it" data-price="4" style="--g1:#2b2820;--g2:#7a6b3e;">
+    <div>
+      <div class="rank">06</div>
+      <h2>Olivetta</h2>
+      <div class="tags"><span>Jardim Paulista</span><span>Italiana</span><span>$$$$</span></div>
+      <p class="desc">Italiana sem nostalgia. A massa fresca segue impecável, mas o que move a casa agora são os pratos de caça e a brasa. Lista de vinhos italianos com curadoria fora do óbvio. Reserve com semanas de antecedência.</p>
+      <div class="address"><span class="neighborhood">Jardim Paulista</span><span>Apenas jantar</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 06</span><span>Cantina</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="centro" data-cuisine="asia" data-price="3" style="--g1:#1f2a2a;--g2:#3a6b6b;">
+    <div>
+      <div class="rank">07</div>
+      <h2>Komah Sul</h2>
+      <div class="tags"><span>Bela Vista</span><span>Coreana</span><span>$$$</span></div>
+      <p class="desc">A cozinha coreana finalmente saiu da Liberdade e ganhou Bela Vista. Carvão, fermentações, picância calibrada para o paulistano. Os jantares de balcão são o melhor programa gastronômico abaixo de R$ 250 na cidade.</p>
+      <div class="address"><span class="neighborhood">Bela Vista</span><span>Balcão · Ter a Dom</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 07</span><span>Brasa</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="oeste" data-cuisine="asia" data-price="3" style="--g1:#1a1f2b;--g2:#3d4d7a;">
+    <div>
+      <div class="rank">08</div>
+      <h2>Tan Tan</h2>
+      <div class="tags"><span>Vila Madalena</span><span>Asiática</span><span>$$$</span></div>
+      <p class="desc">Continua sendo a melhor casa pan-asiática de São Paulo, com a vantagem de ter amadurecido o serviço. Os coquetéis acompanham — talvez sejam, hoje, o ponto mais alto do salão. Reserve para a primeira janela da noite.</p>
+      <div class="address"><span class="neighborhood">Vila Madalena</span><span>Coquetelaria</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 08</span><span>Bar</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="oeste" data-cuisine="it" data-price="3" style="--g1:#2b1f1a;--g2:#7a4a35;">
+    <div>
+      <div class="rank">09</div>
+      <h2>Forno Vivo</h2>
+      <div class="tags"><span>Pinheiros</span><span>Pizza</span><span>$$$</span></div>
+      <p class="desc">A discussão sobre pizza paulistana ganhou um novo capítulo aqui. Massa de fermentação longa, mussarela de búfala local, simplicidade militante. Não tem cardápio extenso — não precisa ter.</p>
+      <div class="address"><span class="neighborhood">Pinheiros</span><span>Sem reservas</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 09</span><span>Forno a Lenha</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="oeste" data-cuisine="contemp" data-price="3" style="--g1:#1f2b1f;--g2:#4d7a4d;">
+    <div>
+      <div class="rank">10</div>
+      <h2>Charco</h2>
+      <div class="tags"><span>Pinheiros</span><span>Latina</span><span>$$$</span></div>
+      <p class="desc">Cozinha latino-americana sem clichês. A casa virou ponto de encontro de chefs em folga, o que já é um diagnóstico. Carta de mezcais raros e um menu degustação curto que vale o pedido.</p>
+      <div class="address"><span class="neighborhood">Pinheiros</span><span>Menu degustação</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 10</span><span>Adega</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="centro" data-cuisine="br" data-price="4" style="--g1:#2b1a25;--g2:#7a3d5d;">
+    <div>
+      <div class="rank">11</div>
+      <h2>Notiê</h2>
+      <div class="tags"><span>Centro</span><span>Brasileira</span><span>$$$$</span></div>
+      <p class="desc">Vista do 24º andar, cozinha brasileira contemporânea, programa noturno completo. Foi a estreia mais comentada do ano passado e seguiu firme. Vá pelo entardecer; fique pelo prato principal.</p>
+      <div class="address"><span class="neighborhood">República</span><span>Programa noturno</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 11</span><span>Vista</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="centro" data-cuisine="asia" data-price="3" style="--g1:#1f1f2b;--g2:#3d3d7a;">
+    <div>
+      <div class="rank">12</div>
+      <h2>Fame</h2>
+      <div class="tags"><span>Bela Vista</span><span>Asiática</span><span>$$$</span></div>
+      <p class="desc">Yakitori, sake selecionado, balcão pequeno e barulhento. Funciona porque sabe exatamente o que é. Bom para uma noite curta antes ou depois de outro programa — ou como destino, com calma.</p>
+      <div class="address"><span class="neighborhood">Bela Vista</span><span>Balcão · 12 lugares</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 12</span><span>Yakitori</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="oeste" data-cuisine="contemp" data-price="3" style="--g1:#2b2820;--g2:#7a7244;">
+    <div>
+      <div class="rank">13</div>
+      <h2>Cepa</h2>
+      <div class="tags"><span>Pinheiros</span><span>Contemporânea</span><span>$$$</span></div>
+      <p class="desc">A casa cresceu sem perder a coesão. Cozinha que olha para o cerrado e para o litoral paulista, sala de jantar que faz juz à proposta. O menu do almoço é o segredo melhor guardado da rua.</p>
+      <div class="address"><span class="neighborhood">Pinheiros</span><span>Almoço executivo</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 13</span><span>Mesa Comunal</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="oeste" data-cuisine="contemp" data-price="3" style="--g1:#2b201f;--g2:#7a4d44;">
+    <div>
+      <div class="rank">14</div>
+      <h2>Sal Mediterrânea</h2>
+      <div class="tags"><span>Pinheiros</span><span>Mediterrânea</span><span>$$$</span></div>
+      <p class="desc">Frutos do mar, vegetais grelhados, vinhos brancos da Grécia e do sul da Itália. A casa virou referência de almoço de domingo. Reserve mesa na varanda — faz diferença.</p>
+      <div class="address"><span class="neighborhood">Pinheiros</span><span>Almoço de domingo</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 14</span><span>Varanda</span></div>
+    </div>
+  </article>
+
+  <article class="entry" data-region="oeste" data-cuisine="contemp" data-price="4" style="--g1:#1f2b2b;--g2:#446b7a;">
+    <div>
+      <div class="rank">15</div>
+      <h2>Manga</h2>
+      <div class="tags"><span>Pinheiros</span><span>Contemporânea</span><span>$$$$</span></div>
+      <p class="desc">A casa que fecha a lista também é uma das mais novas. Menu degustação curto, sala de jantar para vinte pessoas, sem opção à la carte. Quem chegar para a primeira janela costuma sair antes das onze.</p>
+      <div class="address"><span class="neighborhood">Pinheiros</span><span>Apenas degustação</span></div>
+    </div>
+    <div class="visual">
+      <div class="art"></div><div class="grain"></div>
+      <div class="label"><span>Nº 15</span><span>Cozinha</span></div>
+    </div>
+  </article>
+
+  <div class="empty" id="empty">
+    Nenhum restaurante combina com esses filtros.<br>
+    Tente uma combinação diferente.
+  </div>
+
+</main>
+
+<footer>
+  <div class="sig">Mesa</div>
+  <div>Revista EXAME · Edição 2026 · Reprodução proibida</div>
+</footer>
+
+<script>
+  // ---- Scroll progress
+  const progress = document.getElementById('progress');
+  const updateProgress = () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+    progress.style.width = (scrolled * 100) + '%';
+  };
+  document.addEventListener('scroll', updateProgress, { passive: true });
+
+  // ---- Intersection reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.entry').forEach(el => io.observe(el));
+
+  // ---- Filters
+  const state = { region: 'all', cuisine: 'all', price: 'all' };
+  const entries = [...document.querySelectorAll('.entry')];
+  const empty = document.getElementById('empty');
+
+  document.querySelectorAll('.filter-group').forEach(group => {
+    const groupName = group.dataset.group;
+    group.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        group.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        state[groupName] = chip.dataset.val;
+        applyFilters();
+      });
+    });
+  });
+
+  function applyFilters(){
+    let visible = 0;
+    entries.forEach(e => {
+      const okR = state.region === 'all' || e.dataset.region === state.region;
+      const okC = state.cuisine === 'all' || e.dataset.cuisine === state.cuisine;
+      const okP = state.price === 'all' || e.dataset.price === state.price;
+      const show = okR && okC && okP;
+      e.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    empty.classList.toggle('show', visible === 0);
+  }
+</script>
+
+</body>
+</html>
