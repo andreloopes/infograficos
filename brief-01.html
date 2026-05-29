@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IA e Eleições 2026 — 01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#D9001E;--red-pale:#FFF5F6;--black:#111;--g1:#333;--g2:#666;--g3:#aaa;--line:#EBEBEB;--white:#fff;--gbg:#F7F7F7;--mono:'IBM Plex Mono',monospace;--sans:'Archivo',sans-serif;--blk:'Archivo Black',sans-serif;}
+html,body{width:100%;background:var(--white);color:var(--black);font-family:var(--sans);-webkit-font-smoothing:antialiased;margin:0}
+
+.hdr{padding:24px 32px 20px;border-top:3px solid var(--red);border-bottom:1px solid var(--line)}
+.hdr h1{font-family:var(--blk);font-size:clamp(18px,3.5vw,26px);line-height:1.1;margin-bottom:8px;letter-spacing:-0.2px}
+.hdr h1 em{font-style:normal;color:var(--red)}
+.hdr p{font-size:clamp(11px,1.8vw,13px);color:var(--g2);line-height:1.6}
+
+.sec{padding:24px 32px}
+.sec-num{font-family:var(--mono);font-size:9px;color:var(--g3);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.sec-title{font-family:var(--blk);font-size:clamp(15px,2.8vw,20px);line-height:1.15;margin-bottom:6px}
+.sec-title em{font-style:normal;color:var(--red)}
+.sec-sub{font-size:clamp(11px,1.6vw,12.5px);color:var(--g2);line-height:1.55;margin-bottom:20px}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cbox{background:var(--gbg);border-radius:3px;padding:16px 20px;border-top:3px solid var(--line)}
+.cbox.hl{background:var(--red-pale);border-top-color:var(--red)}
+.cbox-lbl{font-family:var(--mono);font-size:9px;color:var(--g3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;display:block}
+.cbox-num{font-family:var(--blk);font-size:clamp(32px,6vw,44px);line-height:1;color:var(--black)}
+.cbox.hl .cbox-num{color:var(--red)}
+.cbox-desc{font-size:clamp(10px,1.5vw,11.5px);color:var(--g2);margin-top:6px;line-height:1.5}
+
+.foot{padding:12px 32px;border-top:1px solid var(--line)}
+.foot-src{font-size:clamp(9px,1.3vw,11px);color:var(--g3)}
+
+@media(max-width:480px){
+  .hdr,.sec{padding:18px 20px}
+  .compare{grid-template-columns:1fr}
+  .foot{padding:10px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <h1>Brasileiros reconhecem o risco da <em>IA nas eleições</em>, mas não conseguem identificá-la</h1>
+  <p>Estudo inédito expôs participantes a vídeos reais e gerados por IA para medir percepção de risco, capacidade de identificação e abertura ao uso político da tecnologia.</p>
+</div>
+
+<div class="sec">
+  <div class="sec-num">01 de 04</div>
+  <div class="sec-title">O contato com o tema amplia o <em>alerta</em></div>
+  <div class="sec-sub">A pesquisa fez um teste exibindo conteúdos feitos com IA. Antes do experimento, 71,6% já acreditavam que a IA poderia influenciar eleições. Após assistirem a um vídeo — real ou sintético — o índice subiu em todos os grupos.</div>
+  <div class="compare">
+    <div class="cbox">
+      <span class="cbox-lbl">Antes do experimento</span>
+      <div class="cbox-num">71,6%</div>
+      <div class="cbox-desc">acreditavam que a IA pode ser usada para influenciar eleições</div>
+    </div>
+    <div class="cbox hl">
+      <span class="cbox-lbl">Após ver vídeo gerado por IA</span>
+      <div class="cbox-num">74,1%</div>
+      <div class="cbox-desc">passaram a acreditar no risco — mesmo sem saber que o vídeo era sintético</div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <span class="foot-src">Fonte: Projeto Brief · Pesquisa realizada entre 25 e 29 de abril de 2026 · 2.483 participantes · projetobrief.com</span>
+</div>
+
+<script>
+  function h(){window.parent.postMessage({height:document.body.scrollHeight},'*');}
+  window.addEventListener('load',h);window.addEventListener('resize',h);
+</script>
+</body>
+</html>
