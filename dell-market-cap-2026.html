@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>O valor da Dell nos últimos 5 anos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#D9001E;--red-pale:#FFF5F6;--black:#111;
+  --g2:#666;--g3:#aaa;--line:#EBEBEB;--white:#fff;--gbg:#F7F7F7;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Archivo',sans-serif;
+  --blk:'Archivo Black',sans-serif;
+}
+html,body{width:100%;background:var(--white);color:var(--black);font-family:var(--sans);-webkit-font-smoothing:antialiased;margin:0}
+
+.wrap{container-type:inline-size;container-name:wrap;width:100%}
+
+.hdr{padding:20px 24px 16px;border-top:3px solid var(--red);border-bottom:1px solid var(--line)}
+.hdr h1{font-family:var(--blk);font-size:clamp(16px,4cqi,22px);line-height:1.1;margin-bottom:6px}
+.hdr h1 em{font-style:normal;color:var(--red)}
+.hdr p{font-size:clamp(11px,2.2cqi,13px);color:var(--g2);line-height:1.5}
+
+.chart-wrap{padding:20px 24px 0}
+
+/* SVG responsive */
+.chart-svg{width:100%;display:block}
+
+/* labels abaixo do chart */
+.xlabels{display:flex;justify-content:space-between;padding:6px 0 0;margin:0 0 4px}
+.xlbl{font-family:var(--mono);font-size:clamp(8px,1.8cqi,10px);color:var(--g3);text-align:center;flex:1}
+.xlbl.last{color:var(--red);font-weight:600}
+
+/* valores acima de cada ponto — via absolute overlay */
+.chart-container{position:relative}
+.vals-row{display:flex;justify-content:space-between;padding:0;position:absolute;top:0;left:0;right:0}
+.vdot{flex:1;text-align:center;font-family:var(--mono);font-size:clamp(8px,1.8cqi,10px);font-weight:600;color:var(--g2)}
+.vdot.last{color:var(--red)}
+
+.foot{padding:12px 24px;border-top:1px solid var(--line)}
+.foot-src{font-size:clamp(9px,1.8cqi,11px);color:var(--g3)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <h1>O valor da <em>Dell</em> nos últimos 5 anos</h1>
+    <p>Ações da empresa têm aproveitado do avanço da IA</p>
+  </div>
+
+  <div class="chart-wrap">
+
+    <!-- valores em cima dos pontos -->
+    <div style="display:flex;justify-content:space-between;padding:0 0 4px">
+      <div style="flex:1;text-align:center;font-family:var(--mono);font-size:clamp(8px,1.8cqi,10px);font-weight:600;color:var(--g3)">50 bi</div>
+      <div style="flex:1;text-align:center;font-family:var(--mono);font-size:clamp(8px,1.8cqi,10px);font-weight:600;color:var(--g3)">60 bi</div>
+      <div style="flex:1;text-align:center;font-family:var(--mono);font-size:clamp(8px,1.8cqi,10px);font-weight:600;color:var(--g3)">90 bi</div>
+      <div style="flex:1;text-align:center;font-family:var(--mono);font-size:clamp(8px,1.8cqi,10px);font-weight:600;color:var(--g3)">115 bi</div>
+      <div style="flex:1;text-align:center;font-family:var(--mono);font-size:clamp(8px,1.8cqi,10px);font-weight:600;color:var(--g3)">150 bi</div>
+      <div style="flex:1;text-align:center;font-family:var(--mono);font-size:clamp(8px,1.8cqi,10px);font-weight:600;color:var(--red)">284 bi</div>
+    </div>
+
+    <!-- SVG line chart -->
+    <svg class="chart-svg" viewBox="0 0 600 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- grid lines -->
+      <line x1="0" y1="50"  x2="600" y2="50"  stroke="#EBEBEB" stroke-width="1"/>
+      <line x1="0" y1="100" x2="600" y2="100" stroke="#EBEBEB" stroke-width="1"/>
+      <line x1="0" y1="150" x2="600" y2="150" stroke="#EBEBEB" stroke-width="1"/>
+      <line x1="0" y1="195" x2="600" y2="195" stroke="#EBEBEB" stroke-width="1.5"/>
+
+      <!-- area fill under line -->
+      <defs>
+        <linearGradient id="areafill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#D9001E" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#D9001E" stop-opacity="0.01"/>
+        </linearGradient>
+      </defs>
+      <polygon
+        points="0,195 0,164.8 120,157.8 240,136.6 360,119 480,94.4 600,0 600,195"
+        fill="url(#areafill)"
+      />
+
+      <!-- line -->
+      <polyline
+        points="0,164.8 120,157.8 240,136.6 360,119 480,94.4 600,0"
+        fill="none"
+        stroke="#D9001E"
+        stroke-width="2.5"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+
+      <!-- dots -->
+      <circle cx="0"   cy="164.8" r="4" fill="white" stroke="#D9001E" stroke-width="2"/>
+      <circle cx="120" cy="157.8" r="4" fill="white" stroke="#D9001E" stroke-width="2"/>
+      <circle cx="240" cy="136.6" r="4" fill="white" stroke="#D9001E" stroke-width="2"/>
+      <circle cx="360" cy="119"   r="4" fill="white" stroke="#D9001E" stroke-width="2"/>
+      <circle cx="480" cy="94.4"  r="4" fill="white" stroke="#D9001E" stroke-width="2"/>
+      <!-- último ponto destaque -->
+      <circle cx="600" cy="0"     r="6" fill="#D9001E" stroke="white" stroke-width="2.5"/>
+    </svg>
+
+    <!-- anos embaixo -->
+    <div class="xlabels">
+      <div class="xlbl">2021</div>
+      <div class="xlbl">2022</div>
+      <div class="xlbl">2023</div>
+      <div class="xlbl">2024</div>
+      <div class="xlbl">2025</div>
+      <div class="xlbl last">mai/26</div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    <span class="foot-src">Fonte: Bloomberg, CompaniesMarketCap · Valores aproximados em bilhões de dólares · mai/26 = maio de 2026</span>
+  </div>
+
+</div>
+<script>
+  function h(){window.parent.postMessage({height:document.body.scrollHeight},'*');}
+  window.addEventListener('load',h);
+  window.addEventListener('resize',h);
+</script>
+</body>
+</html>
