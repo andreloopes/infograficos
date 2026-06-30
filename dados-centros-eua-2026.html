@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EUA: construção local de data centers, por partido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#D9001E;--black:#111;--g1:#333;--g2:#666;--g3:#aaa;
+  --line:#EBEBEB;--white:#fff;--gbg:#F7F7F7;
+  --s1:#F0F0F0;          /* favorece muito */
+  --s2:rgba(217,0,30,.18);  /* favorece um pouco */
+  --s3:rgba(217,0,30,.50);  /* se opõe um pouco */
+  --s4:#D9001E;              /* se opõe muito */
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Archivo',sans-serif;
+  --blk:'Archivo Black',sans-serif;
+}
+html,body{width:100%;background:var(--white);color:var(--black);font-family:var(--sans);-webkit-font-smoothing:antialiased;margin:0}
+.wrap{container-type:inline-size;width:100%}
+
+.hdr{padding:20px 24px 16px;border-top:3px solid var(--red);border-bottom:1px solid var(--line)}
+.hdr h1{font-family:var(--blk);font-size:clamp(16px,4cqi,22px);line-height:1.15;margin-bottom:6px}
+.hdr h1 em{font-style:normal;color:var(--red)}
+.hdr p{font-size:clamp(11px,2.2cqi,13px);color:var(--g2);line-height:1.55}
+
+.legend{display:flex;flex-wrap:wrap;gap:14px;padding:16px 24px 4px}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:clamp(9.5px,1.8cqi,11.5px);color:var(--g1);font-weight:600}
+.leg-dot{width:11px;height:11px;border-radius:2px;flex-shrink:0;border:1px solid rgba(0,0,0,.06)}
+
+.bars{padding:14px 24px 4px}
+.brow{margin-bottom:18px}
+.brow-lbl{font-size:clamp(11px,2cqi,13px);font-weight:700;color:var(--black);margin-bottom:6px}
+.bstack{display:flex;width:100%;height:clamp(28px,7cqi,40px);border-radius:2px;overflow:hidden}
+.bseg{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:clamp(8.5px,1.8cqi,11px);font-weight:600;white-space:nowrap}
+.bseg.dark{color:var(--white)}
+.bseg.light{color:var(--g1)}
+
+.foot{padding:14px 24px 16px;border-top:1px solid var(--line)}
+.foot-src{font-size:clamp(9px,1.7cqi,11px);color:var(--g3);line-height:1.6}
+.foot-src b{color:var(--g2);font-weight:600}
+
+@container wrap (max-width: 380px){
+  .leg-item{font-size:9px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <h1>Visão dos americanos sobre a construção de <em>data centers</em> perto de casa, por partido</h1>
+    <p>Levantamento da Gallup mediu o apoio à construção local de data centers, segmentado por filiação partidária</p>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><span class="leg-dot" style="background:var(--s1)"></span>Favorece muito</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--s2)"></span>Favorece um pouco</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--s3)"></span>Opõe um pouco</div>
+    <div class="leg-item"><span class="leg-dot" style="background:var(--s4)"></span>Opõe muito</div>
+  </div>
+
+  <div class="bars">
+
+    <div class="brow">
+      <div class="brow-lbl">Democratas</div>
+      <div class="bstack">
+        <div class="bseg light" style="width:6%;background:var(--s1)"></div>
+        <div class="bseg light" style="width:19%;background:var(--s2)">19%</div>
+        <div class="bseg dark"  style="width:19%;background:var(--s3)">19%</div>
+        <div class="bseg dark"  style="width:56%;background:var(--s4)">56%</div>
+      </div>
+    </div>
+
+    <div class="brow">
+      <div class="brow-lbl">Independentes</div>
+      <div class="bstack">
+        <div class="bseg light" style="width:7%;background:var(--s1)">7%</div>
+        <div class="bseg light" style="width:17%;background:var(--s2)">17%</div>
+        <div class="bseg dark"  style="width:26%;background:var(--s3)">26%</div>
+        <div class="bseg dark"  style="width:48%;background:var(--s4)">48%</div>
+      </div>
+    </div>
+
+    <div class="brow">
+      <div class="brow-lbl">Republicanos</div>
+      <div class="bstack">
+        <div class="bseg light" style="width:9%;background:var(--s1)">9%</div>
+        <div class="bseg light" style="width:25%;background:var(--s2)">25%</div>
+        <div class="bseg dark"  style="width:24%;background:var(--s3)">24%</div>
+        <div class="bseg dark"  style="width:39%;background:var(--s4)">39%</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    <div class="foot-src"><b>Metodologia:</b> pesquisa com 1.000 adultos americanos, realizada entre 2 e 18 de março de 2026. Margem de erro de ±4 pontos percentuais.</div>
+    <div class="foot-src" style="margin-top:4px">Fonte: Gallup</div>
+  </div>
+
+</div>
+<script>
+  function h(){window.parent.postMessage({height:document.body.scrollHeight},'*');}
+  window.addEventListener('load',h);
+  window.addEventListener('resize',h);
+</script>
+</body>
+</html>
