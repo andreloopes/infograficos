@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mercado de smartphones na China — 2T26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#D9001E;--red-pale:#FFF5F6;
+  --black:#111;--g1:#333;--g2:#666;--g3:#aaa;--g4:#ddd;
+  --line:#EBEBEB;--white:#fff;--gbg:#F7F7F7;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Archivo',sans-serif;
+  --blk:'Archivo Black',sans-serif;
+}
+html,body{width:100%;background:var(--white);color:var(--black);font-family:var(--sans);-webkit-font-smoothing:antialiased;margin:0}
+.wrap{container-type:inline-size;container-name:wrap;width:100%}
+
+/* ── HEADER ── */
+.hdr{padding:20px 24px 16px;border-top:3px solid var(--red);border-bottom:1px solid var(--line)}
+.hdr h1{font-family:var(--blk);font-size:clamp(15px,3.8cqi,21px);line-height:1.1;margin-bottom:8px}
+.hdr h1 em{font-style:normal;color:var(--red)}
+.hdr p{font-size:clamp(11px,2cqi,12.5px);color:var(--g2);line-height:1.55}
+
+/* ── HERO TOTAL ── */
+.total-note{display:flex;align-items:center;gap:12px;padding:14px 24px;background:var(--gbg);border-bottom:1px solid var(--line)}
+.total-num{font-family:var(--blk);font-size:clamp(22px,5cqi,30px);color:var(--red);line-height:1;flex-shrink:0}
+.total-txt{font-size:clamp(10.5px,1.9cqi,12px);color:var(--g1);line-height:1.5}
+.total-txt b{color:var(--black);font-weight:700}
+
+/* ── COL HEADERS (desktop only) ── */
+.col-hdr{display:flex;align-items:center;gap:10px;padding:10px 24px 4px;border-bottom:1px solid var(--line)}
+.ch-name{width:clamp(100px,22cqi,170px);flex-shrink:0;font-family:var(--mono);font-size:9px;color:var(--g3);letter-spacing:1.5px;text-transform:uppercase}
+.ch-bar{flex:1}
+.ch-s26{width:54px;flex-shrink:0;font-family:var(--mono);font-size:9px;color:var(--g3);letter-spacing:1px;text-transform:uppercase;text-align:right}
+.ch-s25{width:54px;flex-shrink:0;font-family:var(--mono);font-size:9px;color:var(--g3);letter-spacing:1px;text-transform:uppercase;text-align:right}
+.ch-yoy{width:60px;flex-shrink:0;font-family:var(--mono);font-size:9px;color:var(--g3);letter-spacing:1px;text-transform:uppercase;text-align:right}
+
+/* ── ROWS ── */
+.rows{padding:4px 24px 8px}
+.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);cursor:default;transition:background .1s}
+.row:last-child{border-bottom:none}
+.row:hover{background:rgba(0,0,0,.02);margin:0 -12px;padding-left:12px;padding-right:12px}
+
+.r-name{width:clamp(100px,22cqi,170px);flex-shrink:0;display:flex;align-items:center;gap:6px}
+.r-rank{font-family:var(--mono);font-size:9px;color:var(--g3);width:18px;flex-shrink:0;text-align:right}
+.r-label{font-size:clamp(11px,2cqi,13px);font-weight:700;color:var(--black);line-height:1.2}
+.r-label.winner{color:var(--red)}
+
+.r-bar{flex:1;height:clamp(8px,2cqi,12px);background:var(--gbg);border-radius:2px;overflow:hidden}
+.r-fill{height:100%;border-radius:2px;transform-origin:left;transform:scaleX(0);animation:growH .6s cubic-bezier(.4,0,.2,1) forwards}
+.row:nth-child(1)  .r-fill{animation-delay:.04s}
+.row:nth-child(2)  .r-fill{animation-delay:.08s}
+.row:nth-child(3)  .r-fill{animation-delay:.12s}
+.row:nth-child(4)  .r-fill{animation-delay:.16s}
+.row:nth-child(5)  .r-fill{animation-delay:.20s}
+.row:nth-child(6)  .r-fill{animation-delay:.24s}
+.row:nth-child(7)  .r-fill{animation-delay:.28s}
+.row:nth-child(8)  .r-fill{animation-delay:.32s}
+.row:nth-child(9)  .r-fill{animation-delay:.36s}
+.row:nth-child(10) .r-fill{animation-delay:.40s}
+.row:nth-child(11) .r-fill{animation-delay:.44s}
+
+.r-s26{width:54px;flex-shrink:0;font-family:var(--mono);font-size:clamp(10px,1.9cqi,12px);font-weight:600;color:var(--black);text-align:right}
+.r-s26.winner{color:var(--red)}
+.r-s25{width:54px;flex-shrink:0;font-family:var(--mono);font-size:clamp(9.5px,1.7cqi,11px);color:var(--g3);text-align:right}
+.r-yoy{width:60px;flex-shrink:0;font-family:var(--mono);font-size:clamp(9.5px,1.8cqi,11px);font-weight:600;text-align:right;border-radius:2px;padding:2px 5px}
+.r-yoy.up{color:#1a7a40;background:rgba(0,140,60,.08)}
+.r-yoy.dn{color:var(--g2)}
+
+/* ── MOBILE: hide s25 col ── */
+@container wrap (max-width: 460px) {
+  .ch-s25,.r-s25{display:none}
+  .col-hdr,.rows{padding-left:16px;padding-right:16px}
+  .hdr,.total-note,.foot{padding-left:16px;padding-right:16px}
+  .ch-name,.r-name{width:clamp(80px,28cqi,130px)}
+}
+
+/* ── FOOTER ── */
+.foot{padding:10px 24px 14px;border-top:1px solid var(--line)}
+.foot-src{font-size:clamp(9px,1.7cqi,11px);color:var(--g3);line-height:1.6}
+
+@keyframes growH{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hdr">
+  <h1>Smartphones na China: <em>Huawei e Apple</em> crescem enquanto rivais recuam</h1>
+  <p>No segundo trimestre de 2026, as duas líderes nadaram contra a maré — o restante do mercado registrou queda generalizada de participação</p>
+</div>
+
+<div class="total-note">
+  <div class="total-num">−4,3%</div>
+  <div class="total-txt">queda geral do mercado chinês de smartphones no 2T26 em relação ao 2T25 — <b>Huawei (+19,4%) e Apple (+24,4%)</b> foram as únicas entre as 10 maiores a crescer</div>
+</div>
+
+<div class="col-hdr">
+  <div class="ch-name">Empresa</div>
+  <div class="ch-bar"></div>
+  <div class="ch-s26">2T26</div>
+  <div class="ch-s25">2T25</div>
+  <div class="ch-yoy">Var. anual</div>
+</div>
+
+<div class="rows">
+
+  <div class="row">
+    <div class="r-name"><span class="r-rank">1</span><span class="r-label winner">Huawei</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:100%;background:var(--red)"></div></div>
+    <div class="r-s26 winner">22,6%</div>
+    <div class="r-s25">18,1%</div>
+    <div class="r-yoy up">+19,4%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name"><span class="r-rank">2</span><span class="r-label winner">Apple</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:80.1%;background:rgba(217,0,30,.75)"></div></div>
+    <div class="r-s26 winner">18,1%</div>
+    <div class="r-s25">13,9%</div>
+    <div class="r-yoy up">+24,4%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name"><span class="r-rank">3</span><span class="r-label">OPPO</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:70.8%;background:var(--g4)"></div></div>
+    <div class="r-s26">16,0%</div>
+    <div class="r-s25">17,3%</div>
+    <div class="r-yoy dn">−9,7%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name"><span class="r-rank">3</span><span class="r-label">vivo</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:70.8%;background:var(--g4)"></div></div>
+    <div class="r-s26">16,0%</div>
+    <div class="r-s25">17,0%</div>
+    <div class="r-yoy dn">−11,4%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name"><span class="r-rank">5</span><span class="r-label">Xiaomi</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:54.9%;background:var(--g4)"></div></div>
+    <div class="r-s26">12,4%</div>
+    <div class="r-s25">15,1%</div>
+    <div class="r-yoy dn">−21,7%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name"><span class="r-rank">6</span><span class="r-label">Honor</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:50%;background:var(--g4)"></div></div>
+    <div class="r-s26">11,3%</div>
+    <div class="r-s25">11,9%</div>
+    <div class="r-yoy dn">−9,5%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name"><span class="r-rank">7</span><span class="r-label">Wiko</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:4.9%;background:var(--g4)"></div></div>
+    <div class="r-s26">1,1%</div>
+    <div class="r-s25">2,1%</div>
+    <div class="r-yoy dn">−49,2%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name"><span class="r-rank">8</span><span class="r-label">Lenovo</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:1.3%;background:var(--g4)"></div></div>
+    <div class="r-s26">0,3%</div>
+    <div class="r-s25">0,4%</div>
+    <div class="r-yoy dn">−10,4%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name"><span class="r-rank">9</span><span class="r-label">ZTE</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:1.3%;background:var(--g4)"></div></div>
+    <div class="r-s26">0,3%</div>
+    <div class="r-s25">0,4%</div>
+    <div class="r-yoy dn">−33,5%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name"><span class="r-rank">10</span><span class="r-label">Samsung</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:0.4%;background:var(--g4)"></div></div>
+    <div class="r-s26">0,1%</div>
+    <div class="r-s25">0,4%</div>
+    <div class="r-yoy dn">−60,8%</div>
+  </div>
+
+  <div class="row" style="opacity:.6">
+    <div class="r-name"><span class="r-rank">—</span><span class="r-label" style="color:var(--g2)">Outros</span></div>
+    <div class="r-bar"><div class="r-fill" style="width:8%;background:#eee"></div></div>
+    <div class="r-s26" style="color:var(--g2)">1,8%</div>
+    <div class="r-s25">3,4%</div>
+    <div class="r-yoy dn">−50,3%</div>
+  </div>
+
+</div>
+
+<div class="foot">
+  <span class="foot-src">Fonte: IDC Quarterly Mobile Phone Tracker · 14 de julho de 2026 · Resultados preliminares do 2T26 · Participação de mercado por volume de envios</span>
+</div>
+
+</div>
+<script>
+  function h(){window.parent.postMessage({height:document.body.scrollHeight},'*');}
+  window.addEventListener('load',h);window.addEventListener('resize',h);
+</script>
+</body>
+</html>
