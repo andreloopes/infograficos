@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Como os designers usam o Figma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#D9001E;--red-pale:#FFF5F6;
+  --black:#111;--g1:#333;--g2:#666;--g3:#aaa;
+  --line:#EBEBEB;--white:#fff;--gbg:#F7F7F7;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Archivo',sans-serif;
+  --blk:'Archivo Black',sans-serif;
+}
+html,body{width:100%;background:var(--white);color:var(--black);font-family:var(--sans);-webkit-font-smoothing:antialiased;margin:0}
+.wrap{container-type:inline-size;container-name:wrap;width:100%}
+
+/* ── HEADER ── */
+.hdr{padding:24px 28px 20px;border-top:3px solid var(--red);border-bottom:1px solid var(--line)}
+.hdr h1{font-family:var(--blk);font-size:clamp(18px,4.2cqi,26px);line-height:1.1;margin-bottom:8px}
+.hdr h1 em{font-style:normal;color:var(--red)}
+.hdr p{font-size:clamp(11px,2cqi,13px);color:var(--g2);line-height:1.6;border-left:2px solid var(--line);padding-left:12px}
+
+/* ── SECTION LABEL ── */
+.sh{display:flex;align-items:center;gap:10px;padding:20px 28px 0}
+.sh-lbl{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--red);white-space:nowrap;font-weight:600}
+.sh-line{flex:1;height:1px;background:var(--line)}
+
+/* ── BLOCO 1: ANTES → DEPOIS ── */
+.bloco1{padding:18px 28px 22px;border-bottom:1px solid var(--line)}
+.b1-lbl{font-family:var(--mono);font-size:9.5px;color:var(--g3);letter-spacing:1px;margin-bottom:14px;text-transform:uppercase}
+.b1-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.b1-card{flex:1;min-width:120px;padding:16px 20px;border-radius:3px}
+.b1-card.before{background:var(--gbg);border-top:3px solid var(--line)}
+.b1-card.after{background:var(--red-pale);border-top:3px solid var(--red)}
+.b1-card-lbl{font-family:var(--mono);font-size:8.5px;color:var(--g3);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:6px}
+.b1-card-num{font-family:var(--blk);font-size:clamp(36px,8cqi,52px);line-height:1;color:var(--black)}
+.b1-card.after .b1-card-num{color:var(--red)}
+.b1-card-sub{font-size:clamp(10px,1.8cqi,12px);color:var(--g2);margin-top:6px;line-height:1.4}
+.b1-arrow{font-family:var(--blk);font-size:clamp(22px,5cqi,32px);color:var(--g3);flex-shrink:0}
+.b1-context{font-size:clamp(10.5px,1.9cqi,12px);color:var(--g2);line-height:1.6;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.b1-context b{color:var(--black);font-weight:700}
+
+/* ── BLOCO 2: 3 STATS ── */
+.bloco2{padding:18px 28px 22px;border-bottom:1px solid var(--line)}
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{padding:16px 18px;border-top:3px solid var(--line);background:var(--gbg);border-radius:0 0 2px 2px}
+.stat.hl{border-top-color:var(--red);background:var(--red-pale)}
+.stat-num{font-family:var(--blk);font-size:clamp(28px,6cqi,40px);line-height:1;color:var(--black);margin-bottom:6px}
+.stat.hl .stat-num{color:var(--red)}
+.stat-txt{font-size:clamp(10px,1.8cqi,11.5px);color:var(--g2);line-height:1.5}
+.stat-txt b{color:var(--black);font-weight:700}
+
+/* ── BLOCO 3: CONVERGÊNCIA ── */
+.bloco3{padding:18px 28px 22px;border-bottom:1px solid var(--line)}
+.conv{display:flex;flex-direction:column;gap:14px}
+.conv-row{display:flex;align-items:center;gap:14px}
+.conv-lbl{font-size:clamp(11px,2cqi,13px);font-weight:600;color:var(--g1);flex:0 0 clamp(140px,32cqi,210px)}
+.conv-bars{flex:1;display:flex;flex-direction:column;gap:5px}
+.conv-bar-row{display:flex;align-items:center;gap:8px}
+.conv-bar-yr{font-family:var(--mono);font-size:8.5px;color:var(--g3);width:24px;text-align:right;flex-shrink:0}
+.conv-track{flex:1;height:10px;background:var(--gbg);border-radius:2px;overflow:hidden}
+.conv-fill{height:100%;border-radius:2px;transform-origin:left;transform:scaleX(0);animation:growH .6s cubic-bezier(.4,0,.2,1) forwards}
+.conv-val{font-family:var(--mono);font-size:10px;font-weight:600;width:38px;flex-shrink:0;text-align:right}
+.conv-delta{font-family:var(--mono);font-size:10px;font-weight:600;color:#1a7a40;background:rgba(0,140,60,.08);padding:2px 6px;border-radius:2px;flex-shrink:0;white-space:nowrap}
+
+/* ── BLOCO BRASIL ── */
+.brasil-hdr{padding:16px 28px 14px;background:#F0F4FF;border-bottom:1px solid #D0D8F0}
+.brasil-hdr h3{font-family:var(--blk);font-size:clamp(14px,3cqi,18px);color:#1a2a6c;margin-bottom:4px}
+.brasil-hdr p{font-size:clamp(10.5px,1.9cqi,12px);color:#4a5a8a;line-height:1.5}
+
+.bloco4{padding:18px 28px 22px;background:#F7F9FF;border-bottom:1px solid #D0D8F0}
+.b4-grid{display:grid;grid-template-columns:auto 1fr;gap:16px 20px;align-items:start}
+.b4-num{font-family:var(--blk);font-size:clamp(44px,10cqi,64px);line-height:1;color:var(--red)}
+.b4-txt{padding-top:8px}
+.b4-main{font-size:clamp(12px,2.2cqi,14px);font-weight:700;color:var(--black);margin-bottom:6px;line-height:1.35}
+.b4-sub{font-size:clamp(10.5px,1.9cqi,12px);color:var(--g2);line-height:1.5}
+.b4-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font-family:var(--mono);font-size:clamp(9px,1.8cqi,10.5px);padding:4px 10px;border-radius:2px;border:1px solid var(--line);color:var(--g1);background:var(--white)}
+.chip.hl{border-color:var(--red);color:var(--red);background:var(--red-pale);font-weight:600}
+
+.bloco5{padding:18px 28px 24px;background:#F7F9FF}
+.b5-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.b5-card{padding:16px 18px;background:var(--white);border-radius:3px;border-top:3px solid var(--line)}
+.b5-card.hl{border-top-color:var(--red)}
+.b5-card-num{font-family:var(--blk);font-size:clamp(32px,7cqi,44px);line-height:1;margin-bottom:6px;color:var(--black)}
+.b5-card.hl .b5-card-num{color:var(--red)}
+.b5-card-txt{font-size:clamp(10px,1.8cqi,11.5px);color:var(--g2);line-height:1.5}
+.b5-card-txt b{color:var(--black);font-weight:700}
+.b5-badge{display:inline-flex;font-family:var(--mono);font-size:clamp(8.5px,1.6cqi,10px);color:#1a7a40;background:rgba(0,140,60,.08);padding:2px 6px;border-radius:2px;margin-top:6px;font-weight:600}
+
+/* ── FOOTER ── */
+.foot{padding:12px 28px 14px;border-top:1px solid var(--line)}
+.foot-src{font-size:clamp(9px,1.7cqi,11px);color:var(--g3);line-height:1.6}
+
+/* mobile */
+@container wrap (max-width:440px){
+  .stats3{grid-template-columns:1fr 1fr}
+  .stats3 .stat:last-child{grid-column:1/-1}
+  .b4-grid{grid-template-columns:1fr;gap:6px}
+  .b4-num{font-size:clamp(44px,14cqi,56px)}
+  .b5-grid{grid-template-columns:1fr}
+  .conv-lbl{flex:0 0 clamp(120px,36cqi,160px)}
+  .hdr,.sh,.bloco1,.bloco2,.bloco3,.bloco4,.bloco5,.brasil-hdr,.foot{padding-left:18px;padding-right:18px}
+}
+
+@keyframes growH{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="hdr">
+  <h1>Como os designers usam o <em>Figma</em></h1>
+  <p>Levantamento de 2026 mostra avanços da IA por parte dos profissionais — e destaca o Brasil como um dos países mais otimistas do mundo</p>
+</div>
+
+<!-- 01 - ANTES E DEPOIS -->
+<div class="sh"><span class="sh-lbl">O impacto da IA no trabalho em equipe</span><div class="sh-line"></div></div>
+<div class="bloco1">
+  <div class="b1-lbl">Profissionais que dizem que a IA muda significativamente como suas equipes trabalham juntas</div>
+  <div class="b1-row">
+    <div class="b1-card before">
+      <span class="b1-card-lbl">Há dois anos</span>
+      <div class="b1-card-num">7%</div>
+      <div class="b1-card-sub">apenas 7 em cada 100 profissionais relatavam impacto significativo</div>
+    </div>
+    <div class="b1-arrow">→</div>
+    <div class="b1-card after">
+      <span class="b1-card-lbl">Em 2026</span>
+      <div class="b1-card-num">41%</div>
+      <div class="b1-card-sub">quase 6 vezes mais profissionais relatam mudança significativa na colaboração</div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 - DESIGN MAIS IMPORTANTE -->
+<div class="sh"><span class="sh-lbl">O design sobreviveu à IA — e saiu mais forte</span><div class="sh-line"></div></div>
+<div class="bloco2">
+  <div class="stats3">
+    <div class="stat hl">
+      <div class="stat-num">90%</div>
+      <div class="stat-txt">afirmam que o design é <b>pelo menos tão importante</b> quanto era antes da IA</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6 em 10</div>
+      <div class="stat-txt">dizem que o design se tornou <b>mais importante</b> do que era antes</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1 em 10</div>
+      <div class="stat-txt">acredita que o design se tornou menos importante — <b>minoria absoluta</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 - CONVERGÊNCIA -->
+<div class="sh"><span class="sh-lbl">Designers e desenvolvedores trocam de papel</span><div class="sh-line"></div></div>
+<div class="bloco3">
+  <div class="conv">
+    <div class="conv-row">
+      <div class="conv-lbl">Desenvolvedores que fazem design</div>
+      <div class="conv-bars">
+        <div class="conv-bar-row">
+          <span class="conv-bar-yr">2025</span>
+          <div class="conv-track"><div class="conv-fill" style="width:73.3%;background:rgba(217,0,30,.25);animation-delay:.1s"></div></div>
+          <span class="conv-val" style="color:var(--g3)">44%</span>
+        </div>
+        <div class="conv-bar-row">
+          <span class="conv-bar-yr">2026</span>
+          <div class="conv-track"><div class="conv-fill" style="width:100%;background:var(--red);animation-delay:.25s"></div></div>
+          <span class="conv-val" style="color:var(--red)">60%</span>
+          <span class="conv-delta">+16pp</span>
+        </div>
+      </div>
+    </div>
+    <div class="conv-row">
+      <div class="conv-lbl">Designers que participam do desenvolvimento</div>
+      <div class="conv-bars">
+        <div class="conv-bar-row">
+          <span class="conv-bar-yr">2025</span>
+          <div class="conv-track"><div class="conv-fill" style="width:34.2%;background:rgba(217,0,30,.20);animation-delay:.15s"></div></div>
+          <span class="conv-val" style="color:var(--g3)">~20%</span>
+        </div>
+        <div class="conv-bar-row">
+          <span class="conv-bar-yr">2026</span>
+          <div class="conv-track"><div class="conv-fill" style="width:68.3%;background:rgba(217,0,30,.65);animation-delay:.30s"></div></div>
+          <span class="conv-val" style="color:var(--g1)">41%</span>
+          <span class="conv-delta">dobrou</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BRASIL HEADER -->
+<div class="brasil-hdr">
+  <h3>🇧🇷 Brasil em destaque</h3>
+  <p>636 respondentes brasileiros — entre os mais otimistas de todos os países pesquisados</p>
+</div>
+
+<!-- 04 - DESIGN BR -->
+<div class="bloco4">
+  <div class="b4-grid">
+    <div class="b4-num">70%</div>
+    <div class="b4-txt">
+      <div class="b4-main">dos brasileiros dizem que o design se tornou mais importante com a IA</div>
+      <div class="b4-sub">O percentual é o 2º maior globalmente — atrás apenas da Índia — e fica 19 pontos acima da América do Norte</div>
+    </div>
+  </div>
+  <div class="b4-chips">
+    <div class="chip hl">🇧🇷 Brasil: 70%</div>
+    <div class="chip">Índia: 1º lugar</div>
+    <div class="chip">América do Norte: −19 pp</div>
+    <div class="chip">Menos importante: apenas 3% — menor do mundo</div>
+  </div>
+</div>
+
+<!-- 05 - COLABORAÇÃO BR -->
+<div class="bloco5">
+  <div class="b5-grid">
+    <div class="b5-card hl">
+      <div class="b5-card-num">49%</div>
+      <div class="b5-card-txt">relatam impacto <b>significativo ou transformador</b> da IA sobre a colaboração nas equipes</div>
+      <div class="b5-badge">🏆 maior percentual global</div>
+    </div>
+    <div class="b5-card">
+      <div class="b5-card-num">60%</div>
+      <div class="b5-card-txt">concordam que a IA <b>melhora a colaboração</b> entre áreas diferentes da empresa</div>
+      <div class="b5-badge">+11pp vs EUA · +16pp vs Reino Unido</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="foot">
+  <span class="foot-src">Fonte: Figma — pesquisa anual com profissionais de produto e design · 636 respondentes brasileiros · 2026</span>
+</div>
+
+</div>
+<script>
+  function h(){window.parent.postMessage({height:document.body.scrollHeight},'*');}
+  window.addEventListener('load',h);window.addEventListener('resize',h);
+</script>
+</body>
+</html>
