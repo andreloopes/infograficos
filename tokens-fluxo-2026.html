@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>O que é um token de IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#D9001E;--red-pale:#FFF5F6;
+  --black:#111;--g2:#666;--g3:#aaa;
+  --line:#EBEBEB;--white:#fff;--gbg:#F7F7F7;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Archivo',sans-serif;
+  --blk:'Archivo Black',sans-serif;
+}
+html,body{width:100%;background:var(--white);font-family:var(--sans);-webkit-font-smoothing:antialiased;margin:0}
+.wrap{container-type:inline-size;width:100%}
+
+/* ── HEADER ── */
+.hdr{padding:28px 32px 24px;border-top:3px solid var(--red);border-bottom:1px solid var(--line)}
+.hdr h1{font-family:var(--blk);font-size:clamp(18px,4cqi,24px);line-height:1.1;margin-bottom:12px;color:var(--black)}
+.hdr h1 em{font-style:normal;color:var(--red)}
+.hdr p{font-size:clamp(12px,2.1cqi,14px);color:var(--g2);line-height:1.7;border-left:2px solid var(--line);padding-left:14px;max-width:560px}
+
+/* ── DEMO ── */
+.demo{padding:28px 32px;border-bottom:1px solid var(--line)}
+.demo-lbl{font-family:var(--mono);font-size:9px;color:var(--g3);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.demo-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.demo-word{font-family:var(--blk);font-size:clamp(22px,5cqi,30px);color:var(--black)}
+.demo-arrow{font-size:22px;color:var(--g3);flex-shrink:0}
+.tokens-row{display:flex;flex-wrap:wrap;gap:6px}
+.tk{font-family:var(--mono);font-size:clamp(12px,2.4cqi,15px);font-weight:600;color:var(--white);padding:6px 12px;border-radius:4px;border-bottom:3px solid rgba(0,0,0,.18);opacity:0;animation:pop .25s ease forwards}
+.tk:nth-child(1){background:#D9001E;animation-delay:.1s}
+.tk:nth-child(2){background:#333;animation-delay:.22s}
+.tk:nth-child(3){background:#A01015;animation-delay:.34s}
+.tk:nth-child(4){background:#555;animation-delay:.46s}
+.demo-sub{font-size:clamp(11px,2cqi,13px);color:var(--g3);line-height:1.6}
+.demo-sub b{color:var(--black)}
+
+/* ── CUSTO (bloco independente) ── */
+.custo{padding:0 32px 28px;border-bottom:1px solid var(--line)}
+.custo-inner{background:var(--red-pale);border:1px solid rgba(217,0,30,.18);border-radius:4px;padding:20px 24px;display:flex;align-items:center;gap:24px}
+.custo-num{flex-shrink:0}
+.custo-val{font-family:var(--blk);font-size:clamp(34px,7cqi,48px);color:var(--red);line-height:1;display:block}
+.custo-unit{font-family:var(--mono);font-size:clamp(9px,1.7cqi,11px);color:var(--red);letter-spacing:1px;text-transform:uppercase;display:block;margin-top:4px}
+.custo-divider{width:1px;height:52px;background:rgba(217,0,30,.2);flex-shrink:0}
+.custo-text{font-size:clamp(11.5px,2.1cqi,13.5px);color:var(--g2);line-height:1.6}
+.custo-text b{color:var(--black);font-weight:700}
+
+/* ── TOKENS SÃO ── */
+.three-hdr{padding:28px 32px 16px}
+.three-hdr-txt{font-family:var(--blk);font-size:clamp(16px,3.2cqi,20px);color:var(--black)}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 32px 28px}
+.card{background:var(--gbg);border-radius:4px;padding:20px 20px 22px;border-top:3px solid var(--line)}
+.card.hl{border-top-color:var(--red)}
+.card-icon{font-size:24px;margin-bottom:12px;display:block;line-height:1}
+.card-title{font-family:var(--blk);font-size:clamp(14px,2.8cqi,18px);color:var(--black);margin-bottom:8px}
+.card-desc{font-size:clamp(10.5px,1.9cqi,12.5px);color:var(--g2);line-height:1.65}
+.card-desc b{color:var(--black);font-weight:700}
+
+/* context bar */
+.ctxbar{height:8px;background:#e0e0e0;border-radius:8px;overflow:hidden;margin:12px 0 5px}
+.ctxfill{height:100%;width:30%;background:var(--red);border-radius:8px}
+.ctxnums{display:flex;justify-content:space-between;font-family:var(--mono);font-size:clamp(8px,1.5cqi,9.5px);color:var(--g3)}
+
+/* foot */
+.foot{padding:12px 32px 16px;border-top:1px solid var(--line)}
+.foot-src{font-size:clamp(9px,1.6cqi,11px);color:var(--g3)}
+
+@container (max-width:460px){
+  .hdr,.demo,.custo,.three-hdr,.foot{padding-left:20px;padding-right:20px}
+  .custo{padding-bottom:20px}
+  .custo-inner{flex-direction:column;align-items:flex-start;gap:12px}
+  .custo-divider{display:none}
+  .three{grid-template-columns:1fr;padding-left:20px;padding-right:20px;gap:12px}
+  .three-hdr{padding-bottom:12px}
+}
+@keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="hdr">
+  <h1>Entenda o que é um <em>token</em> e como funciona</h1>
+  <p>A Inteligência Artificial não lê palavras ou frases inteiras como nós. Em vez disso, ela quebra o texto em pedaços menores chamados tokens — e cada pedaço tem um custo em dinheiro real</p>
+</div>
+
+<!-- DEMO -->
+<div class="demo">
+  <div class="demo-lbl">Como a IA enxerga a palavra "inteligência"</div>
+  <div class="demo-row">
+    <span class="demo-word">inteligência</span>
+    <span class="demo-arrow">→</span>
+    <div class="tokens-row">
+      <span class="tk">intel</span>
+      <span class="tk">ig</span>
+      <span class="tk">ên</span>
+      <span class="tk">cia</span>
+    </div>
+  </div>
+  <div class="demo-sub">1 palavra virou <b>4 tokens</b> — cada bloco colorido é um fragmento que a IA lê, processa e, no final, cobra</div>
+</div>
+
+<!-- CUSTO -->
+<div class="custo">
+  <div class="custo-inner">
+    <div class="custo-num">
+      <span class="custo-val">130 mil</span>
+      <span class="custo-unit">tokens por R$ 1</span>
+    </div>
+    <div class="custo-divider"></div>
+    <div class="custo-text">
+      Nos modelos mais acessíveis do mercado, R$ 1 compra 130 mil tokens — o equivalente a centenas de conversas. <b>Uma resposta típica da IA usa cerca de 500 tokens.</b> Quanto mais longa a troca, maior a conta.
+    </div>
+  </div>
+</div>
+
+<!-- TOKENS SÃO -->
+<div class="three-hdr">
+  <span class="three-hdr-txt">Tokens são:</span>
+</div>
+
+<div class="three">
+
+  <div class="card hl">
+    <span class="card-icon">📊</span>
+    <div class="card-title">Contados</div>
+    <div class="card-desc">A IA não lê "inteligência" — ela vê "intel", "ig", "ên", "cia". <b>Espaços, vírgulas e acentos</b> também viram tokens e entram na soma</div>
+  </div>
+
+  <div class="card">
+    <span class="card-icon">📏</span>
+    <div class="card-title">Limitados</div>
+    <div class="card-desc">Todo modelo tem um teto de tokens que consegue manter na memória de uma vez — a <b>janela de contexto</b>. Passe desse limite e ele começa a esquecer o início da conversa</div>
+    <div class="ctxbar"><div class="ctxfill"></div></div>
+    <div class="ctxnums"><span>8K</span><span>200K</span><span>1M+</span></div>
+  </div>
+
+  <div class="card">
+    <span class="card-icon">💸</span>
+    <div class="card-title">Cobrados</div>
+    <div class="card-desc">Você paga pela <b>ida e pela volta</b>: cada token que você envia e cada token que a IA devolve. Respostas longas custam mais do que respostas curtas</div>
+  </div>
+
+</div>
+
+<div class="foot">
+  <span class="foot-src">Fonte: documentação pública de OpenAI, Anthropic e Google · preços de referência de julho de 2026 · ExameLab</span>
+</div>
+
+</div>
+<script>
+  function h(){window.parent.postMessage({height:document.body.scrollHeight},'*');}
+  window.addEventListener('load',h);window.addEventListener('resize',h);
+</script>
+</body>
+</html>
