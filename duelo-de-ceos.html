@@ -6,207 +6,191 @@
 <title>DUELO DE CEOs — Batalha de Cartas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b1026;          /* midnight terminal */
-    --bg2:#141a3a;
-    --panel:#1c2350;
-    --ink:#e8ecff;
-    --dim:#8a93c9;
-    --gold:#ffcb3d;        /* arcade accent */
-    --up:#3ef0a0;          /* market green */
-    --down:#ff4d6d;        /* market red */
-    --giant:#4db5ff;       /* Gigantes frame */
-    --polem:#ff5ca8;       /* Polêmicos frame */
-    --shadow:#05081a;
-    --line:#3a4390;
+    --bg:#111838;
+    --bg2:#1b2350;
+    --panel:#232c5e;
+    --ink:#f6f8ff;
+    --dim:#b9c2f0;
+    --gold:#ffd24a;
+    --up:#4dffab;
+    --down:#ff6b86;
+    --giant:#5cc0ff;
+    --polem:#ff7ab8;
+    --shadow:#070a1c;
+    --line:#4a56a8;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
-    background:
-      radial-gradient(120% 90% at 50% -10%, #1a2255 0%, var(--bg) 60%),
-      var(--bg);
+    background:radial-gradient(130% 90% at 50% -10%, #223066 0%, var(--bg) 62%), var(--bg);
     color:var(--ink);
-    font-family:'VT323',monospace;
-    font-size:20px;
-    letter-spacing:.4px;
-    -webkit-font-smoothing:none;
+    font-family:'Pixelify Sans',system-ui,monospace;
+    font-size:19px; font-weight:500;
     image-rendering:pixelated;
-    overflow-x:hidden;
-    min-height:100%;
+    overflow-x:hidden; min-height:100%;
   }
-  /* CRT scanline overlay */
   body::after{
     content:"";position:fixed;inset:0;pointer-events:none;z-index:999;
-    background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px);
-    mix-blend-mode:multiply;opacity:.55;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.10) 0 1px,transparent 1px 3px);
+    mix-blend-mode:multiply;opacity:.4;
   }
   .pixel{font-family:'Press Start 2P',monospace}
   canvas{image-rendering:pixelated}
+  .wrap{max-width:980px;margin:0 auto;padding:16px 14px 40px}
 
-  .wrap{max-width:960px;margin:0 auto;padding:16px 14px 40px}
+  .panel{background:var(--panel);border:3px solid var(--line);
+    box-shadow:0 0 0 3px var(--shadow), 6px 6px 0 0 var(--shadow);padding:14px}
 
-  /* ---- generic pixel panel ---- */
-  .panel{
-    background:var(--panel);
-    border:3px solid var(--line);
-    box-shadow:0 0 0 3px var(--shadow), 6px 6px 0 0 var(--shadow);
-    padding:14px;
-  }
-
-  /* ---------- TITLE SCREEN ---------- */
+  /* ---------- TITLE ---------- */
   #title{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;padding:24px}
   .logo{line-height:1.5}
   .logo .l1{font-size:11px;color:var(--gold);display:block;margin-bottom:14px;letter-spacing:2px}
-  .logo .l2{font-size:34px;color:var(--ink);display:block;text-shadow:4px 4px 0 var(--shadow), 0 0 22px rgba(77,181,255,.35)}
-  .logo .l3{font-size:34px;color:var(--gold);display:block;text-shadow:4px 4px 0 var(--shadow), 0 0 22px rgba(255,203,61,.4)}
-  .tagline{color:var(--dim);font-size:22px;max-width:520px;line-height:1.35}
-  .rules{max-width:560px;text-align:left;font-size:20px;line-height:1.5;color:var(--ink)}
+  .logo .l2{font-size:36px;color:var(--ink);display:block;text-shadow:4px 4px 0 var(--shadow), 0 0 22px rgba(92,192,255,.4)}
+  .logo .l3{font-size:36px;color:var(--gold);display:block;text-shadow:4px 4px 0 var(--shadow), 0 0 22px rgba(255,210,74,.45)}
+  .tagline{color:var(--dim);font-size:23px;max-width:540px;line-height:1.35}
+  .rules{max-width:580px;text-align:left;font-size:22px;line-height:1.5;color:var(--ink)}
   .rules b{color:var(--gold)}
-  .rules .ico{color:var(--giant)}
-
-  button.btn{
-    font-family:'Press Start 2P',monospace;
-    font-size:13px;
-    color:var(--shadow);
-    background:var(--gold);
-    border:none;
-    padding:16px 26px;
-    cursor:pointer;
-    box-shadow:0 0 0 3px var(--shadow), 5px 5px 0 0 var(--shadow);
-    transition:transform .05s;
-  }
-  button.btn:hover{background:#ffd869}
+  .rules .ico{color:var(--giant);font-weight:700}
+  button.btn{font-family:'Press Start 2P',monospace;font-size:13px;color:var(--shadow);
+    background:var(--gold);border:none;padding:16px 26px;cursor:pointer;
+    box-shadow:0 0 0 3px var(--shadow), 5px 5px 0 0 var(--shadow);transition:transform .05s}
+  button.btn:hover{background:#ffde72}
   button.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 3px var(--shadow),2px 2px 0 0 var(--shadow)}
   button.btn.ghost{background:var(--panel);color:var(--ink)}
   button.btn:focus-visible{outline:3px solid var(--giant);outline-offset:3px}
-
-  .flavor-legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:18px;color:var(--dim)}
+  .flavor-legend{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;font-size:20px;color:var(--dim)}
   .swatch{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:6px;box-shadow:0 0 0 2px var(--shadow)}
 
-  /* ---------- BATTLE SCREEN ---------- */
+  /* ---------- BATTLE ---------- */
   #game{display:none}
-  .hud{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
-  .hud .side-name{font-size:11px}
-  .mktcap{flex:1;max-width:340px}
-  .mktcap .lbl{font-size:16px;color:var(--dim);display:flex;justify-content:space-between;margin-bottom:4px}
-  .bar{height:16px;background:var(--shadow);border:2px solid var(--line);position:relative;overflow:hidden}
-  .bar > i{display:block;height:100%;background:linear-gradient(90deg,#1e7a52,var(--up));transition:width .5s ease}
-  .bar.enemy > i{background:linear-gradient(90deg,#8a1b30,var(--down))}
-  .deckcount{font-size:16px;color:var(--dim);text-align:center;min-width:56px}
-  .deckcount b{color:var(--gold);display:block;font-family:'Press Start 2P';font-size:11px}
+  .hud{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+  .mktcap{flex:1;max-width:360px}
+  .mktcap .lbl{font-size:18px;color:var(--ink);display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;font-weight:600}
+  .mktcap .lbl .who{font-family:'Press Start 2P';font-size:9px}
+  .mktcap .lbl .hp{font-family:'Press Start 2P';font-size:12px;color:var(--gold)}
+  .bar{height:20px;background:var(--shadow);border:3px solid var(--line);position:relative;overflow:hidden}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,#1f9c67,var(--up));transition:width .5s ease}
+  .bar.enemy > i{background:linear-gradient(90deg,#a52440,var(--down))}
+  .deckcount{font-size:17px;color:var(--dim);text-align:center;min-width:64px;font-weight:600}
+  .deckcount b{color:var(--gold);display:block;font-family:'Press Start 2P';font-size:12px;margin-top:2px}
 
-  /* arena */
-  .arena{
-    background:linear-gradient(180deg,#10163a,#0c1130);
-    border:3px solid var(--line);
-    box-shadow:0 0 0 3px var(--shadow);
-    padding:14px 10px;
-    margin:8px 0 12px;
-    position:relative;
-    overflow:hidden;
-  }
-  .arena-row{display:flex;align-items:center;justify-content:center;gap:14px;min-height:150px}
-  .vs{font-family:'Press Start 2P';font-size:16px;color:var(--gold);text-shadow:2px 2px 0 var(--shadow);min-width:70px;text-align:center}
-  .slot{
-    width:120px;height:150px;border:3px dashed var(--line);
-    display:flex;align-items:center;justify-content:center;color:var(--dim);
-    font-size:16px;text-align:center;flex:0 0 auto;
-  }
-  .clash-msg{
-    text-align:center;margin-top:10px;font-size:20px;color:var(--ink);min-height:26px;line-height:1.3
-  }
-  .clash-msg .adv{color:var(--gold)}
-  .clash-msg .hit-you{color:var(--down)}
-  .clash-msg .hit-cpu{color:var(--up)}
-
-  /* floating damage */
-  .float{position:absolute;font-family:'Press Start 2P';font-size:14px;pointer-events:none;
-    animation:floatUp 1s ease-out forwards;text-shadow:2px 2px 0 var(--shadow);z-index:5}
-  @keyframes floatUp{0%{opacity:0;transform:translateY(6px) scale(.6)}
-    20%{opacity:1;transform:translateY(0) scale(1.15)}
-    100%{opacity:0;transform:translateY(-42px) scale(1)}}
-
-  /* hand */
-  .hand-label{font-size:16px;color:var(--dim);margin:6px 2px}
-  .hand{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;min-height:214px}
-
-  /* ---------- CARD ---------- */
-  .card{
-    width:150px;flex:0 0 auto;background:var(--bg2);
-    border:3px solid var(--giant);
-    box-shadow:0 0 0 3px var(--shadow), 4px 4px 0 0 var(--shadow);
-    padding:8px 8px 10px;position:relative;user-select:none;
-  }
-  .card.polem{border-color:var(--polem)}
-  .card.hand-card{cursor:pointer;transition:transform .08s}
-  .card.hand-card:hover{transform:translateY(-6px)}
-  .card.hand-card:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-  .card.small{width:120px}
-  .card.small .cv{width:88px;height:88px}
-  .card .badge{
-    position:absolute;top:-3px;right:-3px;font-family:'Press Start 2P';font-size:7px;
-    padding:4px 5px;background:var(--giant);color:var(--shadow);box-shadow:0 0 0 3px var(--shadow)
-  }
-  .card.polem .badge{background:var(--polem)}
-  .card .cv{
-    width:118px;height:118px;margin:2px auto 6px;display:block;
-    background:#0a0f28;border:2px solid var(--line);box-shadow:inset 0 0 0 2px var(--shadow)
-  }
-  .card .cname{font-size:19px;line-height:1.05;text-align:center;color:var(--ink);min-height:40px;display:flex;align-items:center;justify-content:center}
-  .card .cco{font-size:15px;text-align:center;color:var(--dim);margin-bottom:4px}
-  .card .sector{text-align:center;font-size:15px;color:var(--gold);margin-bottom:6px}
-  .card .stats{display:flex;justify-content:space-between;gap:6px}
-  .card .stat{flex:1;text-align:center;background:var(--shadow);border:2px solid var(--line);padding:3px 0}
-  .card .stat .k{font-size:13px;color:var(--dim);display:block}
-  .card .stat .v{font-family:'Press Start 2P';font-size:12px}
-  .card .stat.atk .v{color:var(--down)}
-  .card .stat.def .v{color:var(--giant)}
-  .card .flavor{font-size:14px;color:var(--dim);text-align:center;margin-top:6px;line-height:1.2;min-height:34px}
-
-  .card-back{
-    width:120px;height:170px;background:
-      repeating-linear-gradient(45deg,#232c66 0 8px,#1a2050 8px 16px);
+  .arena{position:relative;overflow:hidden;margin:8px 0 6px;padding:16px 10px 20px;
     border:3px solid var(--line);box-shadow:0 0 0 3px var(--shadow);
-    display:flex;align-items:center;justify-content:center;flex:0 0 auto;
-  }
-  .card-back span{font-family:'Press Start 2P';font-size:9px;color:var(--gold);text-shadow:2px 2px 0 var(--shadow)}
+    background:radial-gradient(120% 85% at 50% 18%, #40509a 0%, #2c3a78 45%, #1e2a5c 100%)}
+  .arena::before{content:"";position:absolute;left:50%;bottom:10px;transform:translateX(-50%);
+    width:80%;height:52px;background:radial-gradient(50% 100% at 50% 0,#5b6cc4 0%,transparent 72%);opacity:.75}
+  .arena-row{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:16px;min-height:246px}
+  .vs{font-family:'Press Start 2P';font-size:18px;color:var(--gold);text-shadow:2px 2px 0 var(--shadow);min-width:72px;text-align:center}
+  .slot{width:132px;height:238px;border:3px dashed rgba(255,255,255,.28);border-radius:2px;
+    display:flex;align-items:center;justify-content:center;color:#cdd6ff;
+    font-size:18px;text-align:center;flex:0 0 auto;font-weight:600}
+  .slot.filled{border-color:transparent}
 
-  .cpu-hand{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;min-height:80px}
-  .cpu-hand .card-back{width:56px;height:78px}
+  .statusbar{margin:10px 0 4px;padding:11px 14px;background:#151d40;border:3px solid var(--gold);
+    box-shadow:0 0 0 3px var(--shadow);text-align:center;font-weight:700;font-size:23px;
+    color:var(--ink);min-height:32px;line-height:1.25}
+  .statusbar.adv{color:var(--shadow);background:var(--gold);border-color:var(--shadow)}
+
+  /* banner de vencedor da rodada */
+  .banner{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;pointer-events:none;opacity:0}
+  .banner.show{opacity:1;background:rgba(7,10,28,.58);animation:bpop .5s ease-out}
+  .btitle{font-family:'Press Start 2P';font-size:22px;text-align:center;line-height:1.4;text-shadow:3px 3px 0 var(--shadow)}
+  .bwin{color:var(--up)} .blose{color:var(--down)} .bdraw{color:var(--gold)}
+  .bsub{font-weight:700;font-size:21px;color:var(--ink);background:rgba(7,10,28,.7);padding:5px 12px}
+  @keyframes bpop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+
+  /* dano flutuante */
+  .float{position:absolute;left:50%;top:38%;transform:translateX(-50%);
+    font-family:'Press Start 2P';font-size:20px;pointer-events:none;z-index:7;
+    text-shadow:2px 2px 0 var(--shadow);animation:floatUp 1.05s ease-out forwards}
+  @keyframes floatUp{0%{opacity:0;transform:translate(-50%,8px) scale(.6)}
+    20%{opacity:1;transform:translate(-50%,0) scale(1.2)}
+    100%{opacity:0;transform:translate(-50%,-48px) scale(1)}}
+
+  .turnbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0 4px}
+  .turnbar .roundno{font-family:'Press Start 2P';font-size:10px;color:var(--gold)}
+  .hand-label{font-size:18px;color:var(--dim);margin:8px 2px;font-weight:600}
+  .hand{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;min-height:236px}
+
+  .cpu-hand{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:6px;min-height:78px}
+  .cpu-hand .card-back{width:56px;height:76px}
   .cpu-hand .card-back span{font-size:7px}
 
-  .turnbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0}
-  .turnbar .msg{font-size:20px;color:var(--gold);flex:1}
-  .roundno{font-family:'Press Start 2P';font-size:9px;color:var(--dim)}
+  /* ---------- CARD ---------- */
+  .card{width:158px;flex:0 0 auto;background:var(--bg2);border:3px solid var(--giant);
+    box-shadow:0 0 0 3px var(--shadow), 4px 4px 0 0 var(--shadow);padding:8px 8px 10px;position:relative;user-select:none}
+  .card.polem{border-color:var(--polem)}
+  .card.hand-card{cursor:pointer;transition:transform .1s}
+  .card.hand-card:hover{transform:translateY(-8px)}
+  .card.hand-card:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  .card.small{width:132px}
+  .card.small .cv{width:100px;height:100px}
+  .card.small .cname{min-height:34px;font-size:18px}
+  .card.small .cco{font-size:15px}
+  .card.small .sector{font-size:15px;margin-bottom:5px}
+  .card.small .flavor{display:none}
+  .card .badge{position:absolute;top:-3px;right:-3px;font-family:'Press Start 2P';font-size:7px;
+    padding:4px 5px;background:var(--giant);color:var(--shadow);box-shadow:0 0 0 3px var(--shadow)}
+  .card.polem .badge{background:var(--polem)}
+  .card .cv{width:120px;height:120px;margin:2px auto 6px;display:block;background:#0a0f28;
+    border:2px solid var(--line);box-shadow:inset 0 0 0 2px var(--shadow)}
+  .card .cname{font-size:21px;font-weight:700;line-height:1.02;text-align:center;color:var(--ink);min-height:42px;display:flex;align-items:center;justify-content:center}
+  .card .cco{font-size:17px;text-align:center;color:var(--dim);margin-bottom:4px;font-weight:600}
+  .card .sector{text-align:center;font-size:17px;color:var(--gold);margin-bottom:6px;font-weight:700}
+  .card .stats{display:flex;justify-content:space-between;gap:6px}
+  .card .stat{flex:1;text-align:center;background:var(--shadow);border:2px solid var(--line);padding:4px 0}
+  .card .stat .k{font-size:14px;color:var(--dim);display:block;font-weight:600}
+  .card .stat .v{font-family:'Press Start 2P';font-size:13px}
+  .card .stat.atk .v{color:var(--down)}
+  .card .stat.def .v{color:var(--giant)}
+  .card .flavor{font-size:15px;color:var(--dim);text-align:center;margin-top:6px;line-height:1.2;min-height:36px}
 
-  .log{margin-top:12px;background:var(--shadow);border:2px solid var(--line);padding:8px 10px;font-size:17px;max-height:120px;overflow-y:auto;line-height:1.4}
+  .card-back{width:132px;height:184px;background:repeating-linear-gradient(45deg,#2b3676 0 8px,#202a5c 8px 16px);
+    border:3px solid var(--line);box-shadow:0 0 0 3px var(--shadow);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .card-back span{font-family:'Press Start 2P';font-size:9px;color:var(--gold);text-shadow:2px 2px 0 var(--shadow)}
+
+  .log{margin-top:12px;background:var(--shadow);border:3px solid var(--line);padding:9px 12px;font-size:18px;max-height:132px;overflow-y:auto;line-height:1.45;font-weight:500}
   .log div{margin-bottom:3px}
-  .log .u{color:var(--up)}
-  .log .d{color:var(--down)}
-  .log .a{color:var(--gold)}
-  .log .sys{color:var(--dim)}
+  .log .u{color:var(--up)} .log .d{color:var(--down)} .log .a{color:var(--gold)}
+  .log .sys{color:var(--dim)} .log .win{color:var(--up);font-weight:700} .log .lose{color:var(--down);font-weight:700}
 
-  .mute{background:var(--panel);color:var(--ink);border:2px solid var(--line);
-    font-family:'Press Start 2P';font-size:8px;padding:8px 10px;cursor:pointer;box-shadow:0 0 0 2px var(--shadow)}
+  .mute{background:var(--panel);color:var(--ink);border:3px solid var(--line);
+    font-family:'Press Start 2P';font-size:8px;padding:9px 11px;cursor:pointer;box-shadow:0 0 0 2px var(--shadow)}
+
+  /* animações de carta */
+  @keyframes enterP{from{transform:translateY(160px) scale(.8);opacity:0}to{transform:none;opacity:1}}
+  @keyframes enterC{from{transform:translateY(-160px) scale(.8);opacity:0}to{transform:none;opacity:1}}
+  .enterP{animation:enterP .55s cubic-bezier(.2,.9,.25,1) both}
+  .enterC{animation:enterC .55s cubic-bezier(.2,.9,.25,1) both}
+  @keyframes lungeP{0%{transform:none}45%{transform:translateX(-46px) rotate(-6deg) scale(1.07)}70%{transform:translateX(-30px) rotate(-2deg)}100%{transform:none}}
+  @keyframes lungeC{0%{transform:none}45%{transform:translateX(46px) rotate(6deg) scale(1.07)}70%{transform:translateX(30px) rotate(2deg)}100%{transform:none}}
+  .lungeP{animation:lungeP .6s ease-in-out both}
+  .lungeC{animation:lungeC .6s ease-in-out both}
+  @keyframes hurt{0%{filter:none}20%{filter:brightness(1.9) saturate(.2)}40%{filter:none}60%{filter:brightness(1.9) saturate(.2)}100%{filter:none}}
+  .hurt{animation:hurt .5s steps(1) both}
+  @keyframes shake{0%,100%{transform:translate(0,0)}15%{transform:translate(-7px,4px)}30%{transform:translate(7px,-4px)}45%{transform:translate(-6px,3px)}60%{transform:translate(6px,-3px)}75%{transform:translate(-4px,2px)}90%{transform:translate(4px,-2px)}}
+  .arena.shake{animation:shake .42s}
 
   /* ---------- RESULT ---------- */
   #result{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:26px;padding:24px}
-  .verdict{font-family:'Press Start 2P';font-size:30px;text-shadow:4px 4px 0 var(--shadow)}
-  .verdict.win{color:var(--up)}
-  .verdict.lose{color:var(--down)}
-  .score{font-size:24px;color:var(--dim)}
+  .verdict{font-family:'Press Start 2P';font-size:32px;text-shadow:4px 4px 0 var(--shadow)}
+  .verdict.win{color:var(--up)} .verdict.lose{color:var(--down)}
+  .score{font-size:26px;color:var(--dim);font-weight:600}
   .score b{color:var(--gold)}
 
   @media(max-width:560px){
-    .logo .l2,.logo .l3{font-size:24px}
-    .card{width:132px}
-    .slot{width:108px}
-    .arena-row{gap:8px}
-    .vs{min-width:44px;font-size:12px}
-    body{font-size:19px}
+    .logo .l2,.logo .l3{font-size:26px}
+    .card{width:140px} .card.small{width:118px}
+    .slot{width:116px;height:224px} .arena-row{gap:8px;min-height:230px}
+    .vs{min-width:44px;font-size:14px}
+    body{font-size:18px}
+    .statusbar{font-size:20px} .btitle{font-size:16px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .enterP,.enterC,.lungeP,.lungeC,.hurt,.arena.shake,.banner.show,.float{animation-duration:.01ms !important}
   }
 </style>
 </head>
@@ -228,7 +212,7 @@
     <p style="margin:6px 0 10px;text-align:center">
       <span class="ico">🧠 IA</span> › <span class="ico">🔧 Hardware</span> › <span class="ico">💰 Cripto</span> › <span class="ico">🧠 IA</span>
     </p>
-    <p>• Derrube o <b>Valor de Mercado</b> do rival a zero — ou termine com mais que ele.</p>
+    <p>• Quem tira mais do <b>Valor de Mercado</b> vence a rodada. Zere o rival — ou termine com mais que ele.</p>
   </div>
   <div class="flavor-legend">
     <span><span class="swatch" style="background:var(--giant)"></span>Gigantes (tanques)</span>
@@ -240,42 +224,38 @@
 <!-- ============ GAME ============ -->
 <section id="game">
   <div class="wrap">
-    <!-- CPU HUD -->
     <div class="hud">
       <div class="mktcap">
-        <div class="lbl"><span class="pixel" style="font-size:9px;color:var(--polem)">A MÁQUINA</span><span id="cpuHpTxt">25</span></div>
+        <div class="lbl"><span class="who" style="color:var(--polem)">A MÁQUINA</span><span class="hp" id="cpuHpTxt">25</span></div>
         <div class="bar enemy"><i id="cpuHpBar" style="width:100%"></i></div>
       </div>
       <div class="deckcount">BARALHO<b id="deckTxt">8</b></div>
     </div>
     <div class="cpu-hand" id="cpuHand"></div>
 
-    <!-- ARENA -->
-    <div class="arena">
+    <div class="arena" id="arena">
       <div class="arena-row">
         <div class="slot" id="cpuSlot">carta da<br>máquina</div>
         <div class="vs pixel">VS</div>
-        <div class="slot" id="playerSlot">sua<br>carta</div>
+        <div class="slot" id="playerSlot">sua carta</div>
       </div>
-      <div class="clash-msg" id="clashMsg">Escolha uma carta pra abrir a rodada.</div>
+      <div class="banner" id="banner"></div>
     </div>
+    <div class="statusbar" id="clashMsg">Escolha uma carta pra abrir a rodada.</div>
 
-    <!-- PLAYER HUD -->
-    <div class="hud">
+    <div class="hud" style="margin-top:8px">
       <div class="mktcap">
-        <div class="lbl"><span class="pixel" style="font-size:9px;color:var(--up)">VOCÊ</span><span id="pHpTxt">25</span></div>
+        <div class="lbl"><span class="who" style="color:var(--up)">VOCÊ</span><span class="hp" id="pHpTxt">25</span></div>
         <div class="bar"><i id="pHpBar" style="width:100%"></i></div>
       </div>
       <button class="mute" id="muteBtn" onclick="toggleMute()">🔊 SOM</button>
     </div>
 
     <div class="turnbar">
-      <span class="msg" id="turnMsg">Sua vez.</span>
+      <span class="hand-label" style="margin:0">SUA MÃO — clique pra jogar</span>
       <span class="roundno" id="roundNo">RODADA 1</span>
     </div>
-    <div class="hand-label">SUA MÃO — clique pra jogar</div>
     <div class="hand" id="playerHand"></div>
-
     <div class="log" id="log"></div>
   </div>
 </section>
@@ -284,369 +264,395 @@
 <section id="result">
   <div class="verdict pixel" id="verdict">VITÓRIA</div>
   <div class="score" id="scoreTxt"></div>
-  <div class="panel" style="max-width:460px;font-size:19px;line-height:1.4;color:var(--dim)" id="resultBlurb"></div>
+  <div class="panel" style="max-width:480px;font-size:21px;line-height:1.4;color:var(--dim)" id="resultBlurb"></div>
   <button class="btn" onclick="startGame()">↻ JOGAR DE NOVO</button>
   <button class="btn ghost" onclick="goTitle()">MENU</button>
 </section>
 
 <script>
+/* ===== util cor ===== */
+function dk(hex,f){let n=parseInt(hex.slice(1),16);let r=(n>>16&255)*f|0,g=(n>>8&255)*f|0,b=(n&255)*f|0;return`rgb(${r},${g},${b})`;}
+
 /* ============================================================
    DADOS — 14 CEOs (7 Gigantes + 7 Polêmicos)
-   setor: ia | hw | cripto   (triângulo: ia>hw>cripto>ia)
-   Gigantes = DEF alta / Polêmicos = ATK alta, DEF baixa
+   setor: ia | hw | cripto  (ia>hw>cripto>ia)
    ============================================================ */
-const SECTOR = {
-  ia:    {icon:'🧠', label:'IA'},
-  hw:    {icon:'🔧', label:'Hardware'},
-  cripto:{icon:'💰', label:'Cripto'}
-};
-// quem vence quem
-const BEATS = { ia:'hw', hw:'cripto', cripto:'ia' };
+const SECTOR = {ia:{icon:'🧠',label:'IA'}, hw:{icon:'🔧',label:'Hardware'}, cripto:{icon:'💰',label:'Cripto'}};
+const BEATS = {ia:'hw', hw:'cripto', cripto:'ia'};
 
 const CEOS = [
   // ---- GIGANTES ----
-  {name:'Tim Cook',        co:'Apple',     side:'giant', sector:'hw', atk:8, def:9,
-   skin:'#f0c9a8', hair:'#c9cdd6', cloth:'#243a66', glasses:false, hairStyle:'short',
+  {name:'Tim Cook',co:'Apple',side:'giant',sector:'hw',atk:8,def:9,
+   skin:'#f0c6a0',hair:'#cdd0d8',type:'suit',cloth:'#26375f',tie:'#9aa0ad',hairStyle:'receding',beard:'none',glasses:false,lips:false,
    flavor:'Guardião do império Apple.'},
-  {name:'Satya Nadella',   co:'Microsoft', side:'giant', sector:'ia', atk:8, def:9,
-   skin:'#c68642', hair:'#1a1a1a', cloth:'#2f3a4a', glasses:true, hairStyle:'short',
+  {name:'Satya Nadella',co:'Microsoft',side:'giant',sector:'ia',atk:8,def:9,
+   skin:'#c98a54',hair:'#1c1c22',type:'suit',cloth:'#33384a',tie:'#3f6296',hairStyle:'short',beard:'none',glasses:true,lips:false,
    flavor:'Levou a MS à era da nuvem e da IA.'},
-  {name:'Jensen Huang',    co:'Nvidia',    side:'giant', sector:'hw', atk:10, def:7,
-   skin:'#e8bd94', hair:'#151515', cloth:'#111111', glasses:false, hairStyle:'short',
+  {name:'Jensen Huang',co:'Nvidia',side:'giant',sector:'hw',atk:10,def:7,
+   skin:'#eab98c',hair:'#17171b',type:'leather',cloth:'#17171d',hairStyle:'short',beard:'none',glasses:false,lips:false,
    flavor:'O rei dos chips de IA.'},
-  {name:'Sundar Pichai',   co:'Alphabet',  side:'giant', sector:'ia', atk:7, def:8,
-   skin:'#b5793f', hair:'#2a2a2a', cloth:'#2b6fb0', glasses:false, hairStyle:'short',
+  {name:'Sundar Pichai',co:'Alphabet',side:'giant',sector:'ia',atk:7,def:8,
+   skin:'#c68a52',hair:'#3a2f2a',type:'suit',cloth:'#2b4c86',tie:'#8a5a34',hairStyle:'sidePart',beard:'stubble',glasses:false,lips:false,
    flavor:'Comanda Google e Alphabet.'},
-  {name:'Andy Jassy',      co:'Amazon',    side:'giant', sector:'hw', atk:7, def:8,
-   skin:'#f0c9a8', hair:'#5a3a1e', cloth:'#0e7d6e', glasses:false, hairStyle:'short',
+  {name:'Andy Jassy',co:'Amazon',side:'giant',sector:'hw',atk:7,def:8,
+   skin:'#eec2a0',hair:'#5a3a20',type:'crewneck',cloth:'#0e6b62',hairStyle:'short',beard:'stubble',glasses:false,lips:false,
    flavor:'Herdou o trono da AWS e da Amazon.'},
-  {name:'Mark Zuckerberg', co:'Meta',      side:'giant', sector:'ia', atk:8, def:7,
-   skin:'#f0c9a8', hair:'#7a4a24', cloth:'#8a8f9c', glasses:false, hairStyle:'short',
+  {name:'Mark Zuckerberg',co:'Meta',side:'giant',sector:'ia',atk:8,def:7,
+   skin:'#f0c6a0',hair:'#7a4a24',type:'crewneck',cloth:'#7d8497',hairStyle:'curly',beard:'none',glasses:false,lips:false,
    flavor:'Do Facebook ao metaverso e à IA.'},
-  {name:'Elon Musk',       co:'Tesla',     side:'giant', sector:'hw', atk:9, def:6,
-   skin:'#f0c9a8', hair:'#3a2416', cloth:'#111111', glasses:false, hairStyle:'short',
+  {name:'Elon Musk',co:'Tesla',side:'giant',sector:'hw',atk:9,def:6,
+   skin:'#f0c6a0',hair:'#3a2416',type:'tee',cloth:'#17171d',hairStyle:'receding',beard:'none',glasses:false,lips:false,
    flavor:'Tesla, SpaceX, X — e muita polêmica.'},
   // ---- POLÊMICOS ----
-  {name:'Sam Altman',      co:'OpenAI',    side:'polem', sector:'ia', atk:9, def:6,
-   skin:'#f0c9a8', hair:'#6a4a2a', cloth:'#8a8f9c', glasses:false, hairStyle:'short',
+  {name:'Sam Altman',co:'OpenAI',side:'polem',sector:'ia',atk:9,def:6,
+   skin:'#f0c6a0',hair:'#6b4423',type:'crewneck',cloth:'#6a7080',hairStyle:'short',beard:'none',glasses:false,lips:false,
    flavor:'OpenAI e a demissão-relâmpago de 2023.'},
-  {name:'Changpeng Zhao',  co:'Binance',   side:'polem', sector:'cripto', atk:8, def:4,
-   skin:'#d8a86a', hair:'#101010', cloth:'#101010', glasses:false, hairStyle:'short',
+  {name:'Changpeng Zhao',co:'Binance',side:'polem',sector:'cripto',atk:8,def:4,
+   skin:'#d19a5e',hair:'#141414',type:'tee',cloth:'#141414',hairStyle:'buzz',beard:'none',glasses:false,lips:false,
    flavor:'Ergueu a maior corretora de cripto.'},
-  {name:'Travis Kalanick', co:'Uber',      side:'polem', sector:'cripto', atk:8, def:4,
-   skin:'#f0c9a8', hair:'#8a8f9c', cloth:'#20242e', glasses:false, hairStyle:'short',
+  {name:'Travis Kalanick',co:'Uber',side:'polem',sector:'cripto',atk:8,def:4,
+   skin:'#f0c6a0',hair:'#9a9aa2',type:'tee',cloth:'#20242e',hairStyle:'short',beard:'stubble',glasses:false,lips:false,
    flavor:'Fundou a Uber e saiu sob pressão.'},
-  {name:'Adam Neumann',    co:'WeWork',    side:'polem', sector:'cripto', atk:7, def:3,
-   skin:'#eec19a', hair:'#241610', cloth:'#3a4150', glasses:false, hairStyle:'long',
+  {name:'Adam Neumann',co:'WeWork',side:'polem',sector:'cripto',atk:7,def:3,
+   skin:'#eec2a0',hair:'#241610',type:'crewneck',cloth:'#4a5063',hairStyle:'long',beard:'none',glasses:false,lips:false,
    flavor:'O sonho — e o colapso — da WeWork.'},
-  {name:'Elizabeth Holmes',co:'Theranos',  side:'polem', sector:'hw', atk:6, def:2,
-   skin:'#f2cfae', hair:'#e0c25a', cloth:'#111111', glasses:false, hairStyle:'long',
+  {name:'Elizabeth Holmes',co:'Theranos',side:'polem',sector:'hw',atk:6,def:2,
+   skin:'#f4cdac',hair:'#d8b24a',type:'turtleneck',cloth:'#17171d',hairStyle:'long',beard:'none',glasses:false,lips:true,
    flavor:'Prometeu revolucionar exames de sangue.'},
-  {name:'Sam Bankman-Fried',co:'FTX',      side:'polem', sector:'cripto', atk:9, def:2,
-   skin:'#eec19a', hair:'#1f1f1f', cloth:'#8a8f9c', glasses:false, hairStyle:'long',
+  {name:'Sam Bankman-Fried',co:'FTX',side:'polem',sector:'cripto',atk:9,def:2,
+   skin:'#eec2a0',hair:'#241a12',type:'tee',cloth:'#7d8497',hairStyle:'curly',beard:'none',glasses:false,lips:false,
    flavor:'Do topo das cryptos ao colapso da FTX.'},
-  {name:'Do Kwon',         co:'Terraform', side:'polem', sector:'cripto', atk:8, def:3,
-   skin:'#d8a86a', hair:'#0f0f0f', cloth:'#20242e', glasses:false, hairStyle:'short',
+  {name:'Do Kwon',co:'Terraform',side:'polem',sector:'cripto',atk:8,def:3,
+   skin:'#d19a5e',hair:'#0f0f0f',type:'tee',cloth:'#4a5063',hairStyle:'short',beard:'none',glasses:false,lips:false,
    flavor:'A ascensão e queda da Terra/Luna.'}
 ];
 
 /* ============================================================
-   PIXEL AVATAR — desenha rosto 16x16 num canvas
+   PIXEL AVATAR 24x24 — contorno, sombra, cabelos e roupas
    ============================================================ */
-const FACE = [
-  "....hhhhhhhh....",
-  "...hhhhhhhhhh...",
-  "..hhhhhhhhhhhh..",
-  "..hhsssssssshh..",
-  "..hssssssssssh..",
-  "..hssssssssssh..",
-  "..sseesssseess..",
-  "..sseesssseess..",
-  "..ssssssssssss..",
-  "..ssssssssssss..",
-  "..sssmmmmmmsss..",
-  "..ssssssssssss..",
-  "...ssssssssss...",
-  "..cccccccccccc..",
-  ".cccccccccccccc.",
-  ".cccccccccccccc."
-];
-function drawAvatar(cv, ceo){
-  const grid=16, px=Math.floor(cv.width/grid);
-  const ctx=cv.getContext('2d');
-  ctx.imageSmoothingEnabled=false;
-  ctx.clearRect(0,0,cv.width,cv.height);
-  // subtle bg glow by side
-  ctx.fillStyle = ceo.side==='giant' ? '#0d1c3a' : '#2a0f28';
-  ctx.fillRect(0,0,cv.width,cv.height);
-  const pal={h:ceo.hair, s:ceo.skin, e:'#1a120a', m:'#8a4436', c:ceo.cloth};
-  const put=(x,y,col)=>{ctx.fillStyle=col;ctx.fillRect(x*px,y*px,px,px);};
-  // base face
-  for(let y=0;y<16;y++){
-    for(let x=0;x<16;x++){
-      const ch=FACE[y][x];
-      if(ch!=='.' && pal[ch]) put(x,y,pal[ch]);
-    }
+const HEAD=[
+"        OOOOOOOO        ",
+"       OKKKKKKKKO       ",
+"      OKKKKKKKKKKO      ",
+"      OKKKKKKKKKKO      ",
+"      OKKKKKKKKKKO      ",
+"     OKKKKKKKKKKKKO     ",
+"     OKKKKKKKKKKKKO     ",
+"      OKKKKKKKKKKO      ",
+"      OKKKKKKKKKKO      ",
+"       OKKKKKKKKO       ",
+"        OKKKKKKO        ",
+"         OKKKKO         "
+]; // y = 4..15
+
+function drawAvatar(cv,c){
+  const G=24, s=cv.width/G;
+  const x=cv.getContext('2d'); x.imageSmoothingEnabled=false;
+  x.clearRect(0,0,cv.width,cv.height);
+  const P=(cx,cy,col)=>{x.fillStyle=col;x.fillRect(cx*s,cy*s,s,s);};
+  const R=(cx,cy,w,h,col)=>{x.fillStyle=col;x.fillRect(cx*s,cy*s,w*s,h*s);};
+  const OUT='#15111d', EW='#f5f5fb', PUP='#241c2e';
+  const skin=c.skin, skin2=dk(c.skin,.8), hair=c.hair, hair2=dk(c.hair,.66),
+        cloth=c.cloth, cloth2=dk(c.cloth,.7);
+
+  // fundo (spotlight por lado)
+  const bg1 = c.side==='giant' ? '#2a3a63' : '#43285a';
+  const bg2 = c.side==='giant' ? '#182347' : '#2a1740';
+  R(0,0,24,24,bg2); R(4,2,16,20,bg1); R(6,1,12,22,bg1);
+
+  // corpo
+  drawBody(c,P,R,skin,skin2,cloth,cloth2,OUT);
+
+  // cabelo de trás (long)
+  if(c.hairStyle==='long'){
+    R(5,5,2,13,hair); R(17,5,2,13,hair); R(6,3,12,3,hair);
+    R(5,15,2,3,hair2); R(17,15,2,3,hair2);
   }
-  // long hair overlay (frames the face)
-  if(ceo.hairStyle==='long'){
-    for(let y=4;y<=12;y++){ put(2,y,pal.h); put(13,y,pal.h); }
-    put(1,6,pal.h);put(1,7,pal.h);put(1,8,pal.h);put(1,9,pal.h);
-    put(14,6,pal.h);put(14,7,pal.h);put(14,8,pal.h);put(14,9,pal.h);
+
+  // pescoço (se não gola alta)
+  if(c.type!=='turtleneck'){ R(10,14,4,4,skin); P(13,14,skin2);P(13,15,skin2);P(13,16,skin2); }
+
+  // cabeça
+  for(let i=0;i<HEAD.length;i++){const row=HEAD[i],y=4+i;
+    for(let cx=0;cx<24;cx++){const ch=row[cx];
+      if(ch==='O')P(cx,y,OUT); else if(ch==='K')P(cx,y,skin);}}
+  // sombra do rosto + orelhas
+  P(16,7,skin2);P(16,8,skin2);P(16,9,skin2);P(16,10,skin2);P(16,11,skin2);P(15,12,skin2);P(14,13,skin2);
+  P(6,9,skin2);P(17,9,skin2);
+
+  // sobrancelhas, olhos, nariz
+  R(8,7,2,1,hair2); R(14,7,2,1,hair2);
+  R(8,8,2,2,EW); R(14,8,2,2,EW); P(9,9,PUP); P(14,9,PUP);
+  P(11,11,skin2);P(12,11,skin2);P(12,12,skin2);
+  // boca / lábios
+  if(c.lips){ R(10,13,4,1,'#c53a55'); P(10,13,'#a02c44'); P(13,13,'#a02c44'); }
+  else { R(10,13,3,1,'#8a4a42'); }
+
+  // barba
+  if(c.beard==='stubble'){
+    [[9,13],[13,13],[10,14],[13,14],[11,14],[12,14],[11,15],[12,15]].forEach(a=>P(a[0],a[1],skin2));
+  } else if(c.beard==='full'){
+    R(7,12,2,2,hair);R(15,12,2,2,hair);R(8,13,8,1,hair);R(9,14,6,1,hair);R(10,15,4,1,hair);R(10,12,4,1,hair2);
   }
-  // glasses overlay
-  if(ceo.glasses){
-    const g='#12100c';
-    [3,4,5,6,9,10,11,12].forEach(x=>put(x,5,g)); // top rims
-    put(2,6,g); put(13,6,g);                       // temples
-    put(7,6,g); put(8,6,g);                         // bridge
+
+  // cabelo da frente por estilo
+  hairFront(c.hairStyle,P,R,hair,hair2);
+
+  // óculos
+  if(c.glasses){
+    const gf='#20242e';
+    R(7,8,4,1,gf);R(7,8,1,2,gf);R(10,8,1,2,gf);R(8,9,2,1,gf);
+    R(13,8,4,1,gf);R(13,8,1,2,gf);R(16,8,1,2,gf);R(14,9,2,1,gf);
+    R(11,8,2,1,gf);P(6,8,gf);P(17,8,gf);
   }
-  // tiny highlight cheek
-  ctx.fillStyle='rgba(255,255,255,.10)';
-  ctx.fillRect(3*px,4*px,px,px);
+}
+
+function drawBody(c,P,R,skin,skin2,cloth,cloth2,OUT){
+  R(3,20,18,4,cloth); R(5,18,14,2,cloth); R(3,22,18,2,cloth2);
+  P(4,19,cloth2);P(19,19,cloth2);
+  P(2,21,OUT);P(2,22,OUT);P(2,23,OUT);P(21,21,OUT);P(21,22,OUT);P(21,23,OUT);P(4,18,OUT);P(19,18,OUT);
+  const t=c.type;
+  if(t==='suit'){
+    R(10,18,4,5,'#e6e8f0'); R(6,18,4,5,cloth); R(14,18,4,5,cloth);
+    P(9,18,cloth2);P(14,18,cloth2);P(10,19,cloth2);P(13,19,cloth2);
+    R(11,19,2,4,c.tie||'#b83a3a'); P(11,18,dk(c.tie||'#b83a3a',.7));P(12,18,dk(c.tie||'#b83a3a',.7));
+  } else if(t==='turtleneck'){
+    R(9,15,6,6,cloth); R(9,15,6,1,cloth2); P(9,16,cloth2);P(14,16,cloth2);
+  } else if(t==='leather'){
+    R(6,18,3,4,cloth2); R(15,18,3,4,cloth2); R(11,18,1,6,'#54545f'); P(10,19,cloth2);P(13,19,cloth2);
+  } else { // crewneck / tee
+    R(9,19,6,1,cloth2); P(9,20,cloth);P(14,20,cloth);
+    if(t==='tee') R(9,19,6,1,dk(c.cloth,.86));
+  }
+}
+
+function hairFront(style,P,R,hair,hair2){
+  if(style==='short'){
+    R(8,2,8,1,hair);R(7,3,10,1,hair);R(6,4,12,2,hair);
+    P(6,6,hair);P(7,6,hair);P(16,6,hair);P(17,6,hair);P(6,7,hair);P(17,7,hair);R(8,2,8,1,hair2);
+  } else if(style==='receding'){
+    R(6,4,3,4,hair);R(15,4,3,4,hair);R(8,3,8,1,hair);P(6,3,hair);P(17,3,hair);R(8,3,8,1,hair2);
+  } else if(style==='sidePart'){
+    R(7,3,10,2,hair);R(6,4,12,1,hair);P(10,3,hair2);P(10,4,hair2);
+    P(7,6,hair);P(8,6,hair);P(9,6,hair);P(6,6,hair);P(17,6,hair);R(7,3,10,1,hair2);
+  } else if(style==='curly'){
+    R(5,2,14,4,hair);P(7,1,hair);P(10,1,hair);P(13,1,hair);P(16,1,hair);
+    P(5,6,hair);P(6,6,hair);P(17,6,hair);P(18,6,hair);P(6,7,hair);P(17,7,hair);
+    P(6,2,hair2);P(9,2,hair2);P(12,2,hair2);P(15,2,hair2);P(18,2,hair2);
+  } else if(style==='buzz'){
+    R(7,4,10,2,hair);R(8,3,8,1,hair);R(7,4,10,1,hair2);
+  } else if(style==='long'){
+    R(7,3,10,2,hair);P(7,6,hair);P(8,6,hair);P(15,6,hair);P(16,6,hair);R(7,3,10,1,hair2);
+  }
 }
 
 /* ============================================================
    RENDER DE CARTA
    ============================================================ */
-function cardEl(ceo, {small=false, inHand=false, idx=0}={}){
+function cardEl(ceo,opt){
+  opt=opt||{};
   const el=document.createElement('div');
-  el.className='card'+(ceo.side==='polem'?' polem':'')+(small?' small':'')+(inHand?' hand-card':'');
+  el.className='card'+(ceo.side==='polem'?' polem':'')+(opt.small?' small':'')+(opt.inHand?' hand-card':'');
   const s=SECTOR[ceo.sector];
-  el.innerHTML=`
-    <span class="badge">${ceo.side==='giant'?'GIGANTE':'POLÊMICO'}</span>
-    <canvas class="cv" width="128" height="128"></canvas>
-    <div class="cname">${ceo.name}</div>
-    <div class="cco">${ceo.co}</div>
-    <div class="sector">${s.icon} ${s.label}</div>
-    <div class="stats">
-      <div class="stat atk"><span class="k">ATK</span><span class="v">${ceo.atk}</span></div>
-      <div class="stat def"><span class="k">DEF</span><span class="v">${ceo.def}</span></div>
-    </div>
-    ${small?'':`<div class="flavor">${ceo.flavor}</div>`}
-  `;
-  drawAvatar(el.querySelector('canvas'), ceo);
-  if(inHand){
-    el.tabIndex=0;
-    el.setAttribute('role','button');
-    el.setAttribute('aria-label',`Jogar ${ceo.name}, ataque ${ceo.atk}, defesa ${ceo.def}`);
-    const play=()=>playCard(idx);
-    el.addEventListener('click',play);
-    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});
+  el.innerHTML=
+    '<span class="badge">'+(ceo.side==='giant'?'GIGANTE':'POLÊMICO')+'</span>'+
+    '<canvas class="cv" width="120" height="120"></canvas>'+
+    '<div class="cname">'+ceo.name+'</div>'+
+    '<div class="cco">'+ceo.co+'</div>'+
+    '<div class="sector">'+s.icon+' '+s.label+'</div>'+
+    '<div class="stats"><div class="stat atk"><span class="k">ATK</span><span class="v">'+ceo.atk+'</span></div>'+
+    '<div class="stat def"><span class="k">DEF</span><span class="v">'+ceo.def+'</span></div></div>'+
+    (opt.small?'':'<div class="flavor">'+ceo.flavor+'</div>');
+  drawAvatar(el.querySelector('canvas'),ceo);
+  if(opt.inHand){
+    el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Jogar '+ceo.name+', ataque '+ceo.atk+', defesa '+ceo.def);
+    const idx=opt.idx;
+    el.addEventListener('click',function(){playCard(idx);});
+    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();playCard(idx);}});
   }
   return el;
 }
 
 /* ============================================================
-   ESTADO DO JOGO
+   ESTADO
    ============================================================ */
 const HP_START=25;
 let state;
 
 function newDeck(){
-  const d=CEOS.map(c=>({...c}));
-  for(let i=d.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[d[i],d[j]]=[d[j],d[i]];}
+  const d=CEOS.map(function(c){return Object.assign({},c);});
+  for(let i=d.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;const t=d[i];d[i]=d[j];d[j]=t;}
   return d;
 }
-
 function startGame(){
   const deck=newDeck();
-  state={
-    pHp:HP_START, cpuHp:HP_START,
+  state={pHp:HP_START,cpuHp:HP_START,
     pHand:[deck.pop(),deck.pop(),deck.pop()],
     cpuHand:[deck.pop(),deck.pop(),deck.pop()],
-    deck, round:1, busy:false, over:false
-  };
+    deck:deck,round:1,busy:false,over:false};
   document.getElementById('title').style.display='none';
   document.getElementById('result').style.display='none';
   document.getElementById('game').style.display='block';
   document.getElementById('log').innerHTML='';
   logLine('sys','A batalha começou. Boa sorte, editor.');
-  resetSlots();
-  renderAll();
-  document.getElementById('turnMsg').textContent='Sua vez — escolha uma carta.';
-  document.getElementById('clashMsg').innerHTML='Escolha uma carta pra abrir a rodada.';
+  resetSlots(); renderAll();
+  setStatus('Sua vez — escolha uma carta.','');
 }
 function goTitle(){
   document.getElementById('result').style.display='none';
   document.getElementById('game').style.display='none';
   document.getElementById('title').style.display='flex';
 }
-
 function resetSlots(){
-  document.getElementById('cpuSlot').innerHTML='carta da<br>máquina';
-  document.getElementById('playerSlot').innerHTML='sua<br>carta';
-  document.getElementById('cpuSlot').className='slot';
-  document.getElementById('playerSlot').className='slot';
+  const cs=document.getElementById('cpuSlot'),ps=document.getElementById('playerSlot');
+  cs.className='slot';ps.className='slot';
+  cs.innerHTML='carta da<br>máquina';ps.innerHTML='sua carta';
+  hideBanner();
 }
-
-function renderAll(){
-  // hp
-  const pPct=Math.max(0,state.pHp/HP_START*100), cPct=Math.max(0,state.cpuHp/HP_START*100);
-  document.getElementById('pHpBar').style.width=pPct+'%';
-  document.getElementById('cpuHpBar').style.width=cPct+'%';
+function renderHp(){
+  document.getElementById('pHpBar').style.width=Math.max(0,state.pHp/HP_START*100)+'%';
+  document.getElementById('cpuHpBar').style.width=Math.max(0,state.cpuHp/HP_START*100)+'%';
   document.getElementById('pHpTxt').textContent=Math.max(0,state.pHp);
   document.getElementById('cpuHpTxt').textContent=Math.max(0,state.cpuHp);
+}
+function renderAll(){
+  renderHp();
   document.getElementById('deckTxt').textContent=state.deck.length;
   document.getElementById('roundNo').textContent='RODADA '+state.round;
-  // player hand
-  const ph=document.getElementById('playerHand'); ph.innerHTML='';
-  state.pHand.forEach((c,i)=>ph.appendChild(cardEl(c,{inHand:!state.busy && !state.over, idx:i})));
-  // cpu hand (backs)
-  const ch=document.getElementById('cpuHand'); ch.innerHTML='';
-  state.cpuHand.forEach(()=>{const b=document.createElement('div');b.className='card-back';b.innerHTML='<span>CEO</span>';ch.appendChild(b);});
+  const ph=document.getElementById('playerHand');ph.innerHTML='';
+  state.pHand.forEach(function(c,i){ph.appendChild(cardEl(c,{inHand:!state.busy&&!state.over,idx:i}));});
+  const ch=document.getElementById('cpuHand');ch.innerHTML='';
+  state.cpuHand.forEach(function(){const b=document.createElement('div');b.className='card-back';b.innerHTML='<span>CEO</span>';ch.appendChild(b);});
 }
 
-/* ---- IA da máquina: joga sua carta mais forte (ATK+DEF), sem espiar a sua ---- */
-function cpuPick(){
-  let best=0,bi=0;
-  state.cpuHand.forEach((c,i)=>{const v=c.atk+c.def+(Math.random()*2);if(v>best){best=v;bi=i;}});
-  return bi;
-}
+/* IA: joga a carta mais forte (ATK+DEF), sem espiar a sua */
+function cpuPick(){let best=-1,bi=0;state.cpuHand.forEach(function(c,i){const v=c.atk+c.def+Math.random()*2;if(v>best){best=v;bi=i;}});return bi;}
 
 /* ============================================================
-   RESOLUÇÃO DE UMA RODADA
+   RODADA
    ============================================================ */
 async function playCard(pi){
-  if(state.busy||state.over) return;
+  if(state.busy||state.over)return;
   state.busy=true;
-  renderAll(); // remove clicabilidade
-
   const pCard=state.pHand.splice(pi,1)[0];
-  const ci=cpuPick();
-  const cCard=state.cpuHand.splice(ci,1)[0];
+  const cCard=state.cpuHand.splice(cpuPick(),1)[0];
+  renderAll();
 
-  // mostra cartas na arena
-  const ps=document.getElementById('playerSlot'), cs=document.getElementById('cpuSlot');
-  ps.className='slot'; cs.className='slot';
-  ps.style.border='none'; cs.style.border='none';
-  ps.innerHTML=''; cs.innerHTML='';
-  ps.appendChild(cardEl(pCard,{small:true}));
-  cs.appendChild(cardEl(cCard,{small:true}));
+  const ps=document.getElementById('playerSlot'),cs=document.getElementById('cpuSlot');
+  ps.className='slot filled';cs.className='slot filled';ps.innerHTML='';cs.innerHTML='';
+  const pEl=cardEl(pCard,{small:true});pEl.classList.add('enterP');
+  const cEl=cardEl(cCard,{small:true});cEl.classList.add('enterC');
+  ps.appendChild(pEl);cs.appendChild(cEl);
+  setStatus('As cartas entram na arena…','');
   sfx('play');
+  await wait(620);
 
-  await wait(650);
+  const pAdv=BEATS[pCard.sector]===cCard.sector, cAdv=BEATS[cCard.sector]===pCard.sector;
+  const pAtk=Math.round(pCard.atk*(pAdv?1.5:1)), cAtk=Math.round(cCard.atk*(cAdv?1.5:1));
+  const dmgToCpu=Math.max(0,pAtk-cCard.def), dmgToYou=Math.max(0,cAtk-pCard.def);
 
-  // vantagem de setor
-  const pAdv = BEATS[pCard.sector]===cCard.sector;
-  const cAdv = BEATS[cCard.sector]===pCard.sector;
-  const pAtk = Math.round(pCard.atk*(pAdv?1.5:1));
-  const cAtk = Math.round(cCard.atk*(cAdv?1.5:1));
-  const dmgToCpu = Math.max(0, pAtk - cCard.def);
-  const dmgToYou = Math.max(0, cAtk - pCard.def);
+  if(pAdv) setStatus('🧠 '+SECTOR[pCard.sector].label+' supera '+SECTOR[cCard.sector].label+' — VOCÊ ganha +50% ATK!','adv');
+  else if(cAdv) setStatus('⚠️ '+SECTOR[cCard.sector].label+' supera '+SECTOR[pCard.sector].label+' — MÁQUINA ganha +50% ATK!','adv');
+  else setStatus(pCard.name+' enfrenta '+cCard.name+'…','');
+  await wait((pAdv||cAdv)?820:200);
 
-  // mensagem de clash
-  let cm='';
-  if(pAdv) cm+=`<span class="adv">Vantagem ${SECTOR[pCard.sector].icon} pra você! +50% ATK</span><br>`;
-  else if(cAdv) cm+=`<span class="adv">Vantagem ${SECTOR[cCard.sector].icon} pra máquina! +50% ATK</span><br>`;
-  cm+=`Você causa <span class="hit-cpu">${dmgToCpu}</span> · Toma <span class="hit-you">${dmgToYou}</span>`;
-  document.getElementById('clashMsg').innerHTML=cm;
+  // choque
+  pEl.classList.remove('enterP');cEl.classList.remove('enterC');
+  void pEl.offsetWidth;
+  pEl.classList.add('lungeP');cEl.classList.add('lungeC');
+  const arena=document.getElementById('arena');
+  setTimeout(function(){arena.classList.add('shake');sfx('hit');},250);
+  await wait(300);
 
-  sfx('hit');
-  floatDmg(cs, dmgToCpu, 'var(--up)');
-  floatDmg(ps, dmgToYou, 'var(--down)');
+  state.cpuHp-=dmgToCpu; state.pHp-=dmgToYou;
+  floatDmg(cs,dmgToCpu,'cpu'); floatDmg(ps,dmgToYou,'you');
+  if(dmgToYou>dmgToCpu){pEl.classList.add('hurt');}
+  else if(dmgToCpu>dmgToYou){cEl.classList.add('hurt');}
+  else{pEl.classList.add('hurt');cEl.classList.add('hurt');}
+  renderHp();
+  setTimeout(function(){arena.classList.remove('shake');},400);
+  await wait(560);
 
-  // aplica dano
-  state.cpuHp-=dmgToCpu;
-  state.pHp-=dmgToYou;
+  let who = dmgToCpu>dmgToYou ? 'you' : (dmgToYou>dmgToCpu ? 'cpu' : 'draw');
+  showBanner(who,dmgToCpu,dmgToYou);
+  logRound(state.round,pCard,cCard,pAdv,cAdv,dmgToCpu,dmgToYou,who);
+  await wait(1200);
+  hideBanner();
 
-  // log
-  logLine('sys',`R${state.round}: ${pCard.name} (${pCard.co}) × ${cCard.name} (${cCard.co})`);
-  if(pAdv) logLine('a',`↳ ${SECTOR[pCard.sector].label} supera ${SECTOR[cCard.sector].label} — bônus seu.`);
-  if(cAdv) logLine('a',`↳ ${SECTOR[cCard.sector].label} supera ${SECTOR[pCard.sector].label} — bônus da máquina.`);
-  logLine('u',`↳ Você tira ${dmgToCpu} do valor de mercado da máquina.`);
-  logLine('d',`↳ A máquina tira ${dmgToYou} do seu.`);
+  if(state.pHp<=0||state.cpuHp<=0){return endGame();}
+  if(state.deck.length)state.pHand.push(state.deck.pop());
+  if(state.deck.length)state.cpuHand.push(state.deck.pop());
+  if(state.pHand.length===0&&state.cpuHand.length===0){return endGame();}
 
-  await wait(400);
-  renderAll();
-
-  // fim?
-  if(state.pHp<=0 || state.cpuHp<=0){ return endGame(); }
-
-  // recompra
-  if(state.deck.length) state.pHand.push(state.deck.pop());
-  if(state.deck.length) state.cpuHand.push(state.deck.pop());
-
-  // acabaram as cartas?
-  if(state.pHand.length===0 && state.cpuHand.length===0){ return endGame(); }
-
-  state.round++;
-  await wait(500);
-  resetSlots();
-  state.busy=false;
-  renderAll();
-  document.getElementById('turnMsg').textContent = state.deck.length
-     ? 'Sua vez — escolha uma carta.'
-     : 'Últimas cartas! Escolha com cuidado.';
+  state.round++; resetSlots(); state.busy=false; renderAll();
+  setStatus(state.deck.length?'Sua vez — escolha uma carta.':'Últimas cartas! Escolha bem.','');
 }
 
-function floatDmg(slot, val, color){
-  const f=document.createElement('div');
-  f.className='float';
-  f.style.color=color;
-  f.style.left='50%'; f.style.top='40%'; f.style.transform='translateX(-50%)';
-  f.textContent=(val>0?'-'+val:'BLOQ');
-  slot.appendChild(f);
-  setTimeout(()=>f.remove(),1000);
+function floatDmg(slot,val,side){
+  const f=document.createElement('div');f.className='float';
+  if(val>0){f.textContent='-'+val;f.style.color=(side==='you')?'var(--down)':'var(--up)';}
+  else{f.textContent='DEFENDIDO';f.style.color='var(--gold)';f.style.fontSize='12px';}
+  slot.appendChild(f);setTimeout(function(){f.remove();},1050);
 }
+
+function showBanner(who,dc,dy){
+  const b=document.getElementById('banner');let t,cls;
+  if(who==='you'){t='VOCÊ VENCEU<br>A RODADA';cls='bwin';}
+  else if(who==='cpu'){t='A MÁQUINA<br>VENCEU';cls='blose';}
+  else{t='EMPATE<br>NA RODADA';cls='bdraw';}
+  b.innerHTML='<div class="btitle '+cls+'">'+t+'</div><div class="bsub">Você causou '+dc+' · recebeu '+dy+'</div>';
+  b.className='banner show';
+  sfx(who==='you'?'win':(who==='cpu'?'lose':'play'));
+}
+function hideBanner(){document.getElementById('banner').className='banner';}
 
 function endGame(){
-  state.over=true; state.busy=true;
-  renderAll();
-  setTimeout(()=>{
-    const win = state.pHp>state.cpuHp;
-    const draw = state.pHp===state.cpuHp;
+  state.over=true;state.busy=true;renderAll();
+  setTimeout(function(){
+    const win=state.pHp>state.cpuHp, draw=state.pHp===state.cpuHp;
     const v=document.getElementById('verdict');
-    if(draw){ v.textContent='EMPATE'; v.className='verdict pixel'; v.style.color='var(--gold)'; }
-    else if(win){ v.textContent='VITÓRIA'; v.className='verdict pixel win'; }
-    else { v.textContent='DERROTA'; v.className='verdict pixel lose'; }
-    document.getElementById('scoreTxt').innerHTML=
-      `Você <b>${Math.max(0,state.pHp)}</b> × <b>${Math.max(0,state.cpuHp)}</b> Máquina`;
+    if(draw){v.textContent='EMPATE';v.className='verdict pixel';v.style.color='var(--gold)';}
+    else if(win){v.textContent='VITÓRIA';v.className='verdict pixel win';}
+    else{v.textContent='DERROTA';v.className='verdict pixel lose';}
+    document.getElementById('scoreTxt').innerHTML='Você <b>'+Math.max(0,state.pHp)+'</b> × <b>'+Math.max(0,state.cpuHp)+'</b> Máquina';
     document.getElementById('resultBlurb').textContent = draw
       ? 'Mercado lateral: os dois portfólios fecharam empatados.'
-      : win
-        ? 'Seu portfólio de CEOs dominou o pregão. A máquina saiu no vermelho.'
-        : 'A máquina leu melhor o mercado desta vez. Reembaralhe e volte.';
+      : (win ? 'Seu portfólio de CEOs dominou o pregão. A máquina saiu no vermelho.'
+             : 'A máquina leu melhor o mercado desta vez. Reembaralhe e volte.');
     sfx(win?'win':(draw?'play':'lose'));
     document.getElementById('game').style.display='none';
     document.getElementById('result').style.display='flex';
-  },900);
+  },950);
 }
 
-function logLine(cls,txt){
-  const l=document.getElementById('log');
-  const d=document.createElement('div');
-  d.className=cls; d.textContent=txt;
-  l.appendChild(d); l.scrollTop=l.scrollHeight;
+function logRound(r,pC,cC,pAdv,cAdv,dc,dy,who){
+  logLine('sys','Rodada '+r+': '+pC.name+' ('+pC.co+') vs '+cC.name+' ('+cC.co+')');
+  if(pAdv) logLine('a','▸ '+SECTOR[pC.sector].label+' supera '+SECTOR[cC.sector].label+' — bônus SEU (+50%).');
+  if(cAdv) logLine('a','▸ '+SECTOR[cC.sector].label+' supera '+SECTOR[pC.sector].label+' — bônus da MÁQUINA (+50%).');
+  logLine('u','▸ Você causou '+dc+' de dano.');
+  logLine('d','▸ A máquina causou '+dy+' de dano.');
+  if(who==='you') logLine('win','★ VOCÊ venceu a rodada '+r+'.');
+  else if(who==='cpu') logLine('lose','★ A MÁQUINA venceu a rodada '+r+'.');
+  else logLine('a','= Rodada '+r+' empatada.');
 }
-const wait=ms=>new Promise(r=>setTimeout(r,ms));
+function setStatus(t,cls){const s=document.getElementById('clashMsg');s.className='statusbar'+(cls?' '+cls:'');s.innerHTML=t;}
+function logLine(cls,txt){const l=document.getElementById('log');const d=document.createElement('div');d.className=cls;d.textContent=txt;l.appendChild(d);l.scrollTop=l.scrollHeight;}
+const wait=function(ms){return new Promise(function(r){setTimeout(r,ms);});};
 
-/* ============================================================
-   SOM 8-bit (WebAudio) — opcional, com mute
-   ============================================================ */
-let muted=false, actx=null;
-function toggleMute(){
-  muted=!muted;
-  document.getElementById('muteBtn').textContent=muted?'🔇 MUDO':'🔊 SOM';
-}
+/* ===== som 8-bit ===== */
+let muted=false,actx=null;
+function toggleMute(){muted=!muted;document.getElementById('muteBtn').textContent=muted?'🔇 MUDO':'🔊 SOM';}
 function sfx(type){
-  if(muted) return;
+  if(muted)return;
   try{
     actx=actx||new (window.AudioContext||window.webkitAudioContext)();
-    const seq={
-      play:[[440,.06]],
-      hit:[[220,.05],[160,.08]],
-      win:[[523,.09],[659,.09],[784,.16]],
-      lose:[[330,.12],[247,.12],[165,.22]]
-    }[type]||[[440,.06]];
+    const seq=({play:[[440,.06]],hit:[[220,.05],[150,.09]],win:[[523,.09],[659,.09],[784,.17]],lose:[[330,.12],[247,.12],[165,.22]]})[type]||[[440,.06]];
     let t=actx.currentTime;
-    seq.forEach(([f,d])=>{
-      const o=actx.createOscillator(), g=actx.createGain();
-      o.type='square'; o.frequency.value=f;
-      g.gain.setValueAtTime(.08,t); g.gain.exponentialRampToValueAtTime(.001,t+d);
-      o.connect(g); g.connect(actx.destination);
-      o.start(t); o.stop(t+d); t+=d;
-    });
+    seq.forEach(function(p){const o=actx.createOscillator(),g=actx.createGain();
+      o.type='square';o.frequency.value=p[0];
+      g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+p[1]);
+      o.connect(g);g.connect(actx.destination);o.start(t);o.stop(t+p[1]);t+=p[1];});
   }catch(e){}
 }
 </script>
