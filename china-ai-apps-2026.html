@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Apps de IA mais populares na China</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#D9001E;--black:#111;--g2:#666;--g3:#aaa;
+  --line:#EBEBEB;--white:#fff;--gbg:#F7F7F7;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Archivo',sans-serif;
+  --blk:'Archivo Black',sans-serif;
+  --rh:46; /* row height px */
+}
+html,body{width:100%;background:var(--white);color:var(--black);font-family:var(--sans);-webkit-font-smoothing:antialiased;margin:0}
+.wrap{container-type:inline-size;width:100%}
+
+.hdr{padding:20px 24px 16px;border-top:3px solid var(--red);border-bottom:1px solid var(--line)}
+.hdr h1{font-family:var(--blk);font-size:clamp(15px,3.8cqi,21px);line-height:1.1;margin-bottom:8px}
+.hdr h1 em{font-style:normal;color:var(--red)}
+.hdr-sub{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.hdr p{font-size:clamp(11px,2cqi,13px);color:var(--g2)}
+
+/* CONTROLS */
+.controls{display:flex;align-items:center;gap:12px;padding:12px 24px;border-bottom:1px solid var(--line);background:var(--gbg)}
+.btn-play{width:34px;height:34px;border-radius:50%;background:var(--black);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+.btn-play:hover{background:var(--red)}
+.btn-play svg{width:12px;height:12px;fill:var(--white)}
+.period-label{font-family:var(--blk);font-size:clamp(18px,4cqi,26px);color:var(--black);line-height:1;flex-shrink:0;min-width:90px}
+.progress-wrap{flex:1;height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--red);border-radius:2px;transition:width 0.4s ease;width:0%}
+
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;padding:10px 24px;border-bottom:1px solid var(--line)}
+.leg{display:flex;align-items:center;gap:5px;font-size:clamp(9.5px,1.8cqi,11.5px);color:var(--g2);font-weight:600}
+.leg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+
+/* CHART */
+.chart-area{padding:16px 24px 20px;position:relative}
+.chart-inner{position:relative;height:368px} /* 8 rows × 46px */
+
+.bar-row{position:absolute;width:100%;display:flex;align-items:center;gap:10px;height:36px;transition:top 0.75s cubic-bezier(.4,0,.2,1)}
+.bar-lbl{width:clamp(110px,24cqi,168px);flex-shrink:0;text-align:right}
+.bar-lbl-name{font-size:clamp(10.5px,2cqi,13px);font-weight:700;color:var(--black);display:block;line-height:1.2}
+.bar-lbl-co{font-family:var(--mono);font-size:clamp(8px,1.5cqi,9.5px);color:var(--g3);display:block;margin-top:1px}
+.bar-track{flex:1;height:100%;background:var(--gbg);border-radius:2px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:2px;width:0%;transition:width 0.75s cubic-bezier(.4,0,.2,1)}
+.bar-val{font-family:var(--mono);font-size:clamp(10px,1.9cqi,12.5px);font-weight:600;color:var(--g2);width:clamp(44px,9cqi,58px);flex-shrink:0;transition:color .3s}
+
+/* FOOTER */
+.foot{padding:10px 24px 12px;border-top:1px solid var(--line)}
+.foot-src{font-size:clamp(9px,1.6cqi,10.5px);color:var(--g3)}
+
+@container wrap (max-width:420px){
+  .hdr,.controls,.legend,.chart-area,.foot{padding-left:16px;padding-right:16px}
+  .bar-lbl{width:clamp(90px,28cqi,130px)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hdr">
+  <h1>O <em>Doubao</em>, da ByteDance, lidera os apps de IA na China</h1>
+  <div class="hdr-sub">
+    <p>Usuários ativos mensais (milhões) · Ago/2024 → Jun/2026</p>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="btn-play" id="btnPlay" title="Play / Pause">
+    <svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <svg id="iconPause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+  </button>
+  <div class="period-label" id="periodLabel">Ago. 2024</div>
+  <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="legend">
+  <div class="leg"><div class="leg-dot" style="background:#E05280"></div>ByteDance</div>
+  <div class="leg"><div class="leg-dot" style="background:#1055A0"></div>Alibaba</div>
+  <div class="leg"><div class="leg-dot" style="background:#8CAF45"></div>DeepSeek</div>
+  <div class="leg"><div class="leg-dot" style="background:#2085C0"></div>Tencent</div>
+  <div class="leg"><div class="leg-dot" style="background:#5BBEC8"></div>Baidu</div>
+  <div class="leg"><div class="leg-dot" style="background:#3D8B52"></div>Moonshot</div>
+</div>
+
+<div class="chart-area">
+  <div class="chart-inner" id="chartInner"></div>
+</div>
+
+<div class="foot">
+  <span class="foot-src">Fonte: AI Champion Product Board (aicpb.com), Financial Times · Dados aproximados por período · Valores em milhões de usuários ativos mensais</span>
+</div>
+
+</div>
+<script>
+const RH = 46; // row height px
+
+const apps = [
+  { id:'doubao',  name:'Doubao',         co:'ByteDance', color:'#E05280' },
+  { id:'qwen',    name:'Qwen',           co:'Alibaba',   color:'#1055A0' },
+  { id:'quark',   name:'Quark',          co:'Alibaba',   color:'#1055A0', opacity:0.65 },
+  { id:'dseek',   name:'DeepSeek',       co:'DeepSeek',  color:'#8CAF45' },
+  { id:'yuanbao', name:'Tencent Yuanbao',co:'Tencent',   color:'#2085C0' },
+  { id:'baidu',   name:'Baidu Netdisk',  co:'Baidu',     color:'#5BBEC8' },
+  { id:'jimeng',  name:'Jimeng',         co:'ByteDance', color:'#E05280', opacity:0.55 },
+  { id:'kimi',    name:'Kimi',           co:'Moonshot',  color:'#3D8B52' },
+];
+
+// Snapshots: estimated data based on known trends
+// DeepSeek spike in Jan 2025; Doubao steady growth; Qwen surges 2025-26
+const periods = [
+  { label:'Ago. 2024', vals:{ doubao:60,  qwen:18,  quark:120, dseek:3,   yuanbao:8,   baidu:140, jimeng:4,  kimi:20 } },
+  { label:'Nov. 2024', vals:{ doubao:88,  qwen:32,  quark:124, dseek:5,   yuanbao:22,  baidu:132, jimeng:11, kimi:22 } },
+  { label:'Jan. 2025', vals:{ doubao:112, qwen:48,  quark:128, dseek:102, yuanbao:34,  baidu:122, jimeng:19, kimi:24 } },
+  { label:'Abr. 2025', vals:{ doubao:172, qwen:128, quark:142, dseek:134, yuanbao:68,  baidu:112, jimeng:44, kimi:25 } },
+  { label:'Set. 2025', vals:{ doubao:242, qwen:192, quark:151, dseek:141, yuanbao:90,  baidu:106, jimeng:64, kimi:24 } },
+  { label:'Jun. 2026', vals:{ doubao:324, qwen:251, quark:159, dseek:139, yuanbao:104, baidu:101, jimeng:87, kimi:23 } },
+];
+
+// Build DOM rows
+const container = document.getElementById('chartInner');
+const rows = {};
+apps.forEach((app, i) => {
+  const div = document.createElement('div');
+  div.className = 'bar-row';
+  div.id = 'row-' + app.id;
+  div.style.top = (i * RH) + 'px';
+  div.innerHTML = `
+    <div class="bar-lbl">
+      <span class="bar-lbl-name">${app.name}</span>
+      <span class="bar-lbl-co">${app.co}</span>
+    </div>
+    <div class="bar-track">
+      <div class="bar-fill" style="background:${app.color};opacity:${app.opacity||1}"></div>
+    </div>
+    <span class="bar-val">0 mi</span>
+  `;
+  container.appendChild(div);
+  rows[app.id] = div;
+});
+
+let currentIdx = 0;
+let playing = false;
+let timer = null;
+
+function render(idx, animate) {
+  const p = periods[idx];
+  document.getElementById('periodLabel').textContent = p.label;
+  document.getElementById('progressFill').style.width = (idx / (periods.length - 1) * 100) + '%';
+
+  // Sort by value descending
+  const sorted = Object.entries(p.vals).sort((a, b) => b[1] - a[1]);
+  const maxVal = sorted[0][1];
+
+  sorted.forEach(([id, val], rank) => {
+    const row = rows[id];
+    if (!row) return;
+    row.style.top = (rank * RH) + 'px';
+    row.querySelector('.bar-fill').style.width = (val / maxVal * 100) + '%';
+    const valEl = row.querySelector('.bar-val');
+    valEl.textContent = val + ' mi';
+    valEl.style.color = rank === 0 ? 'var(--red)' : 'var(--g2)';
+  });
+}
+
+function next() {
+  if (currentIdx < periods.length - 1) {
+    currentIdx++;
+    render(currentIdx, true);
+    if (currentIdx === periods.length - 1) {
+      pause();
+    }
+  }
+}
+
+function play() {
+  playing = true;
+  document.getElementById('iconPlay').style.display = 'none';
+  document.getElementById('iconPause').style.display = '';
+  if (currentIdx === periods.length - 1) currentIdx = 0;
+  render(currentIdx, true);
+  timer = setInterval(next, 2200);
+}
+
+function pause() {
+  playing = false;
+  document.getElementById('iconPlay').style.display = '';
+  document.getElementById('iconPause').style.display = 'none';
+  clearInterval(timer);
+}
+
+document.getElementById('btnPlay').addEventListener('click', () => {
+  playing ? pause() : play();
+});
+
+// Initial render (no animation)
+render(0, false);
+
+// Auto-play after short delay
+setTimeout(play, 800);
+
+// iframe resize
+function h(){window.parent.postMessage({height:document.body.scrollHeight},'*');}
+window.addEventListener('load',h);
+window.addEventListener('resize',h);
+</script>
+</body>
+</html>
