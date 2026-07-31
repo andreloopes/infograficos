@@ -25,7 +25,7 @@ jobs:
         run: |
           git config user.name  "examelab-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add agregador-pesquisas/dados/agregado.json agregador-pesquisas/dados/historico.json agregador-pesquisas/dados/_status.json
+          git add agregador-pesquisas/dados
           if git diff --staged --quiet; then
             echo "Sem mudanças no agregado hoje."
           else
