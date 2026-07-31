@@ -1,12 +1,15 @@
 {
-  "ultima_execucao": "2026-07-31T18:03:36.331Z",
-  "cenario": "2º turno · Lula × Flávio",
-  "corte": "2026-07-27",
-  "candidatos": 2,
+  "ultima_execucao": "2026-07-31T18:26:15.547Z",
+  "presidente": "2º turno · Lula × Flávio",
+  "aprovacao": "sem dados nesta rodada",
+  "governadores": "sem dados nesta rodada",
   "pontos_na_serie": 2,
   "log": [
-    "E²D: testando 7 endereço(s) de API…",
-    "E²D: nenhum endereço devolveu dados de candidatos.",
-    "Fallback Kalman: OK"
+    "Presidente/E²D: testando 7 endereço(s)…",
+    "Presidente/E²D: sem dados — usando fallback Kalman.",
+    "Presidente: fallback Kalman OK",
+    "Aprovação/E²D: 0 pesquisas na lista, 0 de aprovação, 20 fichas com link.",
+    "Aprovação/E²D: nenhuma ficha com números extraíveis.",
+    "Governadores/E²D: 0 pesquisa(s) estadual(is) na lista."
   ]
 }
