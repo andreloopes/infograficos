@@ -89,6 +89,36 @@ function mapE2D(rawArr, rawRoot) {
     fonte_url: `${E2D}/agregador`, candidatos: cands, prob_vitoria: null, ultima_pesquisa: null, ultimas_pesquisas: [] };
 }
 
+
+function presidenteA2(html, log) {
+  // Plano C: a página /agregador vem renderizada no servidor — a tabela do
+  // agregado está no TEXTO. Extraímos linhas "Nome 40.1% 34.7 – 46.0%".
+  const txt = stripTags(html);
+  const rows = [];
+  const re = /([A-ZÀ-Ú][A-Za-zÀ-ú. ]{1,28}?)\s+(\d{1,2}(?:[.,]\d)?)\s*%\s+(\d{1,2}(?:[.,]\d)?)\s*[–—-]\s*(\d{1,2}(?:[.,]\d)?)\s*%/g;
+  let m;
+  while ((m = re.exec(txt)) && rows.length < 20) {
+    const nome = m[1].trim().replace(/\s+/g, " ");
+    if (/cen[áa]rio|lidera|top|m[ée]dia|ic 9|amostra|coleta|indecis/i.test(nome)) continue;
+    rows.push({ nome, media: num(m[2]), ic_min: num(m[3]), ic_max: num(m[4]) });
+  }
+  const seen = new Set();
+  const cands = rows.filter((r) => Number.isFinite(r.media) && r.media > 0 && !seen.has(r.nome) && seen.add(r.nome))
+    .map((r) => ({ ...r, partido: "", tendencia_14d: 0 }));
+  if (cands.length < 3) { log(`Presidente/E²D(A2): só ${cands.length} linha(s) de tabela no texto.`); return null; }
+  const soma = cands.reduce((s, c) => s + c.media, 0);
+  if (soma < 20 || soma > 115) { log(`Presidente/E²D(A2): soma implausível (${r1(soma)}).`); return null; }
+  cands.sort((a, b) => b.media - a.media);
+  const ind = (txt.match(/Indecisos\s+(\d{1,2}(?:[.,]\d)?)\s*%/i) || [])[1];
+  const corteBr = (txt.match(/corte em (\d{2})\/(\d{2})\/(\d{4})/i) || []);
+  const corte = corteBr.length ? `${corteBr[3]}-${corteBr[2]}-${corteBr[1]}` : hoje();
+  log(`Presidente/E²D(A2): FUNCIONOU — tabela SSR com ${cands.length} candidatos.`);
+  return { cenario: "1º turno · Brasil (nacional)", metodologia: "Média ponderada por recência e amostra (E²D)",
+    corte, indecisos: ind ? num(ind) : null,
+    fonte: "Eleição em Dados (E²D) — média ponderada de pesquisas registradas no TSE",
+    fonte_url: `${E2D}/agregador`, candidatos: cands, prob_vitoria: null, ultima_pesquisa: null, ultimas_pesquisas: [] };
+}
+
 async function presidenteA(log, pageCache) {
   const page = pageCache.agregador ?? (pageCache.agregador = await tryFetch(`${E2D}/agregador`, false));
   const urls = new Set(E2D_GUESSES);
@@ -118,6 +148,10 @@ async function presidenteA(log, pageCache) {
     if (r.ok && r.body) { const arr = findCandidateArray(r.body);
       if (arr) { log(`Presidente/E²D: FUNCIONOU → ${u}`); const ag = mapE2D(arr, r.body); if (ag) return ag; } }
   }
+  if (page.ok && typeof page.body === "string") {
+    const a2 = presidenteA2(page.body, log);
+    if (a2) return a2;
+  }
   log("Presidente/E²D: sem dados — usando fallback Kalman.");
   return null;
 }
@@ -143,86 +177,69 @@ async function presidenteB(log) {
     ultimas_pesquisas: pesquisas };
 }
 
-/* ============ lista de pesquisas do E²D (base p/ seções 2 e 3) ============ */
+/* ============ varredura de fichas do E²D (alimenta seções 2 e 3) ============ */
 
-function parseListaPesquisas(html) {
-  // Trabalha sobre TEXTO (sem tags) — robusto a mudanças de markup.
-  // Estrutura observada: [ESTADO] [Tipo da pesquisa] [Instituto] "Coleta em dd/mm/aaaa" [TSE xx] [Amostra n]
-  const ids = [...new Set([...String(html).matchAll(/\/pesquisas\/(\d+)/g)].map((m) => m[1]))];
-  const txt = stripTags(html);
-  // 1) âncoras: todas as datas de coleta
-  const marks = [];
-  const re = /Coleta em (\d{2}\/\d{2}\/\d{4})(?:\D{0,10}TSE ([A-Z]{2}-\d+\/\d{4}))?/g;
-  let m;
-  while ((m = re.exec(txt)) && marks.length < 60) marks.push({ idx: m.index, end: re.lastIndex, coleta: m[1], tse: m[2] || "" });
-  // 2) cada item lê só a fatia entre o fim do item anterior e a sua âncora
-  const itens = marks.map((mk, i) => {
-    const antes = txt.slice(i ? marks[i - 1].end : Math.max(0, mk.idx - 220), mk.idx).slice(-220);
-    const depois = txt.slice(mk.end, mk.end + 60);
-    const amostra = (depois.match(/Amostra\s+([\d.\s]+)/i) || [])[1];
-    let tipo = "outro", estado = null, instituto = "—";
-    const tm = antes.match(/(Aprova[çc][ãa]o do governo|Pesquisa de candidatos)/i);
-    if (tm) {
-      tipo = /aprova/i.test(tm[0]) ? "aprovacao" : "candidatos";
-      const pre = antes.slice(0, tm.index);                 // estado vem ANTES do tipo
-      const post = antes.slice(tm.index + tm[0].length);    // instituto vem DEPOIS do tipo
-      estado = UFS.find((uf) => pre.includes(uf)) || (/Nacional/i.test(pre) ? "Nacional" : null);
-      instituto = post.replace(/Ver detalhe/gi, " ").replace(/\s+/g, " ").trim() || "—";
+async function varreduraFichas(log, pageCache) {
+  if (pageCache.fichas) return pageCache.fichas;
+  const fontes = [];
+  for (const path of ["/", "/pesquisas"]) {
+    const p = await tryFetch(`${E2D}${path}`, false);
+    if (p.ok && typeof p.body === "string") fontes.push({ path, html: p.body });
+    else log(`Fichas/E²D: ${path} inacessível (${p.status || p.err}).`);
+  }
+  const ids = [...new Set(fontes.flatMap((f) => [...f.html.matchAll(/\/pesquisas\/(\d+)/g)].map((m) => m[1])))];
+  log(`Fichas/E²D: ${ids.length} ficha(s) com link nas páginas ${fontes.map((f) => f.path).join(" e ") || "—"}.`);
+  const aprov = [], gov = [];
+  let amostraTelemetria = null;
+  for (const id of ids.slice(0, 14)) {
+    if (aprov.length >= 5 && gov.length >= 8) break;
+    const det = await tryFetch(`${E2D}/pesquisas/${id}`, false, 10000);
+    if (!det.ok) continue;
+    const t = stripTags(det.body);
+    if (!amostraTelemetria) amostraTelemetria = t.slice(0, 240);
+    const coleta = (t.match(/Coleta(?:\s+em)?\s+(\d{2}\/\d{2}\/\d{4})/) || [])[1] || "";
+    const amostra = (t.match(/Amostra\s+([\d.\s]+)/i) || [])[1];
+    const tse = (t.match(/TSE\s+([A-Z]{2}-\d+\/\d{4})/) || [])[1] || "";
+    const estado = UFS.find((uf) => t.includes(uf)) || null;
+    const inst = (t.match(/([A-ZÀ-Ú][\wÀ-ú&.\/-]*(?:\s+[A-ZÀ-Ú&][\wÀ-ú&.\/-]*){0,4})\s*Coleta/) || [])[1] || "—";
+    const base = { instituto: inst.trim(), coleta, tse,
+      amostra: amostra ? parseInt(amostra.replace(/\D/g, ""), 10) : 0, url: `${E2D}/pesquisas/${id}` };
+    if (/Aprova[çc][ãa]o do governo/i.test(t) && aprov.length < 5) {
+      const ap = (t.match(/(?<!des)aprova\w*\D{0,40}?(\d{1,2}(?:[.,]\d)?)\s*%/i) || [])[1];
+      const de = (t.match(/desaprova\w*\D{0,40}?(\d{1,2}(?:[.,]\d)?)\s*%/i) || [])[1];
+      if (ap && de) { aprov.push({ ...base, aprova: num(ap), desaprova: num(de) });
+        log(`Fichas/E²D: ${id} → aprovação ${base.instituto} ${ap}%×${de}%`); }
+      else log(`Fichas/E²D: ${id} é aprovação mas sem números no texto.`);
+    } else if (estado && /Pesquisa de candidatos|candidat/i.test(t) && gov.length < 8) {
+      gov.push({ ...base, estado });
+      log(`Fichas/E²D: ${id} → estadual ${estado} (${base.instituto})`);
     }
-    return { tipo, estado, instituto, coleta: mk.coleta, tse: mk.tse,
-      amostra: amostra ? parseInt(amostra.replace(/\D/g, ""), 10) : 0 };
-  });
-  return { ids, itens };
+  }
+  if (!aprov.length && !gov.length && amostraTelemetria)
+    log(`Fichas/E²D: amostra de texto de ficha p/ diagnóstico: "${amostraTelemetria}"`);
+  return (pageCache.fichas = { aprov, gov });
 }
 
 /* ================= SEÇÃO 2 — APROVAÇÃO ================= */
 
 async function coletaAprovacao(log, pageCache) {
-  const page = pageCache.pesquisas ?? (pageCache.pesquisas = await tryFetch(`${E2D}/pesquisas`, false));
-  if (!page.ok) { log(`Aprovação/E²D: lista inacessível (${page.status || page.err})`); return null; }
-  const { ids, itens } = parseListaPesquisas(page.body);
-  const aprovIdx = itens.map((it, i) => it.tipo === "aprovacao" ? i : -1).filter((i) => i >= 0);
-  log(`Aprovação/E²D: ${itens.length} pesquisas na lista, ${aprovIdx.length} de aprovação, ${ids.length} fichas com link.`);
-  const out = [];
-  // visita fichas até achar 5 de aprovação com números (cap 12 fetches)
-  for (const id of ids.slice(0, 12)) {
-    if (out.length >= 5) break;
-    const det = await tryFetch(`${E2D}/pesquisas/${id}`, false, 10000);
-    if (!det.ok) continue;
-    const t = stripTags(det.body);
-    if (!/Aprova[çc][ãa]o do governo/i.test(t)) continue;
-    const ap = (t.match(/(?<!des)aprova\w*\D{0,40}?(\d{1,2}(?:[.,]\d)?)\s*%/i) || [])[1];
-    const de = (t.match(/desaprova\w*\D{0,40}?(\d{1,2}(?:[.,]\d)?)\s*%/i) || [])[1];
-    if (!ap || !de) continue;
-    const inst = (t.match(/(?:por|Instituto)\s+([A-ZÀ-Ú][\wÀ-ú&./ -]{2,40}?)\s+(?:Coleta|em \d)/) || [])[1]
-      || (t.match(/([A-ZÀ-Ú][\wÀ-ú&./-]*(?:\s+[A-ZÀ-Ú&][\wÀ-ú&./-]*){0,4})\s*Coleta em/) || [])[1] || "—";
-    const coleta = (t.match(/Coleta em (\d{2}\/\d{2}\/\d{4})/) || [])[1] || "";
-    const amostra = (t.match(/Amostra\s+([\d.\s]+)/i) || [])[1];
-    out.push({ instituto: inst.trim(), coleta, amostra: amostra ? parseInt(amostra.replace(/\D/g, ""), 10) : 0,
-      aprova: num(ap), desaprova: num(de), url: `${E2D}/pesquisas/${id}` });
-    log(`Aprovação/E²D: ficha ${id} → ${inst.trim()} aprova ${ap}% × desaprova ${de}%`);
-  }
-  if (!out.length) { log("Aprovação/E²D: nenhuma ficha com números extraíveis."); return null; }
-  const media = (k) => r1(out.reduce((s, p) => s + p[k], 0) / out.length);
+  const { aprov } = await varreduraFichas(log, pageCache);
+  if (!aprov.length) { log("Aprovação/E²D: nenhuma ficha com números nesta rodada."); return null; }
+  const media = (k) => r1(aprov.reduce((s, p) => s + p[k], 0) / aprov.length);
   return { atualizado_em: hoje(), titulo: "Aprovação do governo federal",
-    metodologia: `Média simples das últimas ${out.length} pesquisas de aprovação (ExameLab)`,
-    aprova_media: media("aprova"), desaprova_media: media("desaprova"), itens: out,
+    metodologia: `Média simples das últimas ${aprov.length} pesquisas de aprovação (ExameLab)`,
+    aprova_media: media("aprova"), desaprova_media: media("desaprova"), itens: aprov,
     fonte: "Fichas de pesquisas do Eleição em Dados (E²D), registradas no TSE", fonte_url: `${E2D}/pesquisas` };
 }
 
 /* ================= SEÇÃO 3 — GOVERNADORES ================= */
 
 async function coletaGovernadores(log, pageCache) {
-  const page = pageCache.pesquisas ?? (pageCache.pesquisas = await tryFetch(`${E2D}/pesquisas`, false));
-  if (!page.ok) { log(`Governadores/E²D: lista inacessível (${page.status || page.err})`); return null; }
-  const { itens } = parseListaPesquisas(page.body);
-  const estaduais = itens.filter((it) => it.estado && it.estado !== "Nacional").slice(0, 10)
-    .map((it) => ({ estado: it.estado, instituto: it.instituto, coleta: it.coleta, amostra: it.amostra, tse: it.tse }));
-  log(`Governadores/E²D: ${estaduais.length} pesquisa(s) estadual(is) na lista.`);
-  if (!estaduais.length) return null;
+  const { gov } = await varreduraFichas(log, pageCache);
+  if (!gov.length) { log("Governadores/E²D: nenhuma pesquisa estadual nesta rodada."); return null; }
   return { atualizado_em: hoje(), titulo: "Corridas estaduais — pesquisas recentes",
     nota: "Monitor de pesquisas estaduais registradas; resultados completos na ficha de cada pesquisa.",
-    itens: estaduais, fonte: "Lista de pesquisas do Eleição em Dados (E²D)", fonte_url: `${E2D}/pesquisas` };
+    itens: gov, fonte: "Fichas de pesquisas do Eleição em Dados (E²D)", fonte_url: `${E2D}/pesquisas` };
 }
 
 /* ================= histórico + main ================= */
@@ -231,6 +248,13 @@ function atualizaHistorico(ag, aprov) {
   const hp = join(DADOS, "historico.json");
   const hist = existsSync(hp) ? JSON.parse(readFileSync(hp, "utf8")) : { pontos: [] };
   hist.pontos = (hist.pontos || []).map((p) => ({ cenario: p.cenario || "2º turno · Lula × Flávio", ...p }));
+  // autocura: um 2º turno com 2 candidatos soma ~100; ponto contaminado (ex.:
+  // semente de 1º turno etiquetada errado) soma bem menos — descarta.
+  hist.pontos = hist.pontos.filter((p) => {
+    if (!/2º turno/.test(p.cenario)) return true;
+    const soma = Object.values(p.valores || {}).reduce((s, v) => s + (Number(v) || 0), 0);
+    return soma >= 85;
+  });
   const upsert = (data, cenario, valores) => {
     const i = hist.pontos.findIndex((p) => p.data === data && p.cenario === cenario);
     if (i >= 0) hist.pontos[i].valores = valores; else hist.pontos.push({ data, cenario, valores });
