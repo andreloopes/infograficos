@@ -2,8 +2,20 @@
   "descricao": "Série histórica do agregado. Cada execução do coletor acrescenta um ponto por data. Começa com um único ponto real; a linha de tendência se forma com o tempo.",
   "pontos": [
     {
+      "data": "2026-07-27",
+      "cenario": "2º turno · Lula × Flávio",
+      "valores": {
+        "Lula": 52.3,
+        "Flávio Bolsonaro": 47.7
+      }
+    },
+    {
+      "cenario": "2º turno · Lula × Flávio",
       "data": "2026-07-31",
-      "valores": { "Lula": 40.1, "Flávio Bolsonaro": 30.3 }
+      "valores": {
+        "Lula": 40.1,
+        "Flávio Bolsonaro": 30.3
+      }
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "ultima_execucao": "2026-07-31T18:03:36.331Z",
+  "cenario": "2º turno · Lula × Flávio",
+  "corte": "2026-07-27",
+  "candidatos": 2,
+  "pontos_na_serie": 2,
+  "log": [
+    "E²D: testando 7 endereço(s) de API…",
+    "E²D: nenhum endereço devolveu dados de candidatos.",
+    "Fallback Kalman: OK"
+  ]
+}
