@@ -1,0 +1,9 @@
+{
+  "descricao": "Série histórica do agregado. Cada execução do coletor acrescenta um ponto por data. Começa com um único ponto real; a linha de tendência se forma com o tempo.",
+  "pontos": [
+    {
+      "data": "2026-07-31",
+      "valores": { "Lula": 40.1, "Flávio Bolsonaro": 30.3 }
+    }
+  ]
+}

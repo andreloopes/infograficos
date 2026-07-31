@@ -1,0 +1,29 @@
+{
+  "atualizado_em": "2026-07-31",
+  "corte": "2026-07-31",
+  "cenario": "Brasil (nacional) — 1º turno",
+  "pesquisas_no_calculo": 2,
+  "indecisos": 10.7,
+  "fonte": "Eleição em Dados (E²D) — média ponderada de pesquisas registradas no TSE",
+  "fonte_url": "https://eleicaoemdados.com.br/agregador",
+  "candidatos": [
+    { "nome": "Lula", "partido": "PT", "media": 40.1, "ic_min": 34.7, "ic_max": 46.0, "tendencia_14d": 0 },
+    { "nome": "Flávio Bolsonaro", "partido": "PL", "media": 30.3, "ic_min": 25.6, "ic_max": 35.3, "tendencia_14d": 0 },
+    { "nome": "Ronaldo Caiado", "partido": "", "media": 3.0, "ic_min": 0.0, "ic_max": 7.1, "tendencia_14d": 0 },
+    { "nome": "Renan Santos", "partido": "", "media": 3.0, "ic_min": 0.0, "ic_max": 7.1, "tendencia_14d": 0 },
+    { "nome": "Augusto Cury", "partido": "", "media": 2.2, "ic_min": 0.0, "ic_max": 6.2, "tendencia_14d": 0 },
+    { "nome": "Samara Martins", "partido": "", "media": 2.2, "ic_min": 0.0, "ic_max": 6.2, "tendencia_14d": 0 },
+    { "nome": "Romeu Zema", "partido": "", "media": 2.1, "ic_min": 0.0, "ic_max": 6.1, "tendencia_14d": 0 },
+    { "nome": "Aécio Neves", "partido": "", "media": 2.1, "ic_min": 0.0, "ic_max": 6.0, "tendencia_14d": 0 },
+    { "nome": "Dario Barbosa", "partido": "", "media": 1.4, "ic_min": 0.0, "ic_max": 5.2, "tendencia_14d": 0 },
+    { "nome": "Rui Costa Pimenta", "partido": "", "media": 1.4, "ic_min": 0.0, "ic_max": 5.3, "tendencia_14d": 0 },
+    { "nome": "Daciolo", "partido": "", "media": 1.4, "ic_min": 0.0, "ic_max": 5.2, "tendencia_14d": 0 }
+  ],
+  "ultimas_pesquisas": [
+    { "instituto": "Real Time Big Data", "coleta": "2026-06-22", "tse": "BR-09044/2026", "amostra": 1600, "tipo": "Aprovação do governo" },
+    { "instituto": "JOTA Jornalismo", "coleta": "2026-06-21", "tse": "BR-06150/2026", "amostra": 6000, "tipo": "Candidatos" },
+    { "instituto": "AtlasIntel", "coleta": "2026-06-21", "tse": "BR-08344/2026", "amostra": 1200, "tipo": "Candidatos" },
+    { "instituto": "DCastro", "coleta": "2026-06-20", "tse": "BR-05945/2026", "amostra": 1200, "tipo": "Aprovação do governo" },
+    { "instituto": "Gerp", "coleta": "2026-06-19", "tse": "BR-09657/2026", "amostra": 2000, "tipo": "Aprovação do governo" }
+  ]
+}

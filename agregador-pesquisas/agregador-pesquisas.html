@@ -1,1 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agregador de pesquisas 2026 · ExameLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#D9001E; --ink:#14110F; --graphite:#3A3A3A;
+    --paper:#FBFAF8; --hair:#E6E1DA; --muted:#8A837B; --muted2:#B7B0A8;
+    --disp:"Archivo Black",system-ui,sans-serif;
+    --body:"Archivo",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+       -webkit-font-smoothing:antialiased;line-height:1.4}
+  .wrap{container-type:inline-size;max-width:900px;margin:0 auto;padding:0}
+  .board{border:1px solid var(--hair);background:#fff}
 
+  /* header */
+  .eyebrow{display:flex;align-items:center;gap:8px;background:var(--ink);color:#fff;
+    font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    padding:9px 18px}
+  .eyebrow .dot{width:8px;height:8px;background:var(--red);border-radius:50%}
+  .eyebrow .spacer{flex:1}
+  .eyebrow .live{color:var(--muted2)}
+  .head{padding:22px 18px 16px}
+  h1{font-family:var(--disp);font-size:clamp(26px,7cqi,40px);line-height:.98;margin:0 0 10px;
+     letter-spacing:-.01em}
+  .meta{font-family:var(--mono);font-size:11.5px;color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:6px 16px;border-top:1px solid var(--hair);padding-top:12px}
+  .meta b{color:var(--ink);font-weight:600}
+
+  /* section head */
+  .sec{padding:6px 18px 20px;border-top:1px solid var(--hair)}
+  .sec-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--red);margin:18px 0 12px;font-weight:600}
+
+  /* leaderboard */
+  .row{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:center;
+    padding:12px 0;border-top:1px solid var(--hair)}
+  .row:first-of-type{border-top:none}
+  .rk{font-family:var(--mono);font-size:12px;color:var(--muted2);text-align:right}
+  .nm{font-family:var(--disp);font-size:16px;letter-spacing:-.01em}
+  .nm .party{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:400;margin-left:6px}
+  .barwrap{margin-top:7px;height:8px;background:var(--paper);position:relative;border:1px solid var(--hair)}
+  .bar{position:absolute;top:-1px;bottom:-1px;background:var(--muted2)}
+  .ic{position:absolute;top:50%;height:1px;background:var(--ink);opacity:.35}
+  .ic::before,.ic::after{content:"";position:absolute;top:-2px;width:1px;height:5px;background:var(--ink);opacity:.5}
+  .ic::before{left:0}.ic::after{right:0}
+  .pct{font-family:var(--disp);font-size:22px;letter-spacing:-.02em;text-align:right;min-width:74px;
+    display:flex;align-items:baseline;justify-content:flex-end;gap:6px}
+  .pct .u{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--muted)}
+  .icnum{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-align:right;margin-top:4px}
+  .trend{font-family:var(--mono);font-size:11px;margin-left:6px}
+  .up{color:var(--red)} .down{color:var(--graphite)} .flat{color:var(--muted2)}
+  .row.lead .bar{background:var(--red)}
+  .row.two .bar{background:var(--graphite)}
+  .row.lead .nm,.row.two .nm{}
+
+  /* trend chart */
+  .chart{width:100%;height:auto;display:block;border:1px solid var(--hair);background:#fff}
+  .chart-note{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:8px}
+
+  /* polls */
+  .polls{display:grid;grid-template-columns:1fr;gap:0}
+  .poll{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;
+    padding:11px 0;border-top:1px solid var(--hair)}
+  .poll:first-child{border-top:none}
+  .poll .inst{font-family:var(--disp);font-size:14px}
+  .poll .sub{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:3px}
+  .poll .tse{font-family:var(--mono);font-size:10.5px;color:var(--ink);background:var(--paper);
+    border:1px solid var(--hair);padding:3px 7px;white-space:nowrap}
+  .poll .amostra{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right}
+
+  /* footer */
+  .foot{padding:16px 18px 20px;border-top:2px solid var(--ink);background:var(--paper)}
+  .foot p{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin:0 0 6px;line-height:1.5}
+  .foot a{color:var(--red);text-decoration:none}
+  .foot a:hover{text-decoration:underline}
+
+  @container (max-width:560px){
+    h1{font-size:30px}
+    .pct{font-size:19px;min-width:62px}
+    .nm{font-size:15px}
+    .poll{grid-template-columns:1fr}
+    .poll .amostra{text-align:left}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .bar{transition:width .6s cubic-bezier(.2,.7,.2,1)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="board">
+    <div class="eyebrow">
+      <span class="dot"></span><span>ExameLab · Eleições 2026</span>
+      <span class="spacer"></span><span class="live" id="live">carregando…</span>
+    </div>
+    <div class="head">
+      <h1>Agregador de<br>pesquisas</h1>
+      <div class="meta" id="meta"></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">Média ponderada · 1º turno</div>
+      <div id="board"></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">Tendência</div>
+      <div id="chart"></div>
+      <div class="chart-note" id="chartNote"></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-h">Últimas pesquisas registradas</div>
+      <div class="polls" id="polls"></div>
+    </div>
+
+    <div class="foot" id="foot"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   DATA ADAPTER
+   A página tenta ler ./dados/agregado.json e ./dados/historico.json (gerados
+   pela GitHub Action). Se não achar (ex.: preview isolado), usa o SEED abaixo.
+   Para trocar de fonte, mude só as funções de carregamento — o resto do render
+   consome sempre o mesmo formato.
+   ========================================================================= */
+const SEED_AGREGADO = /*__SEED_AGREGADO__*/ {
+  "atualizado_em":"2026-07-31","corte":"2026-07-31","cenario":"Brasil (nacional) — 1º turno",
+  "pesquisas_no_calculo":2,"indecisos":10.7,
+  "fonte":"Eleição em Dados (E²D) — média ponderada de pesquisas registradas no TSE",
+  "fonte_url":"https://eleicaoemdados.com.br/agregador",
+  "candidatos":[
+    {"nome":"Lula","partido":"PT","media":40.1,"ic_min":34.7,"ic_max":46.0,"tendencia_14d":0},
+    {"nome":"Flávio Bolsonaro","partido":"PL","media":30.3,"ic_min":25.6,"ic_max":35.3,"tendencia_14d":0},
+    {"nome":"Ronaldo Caiado","partido":"","media":3.0,"ic_min":0.0,"ic_max":7.1,"tendencia_14d":0},
+    {"nome":"Renan Santos","partido":"","media":3.0,"ic_min":0.0,"ic_max":7.1,"tendencia_14d":0},
+    {"nome":"Augusto Cury","partido":"","media":2.2,"ic_min":0.0,"ic_max":6.2,"tendencia_14d":0},
+    {"nome":"Samara Martins","partido":"","media":2.2,"ic_min":0.0,"ic_max":6.2,"tendencia_14d":0},
+    {"nome":"Romeu Zema","partido":"","media":2.1,"ic_min":0.0,"ic_max":6.1,"tendencia_14d":0},
+    {"nome":"Aécio Neves","partido":"","media":2.1,"ic_min":0.0,"ic_max":6.0,"tendencia_14d":0},
+    {"nome":"Dario Barbosa","partido":"","media":1.4,"ic_min":0.0,"ic_max":5.2,"tendencia_14d":0},
+    {"nome":"Rui Costa Pimenta","partido":"","media":1.4,"ic_min":0.0,"ic_max":5.3,"tendencia_14d":0},
+    {"nome":"Daciolo","partido":"","media":1.4,"ic_min":0.0,"ic_max":5.2,"tendencia_14d":0}
+  ],
+  "ultimas_pesquisas":[
+    {"instituto":"Real Time Big Data","coleta":"2026-06-22","tse":"BR-09044/2026","amostra":1600,"tipo":"Aprovação do governo"},
+    {"instituto":"JOTA Jornalismo","coleta":"2026-06-21","tse":"BR-06150/2026","amostra":6000,"tipo":"Candidatos"},
+    {"instituto":"AtlasIntel","coleta":"2026-06-21","tse":"BR-08344/2026","amostra":1200,"tipo":"Candidatos"},
+    {"instituto":"DCastro","coleta":"2026-06-20","tse":"BR-05945/2026","amostra":1200,"tipo":"Aprovação do governo"},
+    {"instituto":"Gerp","coleta":"2026-06-19","tse":"BR-09657/2026","amostra":2000,"tipo":"Aprovação do governo"}
+  ]
+};
+const SEED_HISTORICO = /*__SEED_HISTORICO__*/ {
+  "pontos":[{"data":"2026-07-31","valores":{"Lula":40.1,"Flávio Bolsonaro":30.3}}]
+};
+
+async function carregar(url, seed){
+  try{ const r = await fetch(url, {cache:"no-store"}); if(!r.ok) throw 0; return await r.json(); }
+  catch(e){ return seed; }
+}
+
+/* ---- helpers ---- */
+const nf = n => n.toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1});
+const pct = n => nf(Number(n));
+const ddmm = iso => { const [y,m,d]=iso.split("-"); return `${d}/${m}`; };
+const ddmmyy = iso => { const [y,m,d]=iso.split("-"); return `${d}/${m}/${y.slice(2)}`; };
+const trendMark = t => t>0.3 ? '<span class="trend up">▲</span>' : t<-0.3 ? '<span class="trend down">▼</span>' : '<span class="trend flat">▬</span>';
+
+/* ---- render ---- */
+function render(ag, hist){
+  document.getElementById("live").textContent = "atualizado " + ddmmyy(ag.atualizado_em);
+
+  document.getElementById("meta").innerHTML =
+    `<span><b>Cenário</b> ${ag.cenario}</span>`+
+    `<span><b>Corte</b> ${ddmmyy(ag.corte)}</span>`+
+    `<span><b>Pesquisas no cálculo</b> ${ag.pesquisas_no_calculo}</span>`+
+    `<span><b>Indecisos</b> ${pct(ag.indecisos)}%</span>`;
+
+  const max = Math.max(...ag.candidatos.map(c=>c.ic_max), ...ag.candidatos.map(c=>c.media));
+  const scale = 100/max;
+  document.getElementById("board").innerHTML = ag.candidatos.map((c,i)=>{
+    const cls = i===0?"lead":i===1?"two":"";
+    const w = (c.media*scale).toFixed(1);
+    const icL = (c.ic_min*scale).toFixed(1), icW = ((c.ic_max-c.ic_min)*scale).toFixed(1);
+    return `<div class="row ${cls}">
+      <div class="rk">${String(i+1).padStart(2,"0")}</div>
+      <div>
+        <div class="nm">${c.nome}${c.partido?`<span class="party">${c.partido}</span>`:""}</div>
+        <div class="barwrap">
+          <div class="ic" style="left:${icL}%;width:${icW}%"></div>
+          <div class="bar" style="width:${w}%"></div>
+        </div>
+        <div class="icnum">IC 95%: ${pct(c.ic_min)}–${pct(c.ic_max)}%</div>
+      </div>
+      <div>
+        <div class="pct">${pct(c.media)}<span class="u">%</span>${trendMark(c.tendencia_14d)}</div>
+      </div>
+    </div>`;
+  }).join("");
+
+  renderChart(ag, hist);
+
+  document.getElementById("polls").innerHTML = ag.ultimas_pesquisas.map(p=>
+    `<div class="poll">
+      <div>
+        <div class="inst">${p.instituto}</div>
+        <div class="sub">Coleta ${ddmmyy(p.coleta)} · ${p.tipo}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="tse">TSE ${p.tse}</div>
+        <div class="amostra">amostra ${p.amostra.toLocaleString("pt-BR")}</div>
+      </div>
+    </div>`).join("");
+
+  document.getElementById("foot").innerHTML =
+    `<p><b style="color:var(--ink)">Como ler:</b> não é uma pesquisa eleitoral, e sim uma estimativa matemática a partir de pesquisas registradas no TSE, com média ponderada por recência e tamanho de amostra. IC 95% = intervalo de confiança.</p>`+
+    `<p>Fonte: ${ag.fonte}. <a href="${ag.fonte_url}" target="_blank" rel="noopener">Ver metodologia →</a></p>`+
+    `<p>ExameLab · dado tratado em ${ddmmyy(ag.atualizado_em)}. Estimativa sujeita a revisão a cada nova pesquisa.</p>`;
+}
+
+/* ---- SVG trend chart (self-contained, sem libs) ---- */
+function renderChart(ag, hist){
+  const W=860,H=280,pad={t:18,r:64,b:34,l:34};
+  const series = ag.candidatos.slice(0,2).map((c,i)=>({name:c.nome,color:i===0?"var(--red)":"var(--graphite)"}));
+  const pts = hist.pontos||[];
+  const note = document.getElementById("chartNote");
+
+  const yMax = 60, yMin = 20;
+  const x = (i,n)=> pad.l + (n<=1?0:(i/(n-1)))*(W-pad.l-pad.r);
+  const y = v => pad.t + (1-(v-yMin)/(yMax-yMin))*(H-pad.t-pad.b);
+
+  let grid="";
+  for(let v=yMin; v<=yMax; v+=10){
+    grid+=`<line x1="${pad.l}" y1="${y(v)}" x2="${W-pad.r}" y2="${y(v)}" stroke="var(--hair)" stroke-width="1"/>`+
+          `<text x="${pad.l-6}" y="${y(v)+3}" text-anchor="end" font-family="var(--mono)" font-size="10" fill="var(--muted)">${v}</text>`;
+  }
+
+  let body="";
+  if(pts.length>=2){
+    series.forEach(s=>{
+      const d = pts.map((p,i)=>`${i?"L":"M"}${x(i,pts.length).toFixed(1)},${y(p.valores[s.name]).toFixed(1)}`).join(" ");
+      body+=`<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5"/>`;
+      const last=pts[pts.length-1];
+      body+=`<circle cx="${x(pts.length-1,pts.length).toFixed(1)}" cy="${y(last.valores[s.name]).toFixed(1)}" r="3.5" fill="${s.color}"/>`+
+            `<text x="${(x(pts.length-1,pts.length)+8).toFixed(1)}" y="${(y(last.valores[s.name])+3).toFixed(1)}" font-family="var(--mono)" font-size="11" font-weight="600" fill="${s.color}">${pct(last.valores[s.name])}</text>`;
+    });
+    pts.forEach((p,i)=>{ if(i%Math.ceil(pts.length/6||1)===0||i===pts.length-1)
+      body+=`<text x="${x(i,pts.length).toFixed(1)}" y="${H-pad.b+16}" text-anchor="middle" font-family="var(--mono)" font-size="10" fill="var(--muted)">${ddmm(p.data)}</text>`; });
+    note.innerHTML = `Série própria (ExameLab), 1 ponto por dia de coleta. ${series.map(s=>`<span style="color:${s.color}">■</span> ${s.name}`).join(" &nbsp; ")}`;
+  } else {
+    // Estado honesto: 1 ponto real, sem inventar curva
+    const p=pts[0];
+    series.forEach(s=>{
+      const px=W-pad.r, py=y(p.valores[s.name]);
+      body+=`<circle cx="${px}" cy="${py.toFixed(1)}" r="4" fill="${s.color}"/>`+
+            `<text x="${px-8}" y="${(py+3).toFixed(1)}" text-anchor="end" font-family="var(--mono)" font-size="11" font-weight="600" fill="${s.color}">${pct(p.valores[s.name])}</text>`;
+    });
+    body+=`<text x="${(pad.l+(W-pad.r))/2}" y="${H/2-4}" text-anchor="middle" font-family="var(--mono)" font-size="12" fill="var(--muted)">Série em formação — ${pts.length} de N pontos</text>`+
+          `<text x="${(pad.l+(W-pad.r))/2}" y="${H/2+14}" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--muted2)">a linha aparece a partir do 2º dia de coleta</text>`;
+    note.innerHTML = `A tendência é montada com os snapshots diários do seu coletor — hoje há só o retrato de ${ddmmyy(p.data)}.`;
+  }
+
+  document.getElementById("chart").innerHTML =
+    `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Gráfico de tendência do agregado">${grid}${body}</svg>`;
+}
+
+(async function(){
+  const ag = await carregar("./dados/agregado.json", SEED_AGREGADO);
+  const hist = await carregar("./dados/historico.json", SEED_HISTORICO);
+  render(ag, hist);
+})();
+</script>
+</body>
+</html>
