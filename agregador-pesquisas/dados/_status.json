@@ -1,15 +1,15 @@
 {
-  "ultima_execucao": "2026-07-31T18:26:15.547Z",
-  "presidente": "2º turno · Lula × Flávio",
+  "ultima_execucao": "2026-07-31T18:36:03.160Z",
+  "presidente": "1º turno · Brasil (nacional)",
   "aprovacao": "sem dados nesta rodada",
   "governadores": "sem dados nesta rodada",
   "pontos_na_serie": 2,
   "log": [
     "Presidente/E²D: testando 7 endereço(s)…",
-    "Presidente/E²D: sem dados — usando fallback Kalman.",
-    "Presidente: fallback Kalman OK",
-    "Aprovação/E²D: 0 pesquisas na lista, 0 de aprovação, 20 fichas com link.",
-    "Aprovação/E²D: nenhuma ficha com números extraíveis.",
-    "Governadores/E²D: 0 pesquisa(s) estadual(is) na lista."
+    "Presidente/E²D(A2): FUNCIONOU — tabela SSR com 11 candidatos.",
+    "Fichas/E²D: 20 ficha(s) com link nas páginas / e /pesquisas.",
+    "Fichas/E²D: amostra de texto de ficha p/ diagnóstico: \" Pesquisa Real Time Big Data – 22/06/2026 | Eleição em Dados Pular para o conteúdo Pesquisas Agregador Metodologia Imprensa Apoie ← Pesquisas Real Time Big Data — 22/06/2026 Presidente 2026 · Brasil (nacional) · BR Exportar Dados: CSV JSON \"",
+    "Aprovação/E²D: nenhuma ficha com números nesta rodada.",
+    "Governadores/E²D: nenhuma pesquisa estadual nesta rodada."
   ]
 }

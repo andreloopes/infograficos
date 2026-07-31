@@ -10,11 +10,12 @@
       }
     },
     {
-      "cenario": "2º turno · Lula × Flávio",
       "data": "2026-07-31",
+      "cenario": "1º turno · Brasil (nacional)",
       "valores": {
         "Lula": 40.1,
-        "Flávio Bolsonaro": 30.3
+        "Flávio Bolsonaro": 30.3,
+        "Ronaldo Caiado": 3
       }
     }
   ]
