@@ -1,64 +1,64 @@
 {
   "cenario": "1º turno · Brasil (nacional)",
   "metodologia": "Média ponderada por recência e amostra (E²D)",
-  "corte": "2026-08-02",
+  "corte": "2026-08-03",
   "indecisos": 10.7,
   "fonte": "Eleição em Dados (E²D) — média ponderada de pesquisas registradas no TSE",
   "fonte_url": "https://eleicaoemdados.com.br/agregador",
   "candidatos": [
     {
       "nome": "Lula",
-      "media": 40.1,
-      "ic_min": 34.7,
-      "ic_max": 46,
+      "media": 40.5,
+      "ic_min": 34.6,
+      "ic_max": 46.9,
       "partido": "",
       "tendencia_14d": 0
     },
     {
       "nome": "Flávio Bolsonaro",
-      "media": 30.3,
-      "ic_min": 25.6,
-      "ic_max": 35.3,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
-      "nome": "Ronaldo Caiado",
-      "media": 3,
-      "ic_min": 0,
-      "ic_max": 7.1,
+      "media": 29.1,
+      "ic_min": 24.1,
+      "ic_max": 34.6,
       "partido": "",
       "tendencia_14d": 0
     },
     {
       "nome": "Renan Santos",
-      "media": 3,
+      "media": 3.3,
+      "ic_min": 0,
+      "ic_max": 7.8,
+      "partido": "",
+      "tendencia_14d": 0
+    },
+    {
+      "nome": "Augusto Cury",
+      "media": 2.6,
       "ic_min": 0,
       "ic_max": 7.1,
       "partido": "",
       "tendencia_14d": 0
     },
     {
-      "nome": "Augusto Cury",
-      "media": 2.2,
-      "ic_min": 0,
-      "ic_max": 6.2,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
       "nome": "Samara Martins",
-      "media": 2.2,
+      "media": 2.3,
       "ic_min": 0,
-      "ic_max": 6.2,
+      "ic_max": 6.6,
       "partido": "",
       "tendencia_14d": 0
     },
     {
       "nome": "Romeu Zema",
-      "media": 2.1,
+      "media": 2.2,
       "ic_min": 0,
-      "ic_max": 6.1,
+      "ic_max": 6.6,
+      "partido": "",
+      "tendencia_14d": 0
+    },
+    {
+      "nome": "Ronaldo Caiado",
+      "media": 2.2,
+      "ic_min": 0,
+      "ic_max": 6.5,
       "partido": "",
       "tendencia_14d": 0
     },
@@ -66,31 +66,31 @@
       "nome": "Aecio Neves",
       "media": 2.1,
       "ic_min": 0,
-      "ic_max": 6,
+      "ic_max": 6.3,
       "partido": "",
       "tendencia_14d": 0
     },
     {
       "nome": "Dario Barbosa",
-      "media": 1.4,
+      "media": 1.8,
       "ic_min": 0,
-      "ic_max": 5.2,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
-      "nome": "Rui Costa Pimenta",
-      "media": 1.4,
-      "ic_min": 0,
-      "ic_max": 5.3,
+      "ic_max": 6.1,
       "partido": "",
       "tendencia_14d": 0
     },
     {
       "nome": "Daciolo",
-      "media": 1.4,
+      "media": 1.6,
       "ic_min": 0,
-      "ic_max": 5.2,
+      "ic_max": 5.8,
+      "partido": "",
+      "tendencia_14d": 0
+    },
+    {
+      "nome": "Rui Costa Pimenta",
+      "media": 1.5,
+      "ic_min": 0,
+      "ic_max": 5.7,
       "partido": "",
       "tendencia_14d": 0
     }
@@ -98,5 +98,5 @@
   "prob_vitoria": null,
   "ultima_pesquisa": null,
   "ultimas_pesquisas": [],
-  "atualizado_em": "2026-08-02"
+  "atualizado_em": "2026-08-03"
 }
