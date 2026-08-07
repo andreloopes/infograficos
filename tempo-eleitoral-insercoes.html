@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quem terá mais espaço nas inserções ao longo do dia · EXAME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1a19; --soft:#4d4a47; --muted:#5c5955; --hair:#e6e3df; --hair2:#f4f3f1;
+    --paper:#ffffff; --red:#D9001E; --link:#A80016;
+    --g2:#3A3A3A; --g3:#8A837B; --g4:#C9C4BC;
+    --body:"Archivo",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:400;
+    line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:660px;margin:0 auto;padding:26px 22px 24px}
+  a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--red);font-weight:500;margin:0 0 10px}
+  h1{font-weight:300;font-size:clamp(21px,4.6vw,27px);letter-spacing:-.01em;line-height:1.18;margin:0 0 10px}
+  .lede{font-weight:400;font-size:14.5px;color:var(--soft);margin:0 0 26px;max-width:56ch;line-height:1.55}
+
+  .blocklabel{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 8px;
+    font-family:var(--mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+
+  .segbar{display:flex;width:100%;height:40px;border-radius:8px;overflow:hidden;
+    border:1px solid var(--hair);margin:0 0 22px}
+  .seg{height:100%;position:relative}
+  .seg:not(:last-child){border-right:1.5px solid #fff}
+
+  .rows{border-top:1px solid var(--hair)}
+  .row{padding:14px 0;border-bottom:1px solid var(--hair2);display:flex;align-items:center;gap:14px}
+  .row .rk{font-family:var(--mono);font-size:11px;color:var(--muted);width:18px;flex:none}
+  .row .who{flex:1;min-width:0}
+  .row .nm{font-weight:500;font-size:15px;line-height:1.3}
+  .row .pt{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px;line-height:1.5}
+  .row .val{text-align:right;flex:none}
+  .row .val .t{font-family:var(--mono);font-weight:500;font-size:17px}
+  .row .val .p{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
+  .row.lead .val .t{color:var(--red)}
+  .row .swatch{width:9px;height:9px;border-radius:2px;flex:none}
+
+  .zerosec{margin-top:26px}
+  .zerosec h2{font-weight:500;font-size:14.5px;margin:0 0 3px;letter-spacing:-.005em}
+  .zerosec .zn{font-family:var(--mono);font-size:11px;color:var(--muted);margin:0 0 12px}
+  .zerolist{display:flex;flex-wrap:wrap;gap:7px}
+  .zchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--hair);border-radius:999px;
+    padding:6px 11px 6px 9px;background:var(--hair2)}
+  .zchip .x{font-family:var(--mono);font-size:10px;color:var(--muted)}
+  .zchip .zn2{font-size:12.5px;color:var(--soft)}
+  .zchip .zp{font-family:var(--mono);font-size:10px;color:var(--muted)}
+
+  .method{margin-top:22px;padding-top:16px;border-top:1px solid var(--hair)}
+  .method p{font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.7;margin:0 0 8px}
+  .method b{color:var(--soft);font-weight:500}
+
+  @media(max-width:420px){
+    .wrap{padding:20px 16px 20px}
+    .row .nm{font-size:14px}.row .val .t{font-size:15px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Horário eleitoral gratuito · Inserções</p>
+  <h1>Quem terá mais espaço nas inserções ao longo do dia</h1>
+  <p class="lede">Nove nomes ficariam sem espaço nos comerciais eleitorais distribuídos ao longo do dia</p>
+
+  <div class="blocklabel"><span>Inserções ao longo do dia: 14min*</span><span>100%</span></div>
+  <div class="segbar" id="segbar" role="img" aria-label="Divisão de 14 minutos de inserções ao longo do dia: Lula 44,2%, Flávio Bolsonaro 34,7%, Caiado 16,3%, Cury 4,8%"></div>
+
+  <div class="rows" id="rows"></div>
+
+  <div class="zerosec">
+    <h2>Sem espaço nas inserções</h2>
+    <p class="zn">9 candidaturas registradas sem tempo de horário eleitoral</p>
+    <div class="zerolist" id="zerolist"></div>
+  </div>
+
+  <div class="method">
+    <p><b>Como é calculado:</b> pela regra eleitoral, 10% do tempo é dividido igualmente entre as candidaturas e 90% é proporcional ao tamanho da bancada de deputados federais eleita por cada partido, federação ou coligação em 2026. Quem não tem representação suficiente na Câmara não recebe tempo de rádio e TV.</p>
+    <p>*Considerando o mesmo tempo que o TSE reservou para as candidaturas à Presidência em 2022.</p>
+    <p>Fonte: Projeção de Edson Borowski, com dados do TSE.</p>
+  </div>
+</div>
+
+<script>
+const DADOS=[
+  {nome:"Lula",partido:"Federação Brasil da Esperança + PSOL/REDE + PSB + PDT",seg:371.41,cor:"var(--red)"},
+  {nome:"Flávio Bolsonaro",partido:"PL",seg:291.39,cor:"var(--g2)"},
+  {nome:"Caiado",partido:"PSD",seg:136.88,cor:"var(--g3)"},
+  {nome:"Cury",partido:"Avante",seg:40.31,cor:"var(--g4)"},
+];
+const SEM_TEMPO=[
+  {nome:"Clariana Barão",partido:"DC"},
+  {nome:"Edmilson Costa",partido:"PCB"},
+  {nome:"Hertz Dias",partido:"PSTU"},
+  {nome:"Leonardo Avalanche",partido:"PRTB"},
+  {nome:"Renan",partido:"Missão"},
+  {nome:"Rui Costa Pimenta",partido:"PCO"},
+  {nome:"Samara Martins",partido:"UP"},
+  {nome:"Wilson Grassi",partido:"Democrata"},
+  {nome:"Zema",partido:"Novo"},
+];
+const TOTAL=840;
+const mmss=s=>{const m=Math.floor(s/60),r=Math.round(s%60);return `${m}m${String(r).padStart(2,"0")}s`;};
+const pct=s=>(100*s/TOTAL).toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1});
+
+document.getElementById("segbar").innerHTML=DADOS.map(d=>
+  `<div class="seg" style="width:${(100*d.seg/TOTAL).toFixed(3)}%;background:${d.cor}"></div>`).join("");
+
+document.getElementById("rows").innerHTML=DADOS.map((d,i)=>`
+  <div class="row ${i===0?"lead":""}">
+    <span class="rk">${String(i+1).padStart(2,"0")}</span>
+    <span class="swatch" style="background:${d.cor}"></span>
+    <div class="who"><div class="nm">${d.nome}</div><div class="pt">${d.partido}</div></div>
+    <div class="val"><div class="t">${mmss(d.seg)}</div><div class="p">${pct(d.seg)}%</div></div>
+  </div>`).join("");
+
+document.getElementById("zerolist").innerHTML=SEM_TEMPO.map(z=>
+  `<span class="zchip"><span class="x">✕</span><span class="zn2">${z.nome}</span><span class="zp">${z.partido}</span></span>`).join("");
+</script>
+</body>
+</html>
