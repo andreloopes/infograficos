@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carinho sob demanda · O preço de namorar uma IA · EXAME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1a19; --soft:#4d4a47; --muted:#5c5955; --hair:#e6e3df; --hair2:#f4f3f1;
+    --paper:#ffffff; --red:#D9001E; --link:#A80016;
+    --g2:#3A3A3A; --g3:#8A837B; --g4:#C9C4BC;
+    --pink:#FF4D8D; --purple:#7C5CD9; --pixel-ink:#241833;
+    --body:"Archivo",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --pixel:"Press Start 2P",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:400;
+    line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:700px;margin:0 auto;padding:28px 22px 26px}
+  a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+  svg{display:block;shape-rendering:crispEdges}
+
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--red);font-weight:500;margin:0 0 12px}
+  .titlerow{display:flex;align-items:center;gap:14px;margin:0 0 8px}
+  .titlerow .pxheart{flex:none;width:40px;height:35px}
+  h1{font-weight:300;font-size:clamp(26px,6vw,34px);letter-spacing:-.01em;line-height:1.08;margin:0}
+  .subtitle{font-weight:400;font-size:15.5px;color:var(--soft);margin:0 0 18px;max-width:52ch}
+  .intro{font-size:13.5px;color:var(--soft);line-height:1.65;margin:0 0 28px;
+    padding:14px 16px;background:var(--hair2);border-radius:10px}
+  .intro b{color:var(--ink);font-weight:500}
+
+  h2{font-weight:500;font-size:16.5px;margin:0 0 4px;display:flex;align-items:center;gap:9px}
+  h2 .pxicon{flex:none;width:20px;height:18px}
+  .sechint{font-size:12.5px;color:var(--muted);margin:0 0 16px;line-height:1.55}
+
+  /* seção 1: apps prontos */
+  .approws{border-top:1px solid var(--hair);margin-bottom:8px}
+  .approw{padding:12px 0;border-bottom:1px solid var(--hair2);display:flex;align-items:center;gap:12px}
+  .approw .an{flex:1;min-width:0}
+  .approw .an .nm{font-weight:500;font-size:14.5px}
+  .approw .an .usd{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px}
+  .approw .barcell{flex:none;width:44%;display:flex;align-items:center;gap:10px}
+  .approw .bar{flex:1;height:16px;background:var(--hair2);border-radius:4px;overflow:hidden;position:relative}
+  .approw .bar i{display:block;height:100%;background:var(--pink);border-radius:4px}
+  .approw .brl{font-family:var(--mono);font-weight:500;font-size:13.5px;width:64px;text-align:right;flex:none}
+  .anote{display:inline-block;margin-top:4px;font-family:var(--mono);font-size:9.5px;color:var(--muted);
+    background:var(--hair2);border-radius:999px;padding:2px 8px}
+  @media(max-width:460px){.approw{flex-wrap:wrap}.approw .barcell{width:100%;order:3}}
+
+  /* seção 2: API */
+  .chart-wrap{margin:6px 0 6px;position:relative}
+  .chart{width:100%;height:auto;display:block}
+  .refline-label{font-family:var(--mono);font-size:9.5px;color:var(--muted)}
+  .legend2{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 4px;font-family:var(--mono);font-size:10.5px;color:var(--soft)}
+  .legend2 span{display:inline-flex;align-items:center;gap:6px}
+  .legend2 i{width:9px;height:9px;border-radius:2px;flex:none}
+
+  .profiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 4px}
+  .profile{border:1px solid var(--hair);border-radius:10px;padding:11px 10px;text-align:center}
+  .profile .pname{font-weight:500;font-size:12.5px;margin-bottom:2px}
+  .profile .pdesc{font-family:var(--mono);font-size:9px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+  .profile .hearts{display:flex;justify-content:center;gap:3px}
+  .profile .hearts svg{width:16px;height:14px}
+
+  /* insight callout — recolhível */
+  .callout{margin:24px 0 20px;border:1px solid var(--hair);border-radius:10px;overflow:hidden}
+  .callout>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;
+    padding:12px 16px;background:var(--hair2);min-height:44px}
+  .callout>summary::-webkit-details-marker{display:none}
+  .callout>summary .ic{font-family:var(--mono);font-size:11px;color:var(--red);transition:transform .15s;flex:none}
+  .callout[open]>summary .ic{transform:rotate(90deg)}
+  .callout>summary .ck{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--red);font-weight:500;flex:1}
+  .callout>summary .cn{font-family:var(--mono);font-size:9.5px;color:var(--muted)}
+  .callout-body{padding:14px 18px 16px;border-left:3px solid var(--red);margin:0 16px 14px;
+    background:var(--paper)}
+  .callout-body p{font-size:13.5px;color:var(--soft);line-height:1.65;margin:0}
+  .callout-body b{color:var(--ink);font-weight:500}
+
+  .footnotes{margin:0 0 6px}
+  .footnotes p{font-size:12px;color:var(--soft);line-height:1.6;margin:0 0 8px;padding-left:16px;position:relative}
+  .footnotes p::before{content:"•";position:absolute;left:0;color:var(--muted)}
+
+  .method{margin-top:16px;padding-top:2px;border-top:1px solid var(--hair)}
+  .method>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;
+    padding:12px 0;min-height:44px;font-family:var(--mono);font-size:10.5px;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.06em}
+  .method>summary::-webkit-details-marker{display:none}
+  .method>summary .ic{font-size:11px;color:var(--muted);transition:transform .15s;flex:none}
+  .method[open]>summary .ic{transform:rotate(90deg)}
+  .method-body{padding:0 0 4px}
+  .method-body p{font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.75;margin:0 0 8px}
+  .method-body b{color:var(--soft);font-weight:500}
+
+  @media(max-width:420px){
+    .wrap{padding:20px 16px 20px}
+    .profiles{gap:7px}
+    .profile{padding:9px 6px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">ExameLab · Namoro com inteligência artificial</p>
+  <div class="titlerow"><div class="pxheart" id="px-heart-title"></div><h1>Carinho sob demanda</h1></div>
+  <p class="subtitle">O preço para manter o relacionamento com uma inteligência artificial</p>
+
+  <p class="intro">"Namorar uma IA" acontece hoje de duas formas bem diferentes: pela <b>assinatura de um app pronto</b> — preço fixo, sem relação direta com o quanto se conversa — ou por um <b>bot construído sobre uma API</b>, como costuma rodar no Discord — aí o custo é por token e varia muito com o uso.</p>
+
+  <h2><span class="pxicon" id="px-heart-h1"></span>Apps prontos — preço fixo por assinatura</h2>
+  <p class="sechint">Nenhum desses cobra por token do usuário final: é tudo mensalidade. Dá pra namorar 24h por dia pagando o mesmo valor, dentro dos limites de uso de cada plano. Cotação: US$1 ≈ R$5,10 (11/ago/2026).</p>
+  <div class="approws" id="approws"></div>
+
+  <h2 style="margin-top:30px"><span class="pxicon" id="px-coin-h2"></span>Bot próprio via API — o custo é por token</h2>
+  <p class="sechint">Quem monta um "namorado(a) de IA" no Discord, SillyTavern ou Chub paga por token consumido — e o histórico da conversa inteira costuma ser reenviado a cada mensagem, então quanto mais "memória" o relacionamento acumula, mais caro fica cada resposta. Custo mensal estimado (30 dias) para três perfis de uso:</p>
+
+  <div class="profiles" id="profiles"></div>
+
+  <div class="chart-wrap">
+    <svg class="chart" id="chart" viewBox="0 0 660 300" preserveAspectRatio="xMidYMid meet" role="img"
+      aria-label="Custo mensal por modelo em três perfis de uso: leve, moderado e intenso"></svg>
+  </div>
+  <div class="legend2" id="legend2"></div>
+
+  <details class="callout">
+    <summary><span class="ic">▸</span><span class="ck">Leitura para a matéria</span><span class="cn">ler mais</span></summary>
+    <div class="callout-body"><p>No uso leve ou moderado, montar o próprio bot via API sai <b>mais barato</b> que qualquer assinatura pronta — por isso tanta gente prefere Discord ou SillyTavern a pagar Replika ou Character.AI. Mas no uso intenso — o perfil mais comum entre quem chama isso de "namoro" de verdade, com conversas o dia todo — o custo pode <b>ultrapassar os US$20/mês</b> das assinaturas, especialmente em Gemini e Claude, que cobram mais caro por token de saída. O GPT-5 se mantém mais barato porque a OpenAI pratica uma tarifa de entrada bem mais baixa.</p></div>
+  </details>
+
+  <div class="footnotes">
+    <p>Sem "prompt caching" — recurso que reduz o custo do contexto repetido — o gasto do uso intenso pode ser ainda maior do que o calculado aqui.</p>
+    <p>Estes números são só a "conta de luz" do relacionamento: não incluem hospedagem do bot, nem os pacotes de gemas ou Charms que Replika e Character.AI vendem à parte para personalização.</p>
+  </div>
+
+  <details class="method">
+    <summary><span class="ic">▸</span> Metodologia e fontes</summary>
+    <div class="method-body">
+      <p><b>Metodologia:</b> para o custo por API, foram usados três perfis de uso diário (leve, moderado e intenso) com número estimado de trocas de mensagem, tamanho médio do contexto reenviado a cada chamada e tamanho médio da resposta da IA; esses volumes de tokens foram multiplicados pelos preços oficiais de API de cada modelo (entrada e saída, por milhão de tokens) para chegar ao custo mensal. Para as assinaturas prontas, foi usado o preço fixo publicado por cada plataforma, já que nesse caso o usuário final não paga por token consumido.</p>
+      <p>Preços de API e assinatura levantados em agosto de 2026, sujeitos a alteração pelas empresas. Cotação: US$1 ≈ R$5,10 (11/ago/2026).</p>
+      <p>Estimativa ExameLab, com base nos preços oficiais publicados por OpenAI, Google, Anthropic, Replika e Character.AI.</p>
+    </div>
+  </details>
+
+</div>
+
+<script>
+/* ============ mini-motor de pixel art (bitmap -> <rect> em grade) ============ */
+function pixelSVG(matrix, cell, color, extra=""){
+  const rows=matrix.trim().split("\n").map(r=>r.trim());
+  const h=rows.length, w=rows[0].length;
+  let rects="";
+  rows.forEach((row,y)=>row.split("").forEach((c,x)=>{
+    if(c==="1") rects+=`<rect x="${x*cell}" y="${y*cell}" width="${cell}" height="${cell}" fill="${color}"/>`;
+  }));
+  return {svg:`<svg viewBox="0 0 ${w*cell} ${h*cell}" xmlns="http://www.w3.org/2000/svg" ${extra}>${rects}</svg>`,w,h};
+}
+const HEART=`
+01100110
+11111111
+11111111
+11111111
+01111110
+00111100
+00011000`;
+const COIN=`
+00111100
+01111110
+11100111
+11011011
+11011011
+11100111
+01111110
+00111100`;
+
+document.getElementById("px-heart-title").innerHTML=pixelSVG(HEART,5,"var(--pink)",'aria-hidden="true"').svg;
+document.getElementById("px-heart-h1").innerHTML=pixelSVG(HEART,2.4,"var(--red)",'aria-hidden="true"').svg;
+document.getElementById("px-coin-h2").innerHTML=pixelSVG(COIN,2.4,"var(--purple)",'aria-hidden="true"').svg;
+
+function miniHearts(n,total=3){
+  let out="";
+  for(let i=0;i<total;i++) out+=pixelSVG(HEART,2,i<n?"var(--red)":"var(--hair)",'aria-hidden="true"').svg;
+  return out;
+}
+
+/* ============ seção 1: apps prontos ============ */
+const APPS=[
+  {nome:"Character.AI (c.ai+)", usd:9.99, brl:51, nota:null},
+  {nome:"Replika Pro", usd:19.99, brl:102, nota:"~R$30/mês no plano anual"},
+  {nome:"ChatGPT Plus", usd:20.00, brl:102, nota:null},
+  {nome:"Google AI Pro (Gemini)", usd:19.99, brl:102, nota:null},
+  {nome:"Claude Pro", usd:20.00, brl:102, nota:null},
+];
+const maxApp=Math.max(...APPS.map(a=>a.brl));
+document.getElementById("approws").innerHTML=APPS.map(a=>`
+  <div class="approw">
+    <div class="an"><div class="nm">${a.nome}</div><div class="usd">US$ ${a.usd.toFixed(2)}/mês
+      ${a.nota?`<span class="anote">${a.nota}</span>`:""}</div></div>
+    <div class="barcell">
+      <div class="bar"><i style="width:${(100*a.brl/maxApp).toFixed(1)}%"></i></div>
+      <span class="brl">R$${a.brl}</span>
+    </div>
+  </div>`).join("");
+
+/* ============ seção 2: perfis + gráfico ============ */
+const PERFIS=[
+  {id:"leve",nome:"Leve",desc:"~15min/dia · 15 trocas",hearts:1},
+  {id:"moderado",nome:"Moderado",desc:"~1h/dia · 40 trocas",hearts:2},
+  {id:"intenso",nome:"Intenso",desc:"várias horas/dia · 100 trocas",hearts:3},
+];
+document.getElementById("profiles").innerHTML=PERFIS.map(p=>`
+  <div class="profile"><div class="pname">${p.nome}</div><div class="pdesc">${p.desc}</div>
+    <div class="hearts">${miniHearts(p.hearts)}</div></div>`).join("");
+
+const MODELOS=[
+  {id:"gpt5",nome:"GPT-5",cor:"var(--g2)"},
+  {id:"gemini",nome:"Gemini 3.1 Pro",cor:"var(--purple)"},
+  {id:"claude",nome:"Claude Sonnet 5",cor:"var(--red)"},
+];
+const CUSTOS={ // USD/mês
+  leve:{gpt5:0.56, gemini:1.53, claude:1.40},
+  moderado:{gpt5:2.70, gemini:7.68, claude:7.20},
+  intenso:{gpt5:12.00, gemini:34.80, claude:33.00},
+};
+document.getElementById("legend2").innerHTML=MODELOS.map(m=>
+  `<span><i style="background:${m.cor}"></i>${m.nome}</span>`).join("")
+  +`<span><i style="background:none;border-top:2px dashed var(--muted);width:14px;height:0"></i>≈ preço de assinatura (US$20)</span>`;
+
+(function drawChart(){
+  const W=660,H=300,PAD={t:24,r:14,b:34,l:36};
+  const maxVal=Math.max(...Object.values(CUSTOS).flatMap(o=>Object.values(o)));
+  const yMax=Math.ceil(maxVal/5)*5; // 35
+  const groupW=(W-PAD.l-PAD.r)/PERFIS.length;
+  const barW=26,gap=6;
+  const y=v=>PAD.t+(1-v/yMax)*(H-PAD.t-PAD.b);
+
+  let grid="";
+  for(let v=0; v<=yMax; v+=10){
+    grid+=`<line x1="${PAD.l}" y1="${y(v).toFixed(1)}" x2="${W-PAD.r}" y2="${y(v).toFixed(1)}" stroke="var(--hair)" stroke-width="1"/>`
+       +`<text x="${PAD.l-6}" y="${(y(v)+3.5).toFixed(1)}" text-anchor="end" font-family="var(--mono)" font-size="9.5" fill="var(--muted)">US$${v}</text>`;
+  }
+  const refY=y(20);
+  const refLine=`<line x1="${PAD.l}" y1="${refY.toFixed(1)}" x2="${W-PAD.r}" y2="${refY.toFixed(1)}" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="4 3"/>`;
+
+  let bars="",labels="";
+  PERFIS.forEach((p,gi)=>{
+    const groupX=PAD.l+gi*groupW;
+    const startX=groupX+(groupW-(barW*3+gap*2))/2;
+    MODELOS.forEach((m,mi)=>{
+      const v=CUSTOS[p.id][m.id];
+      const x=startX+mi*(barW+gap);
+      const yy=y(v);
+      bars+=`<rect x="${x.toFixed(1)}" y="${yy.toFixed(1)}" width="${barW}" height="${(H-PAD.b-yy).toFixed(1)}" fill="${m.cor}" rx="2"/>`
+         +`<text x="${(x+barW/2).toFixed(1)}" y="${(yy-5).toFixed(1)}" text-anchor="middle" font-family="var(--mono)" font-size="9.5" font-weight="500" fill="var(--ink)">${v<1?v.toFixed(2):v.toFixed(2).replace(/\\.00$/,"")}</text>`;
+    });
+    labels+=`<text x="${(groupX+groupW/2).toFixed(1)}" y="${H-PAD.b+16}" text-anchor="middle" font-family="var(--body)" font-weight="500" font-size="12" fill="var(--ink)">${p.nome}</text>`;
+  });
+
+  document.getElementById("chart").innerHTML=grid+refLine+bars+labels;
+})();
+</script>
+</body>
+</html>
