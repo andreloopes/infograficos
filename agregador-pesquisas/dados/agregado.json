@@ -1,7 +1,7 @@
 {
   "cenario": "1º turno · Brasil (nacional)",
   "metodologia": "Média ponderada por recência e amostra (E²D)",
-  "corte": "2026-08-20",
+  "corte": "2026-08-21",
   "indecisos": 10.7,
   "fonte": "Eleição em Dados (E²D) — média ponderada de pesquisas registradas no TSE",
   "fonte_url": "https://eleicaoemdados.com.br/agregador",
@@ -98,5 +98,5 @@
   "prob_vitoria": null,
   "ultima_pesquisa": null,
   "ultimas_pesquisas": [],
-  "atualizado_em": "2026-08-20"
+  "atualizado_em": "2026-08-21"
 }

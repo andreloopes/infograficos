@@ -190,7 +190,16 @@
       }
     },
     {
+      "cenario": "1º turno · Brasil (nacional)",
       "data": "2026-08-20",
+      "valores": {
+        "Lula": 40.5,
+        "Flávio Bolsonaro": 29.1,
+        "Renan Santos": 3.3
+      }
+    },
+    {
+      "data": "2026-08-21",
       "cenario": "1º turno · Brasil (nacional)",
       "valores": {
         "Lula": 40.5,
