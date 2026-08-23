@@ -1,102 +1,70 @@
 {
-  "cenario": "1º turno · Brasil (nacional)",
-  "metodologia": "Média ponderada por recência e amostra (E²D)",
-  "corte": "2026-08-22",
-  "indecisos": 10.7,
-  "fonte": "Eleição em Dados (E²D) — média ponderada de pesquisas registradas no TSE",
-  "fonte_url": "https://eleicaoemdados.com.br/agregador",
+  "cenario": "2º turno · Lula × Flávio",
+  "metodologia": "Filtro de Kalman sobre pesquisas registradas",
+  "corte": "2026-08-13",
+  "indecisos": null,
+  "fonte": "Agregador 2026 (Filtro de Kalman) — Joaquim Bermudes, a partir de pesquisas registradas no TSE",
+  "fonte_url": "https://joaquimbermudes.github.io/Agregador_2026/",
   "candidatos": [
     {
       "nome": "Lula",
-      "media": 40.5,
-      "ic_min": 34.6,
-      "ic_max": 46.9,
-      "partido": "",
-      "tendencia_14d": 0
+      "partido": "PT",
+      "media": 53,
+      "ic_min": 50.9,
+      "ic_max": 55.1,
+      "tendencia_14d": 0.7
     },
     {
       "nome": "Flávio Bolsonaro",
-      "media": 29.1,
-      "ic_min": 24.1,
-      "ic_max": 34.6,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
-      "nome": "Renan Santos",
-      "media": 3.3,
-      "ic_min": 0,
-      "ic_max": 7.8,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
-      "nome": "Augusto Cury",
-      "media": 2.6,
-      "ic_min": 0,
-      "ic_max": 7.1,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
-      "nome": "Samara Martins",
-      "media": 2.3,
-      "ic_min": 0,
-      "ic_max": 6.6,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
-      "nome": "Romeu Zema",
-      "media": 2.2,
-      "ic_min": 0,
-      "ic_max": 6.6,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
-      "nome": "Ronaldo Caiado",
-      "media": 2.2,
-      "ic_min": 0,
-      "ic_max": 6.5,
-      "partido": "",
-      "tendencia_14d": -0.8
-    },
-    {
-      "nome": "Aecio Neves",
-      "media": 2.1,
-      "ic_min": 0,
-      "ic_max": 6.3,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
-      "nome": "Dario Barbosa",
-      "media": 1.8,
-      "ic_min": 0,
-      "ic_max": 6.1,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
-      "nome": "Daciolo",
-      "media": 1.6,
-      "ic_min": 0,
-      "ic_max": 5.8,
-      "partido": "",
-      "tendencia_14d": 0
-    },
-    {
-      "nome": "Rui Costa Pimenta",
-      "media": 1.5,
-      "ic_min": 0,
-      "ic_max": 5.7,
-      "partido": "",
-      "tendencia_14d": 0
+      "partido": "PL",
+      "media": 47,
+      "ic_min": 45,
+      "ic_max": 49.1,
+      "tendencia_14d": -0.7
     }
   ],
-  "prob_vitoria": null,
-  "ultima_pesquisa": null,
-  "ultimas_pesquisas": [],
-  "atualizado_em": "2026-08-22"
+  "prob_vitoria": {
+    "Lula": 99.8,
+    "Flávio Bolsonaro": 0.2
+  },
+  "ultima_pesquisa": "Genial/Quaest (13/08/2026)",
+  "ultimas_pesquisas": [
+    {
+      "instituto": "Nexus/BTG Pactual",
+      "coleta_label": "14 Ago - 16 Ago",
+      "amostra": 2003,
+      "detalhe": "Lula 41% × Flávio 36%"
+    },
+    {
+      "instituto": "Genial/Quaest",
+      "coleta_label": "10 Ago - 13 Ago",
+      "amostra": 2004,
+      "detalhe": "Lula 38% × Flávio 31%"
+    },
+    {
+      "instituto": "PoderData/Aya",
+      "coleta_label": "9 Ago - 12 Ago",
+      "amostra": 2400,
+      "detalhe": "Lula 41% × Flávio 35%"
+    },
+    {
+      "instituto": "Gerp",
+      "coleta_label": "6 Ago - 10 Ago",
+      "amostra": 2400,
+      "detalhe": "Lula 38% × Flávio 38%"
+    },
+    {
+      "instituto": "Nexus/BTG Pactual",
+      "coleta_label": "7 Ago - 9 Ago",
+      "amostra": 2001,
+      "detalhe": "Lula 40% × Flávio 35%"
+    },
+    {
+      "instituto": "CNT/MDA",
+      "coleta_label": "5 Ago - 9 Ago",
+      "amostra": 2002,
+      "detalhe": "Lula 42.4% × Flávio 28.7%"
+    }
+  ],
+  "atualizado_em": "2026-08-23"
 }

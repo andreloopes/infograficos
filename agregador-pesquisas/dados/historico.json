@@ -136,6 +136,14 @@
       }
     },
     {
+      "data": "2026-08-13",
+      "cenario": "2º turno · Lula × Flávio",
+      "valores": {
+        "Lula": 53,
+        "Flávio Bolsonaro": 47
+      }
+    },
+    {
       "cenario": "1º turno · Brasil (nacional)",
       "data": "2026-08-14",
       "valores": {
@@ -208,8 +216,8 @@
       }
     },
     {
-      "data": "2026-08-22",
       "cenario": "1º turno · Brasil (nacional)",
+      "data": "2026-08-22",
       "valores": {
         "Lula": 40.5,
         "Flávio Bolsonaro": 29.1,
