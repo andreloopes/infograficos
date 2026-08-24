@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Maiores fabricantes de smartphones da América Latina — 1T26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#D9001E;--red-pale:#FFF5F6;
+  --black:#111;--g1:#333;--g2:#666;--g3:#aaa;--g4:#ddd;
+  --line:#EBEBEB;--white:#fff;--gbg:#F7F7F7;
+  --green:#1a7a40;--green-bg:rgba(0,140,60,.08);
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Archivo',sans-serif;
+  --blk:'Archivo Black',sans-serif;
+}
+html,body{width:100%;background:var(--white);color:var(--black);font-family:var(--sans);-webkit-font-smoothing:antialiased;margin:0}
+.wrap{container-type:inline-size;container-name:wrap;width:100%}
+
+/* ── HEADER ── */
+.hdr{padding:22px 28px 18px;border-top:3px solid var(--red);border-bottom:1px solid var(--line)}
+.hdr h1{font-family:var(--blk);font-size:clamp(16px,3.8cqi,22px);line-height:1.1;margin-bottom:8px}
+.hdr h1 em{font-style:normal;color:var(--red)}
+.hdr-sub{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hdr p{font-size:clamp(11px,2cqi,13px);color:var(--g2);line-height:1.5}
+.hdr-badge{font-family:var(--mono);font-size:clamp(9px,1.7cqi,11px);background:var(--red);color:var(--white);padding:3px 10px;border-radius:2px;white-space:nowrap;flex-shrink:0}
+
+/* ── HEROES ── */
+.heroes{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
+.hero{padding:16px 20px;border-right:1px solid var(--line)}
+.hero:last-child{border-right:none}
+.hero-lbl{font-family:var(--mono);font-size:8px;color:var(--g3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.hero-val{font-family:var(--blk);font-size:clamp(18px,3.8cqi,24px);line-height:1;color:var(--black);margin-bottom:4px}
+.hero-val.red{color:var(--red)}
+.hero-note{font-size:clamp(10px,1.8cqi,11.5px);color:var(--g3)}
+.hero-chg{font-family:var(--mono);font-size:9.5px;font-weight:600;padding:2px 5px;border-radius:2px;display:inline-block}
+.hero-chg.up{color:var(--green);background:var(--green-bg)}
+
+/* ── CALLOUT CHINESAS ── */
+.callout-china{display:flex;align-items:center;gap:16px;padding:14px 28px;background:var(--red-pale);border-bottom:1px solid rgba(217,0,30,.15)}
+.cc-num{font-family:var(--blk);font-size:clamp(28px,6cqi,38px);color:var(--red);line-height:1;flex-shrink:0}
+.cc-txt{font-size:clamp(11px,2cqi,13px);color:var(--g1);line-height:1.55}
+.cc-txt b{color:var(--black);font-weight:700}
+
+/* ── CHART ── */
+.sh{display:flex;align-items:center;gap:10px;padding:18px 28px 0}
+.sh-lbl{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--red);white-space:nowrap;font-weight:600}
+.sh-line{flex:1;height:1px;background:var(--line)}
+
+.rows{padding:10px 28px 8px}
+.col-hdr{display:flex;align-items:center;gap:10px;padding:0 0 6px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.ch-name{width:clamp(100px,22cqi,170px);flex-shrink:0;font-family:var(--mono);font-size:8.5px;color:var(--g3);letter-spacing:1px;text-transform:uppercase}
+.ch-bar{flex:1}
+.ch-share{width:42px;flex-shrink:0;font-family:var(--mono);font-size:8.5px;color:var(--g3);letter-spacing:1px;text-transform:uppercase;text-align:right}
+.ch-ship{width:56px;flex-shrink:0;font-family:var(--mono);font-size:8.5px;color:var(--g3);letter-spacing:1px;text-transform:uppercase;text-align:right}
+.ch-yoy{width:52px;flex-shrink:0;font-family:var(--mono);font-size:8.5px;color:var(--g3);letter-spacing:1px;text-transform:uppercase;text-align:right}
+
+.row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);transition:background .1s;cursor:default}
+.row:last-child{border-bottom:none}
+.row:hover{background:rgba(0,0,0,.02);margin:0 -10px;padding-left:10px;padding-right:10px}
+.row.total{background:var(--gbg);margin:0 -10px;padding:10px;border-radius:2px;border-bottom:none;margin-top:4px}
+
+.r-name{width:clamp(100px,22cqi,170px);flex-shrink:0}
+.r-brand{font-size:clamp(11px,2cqi,13px);font-weight:700;color:var(--black);display:block;line-height:1.2}
+.r-brand.cn{color:var(--red)}
+.r-tag{font-family:var(--mono);font-size:clamp(7.5px,1.4cqi,9px);color:var(--g3);display:block;margin-top:2px}
+
+.r-bar{flex:1;height:clamp(10px,2.2cqi,14px);background:var(--gbg);border-radius:2px;overflow:hidden}
+.r-fill{height:100%;border-radius:2px;transform-origin:left;transform:scaleX(0);animation:growH .65s cubic-bezier(.4,0,.2,1) forwards}
+.row:nth-child(2) .r-fill{animation-delay:.04s}
+.row:nth-child(3) .r-fill{animation-delay:.09s}
+.row:nth-child(4) .r-fill{animation-delay:.14s}
+.row:nth-child(5) .r-fill{animation-delay:.19s}
+.row:nth-child(6) .r-fill{animation-delay:.24s}
+.row:nth-child(7) .r-fill{animation-delay:.29s}
+.row:nth-child(8) .r-fill{animation-delay:.34s}
+
+.r-share{width:42px;flex-shrink:0;font-family:var(--mono);font-size:clamp(10px,1.9cqi,12px);font-weight:600;color:var(--black);text-align:right}
+.r-share.big{color:var(--red)}
+.r-ship{width:56px;flex-shrink:0;font-family:var(--mono);font-size:clamp(9.5px,1.7cqi,11px);color:var(--g2);text-align:right}
+.r-yoy{width:52px;flex-shrink:0;font-family:var(--mono);font-size:clamp(9px,1.7cqi,11px);font-weight:600;text-align:right;border-radius:2px;padding:2px 4px}
+.r-yoy.up{color:var(--green);background:var(--green-bg)}
+.r-yoy.dn{color:var(--g3)}
+.r-yoy.flat{color:var(--g2)}
+
+/* ── NOTA ── */
+.nota{padding:10px 28px 6px}
+.nota p{font-size:clamp(9px,1.7cqi,11px);color:var(--g3);line-height:1.6}
+
+/* ── FOOTER ── */
+.foot{padding:10px 28px 14px;border-top:1px solid var(--line)}
+.foot-src{font-size:clamp(9px,1.6cqi,11px);color:var(--g3)}
+
+@container wrap (max-width:500px){
+  .heroes{grid-template-columns:1fr 1fr}
+  .hero:nth-child(2){border-right:none}
+  .hero:nth-child(3){border-top:1px solid var(--line);grid-column:1/-1}
+  .ch-ship,.r-ship{display:none}
+  .hdr,.sh,.rows,.nota,.foot,.callout-china{padding-left:18px;padding-right:18px}
+}
+@keyframes growH{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="hdr">
+  <h1>Os maiores fabricantes de smartphones da <em>América Latina</em></h1>
+  <div class="hdr-sub">
+    <p>Marcas chinesas aparecem na frente da Apple</p>
+    <span class="hdr-badge">1T26 vs 1T25</span>
+  </div>
+</div>
+
+<!-- HEROES -->
+<div class="heroes">
+  <div class="hero">
+    <div class="hero-lbl">Total de envios — 1T26</div>
+    <div class="hero-val">34,8 mi</div>
+    <div class="hero-note">vs. 33,7 mi no 1T25</div>
+  </div>
+  <div class="hero">
+    <div class="hero-lbl">Líder de mercado</div>
+    <div class="hero-val red">Samsung 37%</div>
+    <div class="hero-note">12,9 mi de unidades</div>
+  </div>
+  <div class="hero">
+    <div class="hero-lbl">Crescimento geral</div>
+    <div class="hero-val">+3%</div>
+    <span class="hero-chg up">mercado em alta</span>
+  </div>
+</div>
+
+<!-- CALLOUT CHINA -->
+<div class="callout-china">
+  <div class="cc-num">41%</div>
+  <div class="cc-txt">do mercado está nas mãos de marcas chinesas — <b>Xiaomi (17%), HONOR (10%) e Motorola/Lenovo (14%)</b> juntas mais que triplicam a participação da Apple, que fica com apenas <b>5%</b></div>
+</div>
+
+<!-- CHART -->
+<div class="sh"><span class="sh-lbl">Participação de mercado — 1T26</span><div class="sh-line"></div></div>
+
+<div class="rows">
+  <div class="col-hdr">
+    <div class="ch-name">Fabricante</div>
+    <div class="ch-bar"></div>
+    <div class="ch-share">Part.</div>
+    <div class="ch-ship">Envios</div>
+    <div class="ch-yoy">Var. a/a</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name">
+      <span class="r-brand">Samsung</span>
+      <span class="r-tag">🇰🇷 Coreia do Sul</span>
+    </div>
+    <div class="r-bar"><div class="r-fill" style="width:100%;background:#1428A0"></div></div>
+    <div class="r-share big">37%</div>
+    <div class="r-ship">12,9 mi</div>
+    <div class="r-yoy up">+9%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name">
+      <span class="r-brand cn">Xiaomi</span>
+      <span class="r-tag">🇨🇳 China</span>
+    </div>
+    <div class="r-bar"><div class="r-fill" style="width:45.9%;background:var(--red)"></div></div>
+    <div class="r-share">17%</div>
+    <div class="r-ship">6,0 mi</div>
+    <div class="r-yoy up">+3%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name">
+      <span class="r-brand cn">Motorola</span>
+      <span class="r-tag">🇨🇳 Lenovo (China)</span>
+    </div>
+    <div class="r-bar"><div class="r-fill" style="width:37.8%;background:rgba(217,0,30,.65)"></div></div>
+    <div class="r-share">14%</div>
+    <div class="r-ship">4,9 mi</div>
+    <div class="r-yoy dn">−5%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name">
+      <span class="r-brand cn">HONOR</span>
+      <span class="r-tag">🇨🇳 China</span>
+    </div>
+    <div class="r-bar"><div class="r-fill" style="width:27%;background:rgba(217,0,30,.45)"></div></div>
+    <div class="r-share">10%</div>
+    <div class="r-ship">3,4 mi</div>
+    <div class="r-yoy up">+30%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name">
+      <span class="r-brand">Apple</span>
+      <span class="r-tag">🇺🇸 Estados Unidos</span>
+    </div>
+    <div class="r-bar"><div class="r-fill" style="width:13.5%;background:var(--g3)"></div></div>
+    <div class="r-share">5%</div>
+    <div class="r-ship">1,8 mi</div>
+    <div class="r-yoy up">+31%</div>
+  </div>
+
+  <div class="row">
+    <div class="r-name">
+      <span class="r-brand" style="color:var(--g2)">Outros</span>
+      <span class="r-tag">Múltiplos países</span>
+    </div>
+    <div class="r-bar"><div class="r-fill" style="width:43.2%;background:var(--g4)"></div></div>
+    <div class="r-share" style="color:var(--g2)">16%</div>
+    <div class="r-ship">5,8 mi</div>
+    <div class="r-yoy dn">−16%</div>
+  </div>
+
+  <div class="row total">
+    <div class="r-name">
+      <span class="r-brand">Total</span>
+    </div>
+    <div class="r-bar"></div>
+    <div class="r-share big">100%</div>
+    <div class="r-ship">34,8 mi</div>
+    <div class="r-yoy flat">+3%</div>
+  </div>
+
+</div>
+
+<!-- NOTA -->
+<div class="nota">
+  <p>Estimativas da Xiaomi incluem submarcas POCO e Redmi. TRANSSION inclui TECNO, Infinix e itel. OPPO inclui OnePlus e realme. Percentuais podem não somar 100% por arredondamento.</p>
+</div>
+
+<!-- FOOTER -->
+<div class="foot">
+  <span class="foot-src">Fonte: Omdia Smartphone Horizon Service (sell-in shipments) · Maio de 2026 · Valores em milhões de unidades</span>
+</div>
+
+</div>
+<script>
+  function h(){window.parent.postMessage({height:document.body.scrollHeight},'*');}
+  window.addEventListener('load',h);window.addEventListener('resize',h);
+</script>
+</body>
+</html>
