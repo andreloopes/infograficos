@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Quem lidera a maturidade digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#b84535;
+  --blue:#3e6f9f;
+  --ink:#2b2e32;
+  --muted:#62666c;
+  --line:#e5e7ea;
+  --soft:#f3f4f6;
+  --paper:#ffffff;
+  --bg:#f7f7f7;
+}
+html,body{
+  width:100%;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  margin:0;
+}
+.shell{
+  max-width:930px;
+  margin:0 auto;
+  padding:18px;
+}
+.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:28px 32px 24px;
+}
+.card h1{
+  font-size:clamp(22px,3.2vw,28px);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1.15;
+  color:var(--ink);
+  margin-bottom:8px;
+}
+.card .lead{
+  font-size:clamp(13px,1.6vw,15px);
+  font-weight:400;
+  color:var(--muted);
+  line-height:1.55;
+  margin-bottom:18px;
+}
+.avg-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border-radius:999px;
+  padding:6px 14px;
+  font-size:12.5px;
+  font-weight:600;
+  color:var(--ink);
+  background:var(--soft);
+  margin-bottom:20px;
+}
+.avg-pill span{color:var(--muted);font-weight:500}
+.avg-pill strong{font-weight:800;letter-spacing:-.02em;color:var(--blue)}
+.rows{display:flex;flex-direction:column;gap:11px}
+.row{
+  display:grid;
+  grid-template-columns:28px minmax(140px,1.2fr) minmax(100px,1.5fr) 44px;
+  gap:10px 12px;
+  align-items:center;
+}
+.rank{
+  font-size:12px;
+  font-weight:600;
+  color:var(--muted);
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.rank.top{color:var(--red);font-weight:800}
+.rank.bot{color:var(--red);font-weight:800}
+.r-label{
+  font-size:clamp(12px,1.45vw,13.5px);
+  font-weight:600;
+  letter-spacing:-.015em;
+  color:var(--ink);
+  line-height:1.25;
+}
+.r-label.top{color:var(--red)}
+.r-label.bot{color:var(--muted)}
+.track{
+  height:10px;
+  background:var(--soft);
+  border-radius:999px;
+  overflow:hidden;
+}
+.fill{
+  height:100%;
+  border-radius:999px;
+  transform-origin:left;
+  transform:scaleX(0);
+  animation:grow .65s cubic-bezier(.4,0,.2,1) forwards;
+}
+.row:nth-child(1) .fill{animation-delay:.03s}
+.row:nth-child(2) .fill{animation-delay:.05s}
+.row:nth-child(3) .fill{animation-delay:.07s}
+.row:nth-child(4) .fill{animation-delay:.09s}
+.row:nth-child(5) .fill{animation-delay:.11s}
+.row:nth-child(6) .fill{animation-delay:.13s}
+.row:nth-child(7) .fill{animation-delay:.15s}
+.row:nth-child(8) .fill{animation-delay:.17s}
+.row:nth-child(9) .fill{animation-delay:.19s}
+.row:nth-child(10) .fill{animation-delay:.21s}
+.row:nth-child(11) .fill{animation-delay:.23s}
+.row:nth-child(12) .fill{animation-delay:.25s}
+.row:nth-child(13) .fill{animation-delay:.27s}
+.row:nth-child(14) .fill{animation-delay:.29s}
+.row:nth-child(15) .fill{animation-delay:.31s}
+.score{
+  font-size:clamp(14px,1.7vw,16px);
+  font-weight:800;
+  letter-spacing:-.03em;
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+  color:var(--ink);
+}
+.score.top,.score.bot{color:var(--red)}
+.badge{
+  display:inline-flex;
+  border-radius:999px;
+  padding:2px 8px;
+  font-size:10px;
+  font-weight:700;
+  margin-left:6px;
+  vertical-align:middle;
+}
+.badge.top{background:rgba(184,69,53,.12);color:var(--red)}
+.badge.bot{background:rgba(184,69,53,.12);color:var(--red)}
+.fonte{
+  margin-top:22px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+}
+.fonte b{font-weight:600;color:var(--ink)}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (max-width:640px){
+  .shell{padding:0}
+  .card{border-radius:0;border-left:none;border-right:none;padding:22px 18px 20px}
+  .row{
+    grid-template-columns:24px 1fr 40px;
+    gap:6px 8px;
+  }
+  .track{grid-column:2 / -1;order:3}
+  .score{order:2}
+}
+@media (prefers-reduced-motion:reduce){
+  .fill{animation:none;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <article class="card" aria-labelledby="titulo">
+    <h1 id="titulo">Quem lidera a maturidade digital</h1>
+    <p class="lead">Digital Maturity Score médio por setor. Média geral do mercado: 72.</p>
+
+    <div class="avg-pill" role="note">
+      <span>Média do mercado</span>
+      <strong>72</strong>
+    </div>
+
+    <div class="rows" role="list" aria-label="Ranking de maturidade digital por setor">
+      <div class="row" role="listitem">
+        <span class="rank top" aria-hidden="true">1</span>
+        <div class="r-label top">Farmacêutica <span class="badge top">Topo</span></div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:83%;background:var(--red)"></div></div>
+        <span class="score top" aria-label="Score 83">83</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">2</span>
+        <div class="r-label">Transporte e Logística</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:79%;background:var(--blue)"></div></div>
+        <span class="score" aria-label="Score 79">79</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">3</span>
+        <div class="r-label">Energia</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:77%;background:var(--blue)"></div></div>
+        <span class="score" aria-label="Score 77">77</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">4</span>
+        <div class="r-label">Educação</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:75%;background:var(--blue)"></div></div>
+        <span class="score" aria-label="Score 75">75</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">5</span>
+        <div class="r-label">Tecnologia da Informação</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:75%;background:var(--blue)"></div></div>
+        <span class="score" aria-label="Score 75">75</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">6</span>
+        <div class="r-label">Bens de Consumo</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:74%;background:var(--ink)"></div></div>
+        <span class="score" aria-label="Score 74">74</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">7</span>
+        <div class="r-label">Comunicação</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:74%;background:var(--ink)"></div></div>
+        <span class="score" aria-label="Score 74">74</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">8</span>
+        <div class="r-label">Construção e Serviços Especializados</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:74%;background:var(--ink)"></div></div>
+        <span class="score" aria-label="Score 74">74</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">9</span>
+        <div class="r-label">Utilidades e Serviços Públicos</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:73%;background:var(--ink)"></div></div>
+        <span class="score" aria-label="Score 73">73</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">10</span>
+        <div class="r-label">Têxtil e Vestuário</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:72%;background:var(--ink)"></div></div>
+        <span class="score" aria-label="Score 72">72</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">11</span>
+        <div class="r-label">Alimentos e Bebidas</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:69%;background:var(--ink)"></div></div>
+        <span class="score" aria-label="Score 69">69</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">12</span>
+        <div class="r-label">Varejo</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:67%;background:var(--ink)"></div></div>
+        <span class="score" aria-label="Score 67">67</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">13</span>
+        <div class="r-label">Serviços Financeiros</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:66%;background:var(--ink)"></div></div>
+        <span class="score" aria-label="Score 66">66</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank" aria-hidden="true">14</span>
+        <div class="r-label">Agricultura e Pecuária</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:64%;background:var(--ink)"></div></div>
+        <span class="score" aria-label="Score 64">64</span>
+      </div>
+      <div class="row" role="listitem">
+        <span class="rank bot" aria-hidden="true">15</span>
+        <div class="r-label bot">Saúde <span class="badge bot">Base</span></div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:54%;background:var(--red)"></div></div>
+        <span class="score bot" aria-label="Score 54">54</span>
+      </div>
+    </div>
+
+    <p class="fonte"><b>Fonte:</b> Panorama Mindset Digital — 3ª edição (Brivia_Group) · 350 empresas · set/25–mar/26</p>
+  </article>
+</div>
+<script>
+function h(){window.parent.postMessage({ height: document.body.scrollHeight }, '*');}
+window.addEventListener('load', h);
+window.addEventListener('resize', h);
+</script>
+</body>
+</html>

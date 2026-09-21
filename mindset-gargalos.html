@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Onde a transformação trava</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#b84535;
+  --blue:#3e6f9f;
+  --ink:#2b2e32;
+  --muted:#62666c;
+  --line:#e5e7ea;
+  --soft:#f3f4f6;
+  --paper:#ffffff;
+  --bg:#f7f7f7;
+}
+html,body{
+  width:100%;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  margin:0;
+}
+.shell{
+  max-width:930px;
+  margin:0 auto;
+  padding:18px;
+}
+.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:28px 32px 24px;
+}
+.card h1{
+  font-size:clamp(22px,3.2vw,28px);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1.15;
+  color:var(--ink);
+  margin-bottom:8px;
+}
+.card .lead{
+  font-size:clamp(13px,1.6vw,15px);
+  font-weight:400;
+  color:var(--muted);
+  line-height:1.55;
+  margin-bottom:18px;
+}
+.alert-banner{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px 12px;
+  background:rgba(184,69,53,.08);
+  border:1px solid rgba(184,69,53,.18);
+  border-radius:12px;
+  padding:12px 16px;
+  margin-bottom:20px;
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.45;
+}
+.alert-pill{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:4px 12px;
+  font-size:12px;
+  font-weight:700;
+  background:var(--red);
+  color:#fff;
+}
+.alert-banner strong{color:var(--ink);font-weight:700}
+.rows{display:flex;flex-direction:column;gap:14px}
+.row{
+  display:grid;
+  grid-template-columns:minmax(160px,1.35fr) minmax(120px,1.3fr) auto;
+  gap:12px 16px;
+  align-items:center;
+}
+.r-label{
+  font-size:clamp(12.5px,1.5vw,14px);
+  font-weight:600;
+  letter-spacing:-.015em;
+  color:var(--ink);
+  line-height:1.3;
+}
+.r-label.crit{color:var(--red)}
+.track{
+  height:12px;
+  background:var(--soft);
+  border-radius:999px;
+  overflow:hidden;
+}
+.fill{
+  height:100%;
+  border-radius:999px;
+  transform-origin:left;
+  transform:scaleX(0);
+  animation:grow .7s cubic-bezier(.4,0,.2,1) forwards;
+}
+.row:nth-child(1) .fill{animation-delay:.04s}
+.row:nth-child(2) .fill{animation-delay:.08s}
+.row:nth-child(3) .fill{animation-delay:.12s}
+.row:nth-child(4) .fill{animation-delay:.16s}
+.row:nth-child(5) .fill{animation-delay:.20s}
+.row:nth-child(6) .fill{animation-delay:.24s}
+.row:nth-child(7) .fill{animation-delay:.28s}
+.meta{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  justify-content:flex-end;
+  min-width:72px;
+}
+.score{
+  font-size:clamp(15px,1.8vw,18px);
+  font-weight:800;
+  letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+  color:var(--red);
+}
+.score.mild{color:var(--ink)}
+.tag{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:3px 10px;
+  font-size:11px;
+  font-weight:600;
+  white-space:nowrap;
+  background:rgba(184,69,53,.12);
+  color:var(--red);
+}
+.tag.soft{
+  background:var(--soft);
+  color:var(--muted);
+}
+.fonte{
+  margin-top:22px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+}
+.fonte b{font-weight:600;color:var(--ink)}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (max-width:640px){
+  .shell{padding:0}
+  .card{border-radius:0;border-left:none;border-right:none;padding:22px 18px 20px}
+  .row{
+    grid-template-columns:1fr auto;
+    gap:6px 10px;
+  }
+  .track{grid-column:1 / -1;order:3}
+  .meta{order:2}
+  .tag{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .fill{animation:none;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <article class="card" aria-labelledby="titulo">
+    <h1 id="titulo">Onde a transformação trava</h1>
+    <p class="lead">Pontos que puxam a maturidade para baixo na média do mercado brasileiro.</p>
+
+    <div class="alert-banner" role="note">
+      <span class="alert-pill">Alerta</span>
+      <span>Valores baixos (escala 0–100). Quanto menor o score, maior o gargalo. Mais crítico: <strong>P&amp;L com IA (45)</strong>.</span>
+    </div>
+
+    <div class="rows" role="list" aria-label="Gargalos da transformação digital ordenados do mais crítico ao menos">
+      <div class="row" role="listitem">
+        <div class="r-label crit">Redução significativa no P&amp;L com IA</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:45%;background:var(--red)"></div></div>
+        <div class="meta"><span class="score" aria-label="Score 45">45</span><span class="tag">Crítico</span></div>
+      </div>
+      <div class="row" role="listitem">
+        <div class="r-label crit">Resolução autônoma de problemas pelo cliente</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:51%;background:var(--red)"></div></div>
+        <div class="meta"><span class="score" aria-label="Score 51">51</span><span class="tag">Crítico</span></div>
+      </div>
+      <div class="row" role="listitem">
+        <div class="r-label crit">Comitê de IA com assento C-Level</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:53%;background:var(--red)"></div></div>
+        <div class="meta"><span class="score" aria-label="Score 53">53</span><span class="tag">Crítico</span></div>
+      </div>
+      <div class="row" role="listitem">
+        <div class="r-label">Orçamento acima de 10% para produtos de dados</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:55%;background:var(--red)"></div></div>
+        <div class="meta"><span class="score" aria-label="Score 55">55</span><span class="tag">Alerta</span></div>
+      </div>
+      <div class="row" role="listitem">
+        <div class="r-label">Chatbots / assistentes inteligentes no atendimento</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:56%;background:rgba(184,69,53,.75)"></div></div>
+        <div class="meta"><span class="score" aria-label="Score 56">56</span><span class="tag">Alerta</span></div>
+      </div>
+      <div class="row" role="listitem">
+        <div class="r-label">Omnicanalidade (começar em um canal e terminar em outro)</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:59%;background:rgba(184,69,53,.55)"></div></div>
+        <div class="meta"><span class="score mild" aria-label="Score 59">59</span><span class="tag soft">Atenção</span></div>
+      </div>
+      <div class="row" role="listitem">
+        <div class="r-label">Base única de informações do cliente</div>
+        <div class="track" role="presentation" aria-hidden="true"><div class="fill" style="width:59%;background:rgba(184,69,53,.55)"></div></div>
+        <div class="meta"><span class="score mild" aria-label="Score 59">59</span><span class="tag soft">Atenção</span></div>
+      </div>
+    </div>
+
+    <p class="fonte"><b>Fonte:</b> Panorama Mindset Digital — 3ª edição (Brivia_Group) · 350 empresas · set/25–mar/26</p>
+  </article>
+</div>
+<script>
+function h(){window.parent.postMessage({ height: document.body.scrollHeight }, '*');}
+window.addEventListener('load', h);
+window.addEventListener('resize', h);
+</script>
+</body>
+</html>
