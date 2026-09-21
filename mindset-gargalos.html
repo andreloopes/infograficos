@@ -21,6 +21,9 @@
 }
 html,body{
   width:100%;
+  height:auto;
+  min-height:0;
+  overflow:visible;
   background:var(--bg);
   color:var(--ink);
   font-family:'Inter',system-ui,-apple-system,sans-serif;
@@ -222,9 +225,39 @@ html,body{
   </article>
 </div>
 <script>
-function h(){window.parent.postMessage({ height: document.body.scrollHeight }, '*');}
-window.addEventListener('load', h);
-window.addEventListener('resize', h);
+(function () {
+  function measure() {
+    var shell = document.querySelector(".shell");
+    var bottom = 0;
+    if (shell) {
+      var r = shell.getBoundingClientRect();
+      bottom = Math.ceil(r.bottom + (window.scrollY || window.pageYOffset || 0));
+    }
+    var h = Math.max(
+      bottom,
+      document.documentElement.scrollHeight || 0,
+      document.body.scrollHeight || 0,
+      document.documentElement.offsetHeight || 0,
+      document.body.offsetHeight || 0,
+      document.documentElement.clientHeight || 0
+    );
+    return Math.ceil(h) + 8;
+  }
+  function send() {
+    window.parent.postMessage({ height: measure() }, "*");
+  }
+  window.addEventListener("load", send);
+  window.addEventListener("resize", send);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(send);
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(send);
+    ro.observe(document.documentElement);
+    ro.observe(document.body);
+    var shell = document.querySelector(".shell");
+    if (shell) ro.observe(shell);
+  }
+  [50, 150, 400, 800, 1600].forEach(function (ms) { setTimeout(send, ms); });
+})();
 </script>
 </body>
 </html>
