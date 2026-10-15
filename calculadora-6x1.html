@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora · Fim da escala 6x1 · ExameLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b1a19; --soft:#5f5b56; --muted:#77716b; --hair:#ddd9d4; --hair2:#f4f3f1;
+  --paper:#fff; --accent:#D9001E; --accent-soft:#fdeef0; --bar:#aaa49d;
+  --body:"Archivo",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:400;
+  line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,select,input{font:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{container-type:inline-size;max-width:760px;margin:0 auto;padding:0 18px 32px}
+
+header.top{display:flex;align-items:baseline;gap:10px;padding:22px 0 16px;flex-wrap:wrap}
+.brand{font-weight:300;font-size:13px;letter-spacing:.02em;color:var(--soft)}
+.brand b{font-weight:500;color:var(--ink)}
+.top .upd{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.status{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--hair);border-radius:999px;
+  padding:5px 11px 5px 9px;font-family:var(--mono);font-size:11px;color:var(--soft);margin-bottom:14px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+h1{font-weight:300;font-size:clamp(26px,6.4vw,40px);letter-spacing:-.02em;line-height:1.05;margin:0 0 8px}
+.lede{font-weight:300;font-size:15px;color:var(--soft);max-width:56ch;margin:0 0 6px}
+
+.eyebrow{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+
+/* Perguntas */
+.step{border-top:1px solid var(--hair);padding:18px 0}
+.q{font-size:17px;font-weight:400;margin:0 0 10px;line-height:1.3}
+.q small{display:block;font-size:13px;font-weight:300;color:var(--soft);margin-top:3px}
+.pills{display:flex;gap:7px;flex-wrap:wrap}
+.pills button{appearance:none;cursor:pointer;background:#fff;border:1px solid var(--hair);border-radius:999px;
+  font-family:var(--body);font-size:14px;line-height:1.1;color:var(--ink);padding:9px 14px;min-height:40px}
+.pills button:hover{border-color:var(--muted)}
+.pills button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.pills button small{font-family:var(--mono);font-size:10.5px;opacity:.7;margin-left:4px}
+.inline-input{display:none;margin-top:10px;max-width:220px}
+.inline-input.on{display:block}
+.field{position:relative}
+.field input{width:100%;font-family:var(--body);font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--hair);
+  border-radius:0;min-height:44px;padding:8px 10px;-webkit-appearance:none;appearance:none}
+.field input:hover{border-color:var(--muted)}
+.field span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:12px;color:var(--muted);pointer-events:none}
+.field.pre span{left:10px} .field.pre input{padding-left:38px}
+.field.suf span{right:10px} .field.suf input{padding-right:70px}
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+
+/* Resultado principal */
+.result{border-top:1px solid var(--ink);padding:20px 0 6px}
+.headline{font-weight:300;font-size:clamp(23px,5cqi,32px);letter-spacing:-.02em;line-height:1.12;margin:0 0 8px}
+.headline em{font-style:normal;color:var(--accent)}
+.sub{font-weight:300;font-size:15px;color:var(--soft);margin:0 0 18px;max-width:58ch}
+
+.weeks{display:grid;gap:16px}
+@container (min-width:600px){ .weeks{grid-template-columns:1fr 1fr;gap:28px} }
+.week .wl{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  display:flex;justify-content:space-between;margin-bottom:8px}
+.week .wl b{font-weight:500;color:var(--ink)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;align-items:end}
+.day{display:flex;flex-direction:column;align-items:stretch;gap:5px}
+.col{height:84px;display:flex;align-items:flex-end;background:var(--hair2);border-radius:6px;overflow:hidden;position:relative}
+.col i{display:block;width:100%;background:var(--bar);border-radius:6px 6px 0 0}
+.week.new .col i{background:var(--ink)}
+.col .off{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:9.5px;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.08em;text-transform:uppercase}
+.col.gain{background:var(--accent-soft);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.col.gain .off{color:var(--accent);font-weight:500}
+.day .dn{font-family:var(--mono);font-size:10.5px;color:var(--soft);text-align:center}
+.day .dh{font-family:var(--mono);font-size:10px;color:var(--muted);text-align:center;min-height:14px}
+
+/* Blocos secundários */
+.facts{display:grid;border-top:1px solid var(--hair);margin-top:20px}
+@container (min-width:560px){
+  .facts{grid-template-columns:1fr 1fr}
+  .facts .fact:nth-child(odd){padding-right:22px;border-right:1px solid var(--hair)}
+  .facts .fact:nth-child(even){padding-left:22px}
+}
+.fact{padding:14px 0 16px;border-bottom:1px solid var(--hair)}
+.fact .v{font-weight:300;font-size:28px;letter-spacing:-.02em;line-height:1.1;margin:0 0 4px}
+.fact .s{font-size:13.5px;font-weight:300;color:var(--soft);line-height:1.45}
+
+.money{margin-top:4px}
+.money .out{margin-top:14px;display:none}
+.money .out.on{display:block}
+.line{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:baseline;padding:11px 0;border-top:1px solid var(--hair2)}
+.line:first-child{border-top:0}
+.line .t{font-size:14px;line-height:1.4}
+.line .t small{display:block;font-size:12.5px;font-weight:300;color:var(--soft);margin-top:2px}
+.line .n{font-family:var(--mono);font-size:15px;font-weight:500;white-space:nowrap;text-align:right}
+.line .n small{display:block;font-size:10.5px;font-weight:400;color:var(--muted)}
+.callout{font-size:14px;font-weight:300;color:var(--ink);background:var(--hair2);padding:12px 14px;margin-top:4px;line-height:1.45}
+.callout b{font-weight:500}
+
+/* Linha do tempo */
+.row{display:grid;grid-template-columns:minmax(120px,170px) 1fr 44px;align-items:center;gap:12px;padding:9px 0;border-top:1px solid var(--hair2)}
+.row:first-of-type{border-top:0}
+.row .n{font-size:13px;color:var(--soft);line-height:1.25}
+.row .n small{display:block;font-size:11.5px;font-weight:300;color:var(--muted)}
+.track{height:8px;background:var(--hair2);border-radius:999px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--bar);border-radius:999px;transition:width .35s ease}
+.row.last .track i{background:var(--accent)}
+.row.last .n{color:var(--ink);font-weight:500}
+.row .h{font-family:var(--mono);font-size:13px;font-weight:500;text-align:right}
+
+.share{display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-top:1px solid var(--hair);padding:18px 0 4px;margin-top:8px}
+.share button{appearance:none;cursor:pointer;background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:999px;
+  font-family:var(--body);font-size:14px;padding:10px 18px;min-height:42px}
+.share button:hover{background:#000}
+.share .ok{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+footer{margin-top:24px;border-top:1px solid var(--hair);padding-top:16px}
+footer p{font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.6;margin:0 0 8px}
+footer b{color:var(--soft);font-weight:500}
+
+@media(max-width:520px){ .wrap{padding:0 14px 28px} .lede{font-size:14px} }
+@media(prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <span class="brand"><b>ExameLab</b> · Calculadora do fim da escala 6x1</span>
+  <span class="upd">Atualizado em 15.out.2026</span>
+</header>
+
+<main>
+  <span class="status"><i></i>Em votação no Senado · ainda não é lei</span>
+  <h1>O que muda na sua semana com o fim da escala 6x1</h1>
+  <p class="lede">Responda duas perguntas rápidas. Vale para quem trabalha com carteira assinada.</p>
+
+  <section class="step">
+    <p class="q" id="q1">Quantos dias por semana você trabalha?</p>
+    <div class="pills" role="group" aria-labelledby="q1" data-group="dias">
+      <button type="button" data-v="6" aria-pressed="true">6 dias</button>
+      <button type="button" data-v="5.5" aria-pressed="false">5 dias e meio <small>sábado curto</small></button>
+      <button type="button" data-v="5" aria-pressed="false">5 dias</button>
+    </div>
+  </section>
+
+  <section class="step">
+    <p class="q" id="q2">Quantas horas por semana?<small>Na dúvida, confira no contrato ou no holerite. Quem trabalha 6 dias costuma cumprir 44 horas.</small></p>
+    <div class="pills" role="group" aria-labelledby="q2" data-group="horas">
+      <button type="button" data-v="44" aria-pressed="true">44 horas</button>
+      <button type="button" data-v="40" aria-pressed="false">40 horas</button>
+      <button type="button" data-v="outra" aria-pressed="false">Outro valor</button>
+    </div>
+    <div class="inline-input" id="outraBox">
+      <div class="field suf"><input id="outraH" type="number" inputmode="decimal" min="10" max="60" step="0.5" value="42" aria-label="Horas por semana"><span>h/semana</span></div>
+    </div>
+  </section>
+
+  <section class="result" aria-live="polite">
+    <span class="eyebrow">Com a nova regra</span>
+    <p class="headline" id="headline"></p>
+    <p class="sub" id="sub"></p>
+
+    <div class="weeks">
+      <div class="week" id="wNow"></div>
+      <div class="week new" id="wNew"></div>
+    </div>
+    <p class="hint" id="dayNote" style="font-size:12.5px;font-weight:300;color:var(--soft);margin:12px 0 0">Qual será o segundo dia de folga depende da empresa e de acordos com os trabalhadores.</p>
+  </section>
+
+  <section class="step money">
+    <p class="q">E o seu salário?<small>A proposta proíbe reduzir salário por causa da jornada menor. Informe o seu para ver o efeito em reais (opcional).</small></p>
+    <div class="field pre" style="max-width:260px"><span>R$</span><input id="sal" type="text" inputmode="decimal" autocomplete="off" placeholder="ex.: 2.000" aria-label="Salário bruto mensal"></div>
+    <div class="out" id="moneyOut"></div>
+  </section>
+
+  <section class="step">
+    <p class="q" id="q3">Quanto tempo você leva para ir e voltar do trabalho?<small>Opcional. Um dia a menos de trabalho é também um dia a menos no transporte.</small></p>
+    <div class="pills" role="group" aria-labelledby="q3" data-group="desl">
+      <button type="button" data-v="30" aria-pressed="false">30 min</button>
+      <button type="button" data-v="60" aria-pressed="false">1h</button>
+      <button type="button" data-v="90" aria-pressed="false">1h30</button>
+      <button type="button" data-v="120" aria-pressed="false">2h</button>
+      <button type="button" data-v="180" aria-pressed="false">3h ou mais</button>
+    </div>
+    <div class="out" id="deslOut" style="margin-top:14px"></div>
+  </section>
+
+  <section class="step">
+    <p class="q">Quando muda<small>Se a proposta for aprovada, a redução é feita em duas etapas.</small></p>
+    <div id="tl"></div>
+  </section>
+
+  <div class="share">
+    <button type="button" id="shareBtn">Compartilhar meu resultado</button>
+    <span class="ok" id="shareOk" aria-live="polite"></span>
+  </div>
+</main>
+
+<footer>
+  <p><b>Como calculamos.</b> Estimativa com base no texto da PEC aprovado pela Câmara e mantido pelo relator no Senado: jornada máxima de 42 horas no 1º ano de vigência e de 40 horas a partir do 2º, com dois dias de descanso e sem redução salarial. Os dois dias de folga foram considerados a partir da regra final; qual será o segundo dia de folga depende da empresa e de acordos. O valor da hora usa o divisor da CLT (jornada semanal × 5). A hora extra considera o adicional mínimo de 50%, sem reflexos em DSR, férias e 13º.</p>
+  <p>Escalas especiais (como 12x36 e tempo parcial), trabalho doméstico e acordos coletivos podem ter regras próprias. A tramitação ainda não terminou e o texto pode mudar.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var DIAS = ["Seg","Ter","Qua","Qui","Sex","Sáb","Dom"];
+  var state = { dias:"6", horas:"44", desl:0 };
+
+  function brl(v){ return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"}); }
+  function num(v,d){ d=d||0; return v.toLocaleString("pt-BR",{minimumFractionDigits:d,maximumFractionDigits:d}); }
+  function hrs(h){ var m=Math.round(h*60), hh=Math.floor(m/60), mm=m%60; return hh+"h"+(mm? String(mm).padStart(2,"0") : ""); }
+  function parseBRL(s){
+    s=String(s||"").replace(/[^\d,\.]/g,"");
+    if(s.indexOf(",")>-1){ s=s.replace(/\./g,"").replace(",","."); } else { s=s.replace(/\./g,""); }
+    var v=parseFloat(s); return isFinite(v)? v : 0;
+  }
+
+  // Distribui a carga semanal pelos dias (array de 7 posições, 0 = folga)
+  function semana(H, tipo){
+    var w=[0,0,0,0,0,0,0], i;
+    if(tipo==="6"){ for(i=0;i<6;i++) w[i]=H/6; }
+    else if(tipo==="5.5"){ var sab=Math.min(4,H/6); for(i=0;i<5;i++) w[i]=(H-sab)/5; w[5]=sab; }
+    else { for(i=0;i<5;i++) w[i]=H/5; }
+    return w;
+  }
+
+  function weekHTML(label, total, w, gainIdx){
+    var html = '<div class="wl"><span>'+label+'</span><b>'+num(total,total%1?1:0)+'h por semana</b></div><div class="days">';
+    for(var i=0;i<7;i++){
+      var h=w[i], gain = gainIdx.indexOf(i)>-1;
+      html += '<div class="day"><div class="col'+(gain?' gain':'')+'">'+
+        (h>0 ? '<i style="height:'+Math.min(100,h/10*100).toFixed(0)+'%"></i>' : '<span class="off">'+(gain?'nova folga':'folga')+'</span>')+
+        '</div><span class="dn">'+DIAS[i]+'</span><span class="dh">'+(h>0?hrs(h):'')+'</span></div>';
+    }
+    return html+'</div>';
+  }
+
+  function calc(){
+    var H = state.horas==="outra" ? Math.min(60,Math.max(10,parseFloat($("outraH").value)||0)) : parseFloat(state.horas);
+    var tipo = state.dias;
+    var D = tipo==="5" ? 5 : 6;             // dias em que vai trabalhar (sábado curto conta como dia)
+    var N = Math.min(H,40);                 // regra final
+    var dN = Math.min(D,5);
+    var red = H-N, folgasSem = D-dN;
+    var now = semana(H,tipo);
+    var nova = semana(N, dN===5 ? "5" : tipo);
+    var gain=[]; for(var i=0;i<7;i++){ if(now[i]>0 && nova[i]===0) gain.push(i); }
+
+    // Manchete
+    var hl, sb;
+    if(folgasSem>0){
+      hl = tipo==="5.5" ? 'Seu <em>sábado fica livre</em>: são dois dias de folga por semana'
+                        : 'Você ganha <em>um segundo dia de folga</em> por semana';
+      sb = 'São 52 dias de folga a mais por ano'+(red>0? ' e '+hrs(red)+' a menos de trabalho por semana':'')+', sem redução de salário.';
+    } else if(red>0){
+      var dd = H/5-N/5;
+      hl = 'Seu dia de trabalho fica <em>'+(dd<1 ? Math.round(dd*60)+' minutos' : hrs(dd))+' mais curto</em>';
+      sb = 'De '+hrs(H/5)+' para '+hrs(N/5)+' por dia: '+hrs(red)+' a menos por semana, ou '+num(red*52)+' horas por ano, sem redução de salário.';
+    } else {
+      hl = 'Pouco muda para você';
+      sb = 'Sua jornada já está dentro do novo limite de 40 horas e de cinco dias por semana.';
+    }
+    $("headline").innerHTML = hl; $("sub").textContent = sb;
+    $("wNow").innerHTML = weekHTML("Hoje", H, now, []);
+    $("wNew").innerHTML = weekHTML("Depois", N, nova, gain);
+    $("dayNote").style.display = gain.length ? "" : "none";
+
+    // Dinheiro
+    var sal = parseBRL($("sal").value), out=$("moneyOut");
+    if(sal>0){
+      var hA=sal/(H*5), hN=sal/(N*5), extra=red*52/12*hN*1.5;
+      var html = '<div class="line"><div class="t">Seu salário mensal<small>Não pode ser reduzido</small></div><div class="n">'+brl(sal)+'<small>igual</small></div></div>';
+      if(red>0){
+        html += '<div class="line"><div class="t">Quanto vale cada hora sua<small>Mesmo salário por menos horas</small></div><div class="n">'+brl(hN)+'<small>hoje '+brl(hA)+' · +'+num((hN/hA-1)*100,0)+'%</small></div></div>';
+        html += '<div class="callout">E se a empresa pedir para você continuar trabalhando '+num(H,H%1?1:0)+' horas? As '+hrs(red)+' a mais por semana viram hora extra: cerca de <b>'+brl(extra)+' a mais por mês</b> no seu salário.</div>';
+      }
+      out.innerHTML = html; out.classList.add("on");
+    } else { out.innerHTML=""; out.classList.remove("on"); }
+
+    // Deslocamento
+    var dOut=$("deslOut");
+    if(state.desl>0){
+      if(folgasSem>0){
+        var hAno = state.desl*folgasSem*52/60;
+        dOut.innerHTML = '<div class="callout">Você deixa de passar <b>'+num(hAno)+' horas por ano</b> no transporte — cerca de '+num(hAno/24,0)+' dias inteiros.</div>';
+      } else {
+        dOut.innerHTML = '<div class="callout">Como você continua indo ao trabalho os mesmos dias, o tempo no transporte não muda.</div>';
+      }
+    } else dOut.innerHTML="";
+
+    // Linha do tempo
+    var max=Math.max(H,44);
+    var rows=[
+      {n:"Hoje", s:"", h:H},
+      {n:"1º ano", s:"após a lei entrar em vigor", h:Math.min(H,42)},
+      {n:"2º ano em diante", s:"com dois dias de folga", h:N}
+    ];
+    $("tl").innerHTML = rows.map(function(r,i){
+      return '<div class="row'+(i===2?' last':'')+'"><span class="n">'+r.n+(r.s?'<small>'+r.s+'</small>':'')+'</span>'+
+        '<div class="track"><i style="width:'+(r.h/max*100).toFixed(1)+'%"></i></div>'+
+        '<span class="h">'+num(r.h,r.h%1?1:0)+'h</span></div>';
+    }).join("");
+
+    state.resumo = { folgas:folgasSem*52, red:red, extra: sal>0&&red>0 ? red*52/12*(sal/(N*5))*1.5 : 0, hl:hl.replace(/<[^>]+>/g,"") };
+    sendHeight();
+  }
+
+  // Grupos de botões
+  Array.prototype.forEach.call(document.querySelectorAll(".pills"), function(g){
+    var key=g.getAttribute("data-group");
+    g.addEventListener("click", function(ev){
+      var b=ev.target.closest("button"); if(!b) return;
+      var already = b.getAttribute("aria-pressed")==="true";
+      Array.prototype.forEach.call(g.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed","false"); });
+      if(key==="desl"){
+        state.desl = already ? 0 : parseFloat(b.getAttribute("data-v"));
+        if(!already) b.setAttribute("aria-pressed","true");
+      } else {
+        b.setAttribute("aria-pressed","true");
+        state[key]=b.getAttribute("data-v");
+        if(key==="horas"){ $("outraBox").classList.toggle("on", state.horas==="outra"); if(state.horas==="outra") $("outraH").focus(); }
+      }
+      calc();
+    });
+  });
+  $("outraH").addEventListener("input", calc);
+  $("sal").addEventListener("input", calc);
+  $("sal").addEventListener("blur", function(){ var v=parseBRL(this.value); if(v>0) this.value=num(v, v%1?2:0); });
+
+  // Compartilhar
+  function shareURL(){
+    try{ var p=new URLSearchParams(location.search).get("url"); if(p) return p; }catch(e){}
+    return document.referrer || "";
+  }
+  $("shareBtn").addEventListener("click", function(){
+    var r=state.resumo, parts=[];
+    parts.push("Com o fim da escala 6x1: "+r.hl.charAt(0).toLowerCase()+r.hl.slice(1)+".");
+    if(r.folgas>0) parts.push("São "+r.folgas+" folgas a mais por ano.");
+    if(r.extra>0) parts.push("Se a jornada atual continuar, seriam cerca de "+brl(r.extra)+" por mês em hora extra.");
+    var url=shareURL(), text=parts.join(" ")+" Calcule o seu na EXAME"+(url?": "+url:".");
+    if(navigator.share){ navigator.share({text:text}).catch(function(){}); }
+    else { window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank","noopener"); }
+  });
+
+  // Altura automática para iframe
+  var lastH=0;
+  function sendHeight(){
+    var h=Math.ceil(document.documentElement.scrollHeight);
+    if(h!==lastH && window.parent!==window){ lastH=h; window.parent.postMessage({type:"exame-calc-6x1",height:h},"*"); }
+  }
+  if("ResizeObserver" in window){ new ResizeObserver(sendHeight).observe(document.body); }
+  window.addEventListener("load", sendHeight);
+
+  calc();
+})();
+</script>
+</body>
+</html>
