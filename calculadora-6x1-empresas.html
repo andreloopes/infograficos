@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora para empresas · Fim da escala 6x1 · ExameLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b1a19; --soft:#5f5b56; --muted:#77716b; --hair:#ddd9d4; --hair2:#f4f3f1;
+  --paper:#fff; --accent:#D9001E; --accent-soft:#fdeef0; --bar:#aaa49d;
+  --body:"Archivo",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:400;
+  line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,select,input{font:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{container-type:inline-size;max-width:760px;margin:0 auto;padding:0 18px 32px}
+
+header.top{display:flex;align-items:baseline;gap:10px;padding:22px 0 16px;flex-wrap:wrap}
+.brand{font-weight:300;font-size:13px;letter-spacing:.02em;color:var(--soft)}
+.brand b{font-weight:500;color:var(--ink)}
+.top .upd{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+.status{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--hair);border-radius:999px;
+  padding:5px 11px 5px 9px;font-family:var(--mono);font-size:11px;color:var(--soft);margin-bottom:14px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+h1{font-weight:300;font-size:clamp(26px,6.4vw,40px);letter-spacing:-.02em;line-height:1.05;margin:0 0 8px}
+.lede{font-weight:300;font-size:15px;color:var(--soft);max-width:58ch;margin:0 0 6px}
+.eyebrow{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+
+/* Formulário */
+.form{border-top:1px solid var(--hair);padding:18px 0;display:grid;gap:18px 22px}
+@container (min-width:600px){ .form{grid-template-columns:1fr 1fr} }
+.q{font-size:15px;font-weight:400;margin:0 0 8px;line-height:1.3}
+.q small{display:block;font-size:12.5px;font-weight:300;color:var(--soft);margin-top:2px}
+.field{position:relative}
+.field input{width:100%;font-family:var(--body);font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--hair);
+  border-radius:0;min-height:44px;padding:8px 10px;-webkit-appearance:none;appearance:none}
+.field input:hover{border-color:var(--muted)}
+.field span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:12px;color:var(--muted);pointer-events:none}
+.field.pre span{left:10px} .field.pre input{padding-left:38px}
+.field.suf span{right:10px} .field.suf input{padding-right:64px}
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.pills{display:flex;gap:7px;flex-wrap:wrap}
+.pills button{appearance:none;cursor:pointer;background:#fff;border:1px solid var(--hair);border-radius:999px;
+  font-family:var(--body);font-size:14px;line-height:1.1;color:var(--ink);padding:9px 14px;min-height:40px}
+.pills button:hover{border-color:var(--muted)}
+.pills button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.inline-input{display:none;margin-top:10px;max-width:200px}
+.inline-input.on{display:block}
+
+details.opt-box{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:0}
+details.opt-box summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0;font-size:15px;min-height:48px}
+details.opt-box summary::-webkit-details-marker{display:none}
+details.opt-box summary small{font-family:var(--mono);font-size:11px;color:var(--muted)}
+details.opt-box summary::after{content:"+";font-family:var(--mono);font-size:18px;color:var(--soft);margin-left:12px}
+details.opt-box[open] summary::after{content:"−"}
+details.opt-box .form{border-top:0;padding-top:0}
+
+/* Resultado */
+.result{border-top:1px solid var(--ink);margin-top:22px;padding:20px 0 4px}
+.headline{font-weight:300;font-size:clamp(23px,5cqi,32px);letter-spacing:-.02em;line-height:1.15;margin:0 0 10px}
+.headline em{font-style:normal;color:var(--accent);white-space:nowrap}
+.sub{font-weight:300;font-size:15px;color:var(--soft);margin:0 0 4px;max-width:60ch}
+.sub b{font-weight:500;color:var(--ink)}
+
+.phases{display:grid;gap:0;margin-top:18px}
+@container (min-width:600px){
+  .phases{grid-template-columns:1fr 1fr}
+  .phase:first-child{padding-right:22px;border-right:1px solid var(--hair)}
+  .phase:last-child{padding-left:22px}
+}
+.phase{border-top:1px solid var(--hair);padding:16px 0 6px}
+.phase h3{font-weight:400;font-size:18px;margin:0;letter-spacing:-.01em}
+.phase .when{font-family:var(--mono);font-size:11px;color:var(--muted);margin:2px 0 4px}
+.phase .gap{font-size:13px;font-weight:300;color:var(--soft);margin:0 0 6px}
+.opt{padding:12px 0;border-top:1px solid var(--hair2)}
+.opt:first-of-type{border-top:0}
+.opt .ot{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--soft)}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);
+  border:1px solid var(--accent);border-radius:999px;padding:2px 7px;line-height:1.3}
+.opt .val{font-weight:300;font-size:27px;letter-spacing:-.02em;line-height:1.15;margin:2px 0 6px}
+.opt .val small{font-size:14px;color:var(--soft);letter-spacing:0;margin-left:2px}
+.track{height:6px;background:var(--hair2);border-radius:999px;overflow:hidden;margin-bottom:7px}
+.track i{display:block;height:100%;background:var(--bar);border-radius:999px;transition:width .35s ease}
+.opt.cheap .track i{background:var(--accent)}
+.opt .det{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.6}
+.opt .det b{font-weight:500;color:var(--soft)}
+.none{font-size:14px;font-weight:300;color:var(--soft);padding:10px 0 12px}
+
+.callout{font-size:14.5px;font-weight:300;color:var(--ink);background:var(--hair2);padding:13px 15px;margin-top:16px;line-height:1.5}
+.callout b{font-weight:500}
+
+.warn{margin-top:22px}
+.warn ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--hair)}
+.warn li{position:relative;padding:11px 0 11px 18px;border-bottom:1px solid var(--hair2);font-size:13.5px;font-weight:300;color:var(--soft);line-height:1.45}
+.warn li::before{content:"";position:absolute;left:0;top:18px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.warn li b{font-weight:500;color:var(--ink)}
+
+footer{margin-top:24px;border-top:1px solid var(--hair);padding-top:16px}
+footer p{font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.6;margin:0 0 8px}
+footer b{color:var(--soft);font-weight:500}
+
+@media(max-width:520px){ .wrap{padding:0 14px 28px} .lede{font-size:14px} }
+@media(prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <span class="brand"><b>ExameLab</b> · Calculadora para empresas</span>
+  <span class="upd">Atualizado em 15.out.2026</span>
+</header>
+
+<main>
+  <span class="status"><i></i>Em votação no Senado · ainda não é lei</span>
+  <h1>Quanto o fim da 6x1 vai custar para manter seu negócio funcionando como hoje</h1>
+  <p class="lede">Compare as duas saídas para repor as horas que vão faltar: pagar hora extra ou contratar mais gente. O cálculo considera as duas fases da regra nova.</p>
+
+  <section class="form" aria-label="Dados da empresa">
+    <div>
+      <p class="q"><label for="func">Funcionários CLT na escala 6x1</label></p>
+      <div class="field"><input id="func" type="number" inputmode="numeric" min="1" max="100000" step="1" value="10"></div>
+    </div>
+    <div>
+      <p class="q"><label for="sal">Salário médio desses funcionários</label></p>
+      <div class="field pre"><span>R$</span><input id="sal" type="text" inputmode="decimal" autocomplete="off" value="2.000"></div>
+    </div>
+    <div>
+      <p class="q" id="qH">Jornada semanal atual</p>
+      <div class="pills" role="group" aria-labelledby="qH" data-group="horas">
+        <button type="button" data-v="44" aria-pressed="true">44 horas</button>
+        <button type="button" data-v="outra" aria-pressed="false">Outra</button>
+      </div>
+      <div class="inline-input" id="outraBox">
+        <div class="field suf"><input id="outraH" type="number" inputmode="decimal" min="30" max="44" step="0.5" value="43" aria-label="Horas por semana"><span>h/sem.</span></div>
+      </div>
+    </div>
+    <div>
+      <p class="q" id="qR">Regime tributário</p>
+      <div class="pills" role="group" aria-labelledby="qR" data-group="regime">
+        <button type="button" data-v="simples" aria-pressed="true">Simples Nacional</button>
+        <button type="button" data-v="lucro" aria-pressed="false">Lucro Presumido ou Real</button>
+      </div>
+    </div>
+  </section>
+
+  <details class="opt-box">
+    <summary>Ajustes opcionais <small>deixam a conta mais precisa</small></summary>
+    <section class="form" aria-label="Ajustes opcionais">
+      <div>
+        <p class="q"><label for="ben">Benefícios por funcionário<small>VT, VR, plano de saúde etc., por mês</small></label></p>
+        <div class="field pre"><span>R$</span><input id="ben" type="text" inputmode="decimal" autocomplete="off" placeholder="0"></div>
+      </div>
+      <div>
+        <p class="q"><label for="adic">Adicional de hora extra<small>Confira na convenção coletiva. O mínimo legal é 50%.</small></label></p>
+        <div class="field suf"><input id="adic" type="number" inputmode="decimal" min="50" max="200" step="5" placeholder="50"><span>%</span></div>
+      </div>
+      <div>
+        <p class="q"><label for="contr">Custo para contratar e treinar uma pessoa<small>Gasto único: seleção, exames, treinamento</small></label></p>
+        <div class="field pre"><span>R$</span><input id="contr" type="text" inputmode="decimal" autocomplete="off" placeholder="0"></div>
+      </div>
+      <div>
+        <p class="q"><label for="fat">Faturamento mensal<small>Para ver o impacto em % do faturamento</small></label></p>
+        <div class="field pre"><span>R$</span><input id="fat" type="text" inputmode="decimal" autocomplete="off" placeholder="opcional"></div>
+      </div>
+    </section>
+  </details>
+
+  <section class="result" aria-live="polite">
+    <span class="eyebrow" id="resEyebrow">Na regra final · 40 horas</span>
+    <p class="headline" id="headline"></p>
+    <p class="sub" id="sub"></p>
+    <div class="phases" id="phases"></div>
+    <div id="virada"></div>
+  </section>
+
+  <section class="warn">
+    <span class="eyebrow">Antes de decidir</span>
+    <ul>
+      <li><b>Os 2 dias de folga por semana são obrigatórios.</b> Não é possível manter a escala de 6 dias pagando hora extra: as horas a mais precisam caber em 5 dias, e a lei limita a hora extra a 2 horas por dia.</li>
+      <li><b>Hora extra todos os dias é solução de curto prazo</b> e aumenta o risco de ações trabalhistas.</li>
+      <li><b>Os valores são estimativas.</b> Encargos, adicional de hora extra e regras da convenção coletiva variam: confirme com seu contador.</li>
+      <li><b>MEI e pequenas empresas</b> podem ter regras de transição próprias, que ainda dependem de lei complementar.</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p><b>Como calculamos.</b> Fase 1: jornada máxima de 42 horas, 60 dias após a promulgação. Fase 2: 40 horas, 14 meses após a promulgação. Horas que faltam = (jornada atual − jornada da fase) × funcionários; um mês tem em média 4,33 semanas. Valor da hora = salário ÷ (jornada da fase × 5), regra da CLT.</p>
+  <p>Encargos sobre salários: 13º e férias + 1/3 (+19,44%) e FGTS (8%), o que leva o custo a cerca de 1,29 × o salário no Simples. No Lucro Presumido ou Real, soma-se cerca de 28% de INSS patronal e outras contribuições (cerca de 1,62 × o salário). Na hora extra, soma-se o reflexo no descanso semanal remunerado (cerca de 20%). Hora extra não gera novos benefícios.</p>
+  <p>Contratação: uma vaga com a jornada da fase para cada bloco de horas que falta; a sobra vira contrato de tempo parcial (até 30 horas), com salário proporcional e benefícios integrais. Acima de 30 horas, a sobra vira mais uma vaga cheia. O custo único de contratação aparece à parte.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var ENC13=1.1944, FGTS=0.08, INSS=0.28, DSR=0.20, SEM=4.33;
+  var FASES=[
+    {jf:42, nome:"Fase 1 · 42 horas", quando:"60 dias após a promulgação"},
+    {jf:40, nome:"Fase 2 · 40 horas", quando:"14 meses após a promulgação"}
+  ];
+  var state={horas:"44", regime:"simples"};
+
+  function num(v,d){d=d||0;return v.toLocaleString("pt-BR",{minimumFractionDigits:d,maximumFractionDigits:d});}
+  function parseBRL(s){
+    s=String(s||"").replace(/[^\d,\.]/g,"");
+    if(s.indexOf(",")>-1){s=s.replace(/\./g,"").replace(",",".");} else {s=s.replace(/\./g,"");}
+    var v=parseFloat(s);return isFinite(v)?v:0;
+  }
+  // Valores arredondados, como pede a especificação
+  function rs(v){
+    if(v>=1e6){var m=v/1e6;return "R$ "+num(m,m<10?1:0)+(m<2?" milhão":" milhões");}
+    if(v>=1e5) return "R$ "+num(Math.round(v/1000))+" mil";
+    if(v>=1000) return "R$ "+num(Math.round(v/10)*10);
+    return "R$ "+num(Math.round(v));
+  }
+  function rsAno(v){ return v>=1e4 && v<1e6 ? "R$ "+num(Math.round(v/1000))+" mil" : rs(v); }
+  function pct(v){ return num(v,1).replace(/,0$/,"")+"%"; }
+  function rsH(v){ return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"}); }
+  function mult(reg){ return ENC13*(1+FGTS+(reg==="lucro"?INSS:0)); }
+
+  function fase(n,H,jf,sal,ben,adic,reg){
+    var falta=Math.max(0,H-jf)*n;                 // horas por semana
+    var m=mult(reg), hora=sal/(jf*5), heMes=falta*SEM;
+    var ot=heMes*hora*(1+adic/100)*(1+DSR)*m;
+    var full=Math.floor(falta/jf+1e-9), rem=falta-full*jf;
+    if(rem>30){full++;rem=0;}
+    rem=rem>1e-9?Math.ceil(rem-1e-9):0;
+    var hire=full*(sal*m+ben)+(rem>0?sal*rem/jf*m+ben:0);
+    return {falta:falta,heMes:heMes,hora:hora,ot:ot,full:full,rem:rem,hire:hire,pessoas:full+(rem>0?1:0),jf:jf};
+  }
+  function vagasTxt(r){
+    var p=[];
+    if(r.full>0) p.push(num(r.full)+" contrataç"+(r.full>1?"ões":"ão")+" de "+r.jf+"h");
+    if(r.rem>0) p.push((r.full>0?"1 de ":"1 vaga de tempo parcial de ")+r.rem+"h"+(r.full>0?" (tempo parcial)":""));
+    return p.join(" + ");
+  }
+
+  function calc(){
+    var n=Math.max(0,Math.round(parseFloat($("func").value)||0));
+    var sal=parseBRL($("sal").value);
+    var H=state.horas==="outra"?Math.min(44,Math.max(30,parseFloat($("outraH").value)||0)):44;
+    var reg=state.regime;
+    var ben=parseBRL($("ben").value);
+    var adicIn=parseFloat($("adic").value); var adic=isFinite(adicIn)&&adicIn>0?adicIn:50;
+    var contr=parseBRL($("contr").value);
+    var fat=parseBRL($("fat").value);
+
+    if(!(n>0&&sal>0)){
+      $("resEyebrow").textContent="Resultado";
+      $("headline").textContent="Informe o número de funcionários e o salário médio para ver o resultado.";
+      $("sub").textContent=""; $("phases").innerHTML=""; $("virada").innerHTML=""; sendHeight(); return;
+    }
+
+    var m=mult(reg), custoPessoa=sal*m+ben, custoEquipe=n*custoPessoa;
+    var rs_=FASES.map(function(f){return fase(n,H,f.jf,sal,ben,adic,reg);});
+    var f2=rs_[1], f1=rs_[0];
+
+    // Manchete
+    var ref = f2.falta>0 ? f2 : (f1.falta>0 ? f1 : null);
+    if(ref){
+      var lo=Math.min(ref.ot,ref.hire), hi=Math.max(ref.ot,ref.hire);
+      $("resEyebrow").textContent = ref===f2 ? "Quando a regra estiver completa · 40 horas" : "Na fase 1 · 42 horas";
+      $("headline").innerHTML = rs(lo)===rs(hi)
+        ? 'O fim da 6x1 vai custar cerca de <em>'+rs(lo)+'</em> a mais por mês para o seu negócio'
+        : 'O fim da 6x1 vai custar a mais entre <em>'+rs(lo)+'</em> e <em>'+rs(hi)+'</em> por mês para o seu negócio';
+      var s='Hoje sua equipe de '+num(n)+' pessoa'+(n>1?'s':'')+' custa cerca de <b>'+rs(custoEquipe)+' por mês</b>';
+      var a=pct(lo/custoEquipe*100), z=pct(hi/custoEquipe*100);
+      s+= a===z ? '. O aumento é de cerca de '+a+' desse custo' : '. O aumento fica entre '+a+' e '+z+' desse custo';
+      if(fat>0){ var fa=pct(lo/fat*100), fz=pct(hi/fat*100); s+= fa===fz ? ', ou '+fa+' do faturamento' : ', ou entre '+fa+' e '+fz+' do faturamento'; }
+      $("sub").innerHTML=s+'.';
+    } else {
+      $("resEyebrow").textContent="Resultado";
+      $("headline").innerHTML='Sua equipe já cumpre até 40 horas: <em>o custo não muda</em>';
+      $("sub").innerHTML='O limite de horas não afeta sua equipe. Ainda assim, a semana de trabalho terá de caber em 5 dias, com 2 folgas.';
+    }
+
+    // Fases
+    var max=0; rs_.forEach(function(r){max=Math.max(max,r.ot,r.hire);});
+    var pessoasAntes=0;
+    $("phases").innerHTML = rs_.map(function(r,i){
+      var F=FASES[i];
+      var head='<div class="phase"><h3>'+F.nome+'</h3><div class="when">'+F.quando+'</div>';
+      if(r.falta<=0){ pessoasAntes=Math.max(pessoasAntes,r.pessoas); return head+'<div class="none">Sua jornada atual já cabe neste limite. Nada muda nesta fase.</div></div>'; }
+      var gap='<p class="gap">Faltam '+num(r.falta,r.falta%1?1:0)+' horas por semana na equipe (cerca de '+num(Math.round(r.heMes))+' por mês).</p>';
+      var cheapOT=r.ot<r.hire, cheapH=r.hire<r.ot;
+      var extraFat=function(v){return fat>0?' · '+pct(v/fat*100)+' do faturamento':'';};
+      var otHTML='<div class="opt'+(cheapOT?' cheap':'')+'"><div class="ot">Pagar hora extra'+(cheapOT?'<span class="tag">mais barato</span>':'')+'</div>'+
+        '<div class="val">'+rs(r.ot)+'<small>/mês</small></div><div class="track"><i style="width:'+(r.ot/max*100).toFixed(1)+'%"></i></div>'+
+        '<div class="det">'+num(Math.round(r.heMes))+' horas extras por mês a '+rsH(r.hora*(1+adic/100))+' cada<br>+'+pct(r.ot/custoEquipe*100)+' no custo da equipe'+extraFat(r.ot)+' · <b>'+rsAno(r.ot*12)+' por ano</b></div></div>';
+      var novas=Math.max(0,r.pessoas-pessoasAntes); pessoasAntes=Math.max(pessoasAntes,r.pessoas);
+      var unico = contr>0&&novas>0 ? '<br>+ '+rs(contr*novas)+' uma vez, para contratar e treinar'+(i===1&&novas<r.pessoas?' (só as vagas novas)':'') : '';
+      var hHTML='<div class="opt'+(cheapH?' cheap':'')+'"><div class="ot">Contratar'+(cheapH?'<span class="tag">mais barato</span>':'')+'</div>'+
+        '<div class="val">'+rs(r.hire)+'<small>/mês</small></div><div class="track"><i style="width:'+(r.hire/max*100).toFixed(1)+'%"></i></div>'+
+        '<div class="det">'+vagasTxt(r)+'<br>+'+pct(r.hire/custoEquipe*100)+' no custo da equipe'+extraFat(r.hire)+' · <b>'+rsAno(r.hire*12)+' por ano</b>'+unico+'</div></div>';
+      return head+gap+otHTML+hHTML+'</div>';
+    }).join("");
+
+    // Ponto de virada (fase 2, mesma regra de contratação)
+    var v=$("virada");
+    if(H>40){
+      var x=null;
+      for(var k=1;k<=5000;k++){ var t=fase(k,H,40,sal,ben,adic,reg); if(t.hire<=t.ot){x=k;break;} }
+      var porFunc=fase(1,H,40,sal,ben,adic,reg).ot;
+      var txt;
+      if(x===null){ txt='Com os valores informados, pagar hora extra sai mais barato que contratar mesmo em equipes grandes.'; }
+      else {
+        txt='No seu caso, <b>contratar compensa a partir de '+num(x)+' funcionário'+(x>1?'s':'')+'</b> na regra final. ';
+        txt+= n>=x ? 'Com '+num(n)+', sua empresa já passou desse ponto.' : 'Com '+num(n)+', a hora extra ainda sai mais barata.';
+        txt+=' A hora extra custa cerca de '+rs(porFunc)+' por funcionário por mês.';
+      }
+      v.innerHTML='<div class="callout">'+txt+'</div>';
+    } else v.innerHTML="";
+
+    sendHeight();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".pills"),function(g){
+    var key=g.getAttribute("data-group");
+    g.addEventListener("click",function(ev){
+      var b=ev.target.closest("button"); if(!b) return;
+      Array.prototype.forEach.call(g.querySelectorAll("button"),function(x){x.setAttribute("aria-pressed","false");});
+      b.setAttribute("aria-pressed","true"); state[key]=b.getAttribute("data-v");
+      if(key==="horas"){ $("outraBox").classList.toggle("on",state.horas==="outra"); if(state.horas==="outra") $("outraH").focus(); }
+      calc();
+    });
+  });
+  ["func","sal","outraH","ben","adic","contr","fat"].forEach(function(id){ $(id).addEventListener("input",calc); });
+  ["sal","ben","contr","fat"].forEach(function(id){
+    $(id).addEventListener("blur",function(){ var v=parseBRL(this.value); if(v>0) this.value=num(v,v%1?2:0); });
+  });
+  document.querySelector("details.opt-box").addEventListener("toggle",sendHeight);
+
+  var lastH=0;
+  function sendHeight(){
+    var h=Math.ceil(document.documentElement.scrollHeight);
+    if(h!==lastH&&window.parent!==window){lastH=h;window.parent.postMessage({type:"exame-calc-6x1-empresa",height:h},"*");}
+  }
+  if("ResizeObserver" in window){ new ResizeObserver(sendHeight).observe(document.body); }
+  window.addEventListener("load",sendHeight);
+  calc();
+})();
+</script>
+</body>
+</html>
