@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gasto de turistas na China · ExameLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b1a19; --soft:#5f5b56; --muted:#77716b; --hair:#ddd9d4; --hair2:#f4f3f1;
+  --paper:#fff; --accent:#D9001E; --base:#cfc9c2;
+  --body:"Archivo",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:400;
+  line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 28px;container-type:inline-size}
+
+header.top{padding:22px 0 16px}
+.brand{font-weight:300;font-size:13px;letter-spacing:.02em;color:var(--soft)}
+.brand b{font-weight:500;color:var(--ink)}
+
+h1{font-weight:300;font-size:clamp(26px,6.4vw,40px);letter-spacing:-.02em;line-height:1.08;margin:0 0 8px}
+.lede{font-weight:300;font-size:16px;color:var(--soft);max-width:58ch;margin:0 0 24px}
+
+.hero{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:20px 0}
+.hero .num{font-weight:300;font-size:clamp(40px,9vw,58px);letter-spacing:-.03em;line-height:1;color:var(--accent);white-space:nowrap}
+.hero p{flex:1 1 280px;margin:0;font-weight:300;font-size:15px;color:var(--soft)}
+.hero p b{font-weight:500;color:var(--ink)}
+
+.block{margin-top:34px}
+.block h2{font-weight:300;font-size:clamp(19px,4.6vw,22px);letter-spacing:-.01em;line-height:1.2;margin:0 0 4px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+
+/* barras horizontais */
+.hbars{margin-top:20px}
+.row{padding:12px 0 14px;border-top:1px solid var(--hair2);cursor:pointer;outline:none}
+.row:first-child{border-top:0;padding-top:4px}
+.row .meta{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin-bottom:8px}
+.row .yr{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:38px}
+.row .v{font-size:clamp(20px,5cqi,26px);font-weight:300;letter-spacing:-.01em;line-height:1.1}
+.row .v small{font-size:14px;color:var(--soft);letter-spacing:0}
+.row .delta{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--accent);border:1px solid #f1c3ca;border-radius:999px;padding:3px 9px;line-height:1}
+.track{height:22px;position:relative}
+.track .fill{position:absolute;left:0;top:0;bottom:0;border-radius:0 4px 4px 0;background:var(--base);transition:opacity .15s}
+.row.now .fill{background:var(--accent)}
+.track::before{content:"";position:absolute;left:0;top:-4px;bottom:-4px;border-left:1px solid var(--muted)}
+.hbars:hover .fill{opacity:.45}
+.hbars .row:hover .fill,.hbars .row:focus-visible .fill{opacity:1}
+
+/* parte do todo */
+.split{margin-top:22px}
+.pcts{position:relative;height:20px;font-family:var(--mono);font-size:12px;font-weight:500}
+.pcts span{position:absolute;bottom:4px}
+.pcts .a{left:0;color:var(--accent)}
+.pcts .b{right:0;color:var(--soft)}
+.stack{display:flex;gap:2px;height:30px}
+.seg{height:100%;cursor:pointer;outline:none;transition:opacity .15s}
+.seg.mob{background:var(--accent);border-radius:4px 0 0 4px;min-width:6px}
+.seg.rest{background:var(--base);border-radius:0 4px 4px 0}
+.split:hover .seg{opacity:.45}
+.split .seg:hover,.split .seg:focus-visible{opacity:1}
+.list{margin-top:14px;border-top:1px solid var(--hair)}
+.li{display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;gap:10px;padding:10px 0;border-bottom:1px solid var(--hair2)}
+.li .dot{width:9px;height:9px;border-radius:50%;align-self:start;margin-top:6px}
+.li .n{font-size:14px}
+.li .v{font-family:var(--mono);font-size:12px;font-weight:500;text-align:right}
+.li .v small{display:block;font-weight:400;color:var(--muted);font-size:11px}
+@container (min-width:520px){.li .v small{display:inline;margin-left:8px}}
+
+.tt{position:fixed;pointer-events:none;background:#fff;border:1px solid var(--hair);
+  box-shadow:0 4px 18px rgba(0,0,0,.07);padding:9px 11px;font-size:12px;min-width:170px;max-width:240px;z-index:5;opacity:0;transition:opacity .12s}
+.tt .d{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-bottom:6px}
+.tt .r{display:flex;align-items:center;gap:7px;margin:3px 0}
+.tt .r .dot{width:8px;height:8px;border-radius:50%;flex:none}
+.tt .r .n{flex:1}
+.tt .r .val{font-family:var(--mono);font-weight:500}
+.tt .s{color:var(--soft);margin-top:6px;line-height:1.4}
+
+footer{margin-top:30px;border-top:1px solid var(--hair);padding-top:14px}
+footer p{font-family:var(--mono);font-size:10.5px;color:var(--muted);line-height:1.6;margin:0}
+footer b{color:var(--soft);font-weight:500}
+
+@media(max-width:520px){.wrap{padding:0 14px 24px}.lede{font-size:15px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><span class="brand"><b>ExameLab</b> · Pagamentos</span></header>
+
+  <h1>O gasto de turistas com pagamentos digitais na China</h1>
+  <p class="lede">Uso de QR Code para pagar pode ganhar ainda mais aderência com a chegada de bandeiras globais</p>
+
+  <div class="hero">
+    <div class="num">US$ 11,1 bilhões</div>
+    <p>foi quanto os turistas gastaram na China em 2025 pagando <b>pelo celular</b>, com carteiras digitais como WeChat Pay e Alipay</p>
+  </div>
+
+  <section class="block" aria-labelledby="g1">
+    <h2 id="g1">Em um ano, o gasto pelo celular mais que dobrou</h2>
+    <div class="eyebrow">Gasto no 1º semestre</div>
+    <div class="hbars" role="img" aria-label="Gasto de turistas com pagamento móvel no 1º semestre: US$ 1,9 bilhão em 2024 e US$ 4,8 bilhões em 2025, alta de 149%">
+      <div class="row" tabindex="0" data-tip='{"d":"1º semestre de 2024","c":"var(--base)","val":"US$ 1,9 bilhão","s":"Mais de 5 milhões de turistas usaram pagamento móvel"}'>
+        <div class="meta"><span class="yr">2024</span><span class="v">US$ 1,9 <small>bilhão</small></span></div>
+        <div class="track"><div class="fill" style="width:39.6%"></div></div>
+      </div>
+      <div class="row now" tabindex="0" data-tip='{"d":"1º semestre de 2025","c":"var(--accent)","val":"US$ 4,8 bilhões","s":"Mais de 10 milhões de turistas usaram pagamento móvel"}'>
+        <div class="meta"><span class="yr">2025</span><span class="v">US$ 4,8 <small>bilhões</small></span><span class="delta">+149%</span></div>
+        <div class="track"><div class="fill" style="width:100%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="g2">
+    <h2 id="g2">Mas o celular ainda é uma fatia pequena do gasto total</h2>
+    <div class="eyebrow">Gasto de turistas na China em 2025</div>
+    <div class="split" role="img" aria-label="Pelo celular: US$ 11,1 bilhões, cerca de 8% do gasto. Demais meios: cerca de US$ 119 bilhões, 92%.">
+      <div class="pcts"><span class="a">8%</span><span class="b">92%</span></div>
+      <div class="stack">
+        <div class="seg mob" style="flex:11.1" tabindex="0" data-tip='{"d":"Gasto em 2025","c":"var(--accent)","n":"Pelo celular","val":"US$ 11,1 bilhões","s":"Cerca de 8% do total"}'></div>
+        <div class="seg rest" style="flex:118.9" tabindex="0" data-tip='{"d":"Gasto em 2025","c":"var(--base)","n":"Demais meios","val":"US$ 119 bilhões","s":"Cerca de 92% do total"}'></div>
+      </div>
+    </div>
+    <div class="list">
+      <div class="li"><span class="dot" style="background:var(--accent)"></span><span class="n">Pelo celular</span><span class="v">US$ 11,1 bilhões<small>cerca de 8%</small></span></div>
+      <div class="li"><span class="dot" style="background:var(--base)"></span><span class="n">Demais meios de pagamento</span><span class="v">US$ 119 bilhões<small>cerca de 92%</small></span></div>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>Fonte:</b> Banco Popular da China e Ministério da Cultura e Turismo da China</p>
+  </footer>
+</div>
+<div class="tt" id="tt" role="tooltip"></div>
+<script>
+(function(){
+  var tt=document.getElementById('tt');
+  function render(el){
+    var o=JSON.parse(el.getAttribute('data-tip'));
+    tt.innerHTML='<div class="d">'+o.d+'</div><div class="r"><span class="dot" style="background:'+o.c+'"></span><span class="n">'+(o.n||'Pelo celular')+'</span><span class="val">'+o.val+'</span></div>'+(o.s?'<div class="s">'+o.s+'</div>':'');
+    tt.style.opacity=1;
+  }
+  function place(x,y){var w=tt.offsetWidth,h=tt.offsetHeight;
+    tt.style.left=Math.min(innerWidth-w-8,Math.max(8,x-w/2))+'px';
+    tt.style.top=(y-h-14<8?y+18:y-h-14)+'px';}
+  function hide(){tt.style.opacity=0}
+  document.querySelectorAll('[data-tip]').forEach(function(el){
+    el.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){render(el);place(e.clientX,e.clientY)}});
+    el.addEventListener('pointermove',function(e){if(e.pointerType==='mouse')place(e.clientX,e.clientY)});
+    el.addEventListener('pointerleave',hide);
+    el.addEventListener('focus',function(){render(el);var r=el.getBoundingClientRect();place(r.left+r.width/2,r.top)});
+    el.addEventListener('blur',hide);
+  });
+})();
+</script>
+</body>
+</html>
