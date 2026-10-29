@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pagamentos de visitantes na China · ExameLab</title>
-<meta name="description" content="O valor das transações móveis de visitantes na China cresceu 149% no primeiro semestre de 2025. Evolução em índice, com dados anuais apresentados separadamente.">
+<meta name="description" content="O gasto de visitantes na China pagando pelo celular passou de US$ 2,0 bilhões para cerca de US$ 4,9 bilhões no 1º semestre, alta de 149%.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -50,6 +50,8 @@ h1{font-weight:300;font-size:clamp(26px,6.4vw,40px);letter-spacing:-.02em;line-h
 .chart-row .meta{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin-bottom:9px}
 .chart-row .year{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:38px}
 .chart-row .v{font-size:26px;font-weight:300;letter-spacing:-.01em;line-height:1.1}
+.chart-row .v small{font-size:15px;color:var(--soft);letter-spacing:0}
+.chart-row .est{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .chart-row .delta{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--accent);border:1px solid #f1c3ca;border-radius:999px;padding:4px 9px;line-height:1}
 .track{height:22px;position:relative}
 .track .fill{position:absolute;left:0;top:0;bottom:0;border-radius:0 4px 4px 0;background:var(--base)}
@@ -87,32 +89,31 @@ footer b{color:var(--soft);font-weight:500}
   <section class="hero" aria-labelledby="mobile-title">
     <div class="eyebrow" id="mobile-title">Pagamentos móveis · 2025</div>
     <div class="metric">
-      <div class="amount" aria-label="Cerca de 11,6 bilhões de dólares americanos">
+      <div class="amount" aria-label="Cerca de 11,2 bilhões de dólares americanos">
         <span class="qualifier">Cerca de</span>
-        <span class="num">US$ 11,6</span>
+        <span class="num">US$ 11,2</span>
         <span class="unit">bilhões</span>
       </div>
       <p>foi quanto turistas que visitaram a China gastaram <b>pelo celular</b> em 2025, segundo o ministro da Cultura e Turismo.</p>
     </div>
-    <p class="scope">Cerca de 80 bilhões de yuans; conversão em dólares divulgada pela fonte.</p>
+    <p class="scope">Valor convertido para dólar pelo câmbio médio oficial de 2025, o mesmo critério do gráfico abaixo.</p>
   </section>
 
   <section class="block growth" aria-labelledby="growth-title">
     <h2 id="growth-title">Pagamentos pelo celular de visitantes mais que dobraram</h2>
-    <p class="series-label">Valor das transações móveis de pessoas que entraram na China</p>
-    <div class="eyebrow" id="growth-index">Índice · 1º semestre de 2024 = 100</div>
-    <figure class="hbars" aria-labelledby="growth-title growth-index" aria-describedby="growth-caption">
-      <div role="img" aria-label="Índice do valor das transações móveis de visitantes na China no primeiro semestre: 100 em 2024 e 249 em 2025. Crescimento de 149%. As duas barras partem de zero.">
-        <div class="chart-row" data-index="100">
-          <div class="meta"><span class="year">2024</span><span class="v">100</span></div>
-          <div class="track"><div class="fill" style="width:40.1606425703%"></div></div>
+    <p class="series-label">Quanto as pessoas que entraram na China gastaram pagando pelo celular no 1º semestre</p>
+    <figure class="hbars" aria-labelledby="growth-title" aria-describedby="growth-caption">
+      <div role="img" aria-label="Gasto pelo celular de pessoas que entraram na China no 1º semestre: US$ 2,0 bilhões em 2024 e cerca de US$ 4,9 bilhões em 2025, alta de 149%.">
+        <div class="chart-row">
+          <div class="meta"><span class="year">2024</span><span class="v">US$ 2,0 <small>bilhões</small></span></div>
+          <div class="track"><div class="fill" style="width:40.8%"></div></div>
         </div>
-        <div class="chart-row now" data-index="249">
-          <div class="meta"><span class="year">2025</span><span class="v">249</span><span class="delta">+149%</span></div>
+        <div class="chart-row now">
+          <div class="meta"><span class="year">2025</span><span class="v">US$ 4,9 <small>bilhões</small></span><span class="delta">+149%</span><span class="est">estimativa</span></div>
           <div class="track"><div class="fill" style="width:100%"></div></div>
         </div>
       </div>
-      <figcaption class="chart-caption" id="growth-caption">As barras mostram a evolução do valor das transações, não valores em dinheiro.<span class="basis">Ambas partem de zero. Índice calculado a partir da alta de 149% divulgada pelo Banco Popular da China; o recorte abrange pessoas que entraram no país, não apenas turistas.</span></figcaption>
+      <figcaption class="chart-caption" id="growth-caption">O valor de 2024 foi divulgado pelo Banco Popular da China. O de 2025 é uma estimativa do ExameLab, calculada pela alta de 149% no valor das transações informada pelo banco, que não divulgou o valor absoluto. Valores convertidos pelo câmbio médio oficial de cada ano. Inclui todas as pessoas que entraram no país, não só turistas.</figcaption>
     </figure>
   </section>
 
@@ -129,14 +130,24 @@ footer b{color:var(--soft);font-weight:500}
     <p class="scope">O turismo receptivo inclui visitantes estrangeiros e residentes de Hong Kong, Macau e Taiwan; não inclui o turismo doméstico da China continental.</p>
   </section>
 
-  <p class="note"><b>Como ler:</b> os indicadores são apresentados separadamente, sem cálculo de participação por meio de pagamento. As barras comparam apenas a evolução semestral, em índice.</p>
-
   <footer aria-label="Fontes dos dados">
-    <p><b>Crescimento semestral:</b> responsável pelo Departamento de Pagamentos e Liquidação do Banco Popular da China, em entrevista ao Financial News (金融时报), <a href="https://news.10jqka.com.cn/20251019/c671839026.shtml" target="_blank" rel="noopener noreferrer">republicada pelo portal Tonghuashun em 19/10/2025</a>. A alta de 149% se refere ao valor das transações, não à quantidade.</p>
-    <p><b>Pagamentos móveis anuais:</b> Ministério da Cultura e Turismo da China, declaração de 7/3/2026, <a href="https://english.www.gov.cn/news/202603/07/content_WS69aba1f9c6d00ca5f9a09b0f.html" target="_blank" rel="noopener noreferrer">publicada no portal do governo chinês</a>.</p>
-    <p><b>Turismo receptivo:</b> National Bureau of Statistics of China (NBS), <a href="https://www.stats.gov.cn/zwfwck/sjfb/202602/t20260228_1962662.html" target="_blank" rel="noopener noreferrer">comunicado estatístico de 2025</a>, publicado em 28/2/2026.</p>
-    <p>O valor anual dos pagamentos móveis foi divulgado pela fonte como US$ 11,59 bilhões e arredondado neste quadro para US$ 11,6 bilhões.</p>
+    <p><b>Fontes:</b> <a href="https://news.10jqka.com.cn/20251019/c671839026.shtml" target="_blank" rel="noopener noreferrer">Banco Popular da China</a> (1º semestre), <a href="https://english.www.gov.cn/news/202603/07/content_WS69aba1f9c6d00ca5f9a09b0f.html" target="_blank" rel="noopener noreferrer">Ministério da Cultura e Turismo da China</a> (pagamentos pelo celular em 2025) e <a href="https://www.stats.gov.cn/zwfwck/sjfb/202602/t20260228_1962662.html" target="_blank" rel="noopener noreferrer">Departamento Nacional de Estatísticas da China</a> (gasto total)</p>
   </footer>
 </main>
+<script>
+(function(){
+  var last=0;
+  function h(){
+    var a=Math.ceil(document.documentElement.scrollHeight);
+    if(a===last) return; last=a;
+    window.parent.postMessage({height:a},'*');
+    window.parent.postMessage({tipo:'exame-iframe-altura',id:'turistas-pagamentos-china-crescimento',altura:a},'*');
+  }
+  window.addEventListener('load',h);
+  window.addEventListener('resize',h);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(h);
+  if(window.ResizeObserver) new ResizeObserver(h).observe(document.body);
+})();
+</script>
 </body>
 </html>
