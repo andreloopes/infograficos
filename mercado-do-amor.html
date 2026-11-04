@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O mercado do amor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --ink: #1a1a1a; --ink-2: #555; --ink-3: #8a8a8a;
+    --grid: #ececec; --bar: #D9001E; --bar-hover: #a80017;
+    --tip-bg: #1a1a1a; --tip-ink: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141414; --ink: #f2f2f2; --ink-2: #b8b8b8; --ink-3: #8c8c8c;
+      --grid: #2a2a2a; --bar: #ff3b4f; --bar-hover: #ff6676; --tip-bg: #f2f2f2; --tip-ink: #141414;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141414; --ink: #f2f2f2; --ink-2: #b8b8b8; --ink-3: #8c8c8c;
+    --grid: #2a2a2a; --bar: #ff3b4f; --bar-hover: #ff6676; --tip-bg: #f2f2f2; --tip-ink: #141414;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Inter", system-ui, -apple-system, sans-serif; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 24px 16px; container-type: inline-size; }
+  .kicker { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--bar); margin-bottom: 6px; }
+  h1 { font-size: 28px; font-weight: 800; line-height: 1.15; margin: 0 0 6px; }
+  .sub { font-size: 15px; color: var(--ink-2); margin: 0 0 22px; line-height: 1.4; }
+
+  .row { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 12px; padding: 7px 0; cursor: default; }
+  .name { font-size: 14px; font-weight: 600; text-align: right; line-height: 1.2; }
+  .name small { display: block; font-weight: 400; font-size: 11px; color: var(--ink-3); }
+  .track {
+    position: relative; height: 40px; display: flex; align-items: center;
+    background-image: linear-gradient(to right, var(--grid) 1px, transparent 1px);
+    background-size: var(--tick, 25%) 100%;
+  }
+  .bar { height: 100%; min-width: 4px; background: var(--bar); border-radius: 0 4px 4px 0; transition: background .15s; }
+  .row:hover .bar, .row:focus-visible .bar { background: var(--bar-hover); }
+  .val { margin-left: 6px; padding: 0 4px; background: var(--bg); font-size: 15px; font-weight: 700; white-space: nowrap; }
+  .val .chg { font-size: 12px; font-weight: 500; color: var(--ink-2); margin-left: 6px; }
+
+  .axis { display: grid; grid-template-columns: 150px 1fr; gap: 12px; margin-top: 4px; }
+  .ticks { position: relative; height: 16px; font-size: 11px; color: var(--ink-3); }
+  .ticks span { position: absolute; transform: translateX(-50%); }
+  .ticks span:first-child { transform: none; }
+
+  .tip { position: absolute; pointer-events: none; opacity: 0; transition: opacity .12s; background: var(--tip-bg); color: var(--tip-ink); font-size: 13px; line-height: 1.4; padding: 8px 10px; border-radius: 6px; max-width: 250px; z-index: 5; }
+  .tip b { display: block; font-size: 14px; }
+
+  .foot { margin-top: 18px; font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+  .foot strong { color: var(--ink-2); font-weight: 600; }
+  details { margin-top: 14px; font-size: 13px; color: var(--ink-2); }
+  summary { cursor: pointer; }
+  table { border-collapse: collapse; margin-top: 8px; width: 100%; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); }
+  td.n, th.n { text-align: right; }
+
+  @container (max-width: 520px) {
+    h1 { font-size: 23px; }
+    .row, .axis { grid-template-columns: 92px 1fr; gap: 8px; }
+    .name { font-size: 13px; }
+    .track { height: 34px; }
+    .val { font-size: 13px; margin-left: 6px; }
+    .val .chg { display: block; margin-left: 0; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="kicker">ExameLab</span>
+  <h1>O mercado do amor</h1>
+  <p class="sub">Os apps de namoro mais populares do mundo<br>(em milhões de usuários com contas grátis e pagantes)</p>
+
+  <div id="chart" role="list" aria-label="Usuários por app de namoro"></div>
+  <div class="axis"><span></span><div class="ticks" id="ticks"></div></div>
+
+  <details>
+    <summary>Ver dados em tabela</summary>
+    <table id="tabela">
+      <thead><tr><th>App</th><th>Dono</th><th class="n">Usuários (mi)</th><th>O que é contado</th><th>Fonte</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </details>
+
+  <p class="foot">
+    <strong>Fontes:</strong> Tinder e Inner Circle, dados das empresas; Hinge, Spencer Rascoff, CEO do Match Group; Grindr, balanço do 2º tri de 2026.
+    As empresas divulgam métricas diferentes e em datas diferentes: Tinder, Hinge e Grindr informam usuários ativos por mês; o Inner Circle informa membros cadastrados.
+    Bumble, Badoo, Happn e Tantan não divulgam número atualizado de usuários.
+  </p>
+</div>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+const DADOS = [
+  { app: "Tinder",       dono: "Match Group", valor: 75, base: "ativos por mês · 2022",      fonte: "Tinder" },
+  { app: "Hinge",        dono: "Match Group", valor: 15, base: "ativos por mês · out. 2025", fonte: "CEO do Match Group" },
+  { app: "Grindr",       dono: "Grindr Inc.", valor: 15, base: "ativos por mês · 2026",      fonte: "Balanço do Grindr" },
+  { app: "Inner Circle", dono: "Hello Group", valor: 9,  base: "membros · nov. 2026",        fonte: "Inner Circle" }
+];
+const MAX = 80, TICK = 20;
+
+const fmt = n => n.toLocaleString("pt-BR");
+const chart = document.getElementById("chart");
+const tip = document.getElementById("tip");
+const tbody = document.querySelector("#tabela tbody");
+
+DADOS.forEach(d => {
+  const row = document.createElement("div");
+  row.className = "row";
+  row.tabIndex = 0;
+  row.setAttribute("role", "listitem");
+  row.setAttribute("aria-label", `${d.app}: ${fmt(d.valor)} milhões de usuários, ${d.base}`);
+  row.innerHTML = `
+    <div class="name">${d.app}<small>${d.dono}</small></div>
+    <div class="track" style="--tick:${(TICK / MAX) * 100}%">
+      <div class="bar" style="width:${(d.valor / MAX) * 100}%"></div>
+      <span class="val">${fmt(d.valor)} mi<span class="chg">${d.base}</span></span>
+    </div>`;
+  document.getElementById("chart").appendChild(row);
+
+  const mostrar = (x, y) => {
+    tip.innerHTML = `<b>${d.app}</b>${fmt(d.valor)} milhões de usuários<br>${d.base}<br><span style="opacity:.75">Fonte: ${d.fonte}</span>`;
+    tip.style.opacity = 1;
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    const left = Math.min(Math.max(8, x + 14), window.innerWidth - w - 8);
+    tip.style.left = left + window.scrollX + "px";
+    tip.style.top = (y - h - 12 + window.scrollY) + "px";
+  };
+  row.addEventListener("mousemove", e => mostrar(e.clientX, e.clientY));
+  row.addEventListener("mouseleave", () => tip.style.opacity = 0);
+  row.addEventListener("focus", () => { const r = row.getBoundingClientRect(); mostrar(r.left + r.width / 2, r.top); });
+  row.addEventListener("blur", () => tip.style.opacity = 0);
+
+  const tr = document.createElement("tr");
+  tr.innerHTML = `<td>${d.app}</td><td>${d.dono}</td><td class="n">${fmt(d.valor)}</td><td>${d.base}</td><td>${d.fonte}</td>`;
+  tbody.appendChild(tr);
+});
+
+const ticks = document.getElementById("ticks");
+for (let t = 0; t <= MAX; t += TICK) {
+  const s = document.createElement("span");
+  s.style.left = (t / MAX) * 100 + "%";
+  s.textContent = t.toLocaleString("pt-BR");
+  ticks.appendChild(s);
+}
+
+const avisarAltura = () => parent.postMessage({ tipo: "altura", valor: document.body.scrollHeight }, "*");
+window.addEventListener("load", avisarAltura);
+window.addEventListener("resize", avisarAltura);
+document.querySelector("details").addEventListener("toggle", avisarAltura);
+</script>
+</body>
+</html>
