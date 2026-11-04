@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Por dentro da complexidade | EXAME</title>
+<meta name="description" content="Infográfico: como funciona a máquina de litografia EUV da ASML, considerada a máquina mais complexa do mundo, e como ela grava os chips.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFD84D;
+  --ink:#111111;
+  --ink2:#2A2A2A;
+  --red:#B80016;
+  --brand:#D9001E;
+  --rule:#111111;
+  --soft:rgba(17,17,17,.14);
+  --vac:#1F2B6E;
+  --mod:#2F3E92;
+  --modline:#8496EC;
+  --euv:#B45CFF;
+  --laser:#FF5A1F;
+  --tin:#D3D9E2;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 32px;container-type:inline-size}
+a{color:inherit}
+
+/* Cabeçalho */
+.kicker{display:inline-block;background:var(--ink);color:#fff;font-weight:700;font-size:14px;padding:4px 10px;border-radius:4px}
+h1{font-family:"Archivo Black",Inter,sans-serif;font-weight:400;font-size:clamp(38px,8cqi,80px);line-height:.95;letter-spacing:-.02em;margin:14px 0 14px}
+.dek{font-size:clamp(17px,2.3cqi,21px);line-height:1.5;margin:0;max-width:60ch;font-weight:500}
+.howto{margin:14px 0 0;font-size:15px;color:var(--ink2);max-width:60ch}
+
+/* Página dupla: ilustração + chamadas */
+.spread{position:relative;display:grid;grid-template-columns:1fr;gap:20px;margin-top:26px}
+.figure{order:-1;margin:0;max-width:540px;width:100%;justify-self:center}
+.figure svg{display:block;width:100%;height:auto}
+.fig-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:14px;font-weight:600}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{display:inline-block;width:22px;height:6px;border-radius:3px;border:1.5px solid var(--ink)}
+.legend .l-euv{background:var(--euv)}
+.legend .l-laser{background:var(--laser)}
+.legend .l-tin{width:12px;height:12px;border-radius:50%;background:var(--tin)}
+.toggle{appearance:none;border:2px solid var(--ink);background:transparent;color:var(--ink);font:700 14px Inter,sans-serif;border-radius:999px;padding:7px 14px;cursor:pointer;min-height:40px}
+.toggle:hover{background:rgba(17,17,17,.08)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+.col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.call{position:relative;padding:14px 0 0 52px;border-top:3px solid var(--rule);scroll-margin-top:16px;transition:background .2s}
+.call .badge{position:absolute;left:0;top:14px;width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:800 18px/1 Inter,sans-serif;transition:background .2s,transform .2s}
+.call h2{font-family:"Archivo Black",Inter,sans-serif;font-weight:400;font-size:20px;line-height:1.15;margin:6px 0 6px;letter-spacing:-.005em}
+.call .fig{margin:0 0 6px;font-size:15px;font-weight:600;line-height:1.3}
+.call .fig strong{display:block;font-family:"Archivo Black",Inter,sans-serif;font-weight:400;font-size:28px;line-height:1.05;color:var(--red);letter-spacing:-.01em}
+.call p.txt{margin:0;font-size:16px;line-height:1.5}
+.call.on .badge{background:var(--red);transform:scale(1.08)}
+.call.on{border-top-color:var(--red)}
+.call:focus{outline:none}
+.call:focus-visible{outline:3px solid var(--ink);outline-offset:6px}
+
+.leaders{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;display:none}
+.leaders path{fill:none;stroke:var(--ink);stroke-width:1.6}
+.leaders circle{fill:var(--ink)}
+.leaders .on path{stroke:var(--red);stroke-width:3}
+.leaders .on circle{fill:var(--red)}
+
+@container (min-width:980px){
+  .spread{grid-template-columns:minmax(0,270px) minmax(0,1fr) minmax(0,270px);gap:0 30px;align-items:stretch}
+  .figure{order:0;align-self:center;max-width:none}
+  .col{grid-template-columns:1fr;align-content:space-between;gap:20px}
+  .col-left .call{padding:14px 0 0 0}
+  .col-left .call .badge{left:auto;right:0}
+  .col-left .call h2,.col-left .call .fig{padding-right:50px}
+  .leaders{display:block}
+}
+@container (max-width:600px){
+  .col{grid-template-columns:1fr}
+}
+
+/* SVG */
+.housing{fill:#FFFFFF;stroke:var(--ink);stroke-width:4}
+.vac{fill:var(--vac)}
+.box{fill:var(--mod);stroke:var(--modline);stroke-width:2;transition:stroke .2s,stroke-width .2s}
+.part.hl .box{stroke:#FFD84D;stroke-width:5}
+.beam{fill:none;stroke:var(--euv);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.beam-core{fill:none;stroke:#F3E6FF;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:10 12}
+.anim .beam-core{animation:flow 1s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-22}}
+.laser{stroke:var(--laser);stroke-width:7;stroke-linecap:round;fill:none}
+.part.hl .laser{stroke-width:10}
+.mirror{stroke:#F4F6FF;stroke-width:6;stroke-linecap:round}
+.mirror-back{stroke:#8C9AD8;stroke-width:11;stroke-linecap:round}
+.mk{cursor:pointer}
+.mk circle{fill:var(--ink);stroke:#FFD84D;stroke-width:4;transition:fill .2s}
+.mk text{font:800 22px Inter,sans-serif;fill:#fff;pointer-events:none}
+.mk.on circle{fill:var(--red)}
+.mk:focus{outline:none}
+.mk:focus-visible circle{stroke:#fff;stroke-width:6}
+.plasma{transform-box:fill-box;transform-origin:center;opacity:0}
+
+/* Seções inferiores */
+.section{margin-top:46px}
+.section > h2{font-family:"Archivo Black",Inter,sans-serif;font-weight:400;font-size:clamp(26px,4cqi,38px);line-height:1.05;margin:0 0 8px;letter-spacing:-.01em}
+.section .sub{margin:0 0 18px;font-size:17px;line-height:1.5;max-width:62ch}
+.trivia{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 34px;border-top:3px solid var(--rule)}
+.trivia li{padding:14px 0;border-bottom:1.5px solid var(--soft);font-size:16px;line-height:1.5}
+.trivia b{font-weight:800}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 34px;border-top:3px solid var(--rule)}
+.fact{padding:16px 0 18px;border-bottom:1.5px solid var(--soft)}
+.fact .n{font-family:"Archivo Black",Inter,sans-serif;font-size:clamp(34px,5cqi,48px);line-height:1;letter-spacing:-.02em}
+.fact .n small{font-size:.48em;letter-spacing:0}
+.fact p{margin:8px 0 0;font-size:16px;line-height:1.45}
+.scale{border-top:3px solid var(--rule)}
+.row{display:grid;grid-template-columns:minmax(150px,210px) 1fr;gap:14px;align-items:center;padding:10px 0;border-bottom:1.5px solid var(--soft)}
+.row .name{font-size:16px;font-weight:700;line-height:1.3}
+.row .name small{display:block;font-weight:500;font-size:14px}
+.track{position:relative;height:30px}
+.bar{position:absolute;left:0;top:6px;height:18px;border-radius:0 9px 9px 0;background:#5E5A4A;border:1.5px solid var(--ink);border-left:0;width:0;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.row.duv .bar{background:var(--brand)}
+.row.euv .bar{background:#7B2CBF}
+.val{position:absolute;top:4px;font-size:15px;font-weight:800;white-space:nowrap;padding-left:10px;left:0;transition:left .9s cubic-bezier(.2,.7,.2,1)}
+.note{font-size:14px;margin-top:10px}
+.foot{margin-top:40px;padding-top:14px;border-top:3px solid var(--rule);font-size:14px;line-height:1.55}
+
+@container (max-width:760px){
+  .trivia{grid-template-columns:1fr}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
+}
+@container (max-width:520px){
+  .facts{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr;gap:2px}
+}
+@media (prefers-reduced-motion:reduce){
+  .anim .beam-core{animation:none}
+  .bar,.val{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="kicker">Infográfico</span>
+    <h1>Por dentro da complexidade</h1>
+    <p class="dek">Siga o caminho da luz dentro da máquina EUV da ASML, considerada o equipamento mais complexo do mundo, e entenda como gotas de estanho viram o raio que grava bilhões de transistores nos chips de celulares e de inteligência artificial.</p>
+    <p class="howto">Os números de 1 a 8 seguem a ordem do processo. Toque em um número na ilustração para ir direto à explicação.</p>
+  </header>
+
+  <div class="spread" id="spread">
+    <div class="col col-left">
+      <article class="call" id="passo-1" data-step="1" tabindex="-1">
+        <span class="badge" aria-hidden="true">1</span>
+        <h2><span class="sr">Etapa 1: </span>Gotas de estanho</h2>
+        <p class="fig"><strong>50 mil</strong>gotas por segundo</p>
+        <p class="txt">Um gerador dispara gotas de estanho derretido, mais finas que um fio de cabelo, a 250 km/h dentro de uma câmara de vácuo.</p>
+      </article>
+      <article class="call" id="passo-2" data-step="2" tabindex="-1">
+        <span class="badge" aria-hidden="true">2</span>
+        <h2><span class="sr">Etapa 2: </span>Dois tiros de laser</h2>
+        <p class="fig"><strong>220 mil °C</strong>no plasma, 40 vezes a superfície do Sol</p>
+        <p class="txt">Um laser de CO₂ da alemã Trumpf acerta cada gota duas vezes: o primeiro pulso a achata, o segundo a vaporiza e cria um plasma.</p>
+      </article>
+      <article class="call" id="passo-3" data-step="3" tabindex="-1">
+        <span class="badge" aria-hidden="true">3</span>
+        <h2><span class="sr">Etapa 3: </span>Uma luz que nada atravessa</h2>
+        <p class="fig"><strong>13,5 nm</strong>de comprimento de onda</p>
+        <p class="txt">O plasma emite ultravioleta extremo, absorvido até pelo ar. Por isso tudo ocorre no vácuo, e um espelho curvo, o coletor, concentra a luz num foco.</p>
+      </article>
+      <article class="call" id="passo-4" data-step="4" tabindex="-1">
+        <span class="badge" aria-hidden="true">4</span>
+        <h2><span class="sr">Etapa 4: </span>Espelhos quase perfeitos</h2>
+        <p class="fig"><strong>&lt; 1 mm</strong>de saliência num espelho do tamanho da Alemanha</p>
+        <p class="txt">No iluminador, espelhos da alemã Zeiss deixam o feixe uniforme. Cada um tem cerca de 100 camadas com poucos átomos de espessura.</p>
+      </article>
+    </div>
+
+    <figure class="figure">
+      <svg id="euv" viewBox="0 0 600 1000" role="group" aria-label="Corte esquemático da máquina EUV com o caminho da luz e oito etapas numeradas">
+        <defs>
+          <linearGradient id="coneGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B45CFF" stop-opacity=".25"/><stop offset=".6" stop-color="#B45CFF" stop-opacity=".7"/><stop offset="1" stop-color="#F3E6FF"/></linearGradient>
+          <radialGradient id="plasmaGrad"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".35" stop-color="#F3E6FF"/><stop offset="1" stop-color="#B45CFF" stop-opacity="0"/></radialGradient>
+          <linearGradient id="waferGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9FB0D6"/><stop offset=".4" stop-color="#D6C4FF"/><stop offset=".7" stop-color="#A9E3EE"/><stop offset="1" stop-color="#8797C2"/></linearGradient>
+        </defs>
+
+        <!-- conduíte do laser, vindo do subsolo -->
+        <g class="part" data-part="2">
+          <rect x="0" y="180" width="26" height="820" fill="#FFFFFF" stroke="#111" stroke-width="3"/>
+          <line class="laser" x1="13" y1="1000" x2="13" y2="195"/>
+          <path class="laser" d="M13 195 H140"/>
+        </g>
+
+        <!-- carcaça branca com janela em corte -->
+        <rect class="housing" x="30" y="36" width="550" height="894" rx="30"/>
+        <rect class="vac" x="46" y="52" width="518" height="862" rx="18"/>
+        <g stroke="#111" stroke-width="3"><line x1="120" y1="930" x2="120" y2="952"/><line x1="490" y1="930" x2="490" y2="952"/></g>
+        <line x1="0" y1="952" x2="600" y2="952" stroke="#111" stroke-width="3"/>
+
+        <!-- 1-3 fonte de luz -->
+        <rect class="box" x="58" y="68" width="222" height="256" rx="18"/>
+        <g class="part" data-part="1">
+          <rect class="box" x="118" y="76" width="44" height="30" rx="6"/>
+          <rect x="134" y="104" width="12" height="10" rx="2" fill="#D3D9E2"/>
+          <rect x="122" y="292" width="36" height="24" rx="6" fill="#4A5AAE"/>
+          <line x1="140" y1="116" x2="140" y2="290" stroke="#5D6EC6" stroke-width="2" stroke-dasharray="3 6"/>
+        </g>
+        <g class="part" data-part="3">
+          <path id="cone" d="M104 128 Q52 195 104 262 L300 195 Z" fill="url(#coneGrad)"/>
+          <path class="box" d="M104 128 Q52 195 104 262" fill="none" style="stroke:#F4F6FF;stroke-width:7"/>
+          <path d="M104 128 Q52 195 104 262" fill="none" stroke="#8C9AD8" stroke-width="3" transform="translate(-7,0)"/>
+        </g>
+        <circle cx="300" cy="195" r="6" fill="#F3E6FF"/>
+        <g id="drops"></g>
+        <circle id="plasma" class="plasma" cx="140" cy="195" r="26" fill="url(#plasmaGrad)"/>
+
+        <!-- 4 iluminador -->
+        <g class="part" data-part="4"><rect class="box" x="58" y="400" width="276" height="300" rx="18"/></g>
+        <!-- 5 máscara -->
+        <g class="part" data-part="5">
+          <rect class="box" x="340" y="62" width="214" height="52" rx="10"/>
+          <rect x="392" y="104" width="90" height="9" rx="2" fill="#E2BE5C"/>
+          <g fill="#8A6A1E"><rect x="398" y="106" width="6" height="5"/><rect x="410" y="106" width="12" height="5"/><rect x="428" y="106" width="5" height="5"/><rect x="439" y="106" width="10" height="5"/><rect x="455" y="106" width="6" height="5"/><rect x="467" y="106" width="9" height="5"/></g>
+        </g>
+        <!-- 6 projeção -->
+        <g class="part" data-part="6"><rect class="box" x="444" y="140" width="110" height="620" rx="18"/></g>
+        <!-- 7 mesa -->
+        <g class="part" data-part="7">
+          <rect class="box" x="300" y="800" width="254" height="100" rx="16"/>
+          <rect x="365" y="840" width="110" height="18" rx="4" fill="#4A5AAE"/>
+          <ellipse cx="420" cy="834" rx="58" ry="12" fill="url(#waferGrad)" stroke="#F4F6FF" stroke-width="1.5"/>
+          <rect x="496" y="848" width="50" height="16" rx="4" fill="#4A5AAE"/>
+          <ellipse cx="521" cy="844" rx="26" ry="7" fill="url(#waferGrad)" stroke="#F4F6FF" stroke-width="1.5"/>
+          <rect x="500" y="812" width="42" height="14" rx="4" fill="#8496EC"/>
+        </g>
+        <!-- 8 saída -->
+        <g class="part" data-part="8">
+          <path d="M470 900 V966" stroke="#111" stroke-width="3" stroke-dasharray="6 6" fill="none"/>
+          <path d="M462 958 l8 12 l8 -12" stroke="#111" stroke-width="3" fill="none" stroke-linejoin="round"/>
+          <rect class="housing" x="400" y="972" width="170" height="26" rx="8" style="stroke-width:3"/>
+          <g fill="url(#waferGrad)" stroke="#111" stroke-width="1.5"><ellipse cx="470" cy="982" rx="30" ry="6"/><ellipse cx="470" cy="976" rx="30" ry="6"/></g>
+        </g>
+
+        <g id="beams"></g>
+        <g id="mirrors"></g>
+        <g id="markers"></g>
+      </svg>
+      <figcaption id="figcap" class="fig-tools">
+        <span class="legend"><span><i class="l-euv"></i>Luz ultravioleta extrema</span><span><i class="l-laser"></i>Laser</span><span><i class="l-tin"></i>Estanho</span></span>
+        <button class="toggle" id="anim" type="button" aria-pressed="false">Pausar animação</button>
+      </figcaption>
+    </figure>
+
+    <div class="col col-right">
+      <article class="call" id="passo-5" data-step="5" tabindex="-1">
+        <span class="badge" aria-hidden="true">5</span>
+        <h2><span class="sr">Etapa 5: </span>A máscara com o desenho</h2>
+        <p class="fig"><strong>15 g</strong>de aceleração, três vezes a de um caça decolando</p>
+        <p class="txt">A luz reflete numa máscara com o desenho de uma camada do chip, quatro vezes maior. A mesa que a move levita sobre ímãs.</p>
+      </article>
+      <article class="call" id="passo-6" data-step="6" tabindex="-1">
+        <span class="badge" aria-hidden="true">6</span>
+        <h2><span class="sr">Etapa 6: </span>Encolher o desenho</h2>
+        <p class="fig"><strong>4 vezes</strong>menor que o desenho da máscara</p>
+        <p class="txt">Espelhos curvos fazem os raios convergirem e encolhem o padrão sem perder o foco. Na versão High-NA, só essa parte tem 40 mil peças.</p>
+      </article>
+      <article class="call" id="passo-7" data-step="7" tabindex="-1">
+        <span class="badge" aria-hidden="true">7</span>
+        <h2><span class="sr">Etapa 7: </span>Gravação no wafer</h2>
+        <p class="fig"><strong>0,25 nm</strong>de precisão no posicionamento</p>
+        <p class="txt">A luz grava o desenho numa resina sobre o disco de silício. Enquanto um disco é exposto, outro já está sendo medido na mesa ao lado.</p>
+      </article>
+      <article class="call" id="passo-8" data-step="8" tabindex="-1">
+        <span class="badge" aria-hidden="true">8</span>
+        <h2><span class="sr">Etapa 8: </span>E o chip?</h2>
+        <p class="fig"><strong>15 a 20</strong>camadas de um chip de 2 nm feitas na EUV</p>
+        <p class="txt">Fora da máquina, a resina é revelada, gases corroem o silício e metais preenchem os sulcos. O ciclo se repete até formar bilhões de transistores.</p>
+      </article>
+    </div>
+
+    <svg class="leaders" id="leaders" aria-hidden="true"></svg>
+  </div>
+
+  <section class="section" aria-labelledby="h-sabia">
+    <h2 id="h-sabia">Você sabia?</h2>
+    <ul class="trivia">
+      <li><b>O estanho corrói outros metais.</b> As peças que ficam perto dele usam materiais que quase nenhuma outra indústria emprega.</li>
+      <li><b>O laser é enorme.</b> Costuma ficar no andar de baixo da fábrica e amplifica um sinal de poucos watts mais de 10 mil vezes, num percurso de até 30 metros.</li>
+      <li><b>O espelho coletor se limpa sozinho.</b> Gás hidrogênio reage com o estanho que gruda na superfície e o transforma em outro gás, o estanano, aspirado para fora.</li>
+      <li><b>A maior parte da luz vira calor.</b> Cada espelho absorve cerca de 30% do que recebe, e o feixe passa por mais de dez deles.</li>
+      <li><b>Poeira é inimiga.</b> O robô que manuseia a máscara pode soltar, no máximo, uma partícula sobre ela a cada um milhão de movimentos.</li>
+      <li><b>As mesas do wafer flutuam.</b> Elas levitam sobre ímãs, aceleram até 7 g sem vibrar e corrigem a posição 20 mil vezes por segundo.</li>
+      <li><b>Sem a EUV, tudo seria mais longo.</b> Fabricar chips de 5 nm poderia exigir até 100 etapas diferentes, segundo o IEEE.</li>
+      <li><b>Ela não para de evoluir.</b> A próxima fonte de luz, de 1.000 watts, deve dobrar o ritmo para 100 mil gotas por segundo até 2030.</li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="h-num">
+    <h2 id="h-num">A máquina em números</h2>
+    <p class="sub">Só uma empresa no mundo fabrica esse equipamento. Montar, transportar e comprar uma unidade exige escala de obra de infraestrutura.</p>
+    <div class="facts">
+      <div class="fact"><div class="n">+100 mil</div><p>peças em uma máquina EUV padrão, além de 3 mil cabos, 40 mil parafusos e 2 km de mangueiras.</p></div>
+      <div class="fact"><div class="n">180 <small>toneladas</small></div><p>é o peso de uma unidade, quase o mesmo de um Boeing 747 vazio.</p></div>
+      <div class="fact"><div class="n">40</div><p>contêineres, 20 caminhões e 3 aviões cargueiros para levar uma única máquina até o cliente.</p></div>
+      <div class="fact"><div class="n">US$ 400 <small>milhões</small></div><p>é o preço estimado da versão High-NA (EXE:5200). A EUV padrão sai por cerca de US$ 250 milhões.</p></div>
+      <div class="fact"><div class="n">5 mil</div><p>fornecedores abastecem a ASML. Os espelhos vêm da alemã Zeiss e o laser, da também alemã Trumpf.</p></div>
+      <div class="fact"><div class="n">1</div><p>fabricante no mundo: a holandesa ASML, com sede em Veldhoven. Nenhuma máquina EUV foi vendida à China.</p></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="h-esc">
+    <h2 id="h-esc">Pequeno quanto?</h2>
+    <p class="sub">A onda de luz da EUV é cerca de 6 mil vezes menor que a espessura de um fio de cabelo. Quanto menor a onda, mais fino o traço que ela consegue desenhar.</p>
+    <div class="scale" id="scale"></div>
+    <p class="note">Escala logarítmica: cada marca vale dez vezes a anterior. Um nanômetro (nm) é um milionésimo de milímetro.</p>
+  </section>
+
+  <footer class="foot">
+    <b>Fontes:</b> ASML, Zeiss, Trumpf, imec, Intel, Reuters, Works in Progress e Tom's Hardware. Preços são estimativas de mercado; peças, peso e transporte referem-se à linha EUV padrão (NXE). A ilustração é esquemática.<br>
+    <b>Infografia:</b> André Lopes | EXAME
+  </footer>
+</div>
+
+<style>.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
+<script>
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  const $=s=>document.querySelector(s);
+  const el=(n,a,p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+  const svg=$('#euv');
+
+  // Caminho da luz
+  const IF=[300,195], M1=[300,470], M2=[96,560], M3=[300,660], R=[437,113],
+        P1=[540,240], P2=[458,370], P3=[540,500], P4=[458,630], W=[420,828];
+  const PATH=[IF,M1,M2,M3,R,P1,P2,P3,P4,W];
+  const d=PATH.map((p,i)=>(i?'L':'M')+p[0]+' '+p[1]).join(' ');
+  el('path',{d,class:'beam'},$('#beams'));
+  el('path',{d,class:'beam-core'},$('#beams'));
+  const norm=v=>{const l=Math.hypot(v[0],v[1]);return [v[0]/l,v[1]/l]};
+  [[M1,IF,M2],[M2,M1,M3],[M3,M2,R],[P1,R,P2],[P2,P1,P3],[P3,P2,P4],[P4,P3,W]].forEach(([p,a,b])=>{
+    const u=norm([a[0]-p[0],a[1]-p[1]]), v=norm([b[0]-p[0],b[1]-p[1]]);
+    const n=norm([u[0]+v[0],u[1]+v[1]]), t=[-n[1],n[0]], L=26;
+    el('line',{x1:p[0]-t[0]*L-n[0]*5,y1:p[1]-t[1]*L-n[1]*5,x2:p[0]+t[0]*L-n[0]*5,y2:p[1]+t[1]*L-n[1]*5,class:'mirror-back'},$('#mirrors'));
+    el('line',{x1:p[0]-t[0]*L,y1:p[1]-t[1]*L,x2:p[0]+t[0]*L,y2:p[1]+t[1]*L,class:'mirror'},$('#mirrors'));
+  });
+
+  // Marcadores numerados (links para as explicações)
+  const MK={1:[192,90],2:[38,195],3:[112,284],4:[76,428],5:[528,88],6:[548,430],7:[536,884],8:[578,968]};
+  const TITLES={};
+  document.querySelectorAll('.call').forEach(c=>TITLES[c.dataset.step]=c.querySelector('h2').textContent.replace(/^Etapa \d+: /,''));
+  const markers={};
+  Object.keys(MK).forEach(n=>{
+    const [x,y]=MK[n];
+    const a=el('a',{href:'#passo-'+n,class:'mk','aria-label':'Etapa '+n+': '+TITLES[n]},$('#markers'));
+    el('circle',{cx:x,cy:y,r:20},a);
+    const t=el('text',{x,y:y+8,'text-anchor':'middle'},a); t.textContent=n;
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      const card=document.getElementById('passo-'+n);
+      setOn(n);
+      card.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'});
+      card.focus({preventScroll:true});
+    });
+    markers[n]=a;
+  });
+
+  // Destaque sincronizado
+  const cards=[...document.querySelectorAll('.call')];
+  let on=null;
+  function setOn(n){
+    on=n;
+    cards.forEach(c=>c.classList.toggle('on',c.dataset.step===n));
+    Object.keys(markers).forEach(k=>markers[k].classList.toggle('on',k===n));
+    svg.querySelectorAll('.part').forEach(p=>p.classList.toggle('hl',p.dataset.part===n));
+    document.querySelectorAll('#leaders g').forEach(g=>g.classList.toggle('on',g.dataset.step===n));
+  }
+  cards.forEach(c=>{
+    c.addEventListener('mouseenter',()=>setOn(c.dataset.step));
+    c.addEventListener('mouseleave',()=>setOn(null));
+    c.addEventListener('focus',()=>setOn(c.dataset.step));
+    c.addEventListener('blur',()=>setOn(null));
+  });
+  Object.keys(markers).forEach(n=>{
+    markers[n].addEventListener('mouseenter',()=>setOn(n));
+    markers[n].addEventListener('mouseleave',()=>setOn(null));
+    markers[n].addEventListener('focus',()=>setOn(n));
+    markers[n].addEventListener('blur',()=>setOn(null));
+  });
+
+  // Linhas de chamada (só no layout largo)
+  const spread=$('#spread'), lead=$('#leaders');
+  function drawLeaders(){
+    lead.innerHTML='';
+    if(getComputedStyle(lead).display==='none')return;
+    const b=spread.getBoundingClientRect();
+    lead.setAttribute('viewBox',`0 0 ${b.width} ${b.height}`);
+    cards.forEach(c=>{
+      const n=c.dataset.step, left=!!c.closest('.col-left');
+      const cr=c.getBoundingClientRect(), br=c.querySelector('.badge').getBoundingClientRect();
+      const mr=markers[n].querySelector('circle').getBoundingClientRect();
+      const ax=(left?cr.right+8:cr.left-8)-b.left, ay=br.top+br.height/2-b.top;
+      const mx=mr.left+mr.width/2-b.left, my=mr.top+mr.height/2-b.top, r=mr.width/2+2;
+      const kx=ax+(left?18:-18);
+      const ang=Math.atan2(my-ay,mx-kx);
+      const ex=mx-Math.cos(ang)*r, ey=my-Math.sin(ang)*r;
+      const g=el('g',{'data-step':n,class:n===on?'on':''},lead);
+      el('path',{d:`M${ax} ${ay} H${kx} L${ex.toFixed(1)} ${ey.toFixed(1)}`},g);
+      el('circle',{cx:ax,cy:ay,r:3.5},g);
+    });
+  }
+
+  // Animação (pausável)
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const gD=$('#drops'), plasma=$('#plasma'), btn=$('#anim');
+  let running=!reduce, raf=0, last=0, acc=0, visible=true;
+  const drops=[];
+  function spawn(y){const c=el('ellipse',{cx:140,cy:y,rx:4,ry:4,fill:'#D3D9E2'},gD);drops.push({y,c,flat:false})}
+  function frame(t){
+    if(!last)last=t;
+    const dt=Math.min(.05,(t-last)/1000); last=t; acc+=dt;
+    if(acc>.32){acc=0;spawn(118)}
+    for(let k=drops.length-1;k>=0;k--){
+      const dp=drops[k]; dp.y+=110*dt; dp.c.setAttribute('cy',dp.y.toFixed(1));
+      if(dp.y>=180&&!dp.flat){dp.flat=true;dp.c.setAttribute('rx',2);dp.c.setAttribute('ry',7)}
+      if(dp.y>=195){dp.c.remove();drops.splice(k,1);
+        if(plasma.animate)plasma.animate([{opacity:1,transform:'scale(.3)'},{opacity:.9,transform:'scale(1)',offset:.35},{opacity:0,transform:'scale(1.5)'}],{duration:320,easing:'ease-out'});}
+    }
+    raf=requestAnimationFrame(frame);
+  }
+  function apply(){
+    svg.classList.toggle('anim',running);
+    btn.textContent=running?'Pausar animação':'Animar';
+    btn.setAttribute('aria-pressed',String(!running));
+    cancelAnimationFrame(raf);
+    if(running&&visible){last=0;raf=requestAnimationFrame(frame)}
+    if(!running){gD.innerHTML='';drops.length=0;[128,150,172].forEach(spawn);el('circle',{cx:140,cy:195,r:12,fill:'url(#plasmaGrad)'},gD)}
+    else gD.querySelectorAll('circle').forEach(c=>c.remove());
+  }
+  btn.addEventListener('click',()=>{running=!running;if(running){gD.innerHTML='';drops.length=0}apply()});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(running)apply()}).observe(svg);
+  }
+  apply();
+
+  // Escala
+  const SCALE=[
+    {n:'Fio de cabelo',s:'espessura',v:80000},
+    {n:'Glóbulo vermelho',s:'diâmetro',v:7000},
+    {n:'Bactéria E. coli',s:'comprimento',v:2000},
+    {n:'Luz das máquinas DUV',s:'geração anterior',v:193,c:'duv'},
+    {n:'Vírus da gripe',s:'diâmetro',v:100},
+    {n:'Luz EUV',s:'comprimento de onda',v:13.5,c:'euv'},
+    {n:'Menor traço da High-NA',s:'em uma exposição',v:8,c:'euv'}
+  ];
+  const sc=$('#scale');
+  const bars=SCALE.map(r=>{
+    const row=document.createElement('div'); row.className='row'+(r.c?' '+r.c:'');
+    row.innerHTML=`<div class="name">${r.n}<small>${r.s}</small></div><div class="track"><div class="bar"></div><div class="val">${r.v.toLocaleString('pt-BR')} nm</div></div>`;
+    sc.appendChild(row);
+    return {row,pct:Math.log10(r.v)/5*82};
+  });
+  const drawBars=()=>bars.forEach(b=>{b.row.querySelector('.bar').style.width=b.pct+'%';b.row.querySelector('.val').style.left=b.pct+'%'});
+  if('IntersectionObserver' in window&&!reduce){
+    const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){drawBars();io.disconnect()}},{threshold:.3});io.observe(sc);
+  }else drawBars();
+
+  // Altura para iframe no WordPress
+  function postHeight(){try{parent.postMessage({type:'exame-iframe-height',id:'euv-asml',height:document.documentElement.scrollHeight},'*')}catch(e){}}
+  const relayout=()=>{drawLeaders();postHeight()};
+  if('ResizeObserver' in window)new ResizeObserver(relayout).observe(spread);
+  window.addEventListener('resize',relayout);
+  window.addEventListener('load',relayout);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(relayout);
+  relayout();
+})();
+</script>
+</body>
+</html>
