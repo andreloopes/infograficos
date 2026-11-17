@@ -1,0 +1,180 @@
+[
+  {
+    "product_id": "galaxy-s26-ultra",
+    "file": "s26-native.png",
+    "width": 330,
+    "height": 330,
+    "sha256": "e97b53cb389faa46cb66d07eaec301acb5120767b0c9ba4850c14056c555e725",
+    "unchanged": true,
+    "source": "https://images.samsung.com/is/image/samsung/p6pim/de/s2602/gallery/de-galaxy-s26-ultra-s948-577216-sm-s948bzsdeub-thumb-550758452?fmt=png-alpha&wid=1000",
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "product_id": "galaxy-z-fold8-ultra",
+    "file": "fold8-native.png",
+    "width": 330,
+    "height": 330,
+    "sha256": "18d08e25552e145bdc6d6f2e6af081194065c45745c3f1eeccd93fbd8e747cdd",
+    "unchanged": true,
+    "source": "https://images.samsung.com/is/image/samsung/p6pim/br/f2607/gallery/br-galaxy-z-fold8-ultra-f976-sm-f976bzvxzto-thumb-553718138?fmt=png-alpha&wid=1000",
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "product_id": "galaxy-a57-5g",
+    "file": "a57-native.png",
+    "width": 330,
+    "height": 330,
+    "sha256": "4f6860b45e93b062149442d7a7e3adfe9991e4e8c16acfb2a69d6897d3672c55",
+    "unchanged": true,
+    "source": "https://images.samsung.com/is/image/samsung/p6pim/uk/sm-a576bzaheub/gallery/uk-galaxy-a57-5g-sm-a576-585057-sm-a576bzaheub-thumb-551741087?fmt=png-alpha&wid=1000",
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "product_id": "galaxy-buds4-pro",
+    "file": "buds4-source.jpg",
+    "width": 800,
+    "height": 533,
+    "sha256": "5cc90069559725343027980885a74d2e43e69933457b5336f2b0ac5f5146e793",
+    "unchanged": true,
+    "source": "https://api.samsungmobilepress.com/api/v1/file/FDD99E898C6FA6749FEF7317EF97B62CEFB26DA746BE26FDEB44531007EEAC4BA9684AB920C08930FA7340E96328BB025058F9C9DFB69C4AE64738A0E2C3E44080085E281F377556C7263E8C6EB180C71D02B0FB0C77FFC6F48BAA60281F547482E646C7AEFBDAFF328825DCF53BBA2DD7BFF28F10CDA149439C8BABFB3CBF9B5234B12FB9665B68B0FA6B78E6025034",
+    "alpha": [
+      255,
+      255
+    ]
+  },
+  {
+    "product_id": "macbook-air-m5-13",
+    "file": "macbook-source.jpg",
+    "width": 980,
+    "height": 654,
+    "sha256": "043afd34f8e468adc0d1f95823c8cc51e30fdce4c55b344e9673c60f0b824569",
+    "unchanged": true,
+    "source": "https://www.apple.com/newsroom/images/2026/03/apple-introduces-the-new-macbook-air-with-m5/article/Apple-MacBook-Air-hero-260303_big.jpg.large.jpg",
+    "alpha": [
+      255,
+      255
+    ]
+  },
+  {
+    "product_id": "electrolux-lsc12",
+    "file": "lsc12-source.jpg",
+    "width": 1000,
+    "height": 1000,
+    "sha256": "cc44419ed1be6613b2a52d495f44a7cc9151fb12cdd87aaf98efba4643ea9caa",
+    "unchanged": true,
+    "source": "https://electrolux.vtexassets.com/arquivos/ids/289466/7909569485637_1-1000x1000.jpg",
+    "alpha": [
+      255,
+      255
+    ]
+  },
+  {
+    "product_id": "nintendo-switch-2",
+    "file": "switch2-hardware.png",
+    "width": 1193,
+    "height": 658,
+    "sha256": "86ed6851e0d0787c88c2b881535cbf556837eb026fedea26b4cdc0a75a84373a",
+    "unchanged": true,
+    "source": "https://www.nintendo.com/ph/hardware/switch2/lineup/assets/img/img_switch2_body.png",
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "product_id": "dji-osmo-pocket-4",
+    "file": "pocket4-source.png",
+    "width": 1280,
+    "height": 1280,
+    "sha256": "04ff1659b7b4793ac5a7967b369d1ba890651dc0ecc2067f3b5b12ee24279c0e",
+    "unchanged": true,
+    "source": "https://se-cdn.djiits.com/tpc/uploads/spu/cover/5408da2c69b56fbd2d80fdca847ad92d@ultra.png",
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "product_id": "dji-mic-3",
+    "file": "mic3-source.png",
+    "width": 1280,
+    "height": 1280,
+    "sha256": "abfdd424887176658a74fa60440b41494975759cae59805827b87ad6b300772d",
+    "unchanged": true,
+    "source": "https://se-cdn.djiits.com/tpc/uploads/spu/cover/473691cc5e140d0341a30b31b479c627@ultra.png",
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "product_id": "apple-watch-ultra-4",
+    "file": "watch4-source.jpg",
+    "width": 980,
+    "height": 551,
+    "sha256": "723153fb2a6aee8807e2b97c7514abf42217e80d3c4d917807a09257f6f607bb",
+    "unchanged": true,
+    "source": "https://www.apple.com/newsroom/images/2026/09/apple-unveils-apple-watch-ultra-4/article/Apple-Watch-Ultra-4-hero-260909_big.jpg.large.jpg",
+    "alpha": [
+      255,
+      255
+    ]
+  },
+  {
+    "product_id": "chatgpt-pro",
+    "file": "chatgpt-logo.svg",
+    "width": 180,
+    "height": 180,
+    "sha256": "8f2de046d22cfecfe3917cf87ff1ce49a48d79956f6b18be3b37db29148a0aeb",
+    "unchanged": true,
+    "source": "https://chatgpt.com/cdn/assets/favicon-l4nq08hd.svg"
+  },
+  {
+    "product_id": "notion",
+    "file": "notion-logo.png",
+    "width": 512,
+    "height": 512,
+    "sha256": "59c42a0afd20dc9dd0cf598e105e774a484bf10cdbec1ffc3a33c9cb59579b47",
+    "unchanged": true,
+    "source": "https://www.notion.so/images/logo-ios.png",
+    "alpha": [
+      255,
+      255
+    ]
+  },
+  {
+    "product_id": "tcl-27g64",
+    "file": "tcl27g64-source.png",
+    "width": 1600,
+    "height": 1200,
+    "sha256": "800829b959ead4ad2e9cd8d49e25583199d927de5e3e1fe777320f80514639b7",
+    "unchanged": true,
+    "source": "https://aws-obg-image-lb-2.tcl.com/content/dam/brandsite/product/monitor/27g64/id/1-02.png?t=1744875298630&w=800",
+    "alpha": [
+      0,
+      255
+    ]
+  },
+  {
+    "product_id": "aoc-q27g4zdr",
+    "file": "aocq27g4zdr-clean.png",
+    "width": 1200,
+    "height": 1200,
+    "sha256": "4f15fa3f4e386ef737d87e86b1047f9a955f3e7dfd989865fa90182b7cd243eb",
+    "unchanged": true,
+    "source": "https://cdn.sanity.io/images/hf5b3axp/production/75413f789e45e783f7cbd7f64d3c518364d293e3-5000x5000.png?w=1200",
+    "alpha": [
+      0,
+      255
+    ]
+  }
+]
