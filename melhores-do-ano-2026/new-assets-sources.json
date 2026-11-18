@@ -1,7 +1,7 @@
 [
   {
     "id": "airtag-2",
-    "path": "/workspace/shared/new-product-assets/airtag-support.png",
+    "path": "assets/airtag-2-official.png",
     "width": 1000,
     "height": 1000,
     "transparent": true,
@@ -20,7 +20,7 @@
   },
   {
     "id": "stanley-flowstate-spring",
-    "path": "/workspace/shared/new-product-assets/stanley-spring.png",
+    "path": "assets/stanley-flowstate-spring-official.png",
     "width": 700,
     "height": 700,
     "transparent": true,
@@ -39,7 +39,7 @@
   },
   {
     "id": "anker-nano-45w",
-    "path": "/workspace/shared/new-product-assets/anker-original.png",
+    "path": "assets/anker-nano-45w-official.png",
     "width": 900,
     "height": 900,
     "transparent": true,
@@ -59,7 +59,7 @@
   },
   {
     "id": "tumi-alpha-4-brief-pack",
-    "path": "/workspace/shared/new-product-assets/tumi-alpha4.png",
+    "path": "assets/tumi-alpha-4-brief-pack-official.png",
     "width": 742,
     "height": 900,
     "transparent": false,
