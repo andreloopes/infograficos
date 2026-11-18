@@ -1,0 +1,80 @@
+[
+  {
+    "id": "airtag-2",
+    "path": "/workspace/shared/new-product-assets/airtag-support.png",
+    "width": 1000,
+    "height": 1000,
+    "transparent": true,
+    "credit": "Apple/Divulgação",
+    "alt": "AirTag de segunda geração, visto de frente e de costas.",
+    "source_url": "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/airtag-2nd-gen.png",
+    "product_url": "https://support.apple.com/pt-br/126203",
+    "facts": {
+      "battery": "CR2032 substituível",
+      "weight": "11,8 g",
+      "precision_finding": "Chip UWB de segunda geração; alcance ampliado requer iPhone 15 ou posterior, exceto 16e/17e, ou iPhone Air",
+      "compatibility": "iOS 26.2.1 ou posterior",
+      "water_resistance": "IP67"
+    },
+    "note": "Foto oficial inspecionada, alpha presente. Preferir esta ao arquivo airtag-2.png da Apple Store, que apresentou faixas laterais estranhas."
+  },
+  {
+    "id": "stanley-flowstate-spring",
+    "path": "/workspace/shared/new-product-assets/stanley-spring.png",
+    "width": 700,
+    "height": 700,
+    "transparent": true,
+    "credit": "Stanley/Divulgação",
+    "alt": "Garrafa Stanley FlowState Spring de 20 oz na cor Champagne, vista de frente.",
+    "source_url": "https://www.stanley1913.com/cdn/shop/files/Web_PNG_Square-The_Flowstate_Spring_Bottle_20oz_-_Champagne_Front_747bda82-4264-4dfc-a899-c4725d09e354.png?v=1783095530&width=700",
+    "product_url": "https://www.stanley1913.com/products/flowstate-spring-bottle-20-oz?variant=53974484386152",
+    "facts": {
+      "capacity": "20 oz, aproximadamente 591 ml",
+      "lid": "Botão de abertura e trava; vedação segundo fabricante",
+      "cold": "10 h gelado, 35 h com gelo segundo fabricante",
+      "material": "Aço inox 18/8 reciclado, isolamento a vácuo de parede dupla",
+      "cleaning": "Pode ir à lava-louças"
+    },
+    "note": "Não usar líquidos quentes. PNG oficial transparente inspecionado, sem edição."
+  },
+  {
+    "id": "anker-nano-45w",
+    "path": "/workspace/shared/new-product-assets/anker-original.png",
+    "width": 900,
+    "height": 900,
+    "transparent": true,
+    "credit": "Anker/Divulgação",
+    "alt": "Carregador Anker Nano 45W branco, com display e pinos dobráveis do padrão americano.",
+    "source_url": "https://cdn.shopify.com/s/files/1/0493/9834/9974/files/Group_2121236309_77952e43-e3b0-4fc6-9a95-65e7546da92b.png?v=1767609604&width=900",
+    "product_url": "https://www.anker.com/products/a121d-45w-usb-c-fast-charger-foldable-plug-compact?variant=46070529261718",
+    "facts": {
+      "power": "USB-C PD de até 45 W; potência real depende do aparelho",
+      "display": "Display de informações de carregamento",
+      "plug": "Pinos dobráveis em 180 graus",
+      "weight": "75 g",
+      "dimensions": "34 × 35,5 × 40 mm",
+      "input": "100–240 V"
+    },
+    "note": "Imagem oficial transparente com pequenas setas explicativas preservadas. Versão americana; disponibilidade oficial no Brasil e plugue BR não verificados. Não usar anker-nano.png: variante com selo OTA distinto."
+  },
+  {
+    "id": "tumi-alpha-4-brief-pack",
+    "path": "/workspace/shared/new-product-assets/tumi-alpha4.png",
+    "width": 742,
+    "height": 900,
+    "transparent": false,
+    "credit": "TUMI/Divulgação",
+    "alt": "Mochila preta TUMI Alpha 4 Brief Pack, vista de frente.",
+    "source_url": "https://tumi.scene7.com/is/image/Tumi/1589571041_main?hei=900&wid=742&fmt=png-alpha",
+    "product_url": "https://www.tumi.com/p/tumi-brief-pack--01589571041/",
+    "facts": {
+      "capacity": "25 litros",
+      "weight": "3,4 lb, aproximadamente 1,54 kg",
+      "material": "Nylon balístico FXT",
+      "laptop": "Compartimento acolchoado para PC de até 15 polegadas ou MacBook de 16 polegadas, conforme descrição detalhada",
+      "travel": "Encaixe Add-a-Bag para alça de mala",
+      "dimensions": "17 × 14 × 9 polegadas"
+    },
+    "note": "Imagem oficial íntegra de fundo branco, apesar do parâmetro PNG-alpha o arquivo não possui transparência efetiva. Disponibilidade oficial brasileira não confirmada."
+  }
+]

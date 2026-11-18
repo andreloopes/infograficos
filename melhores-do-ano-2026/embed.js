@@ -1,0 +1,2 @@
+/* Optional parent-page helper. Install once where the CMS permits scripts. */
+(()=>{const origin='https://andreloopes.github.io';window.addEventListener('message',event=>{if(event.origin!==origin||event.data?.type!=='exame-product-height')return;const height=Number(event.data.height);if(!Number.isFinite(height)||height<100||height>5000)return;for(const frame of document.querySelectorAll('iframe.exame-product-card')){if(frame.contentWindow===event.source&&new URL(frame.src).origin===origin){frame.style.height=`${height+2}px`;break;}}});})();

@@ -1,0 +1,5 @@
+from pathlib import Path
+import json,html
+r=Path(__file__).resolve().parent;p=json.loads((r/'products.json').read_text())
+frames=''.join(f'<section><h2>{x["order"]:02d} · {html.escape(x["name"])}</h2><iframe class="exame-product-card" src="cards/{x["id"]}.html" title="{html.escape(x["name"])}" style="width:100%;height:1000px;border:0;display:block"></iframe></section>' for x in p)
+(r/'preview.html').write_text('''<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prévia dos cards EXAME</title><style>body{margin:20px;font:16px Arial;background:#eee}header{position:sticky;top:0;background:white;padding:12px;z-index:2;border:1px solid}main{width:660px;max-width:100%}section{margin:20px 0}h2{font:15px Arial}</style><header><label>Largura do artigo <select id="width" onchange="document.querySelector('main').style.width=this.value+'px'"><option>360</option><option>390</option><option selected>660</option><option>800</option></select> px</label></header><main>'''+frames+'</main><script src="embed.js"></script></html>')

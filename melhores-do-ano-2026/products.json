@@ -34,20 +34,20 @@
     "method_note": "Tamanho e módulo de câmera saliente podem incomodar. Sem ímãs Qi2 integrados. Seleção editorial provisória. Não constitui teste prático da EXAME.",
     "facts": [
       {
-        "label": "Menos olhares laterais",
+        "label": "A melhor característica:",
         "value": "Tela de privacidade"
       },
       {
-        "label": "Notas e marcações",
+        "label": "Essencial para quem busca:",
+        "value": "Trabalhar no celular fora de casa"
+      },
+      {
+        "label": "Para anotar:",
         "value": "S Pen integrada"
       },
       {
-        "label": "Câmera principal",
-        "value": "200 MP"
-      },
-      {
-        "label": "Olhares laterais",
-        "value": "Tela de privacidade"
+        "label": "Para ler e editar:",
+        "value": "Tela de 6,9”"
       }
     ],
     "reader_note": "O corpo grande e as câmeras salientes podem incomodar no bolso. Não há ímãs Qi2 integrados.",
@@ -84,19 +84,19 @@
     "method_note": "Seleção editorial; não constitui teste prático da EXAME.",
     "facts": [
       {
-        "label": "Sem o tamanho Max",
-        "value": "Tela de 6,3”"
+        "label": "A melhor característica:",
+        "value": "Conjunto de câmeras versátil"
       },
       {
-        "label": "Para chegar perto",
+        "label": "Essencial para quem busca:",
+        "value": "Fotografar e editar no mesmo aparelho"
+      },
+      {
+        "label": "Para chegar perto:",
         "value": "Teleobjetiva de 4x"
       },
       {
-        "label": "Vídeo para editar",
-        "value": "4K Dolby Vision"
-      },
-      {
-        "label": "Espaço de partida",
+        "label": "Espaço de partida:",
         "value": "256 GB"
       }
     ],
@@ -105,8 +105,58 @@
     "editorial_headline": "O enquadramento faz a diferença."
   },
   {
-    "id": "galaxy-buds4-pro",
+    "id": "airtag-2",
     "order": 3,
+    "name": "AirTag 2",
+    "category": "Rastreador",
+    "description": "A pressa costuma começar procurando alguma coisa. O AirTag de segunda geração dá um endereço às chaves e à bagagem no app Buscar. Perto do objeto, a Busca Precisa orienta o caminho em aparelhos compatíveis. Longe dele, entra em cena a rede de dispositivos Apple.",
+    "verdict": "Não é um GPS com conexão própria. O benefício aparece para quem já usa iPhone; confira a compatibilidade da Busca Precisa antes de comprar.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "width": 1000,
+      "height": 1000,
+      "credit": "Apple/Divulgação",
+      "alt": "AirTag de segunda geração, visto de frente e de costas.",
+      "source_url": "https://cdsassets.apple.com/live/7WUAS350/images/tech-specs/airtag-2nd-gen.png",
+      "path": "assets/airtag-2-official.png",
+      "verified": true,
+      "rights_verified": false,
+      "kind": "product",
+      "rights_note": "Imagem de divulgação oficial, mantida sem alterações; uso editorial solicitado pelo usuário."
+    },
+    "sources": [
+      {
+        "label": "Ficha oficial",
+        "url": "https://support.apple.com/pt-br/126203"
+      }
+    ],
+    "method_note": "Seleção editorial; não constitui teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "A melhor característica:",
+        "value": "Busca Precisa ampliada"
+      },
+      {
+        "label": "Essencial para quem busca:",
+        "value": "Encontrar objetos no ecossistema Apple"
+      },
+      {
+        "label": "Para manter:",
+        "value": "Bateria CR2032 substituível"
+      },
+      {
+        "label": "No chaveiro:",
+        "value": "11,8 g"
+      }
+    ],
+    "reader_note": "A bateria CR2032 pode ser substituída pelo usuário. A localização remota depende da rede Buscar. Não foi concebido para rastrear pessoas.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "As chaves não foram tão longe."
+  },
+  {
+    "id": "galaxy-buds4-pro",
+    "order": 4,
     "name": "Galaxy Buds4 Pro",
     "category": "Fone sem fio",
     "description": "Os Buds4 Pro se entendem melhor com um Galaxy: parte dos recursos depende de um celular Samsung compatível. Fora dessa conversa entre aparelhos, ficam os critérios que importam a qualquer ouvido: encaixe, conforto, controles acessíveis e cancelamento de ruído.",
@@ -137,20 +187,20 @@
     "method_note": "Parte dos recursos exige Galaxy compatível. IP57 não se aplica ao estojo. Autonomia informada pela fabricante varia com uso e configuração. Seleção editorial provisória. Não constitui teste prático da EXAME.",
     "facts": [
       {
-        "label": "Ambientes ruidosos",
+        "label": "A melhor característica:",
+        "value": "Integração com aparelhos Galaxy"
+      },
+      {
+        "label": "Essencial para quem busca:",
+        "value": "Música e chamadas no ecossistema Samsung"
+      },
+      {
+        "label": "No trajeto:",
         "value": "Cancelamento ativo"
       },
       {
-        "label": "Música com ANC",
-        "value": "Até 6 h¹"
-      },
-      {
-        "label": "Comandos",
-        "value": "Controles nas hastes"
-      },
-      {
-        "label": "Proteção dos fones",
-        "value": "IP57"
+        "label": "Longe da tomada:",
+        "value": "Até 6 h com ANC¹"
       }
     ],
     "reader_note": "¹Autonomia anunciada pela Samsung, variável conforme uso e configuração. Parte dos recursos exige Galaxy compatível; a classificação IP57 não cobre o estojo.",
@@ -159,7 +209,7 @@
   },
   {
     "id": "macbook-air-m5-13",
-    "order": 4,
+    "order": 5,
     "name": "MacBook Air de 13 polegadas com M5",
     "category": "Notebook",
     "description": "A mesa de casa, uma sala emprestada, o lugar disponível na viagem. O Air de 13 polegadas foi pensado para acompanhar essa troca de endereço. Na configuração inicial, o M5 vem com 16 GB de memória e SSD de 512 GB; a tela de 13,6 polegadas mantém o conjunto compacto.",
@@ -190,19 +240,19 @@
     "method_note": "Duas portas Thunderbolt 4, além de MagSafe e áudio. USB-A e HDMI exigem adaptador. Seleção editorial provisória. Não constitui teste prático da EXAME.",
     "facts": [
       {
-        "label": "Tela",
-        "value": "13,6” Liquid Retina"
+        "label": "A melhor característica:",
+        "value": "Portabilidade para trabalhar"
       },
       {
-        "label": "Memória inicial",
-        "value": "16 GB"
+        "label": "Essencial para quem busca:",
+        "value": "Levar o escritório na bolsa"
       },
       {
-        "label": "Arquivos locais",
+        "label": "Arquivos locais:",
         "value": "SSD de 512 GB"
       },
       {
-        "label": "Conexões de dados",
+        "label": "Para conectar:",
         "value": "Duas Thunderbolt 4"
       }
     ],
@@ -211,8 +261,58 @@
     "editorial_headline": "A mesa pode mudar."
   },
   {
+    "id": "tumi-alpha-4-brief-pack",
+    "order": 6,
+    "name": "TUMI Alpha 4 Brief Pack",
+    "category": "Mochila",
+    "description": "Carregador no fundo, passaporte em algum bolso, notebook no braço. A Brief Pack organiza essa pequena desordem com compartimentos separados e espaço dedicado ao computador. Na viagem, a passagem traseira encaixa a mochila na alça da mala: menos uma coisa para equilibrar.",
+    "verdict": "Organização tem peso: são cerca de 1,54 kg antes de colocar qualquer coisa. Vale para quem carrega bastante e usa os compartimentos, não para quem quer a mochila mais leve.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "width": 742,
+      "height": 900,
+      "credit": "TUMI/Divulgação",
+      "alt": "Mochila preta TUMI Alpha 4 Brief Pack, vista de frente.",
+      "source_url": "https://tumi.scene7.com/is/image/Tumi/1589571041_main?hei=900&wid=742&fmt=png-alpha",
+      "path": "assets/tumi-alpha-4-brief-pack-official.png",
+      "verified": true,
+      "rights_verified": false,
+      "kind": "product",
+      "rights_note": "Imagem de divulgação oficial, mantida sem alterações; uso editorial solicitado pelo usuário."
+    },
+    "sources": [
+      {
+        "label": "Ficha oficial",
+        "url": "https://www.tumi.com/p/tumi-brief-pack--01589571041/"
+      }
+    ],
+    "method_note": "Seleção editorial; não constitui teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "A melhor característica:",
+        "value": "Compartimentos bem separados"
+      },
+      {
+        "label": "Essencial para quem busca:",
+        "value": "Organizar trabalho e viagem na mesma mochila"
+      },
+      {
+        "label": "Espaço útil:",
+        "value": "Capacidade de 25 litros"
+      },
+      {
+        "label": "No aeroporto:",
+        "value": "Encaixe na alça da mala"
+      }
+    ],
+    "reader_note": "Disponibilidade oficial desta versão no Brasil não confirmada. A ficha consultada é da Alpha 4 em nylon balístico, com capacidade de 25 litros. Confira as dimensões do computador, não apenas a diagonal.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "Cada coisa sabe o seu lugar."
+  },
+  {
     "id": "apple-watch-ultra-4",
-    "order": 5,
+    "order": 7,
     "name": "Apple Watch Ultra 4",
     "category": "Smartwatch para treino",
     "description": "Há bastante relógio aqui: caixa de titânio de 49 mm, tela de alto brilho e botão de Ação. O Ultra 4 reúne treino, atividades ao ar livre e a rotina ligada ao iPhone. Antes das métricas, vale uma pergunta simples: esse tamanho funciona no seu pulso?",
@@ -239,20 +339,20 @@
     "method_note": "Autonomia informada pela Apple, variável conforme o uso. Recursos de saúde não equivalem a diagnóstico médico. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
     "facts": [
       {
-        "label": "Tamanho da caixa",
-        "value": "49 mm, em titânio"
+        "label": "A melhor característica:",
+        "value": "Tela legível ao ar livre"
       },
       {
-        "label": "Tela ao ar livre",
-        "value": "Pico de 3.000 nits"
+        "label": "Essencial para quem busca:",
+        "value": "Treinos com um iPhone por perto"
       },
       {
-        "label": "Autonomia anunciada",
+        "label": "No pulso:",
+        "value": "Caixa de titânio de 49 mm"
+      },
+      {
+        "label": "Autonomia anunciada:",
         "value": "Até 50 h em uso normal¹"
-      },
-      {
-        "label": "Celular necessário",
-        "value": "iPhone compatível"
       }
     ],
     "reader_note": "¹Estimativa da Apple; a duração varia conforme o uso. Métricas de treino, recuperação e saúde não substituem avaliação ou diagnóstico médico.",
@@ -261,7 +361,7 @@
   },
   {
     "id": "bee-type-2",
-    "order": 6,
+    "order": 8,
     "name": "Bee Type 2",
     "category": "Mobilidade urbana",
     "description": "Ir à padaria não precisa virar uma expedição de carro. Com desenho retrô e motor elétrico de 1.000 W, a Bee Type 2 conversa com os trajetos curtos da cidade. A bateria removível leva a recarga até a tomada, sem exigir que o veículo vá junto.",
@@ -289,19 +389,19 @@
     "method_note": "Seleção editorial; não constitui teste prático da EXAME.",
     "facts": [
       {
-        "label": "Para trajetos curtos",
-        "value": "Até 32 km/h"
-      },
-      {
-        "label": "A tomada pode subir",
+        "label": "A melhor característica:",
         "value": "Bateria removível"
       },
       {
-        "label": "Recarga planejada",
+        "label": "Essencial para quem busca:",
+        "value": "Trocar trajetos curtos de carro"
+      },
+      {
+        "label": "Recarga planejada:",
         "value": "De 6 a 8 horas"
       },
       {
-        "label": "Para manobrar",
+        "label": "Para manobrar:",
         "value": "Marcha à ré"
       }
     ],
@@ -310,8 +410,58 @@
     "editorial_headline": "O bairro em outra velocidade."
   },
   {
+    "id": "stanley-flowstate-spring",
+    "order": 9,
+    "name": "Stanley FlowState Spring",
+    "category": "Garrafa",
+    "description": "A melhor garrafa é a que acompanha o dia sem pedir atenção. A FlowState Spring troca o canudo exposto por uma tampa com botão e trava. São cerca de 591 ml para levar à reunião, à caminhada ou à mesa, com isolamento a vácuo para a água continuar fria.",
+    "verdict": "O ganho está na tampa fechada, não no nome na lateral. Use para bebidas frias: este modelo não é indicado para líquidos quentes.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "width": 700,
+      "height": 700,
+      "credit": "Stanley/Divulgação",
+      "alt": "Garrafa Stanley FlowState Spring de 20 oz na cor Champagne, vista de frente.",
+      "source_url": "https://www.stanley1913.com/cdn/shop/files/Web_PNG_Square-The_Flowstate_Spring_Bottle_20oz_-_Champagne_Front_747bda82-4264-4dfc-a899-c4725d09e354.png?v=1783095530&width=700",
+      "path": "assets/stanley-flowstate-spring-official.png",
+      "verified": true,
+      "rights_verified": false,
+      "kind": "product",
+      "rights_note": "Imagem de divulgação oficial, mantida sem alterações; uso editorial solicitado pelo usuário."
+    },
+    "sources": [
+      {
+        "label": "Ficha oficial",
+        "url": "https://www.stanley1913.com/products/flowstate-spring-bottle-20-oz"
+      }
+    ],
+    "method_note": "Seleção editorial; não constitui teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "A melhor característica:",
+        "value": "Tampa com botão e trava"
+      },
+      {
+        "label": "Essencial para quem busca:",
+        "value": "Levar água sem canudo exposto"
+      },
+      {
+        "label": "Na medida:",
+        "value": "20 oz, cerca de 591 ml"
+      },
+      {
+        "label": "Para limpar:",
+        "value": "Pode ir à lava-louças"
+      }
+    ],
+    "reader_note": "Versão de 20 oz. A marca anuncia até 10 horas de conservação de bebidas frias e 35 horas com gelo; são condições de teste do fabricante, não garantia para toda situação.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "A água também vai na bolsa."
+  },
+  {
     "id": "dji-osmo-pocket-4",
-    "order": 7,
+    "order": 10,
     "name": "DJI Osmo Pocket 4",
     "category": "Câmera para conteúdo",
     "description": "Câmera e estabilizador costumam ser dois itens na lista. A Pocket 4 os reúne num corpo compacto, com estabilização mecânica em três eixos e tela giratória. É uma opção para registrar a caminhada sem transformar cada parada numa montagem de equipamento.",
@@ -338,19 +488,19 @@
     "method_note": "Não substitui uma câmera de lentes intercambiáveis. Preço, canal de venda e garantia no Brasil ainda pendentes. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
     "facts": [
       {
-        "label": "Estabilização",
-        "value": "Mecânica em três eixos"
+        "label": "A melhor característica:",
+        "value": "Estabilização mecânica"
       },
       {
-        "label": "Sensor",
-        "value": "CMOS de 1”"
+        "label": "Essencial para quem busca:",
+        "value": "Filmar caminhando com pouca bagagem"
       },
       {
-        "label": "Armazenamento",
+        "label": "Armazenamento:",
         "value": "107 GB internos"
       },
       {
-        "label": "Enquadramento",
+        "label": "Para enquadrar:",
         "value": "Tela giratória"
       }
     ],
@@ -360,7 +510,7 @@
   },
   {
     "id": "dji-mic-3",
-    "order": 8,
+    "order": 11,
     "name": "DJI Mic 3",
     "category": "Microfone",
     "description": "A entrevista cresceu, chegou outra câmera, alguém mais entrou na conversa. O Mic 3 oferece espaço para essas produções: suporta até quatro transmissores e oito receptores, com gravação interna em 32 bits float e timecode para sincronização.",
@@ -391,19 +541,19 @@
     "method_note": "A quantidade de unidades depende do kit e dos acessórios. Lançado em agosto de 2025. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
     "facts": [
       {
-        "label": "Gravação interna",
-        "value": "32 bits float"
+        "label": "A melhor característica:",
+        "value": "Gravação interna em 32 bits float"
       },
       {
-        "label": "Pessoas na gravação",
+        "label": "Essencial para quem busca:",
+        "value": "Voz com mais margem na edição"
+      },
+      {
+        "label": "Para entrevistas:",
         "value": "Até 4 transmissores"
       },
       {
-        "label": "Câmeras e destinos",
-        "value": "Até 8 receptores"
-      },
-      {
-        "label": "Sincronização",
+        "label": "Para sincronizar:",
         "value": "Timecode integrado"
       }
     ],
@@ -413,7 +563,7 @@
   },
   {
     "id": "nintendo-switch-2",
-    "order": 9,
+    "order": 12,
     "name": "Nintendo Switch 2",
     "category": "Console",
     "description": "O melhor argumento do Switch 2 continua sendo uma mudança de lugar: sair da televisão e levar o jogo junto. A tela portátil de 7,9 polegadas e os 256 GB internos renovam essa ideia. O catálogo, porém, merece mais atenção na escolha que a maior resolução impressa na caixa.",
@@ -440,20 +590,20 @@
     "method_note": "Lançado em 2025. Não foi identificada uma revisão de hardware para chamá-lo de “versão atualizada”. Saída de vídeo depende do jogo e equipamento. Expansão de jogos exige microSD Express. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
     "facts": [
       {
-        "label": "Na mão",
+        "label": "A melhor característica:",
+        "value": "Jogar na mão ou na televisão"
+      },
+      {
+        "label": "Essencial para quem busca:",
+        "value": "Levar a partida para outro lugar"
+      },
+      {
+        "label": "No modo portátil:",
         "value": "Tela Full HD de 7,9”"
       },
       {
-        "label": "Na televisão",
-        "value": "Até 4K a 60 quadros/s"
-      },
-      {
-        "label": "Armazenamento",
-        "value": "256 GB internos"
-      },
-      {
-        "label": "Expansão de jogos",
-        "value": "Cartão microSD Express"
+        "label": "Para instalar jogos:",
+        "value": "256 GB; expansão microSD Express"
       }
     ],
     "reader_note": "Lançado em 2025. A saída 4K depende do jogo e do equipamento. A tela portátil oferece HDR10 e VRR até 120 Hz; cartões microSD comuns não substituem o microSD Express para expandir jogos.",
@@ -462,7 +612,7 @@
   },
   {
     "id": "tcl-27g64",
-    "order": 10,
+    "order": 13,
     "name": "TCL 27G64",
     "category": "Monitores",
     "description": "De dia, documentos; depois, um jogo ou um filme. O TCL 27G64 combina 27 polegadas, resolução QHD e iluminação QD-Mini LED com atualização de até 180 Hz. É uma opção para uma mesa que não pertence a uma única atividade.",
@@ -489,20 +639,20 @@
     "method_note": "Especificações fornecidas pela apuração com fonte oficial do fabricante. Preço e disponibilidade atual no Brasil não aferidos. Seleção editorial provisória, sem alegação de teste prático.",
     "facts": [
       {
-        "label": "Área de tela",
-        "value": "27 polegadas"
+        "label": "A melhor característica:",
+        "value": "Iluminação QD-Mini LED"
       },
       {
-        "label": "Resolução",
-        "value": "QHD, 2560 × 1440"
+        "label": "Essencial para quem busca:",
+        "value": "Uma tela para trabalhar e jogar"
       },
       {
-        "label": "Iluminação",
-        "value": "QD-Mini LED"
+        "label": "Espaço de trabalho:",
+        "value": "27” com resolução QHD"
       },
       {
-        "label": "Atualização máxima",
-        "value": "180 Hz"
+        "label": "Para jogos rápidos:",
+        "value": "Até 180 Hz"
       }
     ],
     "reader_note": "Modelo lançado no Brasil em 2025. O tipo de iluminação não deve ser confundido com OLED. Confira conexões e requisitos para atingir a taxa máxima na configuração utilizada.",
@@ -511,7 +661,7 @@
   },
   {
     "id": "aoc-q27g4zdr",
-    "order": 11,
+    "order": 14,
     "name": "AOC Q27G4ZDR",
     "category": "Monitores",
     "description": "Os 240 Hz chamam a atenção, mas não contam a história sozinhos. O Q27G4ZDR combina essa atualização com painel QD-OLED e resolução QHD, numa tela vendida como 27 polegadas. É uma escolha voltada a quem dá aos jogos um lugar importante na mesa.",
@@ -538,20 +688,20 @@
     "method_note": "Comercializado como 27”, com diagonal efetiva de 26,5”. Lançamento brasileiro noticiado em outubro de 2026; modelo global de 2025. Não aplicar garantia dos EUA ao Brasil. Preço e condições da oferta brasileira não aferidos; página Amazon inacessível. Sem teste prático da EXAME.",
     "facts": [
       {
-        "label": "Painel",
-        "value": "QD-OLED"
+        "label": "A melhor característica:",
+        "value": "Contraste do painel QD-OLED"
       },
       {
-        "label": "Diagonal efetiva",
-        "value": "26,5” — vendido como 27”"
+        "label": "Essencial para quem busca:",
+        "value": "Imagem e fluidez na mesma mesa"
       },
       {
-        "label": "Resolução",
-        "value": "QHD, 2560 × 1440"
+        "label": "Para jogar:",
+        "value": "Atualização de 240 Hz"
       },
       {
-        "label": "Atualização",
-        "value": "240 Hz"
+        "label": "Para os detalhes:",
+        "value": "Resolução QHD"
       }
     ],
     "reader_note": "Há HDMI 2.1. O lançamento brasileiro foi noticiado em 2026, enquanto o modelo global é de 2025. Garantias anunciadas em outros países não se aplicam automaticamente ao Brasil.",
@@ -559,8 +709,58 @@
     "editorial_headline": "Velocidade não é tudo."
   },
   {
+    "id": "anker-nano-45w",
+    "order": 15,
+    "name": "Anker Nano 45W Smart Display",
+    "category": "Carregador",
+    "description": "Normalmente, carregar o celular é um ato de fé: conectar e esperar. O Nano põe uma pequena tela nessa conversa, mostrando informações da recarga. A saída USB-C chega a 45 W, e os pinos dobráveis ajudam a acomodar o carregador na bolsa.",
+    "verdict": "Uma porta significa um aparelho por vez. Os 45 W são o máximo, não a potência que todo celular recebe. A versão ilustrada usa plugue americano.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "width": 900,
+      "height": 900,
+      "credit": "Anker/Divulgação",
+      "alt": "Carregador Anker Nano 45W branco, com display e pinos dobráveis do padrão americano.",
+      "source_url": "https://cdn.shopify.com/s/files/1/0493/9834/9974/files/Group_2121236309_77952e43-e3b0-4fc6-9a95-65e7546da92b.png?v=1767609604&width=900",
+      "path": "assets/anker-nano-45w-official.png",
+      "verified": true,
+      "rights_verified": false,
+      "kind": "product",
+      "rights_note": "Imagem de divulgação oficial, mantida sem alterações; uso editorial solicitado pelo usuário."
+    },
+    "sources": [
+      {
+        "label": "Ficha oficial",
+        "url": "https://www.anker.com/products/a121d-45w-usb-c-fast-charger-foldable-plug-compact?variant=46070529261718"
+      }
+    ],
+    "method_note": "Seleção editorial; não constitui teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "A melhor característica:",
+        "value": "Tela com informações da recarga"
+      },
+      {
+        "label": "Essencial para quem busca:",
+        "value": "Acompanhar a carga em um formato compacto"
+      },
+      {
+        "label": "Potência máxima:",
+        "value": "45 W via USB-C"
+      },
+      {
+        "label": "Na bagagem:",
+        "value": "75 g; pinos dobráveis"
+      }
+    ],
+    "reader_note": "Disponibilidade oficial no Brasil não confirmada. Confira tomada, cabo e protocolos do aparelho antes da compra. Modelo A121D; entrada de 100 a 240 V.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "A tomada presta contas."
+  },
+  {
     "id": "electrolux-lsc12",
-    "order": 12,
+    "order": 16,
     "name": "Electrolux LSC12",
     "category": "Destaque em eletrodomésticos",
     "description": "A conveniência de uma lava e seca cabe numa única máquina; a roupa, nem sempre no mesmo ciclo. A LSC12 lava até 12 kg e seca até 7 kg. Sensores ajustam a lavagem à carga, e a opção de água quente amplia o repertório de cuidados.",
@@ -591,20 +791,20 @@
     "method_note": "Capacidade de secagem menor que a de lavagem. Faltam testes independentes suficientes para classificá-la como a melhor. Seleção editorial provisória. Não constitui teste prático da EXAME.",
     "facts": [
       {
-        "label": "Carga de lavagem",
+        "label": "A melhor característica:",
+        "value": "AutoSense ajusta o ciclo"
+      },
+      {
+        "label": "Essencial para quem busca:",
+        "value": "Lavar e secar no mesmo equipamento"
+      },
+      {
+        "label": "Na lavagem:",
         "value": "Até 12 kg"
       },
       {
-        "label": "Carga de secagem",
+        "label": "Na secagem:",
         "value": "Até 7 kg"
-      },
-      {
-        "label": "Ajuste do ciclo",
-        "value": "AutoSense"
-      },
-      {
-        "label": "Lavagem",
-        "value": "Opção de água quente"
       }
     ],
     "reader_note": "Motor inverter. As capacidades de lavagem e secagem são diferentes; respeite a carga e o programa indicados no manual.",
@@ -613,7 +813,7 @@
   },
   {
     "id": "chatgpt-pro",
-    "order": 13,
+    "order": 17,
     "name": "ChatGPT Pro, com dots",
     "category": "Assinatura de IA",
     "description": "Uma apresentação para atualizar, uma entrevista para transformar em rascunhos, uma verificação que se repete toda semana. Com dots, o ChatGPT pode levar esses projetos adiante entre conversas, usando os apps autorizados. O interesse está menos em formular outra pergunta e mais em deixar um trabalho bem definido.",
@@ -645,20 +845,20 @@
     "method_note": "Não existe plano separado chamado “ChatGPT Pro Dots”. Elegibilidade para maiores de 18 anos e mercados disponíveis. Primeiro dot incluído no Pro elegível, sujeito a limites. Preços, desempenho e limites ainda precisam ser comparados. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
     "facts": [
       {
-        "label": "Apresentações",
-        "value": "Reúne dados e atualiza slides"
+        "label": "A melhor característica:",
+        "value": "Trabalho contínuo com dots"
       },
       {
-        "label": "Conteúdo",
-        "value": "Da transcrição aos rascunhos"
+        "label": "Essencial para quem busca:",
+        "value": "Delegar projetos que duram mais de um dia"
       },
       {
-        "label": "Rotina",
+        "label": "Para produzir:",
+        "value": "Transcrições, rascunhos e slides"
+      },
+      {
+        "label": "Para acompanhar:",
         "value": "Lembretes e verificações recorrentes"
-      },
-      {
-        "label": "Incluído no Pro elegível",
-        "value": "Primeiro dot, com cota de trabalho"
       }
     ],
     "reader_note": "Acesso gradual para usuários Pro elegíveis, maiores de 18 anos. O dot trabalha em computador na nuvem; acesso ao computador pessoal é opcional. Tarefas aprofundadas têm limites de uso. Não há um plano separado chamado “Pro Dots”.",
@@ -667,7 +867,7 @@
   },
   {
     "id": "notion",
-    "order": 14,
+    "order": 18,
     "name": "Notion",
     "category": "Produtividade",
     "description": "A referência está num documento; a tarefa, numa lista; o prazo, em algum lugar. O Notion permite reunir essas peças em páginas e bases de dados conectadas à organização dos projetos. A vantagem aparece quando as informações precisam conversar, não apenas ficar guardadas.",
@@ -699,20 +899,20 @@
     "method_note": "Funções variam conforme o plano. IA e automações avançadas não estão integralmente no plano gratuito. Não é automaticamente a melhor opção para uma lista simples de tarefas. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
     "facts": [
       {
-        "label": "Referências",
-        "value": "Páginas e documentos"
+        "label": "A melhor característica:",
+        "value": "Páginas ligadas a bases de dados"
       },
       {
-        "label": "Organização",
-        "value": "Bases com propriedades"
+        "label": "Essencial para quem busca:",
+        "value": "Reunir referências e projetos"
       },
       {
-        "label": "Projetos",
+        "label": "Para planejar:",
         "value": "Subtarefas e dependências"
       },
       {
-        "label": "Planos",
-        "value": "Gratuito e pagos"
+        "label": "Para começar:",
+        "value": "Planos gratuito e pagos"
       }
     ],
     "reader_note": "Recursos variam por plano. IA e automações avançadas não estão integralmente incluídas na versão gratuita; compare o plano necessário, não apenas o preço de entrada.",
