@@ -1,0 +1,722 @@
+[
+  {
+    "id": "galaxy-s26-ultra",
+    "order": 1,
+    "name": "Galaxy S26 Ultra",
+    "category": "Celular top de linha",
+    "description": "Uma mensagem no metrô não precisa virar leitura coletiva. A tela de privacidade do S26 Ultra reduz a visão lateral do conteúdo: um detalhe discreto para quem vive com o celular aberto fora de casa. A S Pen e o painel de 6,9 polegadas completam o pequeno escritório de bolso.",
+    "verdict": "A caneta e a tela grande precisam ter lugar na sua rotina. Caso contrário, você levará no bolso mais aparelho do que precisa.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/s26-native.png",
+      "alt": "Galaxy S26 Ultra prata, de frente e de costas, com caneta S Pen.",
+      "credit": "Samsung/Divulgação",
+      "source_url": "https://images.samsung.com/is/image/samsung/p6pim/de/s2602/gallery/de-galaxy-s26-ultra-s948-577216-sm-s948bzsdeub-thumb-550758452?fmt=png-alpha&wid=1000",
+      "verified": true,
+      "rights_verified": false,
+      "width": 330,
+      "height": 330,
+      "rights_note": "Fonte oficial Samsung; condições de reprodução e redistribuição pendentes de confirmação.",
+      "kind": "thumbnail",
+      "resolution_note": "Original de 330 × 330 px; exibição limitada a 300 px para não ampliar a miniatura."
+    },
+    "sources": [
+      {
+        "label": "Fonte oficial",
+        "url": "https://www.samsung.com/br/smartphones/galaxy-s26-ultra/"
+      },
+      {
+        "label": "Apuração complementar",
+        "url": "https://www.tomsguide.com/phones/samsung-phones/samsung-galaxy-s26-ultra-review"
+      }
+    ],
+    "method_note": "Tamanho e módulo de câmera saliente podem incomodar. Sem ímãs Qi2 integrados. Seleção editorial provisória. Não constitui teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Menos olhares laterais",
+        "value": "Tela de privacidade"
+      },
+      {
+        "label": "Notas e marcações",
+        "value": "S Pen integrada"
+      },
+      {
+        "label": "Câmera principal",
+        "value": "200 MP"
+      },
+      {
+        "label": "Olhares laterais",
+        "value": "Tela de privacidade"
+      }
+    ],
+    "reader_note": "O corpo grande e as câmeras salientes podem incomodar no bolso. Não há ímãs Qi2 integrados.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "A conversa não é da fileira inteira."
+  },
+  {
+    "id": "iphone-18-pro",
+    "order": 2,
+    "name": "iPhone 18 Pro",
+    "category": "Celular top de linha",
+    "description": "O café da esquina, um show, a viagem inteira. O iPhone 18 Pro põe três câmeras de 48 MP no bolso, com teleobjetiva de 4x para chegar mais perto sem invadir a cena. A tela de 6,3 polegadas deixa a versão Max para quem realmente quer carregar mais tela.",
+    "verdict": "Faz mais sentido para quem fotografa, grava e edita com frequência. Para mensagens e redes sociais, a conta de um Pro é mais difícil de justificar.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/iphone-18-pro-native.png",
+      "alt": "iPhone 18 Pro na cor bordô, de frente e de costas.",
+      "credit": "Apple/Divulgação",
+      "source_url": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-burgundy-202609?wid=940&hei=1112&fmt=png-alpha&.v=ODB3TEdtbk8ybkd3clM3dWVML3VCVmtqbnQyNWMvcld5Yy9DTnQyVUlQYWlwUGhxdXZuRTRGejlubW1oYWpjbUJ2MUJtQ2VhYWlBc1UxbHhMSzFTQjhlcC9qYU9xUXZmS1NmbGxtTVBCNVAvWncyUEszSEVwdS9nWVBDSFpPZmY",
+      "verified": true,
+      "rights_verified": false,
+      "width": 940,
+      "height": 1112,
+      "rights_note": "Imagem de divulgação oficial, mantida sem alterações; utilização editorial solicitada pelo usuário.",
+      "kind": "product"
+    },
+    "sources": [
+      {
+        "label": "Ficha oficial Apple",
+        "url": "https://www.apple.com/iphone-18-pro/specs/"
+      }
+    ],
+    "method_note": "Seleção editorial; não constitui teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Sem o tamanho Max",
+        "value": "Tela de 6,3”"
+      },
+      {
+        "label": "Para chegar perto",
+        "value": "Teleobjetiva de 4x"
+      },
+      {
+        "label": "Vídeo para editar",
+        "value": "4K Dolby Vision"
+      },
+      {
+        "label": "Espaço de partida",
+        "value": "256 GB"
+      }
+    ],
+    "reader_note": "A câmera principal tem abertura variável. O zoom de 8x é descrito pela Apple como de qualidade óptica: não confunda com uma lente óptica de 8x. Especificações do Pro, não do Pro Max.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "O enquadramento faz a diferença."
+  },
+  {
+    "id": "galaxy-buds4-pro",
+    "order": 3,
+    "name": "Galaxy Buds4 Pro",
+    "category": "Fone sem fio",
+    "description": "Os Buds4 Pro se entendem melhor com um Galaxy: parte dos recursos depende de um celular Samsung compatível. Fora dessa conversa entre aparelhos, ficam os critérios que importam a qualquer ouvido: encaixe, conforto, controles acessíveis e cancelamento de ruído.",
+    "verdict": "A integração é um bom motivo para olhar. Não é um motivo para aceitar um fone que não veste bem.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/buds4-source.jpg",
+      "alt": "Galaxy Buds4 Pro brancos em estojo aberto.",
+      "credit": "Samsung/Divulgação",
+      "source_url": "https://api.samsungmobilepress.com/api/v1/file/FDD99E898C6FA6749FEF7317EF97B62CEFB26DA746BE26FDEB44531007EEAC4BA9684AB920C08930FA7340E96328BB025058F9C9DFB69C4AE64738A0E2C3E44080085E281F377556C7263E8C6EB180C71D02B0FB0C77FFC6F48BAA60281F547482E646C7AEFBDAFF328825DCF53BBA2DD7BFF28F10CDA149439C8BABFB3CBF9B5234B12FB9665B68B0FA6B78E6025034",
+      "verified": true,
+      "rights_verified": false,
+      "width": 800,
+      "height": 533,
+      "rights_note": "Termos Samsung Mobile Press restringem reprodução; autorização editorial pendente."
+    },
+    "sources": [
+      {
+        "label": "Fonte oficial",
+        "url": "https://news.samsung.com/br/samsung-apresenta-a-linha-galaxy-buds4-o-melhor-audio-hi-fi-da-atualidade-com-conforto-e-encaixe-aprimorados"
+      },
+      {
+        "label": "Apuração complementar",
+        "url": "https://www.tomsguide.com/audio/earbuds/samsung-galaxy-buds-4-pro-review"
+      }
+    ],
+    "method_note": "Parte dos recursos exige Galaxy compatível. IP57 não se aplica ao estojo. Autonomia informada pela fabricante varia com uso e configuração. Seleção editorial provisória. Não constitui teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Ambientes ruidosos",
+        "value": "Cancelamento ativo"
+      },
+      {
+        "label": "Música com ANC",
+        "value": "Até 6 h¹"
+      },
+      {
+        "label": "Comandos",
+        "value": "Controles nas hastes"
+      },
+      {
+        "label": "Proteção dos fones",
+        "value": "IP57"
+      }
+    ],
+    "reader_note": "¹Autonomia anunciada pela Samsung, variável conforme uso e configuração. Parte dos recursos exige Galaxy compatível; a classificação IP57 não cobre o estojo.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "A conversa fica em família."
+  },
+  {
+    "id": "macbook-air-m5-13",
+    "order": 4,
+    "name": "MacBook Air de 13 polegadas com M5",
+    "category": "Notebook",
+    "description": "A mesa de casa, uma sala emprestada, o lugar disponível na viagem. O Air de 13 polegadas foi pensado para acompanhar essa troca de endereço. Na configuração inicial, o M5 vem com 16 GB de memória e SSD de 512 GB; a tela de 13,6 polegadas mantém o conjunto compacto.",
+    "verdict": "Antes de fechar a bolsa, conte os cabos: há duas Thunderbolt 4. O projetor HDMI e o acessório USB-A ainda pedem um adaptador.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/macbook-source.jpg",
+      "alt": "MacBook Air aberto com uma composição gráfica na tela.",
+      "credit": "Apple/Divulgação",
+      "source_url": "https://www.apple.com/newsroom/images/2026/03/apple-introduces-the-new-macbook-air-with-m5/article/Apple-MacBook-Air-hero-260303_big.jpg.large.jpg",
+      "verified": true,
+      "rights_verified": false,
+      "width": 980,
+      "height": 654,
+      "rights_note": "Original sem alterações; verificar aplicação dos termos editoriais Apple antes da publicação."
+    },
+    "sources": [
+      {
+        "label": "Fonte oficial",
+        "url": "https://support.apple.com/pt-br/126320"
+      },
+      {
+        "label": "Apuração complementar",
+        "url": "https://www.rtings.com/laptop/reviews/apple/macbook-air-13-m5-2026"
+      }
+    ],
+    "method_note": "Duas portas Thunderbolt 4, além de MagSafe e áudio. USB-A e HDMI exigem adaptador. Seleção editorial provisória. Não constitui teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Tela",
+        "value": "13,6” Liquid Retina"
+      },
+      {
+        "label": "Memória inicial",
+        "value": "16 GB"
+      },
+      {
+        "label": "Arquivos locais",
+        "value": "SSD de 512 GB"
+      },
+      {
+        "label": "Conexões de dados",
+        "value": "Duas Thunderbolt 4"
+      }
+    ],
+    "reader_note": "Modelo de 13 polegadas com chip Apple M5. Também há MagSafe e saída de áudio; configurações de memória e armazenamento podem variar.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "A mesa pode mudar."
+  },
+  {
+    "id": "apple-watch-ultra-4",
+    "order": 5,
+    "name": "Apple Watch Ultra 4",
+    "category": "Smartwatch para treino",
+    "description": "Há bastante relógio aqui: caixa de titânio de 49 mm, tela de alto brilho e botão de Ação. O Ultra 4 reúne treino, atividades ao ar livre e a rotina ligada ao iPhone. Antes das métricas, vale uma pergunta simples: esse tamanho funciona no seu pulso?",
+    "verdict": "Comece pelo encaixe e pelo celular: ele exige iPhone compatível. As até 50 horas anunciadas pela Apple são uma referência, não um compromisso com toda rotina.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/watch4-source.jpg",
+      "alt": "Apple Watch Ultra 4 visto em ângulo sobre fundo preto.",
+      "credit": "Apple/Divulgação",
+      "source_url": "https://www.apple.com/newsroom/images/2026/09/apple-unveils-apple-watch-ultra-4/article/Apple-Watch-Ultra-4-hero-260909_big.jpg.large.jpg",
+      "verified": true,
+      "rights_verified": false,
+      "width": 980,
+      "height": 551,
+      "rights_note": "Original sem alterações; verificar aplicação dos termos editoriais Apple antes da publicação."
+    },
+    "sources": [
+      {
+        "label": "Fonte oficial 1",
+        "url": "https://www.apple.com/br/apple-watch-ultra-4/specs/"
+      }
+    ],
+    "method_note": "Autonomia informada pela Apple, variável conforme o uso. Recursos de saúde não equivalem a diagnóstico médico. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Tamanho da caixa",
+        "value": "49 mm, em titânio"
+      },
+      {
+        "label": "Tela ao ar livre",
+        "value": "Pico de 3.000 nits"
+      },
+      {
+        "label": "Autonomia anunciada",
+        "value": "Até 50 h em uso normal¹"
+      },
+      {
+        "label": "Celular necessário",
+        "value": "iPhone compatível"
+      }
+    ],
+    "reader_note": "¹Estimativa da Apple; a duração varia conforme o uso. Métricas de treino, recuperação e saúde não substituem avaliação ou diagnóstico médico.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "O pulso também tem medidas."
+  },
+  {
+    "id": "bee-type-2",
+    "order": 6,
+    "name": "Bee Type 2",
+    "category": "Mobilidade urbana",
+    "description": "Ir à padaria não precisa virar uma expedição de carro. Com desenho retrô e motor elétrico de 1.000 W, a Bee Type 2 conversa com os trajetos curtos da cidade. A bateria removível leva a recarga até a tomada, sem exigir que o veículo vá junto.",
+    "verdict": "Antes de se encantar com a silhueta, olhe o caminho: onde guardar, onde recarregar e por onde circular. Com 70 kg, ela não é companhia para subir escadas.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/bee-type-2-official.jpg",
+      "alt": "Bee Type 2 verde com banco bege, fotografada em showroom.",
+      "credit": "Bee/Divulgação",
+      "source_url": "https://bee-brasil.com/cdn/shop/files/type_s-58.jpg?v=1784308352&width=900",
+      "verified": true,
+      "rights_verified": false,
+      "width": 900,
+      "height": 600,
+      "rights_note": "Imagem de divulgação oficial, mantida sem alterações; utilização editorial solicitada pelo usuário.",
+      "kind": "product"
+    },
+    "sources": [
+      {
+        "label": "Ficha oficial Bee",
+        "url": "https://bee-brasil.com/products/bee-type-2"
+      }
+    ],
+    "method_note": "Seleção editorial; não constitui teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Para trajetos curtos",
+        "value": "Até 32 km/h"
+      },
+      {
+        "label": "A tomada pode subir",
+        "value": "Bateria removível"
+      },
+      {
+        "label": "Recarga planejada",
+        "value": "De 6 a 8 horas"
+      },
+      {
+        "label": "Para manobrar",
+        "value": "Marcha à ré"
+      }
+    ],
+    "reader_note": "Escolha disponível em 2026, não um lançamento do ano. A marca informa autonomia nominal de até 40–50 km em laboratório: modo ECO, condutor de 75 kg, piso liso e sem aclives. O alcance real varia. Confira as regras locais de circulação.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "O bairro em outra velocidade."
+  },
+  {
+    "id": "dji-osmo-pocket-4",
+    "order": 7,
+    "name": "DJI Osmo Pocket 4",
+    "category": "Câmera para conteúdo",
+    "description": "Câmera e estabilizador costumam ser dois itens na lista. A Pocket 4 os reúne num corpo compacto, com estabilização mecânica em três eixos e tela giratória. É uma opção para registrar a caminhada sem transformar cada parada numa montagem de equipamento.",
+    "verdict": "A simplicidade vem de levar um conjunto fechado. Quem gosta de trocar lentes terá de procurar outra solução.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/pocket4-source.png",
+      "alt": "Câmera DJI Osmo Pocket 4 e acessório de proteção mostrados lado a lado.",
+      "credit": "DJI/Divulgação",
+      "source_url": "https://se-cdn.djiits.com/tpc/uploads/spu/cover/5408da2c69b56fbd2d80fdca847ad92d@ultra.png",
+      "verified": true,
+      "rights_verified": false,
+      "width": 1280,
+      "height": 1280,
+      "rights_note": "Direitos de reprodução e redistribuição pendentes de confirmação para publicação."
+    },
+    "sources": [
+      {
+        "label": "Fonte oficial 1",
+        "url": "https://www.dji.com/jp/osmo-pocket-4"
+      }
+    ],
+    "method_note": "Não substitui uma câmera de lentes intercambiáveis. Preço, canal de venda e garantia no Brasil ainda pendentes. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Estabilização",
+        "value": "Mecânica em três eixos"
+      },
+      {
+        "label": "Sensor",
+        "value": "CMOS de 1”"
+      },
+      {
+        "label": "Armazenamento",
+        "value": "107 GB internos"
+      },
+      {
+        "label": "Enquadramento",
+        "value": "Tela giratória"
+      }
+    ],
+    "reader_note": "Verifique o conteúdo do kit, a garantia e o canal de venda no Brasil. A capacidade interna anunciada é de 107 GB.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "O passeio pede menos bagagem."
+  },
+  {
+    "id": "dji-mic-3",
+    "order": 8,
+    "name": "DJI Mic 3",
+    "category": "Microfone",
+    "description": "A entrevista cresceu, chegou outra câmera, alguém mais entrou na conversa. O Mic 3 oferece espaço para essas produções: suporta até quatro transmissores e oito receptores, com gravação interna em 32 bits float e timecode para sincronização.",
+    "verdict": "O sistema pode crescer; o kit da loja pode ser bem menor. Confira quantos transmissores e receptores vêm na caixa antes de comparar preços.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/mic3-source.png",
+      "alt": "Kit DJI Mic 3 dentro do estojo de carregamento aberto.",
+      "credit": "DJI/Divulgação",
+      "source_url": "https://se-cdn.djiits.com/tpc/uploads/spu/cover/473691cc5e140d0341a30b31b479c627@ultra.png",
+      "verified": true,
+      "rights_verified": false,
+      "width": 1280,
+      "height": 1280,
+      "rights_note": "Direitos de reprodução e redistribuição pendentes de confirmação para publicação."
+    },
+    "sources": [
+      {
+        "label": "Fonte oficial 1",
+        "url": "https://www.dji.com/es/mic-3"
+      },
+      {
+        "label": "Fonte oficial 2",
+        "url": "https://www.dji.com/media-center/announcements/dji-release-mic-3-us"
+      }
+    ],
+    "method_note": "A quantidade de unidades depende do kit e dos acessórios. Lançado em agosto de 2025. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Gravação interna",
+        "value": "32 bits float"
+      },
+      {
+        "label": "Pessoas na gravação",
+        "value": "Até 4 transmissores"
+      },
+      {
+        "label": "Câmeras e destinos",
+        "value": "Até 8 receptores"
+      },
+      {
+        "label": "Sincronização",
+        "value": "Timecode integrado"
+      }
+    ],
+    "reader_note": "Lançado em agosto de 2025. Transmissores, receptores e acessórios disponíveis dependem do kit comprado. Confira os itens incluídos antes de comparar preços.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "Uma conversa tem mais de uma voz."
+  },
+  {
+    "id": "nintendo-switch-2",
+    "order": 9,
+    "name": "Nintendo Switch 2",
+    "category": "Console",
+    "description": "O melhor argumento do Switch 2 continua sendo uma mudança de lugar: sair da televisão e levar o jogo junto. A tela portátil de 7,9 polegadas e os 256 GB internos renovam essa ideia. O catálogo, porém, merece mais atenção na escolha que a maior resolução impressa na caixa.",
+    "verdict": "Pense nos jogos e em onde pretende jogá-los. Para expandir o armazenamento, anote o sobrenome do cartão: microSD Express.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/switch2-hardware.png",
+      "alt": "Nintendo Switch 2 com console, dock e controles.",
+      "credit": "Nintendo/Divulgação",
+      "source_url": "https://www.nintendo.com/ph/hardware/switch2/lineup/assets/img/img_switch2_body.png",
+      "verified": true,
+      "rights_verified": false,
+      "width": 1193,
+      "height": 658,
+      "rights_note": "Condições de reprodução e redistribuição a confirmar antes da publicação."
+    },
+    "sources": [
+      {
+        "label": "Fonte oficial 1",
+        "url": "https://www.nintendo.com/pt-br/gaming-systems/switch-2/tech-specs/"
+      }
+    ],
+    "method_note": "Lançado em 2025. Não foi identificada uma revisão de hardware para chamá-lo de “versão atualizada”. Saída de vídeo depende do jogo e equipamento. Expansão de jogos exige microSD Express. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Na mão",
+        "value": "Tela Full HD de 7,9”"
+      },
+      {
+        "label": "Na televisão",
+        "value": "Até 4K a 60 quadros/s"
+      },
+      {
+        "label": "Armazenamento",
+        "value": "256 GB internos"
+      },
+      {
+        "label": "Expansão de jogos",
+        "value": "Cartão microSD Express"
+      }
+    ],
+    "reader_note": "Lançado em 2025. A saída 4K depende do jogo e do equipamento. A tela portátil oferece HDR10 e VRR até 120 Hz; cartões microSD comuns não substituem o microSD Express para expandir jogos.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "A partida não fica na sala."
+  },
+  {
+    "id": "tcl-27g64",
+    "order": 10,
+    "name": "TCL 27G64",
+    "category": "Monitores",
+    "description": "De dia, documentos; depois, um jogo ou um filme. O TCL 27G64 combina 27 polegadas, resolução QHD e iluminação QD-Mini LED com atualização de até 180 Hz. É uma opção para uma mesa que não pertence a uma única atividade.",
+    "verdict": "Não escolha só pela taxa de atualização. Tamanho, resolução e iluminação também participam de todas as horas que você passa diante da tela.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/tcl27g64-source.png",
+      "alt": "Monitor TCL 27G64 completo, com cena espacial na tela.",
+      "credit": "TCL/Divulgação",
+      "source_url": "https://aws-obg-image-lb-2.tcl.com/content/dam/brandsite/product/monitor/27g64/id/1-02.png?t=1744875298630&w=800",
+      "verified": true,
+      "rights_verified": false,
+      "width": 1600,
+      "height": 1200,
+      "rights_note": "Condições de reprodução e redistribuição a confirmar antes da publicação."
+    },
+    "sources": [
+      {
+        "label": "Especificações oficiais do fabricante",
+        "url": "https://www.tcl.com/br/pt/monitors/27g64"
+      }
+    ],
+    "method_note": "Especificações fornecidas pela apuração com fonte oficial do fabricante. Preço e disponibilidade atual no Brasil não aferidos. Seleção editorial provisória, sem alegação de teste prático.",
+    "facts": [
+      {
+        "label": "Área de tela",
+        "value": "27 polegadas"
+      },
+      {
+        "label": "Resolução",
+        "value": "QHD, 2560 × 1440"
+      },
+      {
+        "label": "Iluminação",
+        "value": "QD-Mini LED"
+      },
+      {
+        "label": "Atualização máxima",
+        "value": "180 Hz"
+      }
+    ],
+    "reader_note": "Modelo lançado no Brasil em 2025. O tipo de iluminação não deve ser confundido com OLED. Confira conexões e requisitos para atingir a taxa máxima na configuração utilizada.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "A mesa tem mais de um turno."
+  },
+  {
+    "id": "aoc-q27g4zdr",
+    "order": 11,
+    "name": "AOC Q27G4ZDR",
+    "category": "Monitores",
+    "description": "Os 240 Hz chamam a atenção, mas não contam a história sozinhos. O Q27G4ZDR combina essa atualização com painel QD-OLED e resolução QHD, numa tela vendida como 27 polegadas. É uma escolha voltada a quem dá aos jogos um lugar importante na mesa.",
+    "verdict": "Olhe o conjunto, depois as condições da compra. Uma garantia anunciada em outro país não acompanha automaticamente a unidade vendida no Brasil.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/aocq27g4zdr-clean.png",
+      "alt": "Monitor AOC Q27G4ZDR completo, com uma cena de jogo na tela.",
+      "credit": "AOC/Divulgação",
+      "source_url": "https://cdn.sanity.io/images/hf5b3axp/production/75413f789e45e783f7cbd7f64d3c518364d293e3-5000x5000.png?w=1200",
+      "verified": true,
+      "rights_verified": false,
+      "width": 1200,
+      "height": 1200,
+      "rights_note": "Condições de reprodução e redistribuição a confirmar antes da publicação."
+    },
+    "sources": [
+      {
+        "label": "Especificações oficiais AOC",
+        "url": "https://www.aoc.com/us/gaming/monitors/q27g4zdr"
+      }
+    ],
+    "method_note": "Comercializado como 27”, com diagonal efetiva de 26,5”. Lançamento brasileiro noticiado em outubro de 2026; modelo global de 2025. Não aplicar garantia dos EUA ao Brasil. Preço e condições da oferta brasileira não aferidos; página Amazon inacessível. Sem teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Painel",
+        "value": "QD-OLED"
+      },
+      {
+        "label": "Diagonal efetiva",
+        "value": "26,5” — vendido como 27”"
+      },
+      {
+        "label": "Resolução",
+        "value": "QHD, 2560 × 1440"
+      },
+      {
+        "label": "Atualização",
+        "value": "240 Hz"
+      }
+    ],
+    "reader_note": "Há HDMI 2.1. O lançamento brasileiro foi noticiado em 2026, enquanto o modelo global é de 2025. Garantias anunciadas em outros países não se aplicam automaticamente ao Brasil.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "Velocidade não é tudo."
+  },
+  {
+    "id": "electrolux-lsc12",
+    "order": 12,
+    "name": "Electrolux LSC12",
+    "category": "Destaque em eletrodomésticos",
+    "description": "A conveniência de uma lava e seca cabe numa única máquina; a roupa, nem sempre no mesmo ciclo. A LSC12 lava até 12 kg e seca até 7 kg. Sensores ajustam a lavagem à carga, e a opção de água quente amplia o repertório de cuidados.",
+    "verdict": "Quem enche a máquina para lavar precisará dividir a carga antes de secar. É um detalhe menos fotogênico que o acabamento, mas muito mais presente na rotina.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/lsc12-source.jpg",
+      "alt": "Lava e seca Electrolux LSC12 cinza vista de frente.",
+      "credit": "Electrolux/Divulgação",
+      "source_url": "https://electrolux.vtexassets.com/arquivos/ids/289466/7909569485637_1-1000x1000.jpg",
+      "verified": true,
+      "rights_verified": false,
+      "width": 1000,
+      "height": 1000,
+      "rights_note": "Direitos de reprodução e redistribuição pendentes de confirmação para publicação."
+    },
+    "sources": [
+      {
+        "label": "Fonte oficial",
+        "url": "https://content.electrolux.com.br/brasil/electrolux/sebastian/v3/lsc12/index.html"
+      },
+      {
+        "label": "Apuração complementar",
+        "url": "https://www.electroluxgroup.com/en/news/electrolux-apresenta-nova-lava-e-seca-no-bbb-26-e-abre-pre-lancamento-exclusivo/"
+      }
+    ],
+    "method_note": "Capacidade de secagem menor que a de lavagem. Faltam testes independentes suficientes para classificá-la como a melhor. Seleção editorial provisória. Não constitui teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Carga de lavagem",
+        "value": "Até 12 kg"
+      },
+      {
+        "label": "Carga de secagem",
+        "value": "Até 7 kg"
+      },
+      {
+        "label": "Ajuste do ciclo",
+        "value": "AutoSense"
+      },
+      {
+        "label": "Lavagem",
+        "value": "Opção de água quente"
+      }
+    ],
+    "reader_note": "Motor inverter. As capacidades de lavagem e secagem são diferentes; respeite a carga e o programa indicados no manual.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "Doze para lavar. Sete para secar."
+  },
+  {
+    "id": "chatgpt-pro",
+    "order": 13,
+    "name": "ChatGPT Pro, com dots",
+    "category": "Assinatura de IA",
+    "description": "Uma apresentação para atualizar, uma entrevista para transformar em rascunhos, uma verificação que se repete toda semana. Com dots, o ChatGPT pode levar esses projetos adiante entre conversas, usando os apps autorizados. O interesse está menos em formular outra pergunta e mais em deixar um trabalho bem definido.",
+    "verdict": "Vale para quem tem projetos que continuam amanhã. Delegar o trabalho não elimina a parte humana: escolher os acessos, conferir o resultado e corrigir o rumo.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/chatgpt-logo.svg",
+      "alt": "Logotipo oficial do ChatGPT; não identifica um plano separado para dots.",
+      "credit": "OpenAI/Divulgação",
+      "source_url": "https://chatgpt.com/cdn/assets/favicon-l4nq08hd.svg",
+      "verified": true,
+      "rights_verified": false,
+      "width": 180,
+      "height": 180,
+      "rights_note": "Condições de reprodução e redistribuição a confirmar antes da publicação.",
+      "kind": "logo"
+    },
+    "sources": [
+      {
+        "label": "Fonte oficial 1",
+        "url": "https://help.openai.com/pt-br/articles/20001530-getting-started-with-your-dot"
+      },
+      {
+        "label": "Fonte oficial 2",
+        "url": "https://openai.com/index/introducing-dots/"
+      }
+    ],
+    "method_note": "Não existe plano separado chamado “ChatGPT Pro Dots”. Elegibilidade para maiores de 18 anos e mercados disponíveis. Primeiro dot incluído no Pro elegível, sujeito a limites. Preços, desempenho e limites ainda precisam ser comparados. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Apresentações",
+        "value": "Reúne dados e atualiza slides"
+      },
+      {
+        "label": "Conteúdo",
+        "value": "Da transcrição aos rascunhos"
+      },
+      {
+        "label": "Rotina",
+        "value": "Lembretes e verificações recorrentes"
+      },
+      {
+        "label": "Incluído no Pro elegível",
+        "value": "Primeiro dot, com cota de trabalho"
+      }
+    ],
+    "reader_note": "Acesso gradual para usuários Pro elegíveis, maiores de 18 anos. O dot trabalha em computador na nuvem; acesso ao computador pessoal é opcional. Tarefas aprofundadas têm limites de uso. Não há um plano separado chamado “Pro Dots”.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "A conversa virou tarefa."
+  },
+  {
+    "id": "notion",
+    "order": 14,
+    "name": "Notion",
+    "category": "Produtividade",
+    "description": "A referência está num documento; a tarefa, numa lista; o prazo, em algum lugar. O Notion permite reunir essas peças em páginas e bases de dados conectadas à organização dos projetos. A vantagem aparece quando as informações precisam conversar, não apenas ficar guardadas.",
+    "verdict": "Construa a estrutura que o trabalho exige, não uma pequena burocracia particular. Para uma lista simples, um sistema simples pode bastar.",
+    "editorial_approved": false,
+    "facts_verified": true,
+    "image": {
+      "path": "assets/notion-logo.png",
+      "alt": "Logotipo oficial do Notion.",
+      "credit": "Notion/Divulgação",
+      "source_url": "https://www.notion.so/images/logo-ios.png",
+      "verified": true,
+      "rights_verified": false,
+      "width": 512,
+      "height": 512,
+      "rights_note": "Condições de reprodução e redistribuição a confirmar antes da publicação.",
+      "kind": "logo"
+    },
+    "sources": [
+      {
+        "label": "Fonte oficial 1",
+        "url": "https://www.notion.com/product"
+      },
+      {
+        "label": "Fonte oficial 2",
+        "url": "https://www.notion.com/pricing"
+      }
+    ],
+    "method_note": "Funções variam conforme o plano. IA e automações avançadas não estão integralmente no plano gratuito. Não é automaticamente a melhor opção para uma lista simples de tarefas. Dados da apuração com fontes de fabricante; escolha editorial provisória, sem teste prático da EXAME.",
+    "facts": [
+      {
+        "label": "Referências",
+        "value": "Páginas e documentos"
+      },
+      {
+        "label": "Organização",
+        "value": "Bases com propriedades"
+      },
+      {
+        "label": "Projetos",
+        "value": "Subtarefas e dependências"
+      },
+      {
+        "label": "Planos",
+        "value": "Gratuito e pagos"
+      }
+    ],
+    "reader_note": "Recursos variam por plano. IA e automações avançadas não estão integralmente incluídas na versão gratuita; compare o plano necessário, não apenas o preço de entrada.",
+    "visual_approved_by_user": true,
+    "editorial_headline": "Um endereço para o trabalho espalhado."
+  }
+]
